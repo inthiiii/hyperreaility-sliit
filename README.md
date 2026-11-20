@@ -6,187 +6,218 @@
 
 Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — University Track**.
 
-[Repository](https://github.com/inthiiii/hyperreaility-sliit) · [Project overview](#overview) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
+[Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: planning and initial development.** The capabilities and architecture below describe the intended MVP. They are not claims of completed implementation, operator integration, or measured performance. The application was previously discussed under the working name SIGNAL FIRST.
+> **Status: proposal submitted; initial design documentation available; MVP implementation pending.** The application entry point and dependency list are currently placeholders. Features below describe the planned MVP. This README will be updated with verified setup instructions and results as development progresses.
 
 ## Overview
 
-RE:L!NK is a proposed decision support application that helps telecom operations teams plan service restoration during major outages. It brings together incident reports, network dependencies, field resources, and service priorities to recommend a feasible recovery plan for human review.
+RE:L!NK helps telecom operations teams plan service restoration when network faults, field resources and incident reports interact. It combines evidence interpretation, dependency analysis, constrained scheduling and human review to recommend which actions can restore useful connectivity.
 
-The MVP will use a small simulated network and documented scenarios. It will recommend actions; it will not control live telecommunications infrastructure or dispatch real crews.
+The MVP models one fictional operator and executes approved actions in a simulator. Its working name during early planning was SIGNAL FIRST.
 
 ## The problem
 
-Restoration requires more than ranking failed towers. A site can have power but remain disconnected because its upstream backhaul is unavailable. A repair crew may lack the right equipment, a road may be blocked, or limited backup generators may be needed at several locations.
+A site can have power but remain disconnected because its upstream backhaul is unavailable. A qualified repair crew may be unable to reach a fault, or a limited generator may be allocated where it cannot yet restore service.
 
-RE:L!NK will help answer:
+RE:L!NK addresses four operational questions:
 
-- Which actions restore useful service first?
 - Which dependencies must be resolved before a repair has value?
-- How should limited crews, generators, and fuel be allocated?
-- How should the plan change when new field information arrives?
+- How should limited crews, generators and accessible routes be allocated?
+- Which services should be prioritized under approved operating policies?
+- How should a reviewed plan change when new evidence arrives?
+
+The research findings, local and global context, and supporting references are in the [submitted proposal](docs/Proposal.docx).
 
 ## Intended users and business value
 
-The initial users are telecom network operations managers, incident coordinators, and field maintenance planners.
+Primary users are network operations managers, incident coordinators and maintenance planners. Initial prospective customers are mobile network operators, followed by tower-infrastructure providers and managed network services.
 
-| Operational need | Proposed value | Measurement |
+| Value pillar | Planned operational benefit | Pilot measurement |
 | --- | --- | --- |
-| Prioritize simultaneous outages | Restore important services earlier | Weighted service downtime and critical facility restoration time |
-| Avoid ineffective dispatch | Account for dependencies and access | Unproductive trips and crew hours |
-| Allocate scarce backup power | Coordinate generators and fuel | Resource feasibility and estimated consumption |
-| Respond to changing conditions | Revise plans with an audit trail | Replanning time and unnecessary reassignment |
+| Operational efficiency | Reduce ineffective assignments, resource conflicts and repeated planning | Unproductive journeys, crew-hours, conflicts and planning time |
+| Service continuity | Coordinate power, equipment and backhaul prerequisites | Weighted downtime, critical-service interruption and unmet services |
+| Decision accountability | Link recommendations and revisions to evidence and approval | Trace completeness, review time and correct escalation |
 
-These are evaluation objectives. Real operator savings and commercial adoption require practitioner validation and a later pilot.
+The adoption path is practitioner discovery, authorized historical replay, a read-only pilot, then commercial deployment if agreed criteria are met. A potential offer combines an enterprise software licence, integration, support and simulation exercises connected to an organization-approved hosted LLM API. Financial value requires attributable improvements and operator-approved cost inputs.
 
 ## Planned MVP capabilities
 
-- Load network, resource, and incident scenarios.
-- Investigate outages and backhaul dependencies.
-- Interpret short field reports and identify missing or conflicting facts.
-- Coordinate repair crews, backup power, and operator-defined service priorities.
-- Generate a validated restoration schedule.
-- Show structured agent exchanges and supporting evidence.
-- Require human review and approval.
-- Replan after a new outage, road closure, or resource change.
-- Compare results with documented baseline methods.
+- Load a network, resource inventory, service priorities and incident reports.
+- Extract evidence-linked facts and expose missing or contradictory information.
+- Investigate equipment, power and backhaul dependencies.
+- Check crew skills, availability, route access and generator autonomy.
+- Schedule equipment repairs, link repairs and generator deployments.
+- Independently validate timing, dependencies and resource allocation.
+- Display supporting evidence, unmet needs and agent exchanges.
+- Require human approval before simulation.
+- Invalidate approval and replan after material changes.
+- Compare the workflow against conventional, single-agent and human baselines.
 
 ## Proposed architecture
 
-| Agent | Responsibility | Collaboration |
+| Agent | Responsibility | Output used by other components |
 | --- | --- | --- |
-| Network Investigator | Interpret incidents and inspect dependencies | Share prerequisites and unresolved facts |
-| Field Resource Planner | Assess crews, equipment, travel, and power | Provide resource constraints and feasible actions |
-| Service Priority Assessor | Apply operator-defined priorities | Assess effects on critical facilities and service demand |
-| Plan Reviewer | Challenge assumptions and review plans | Request corrections or escalate unresolved uncertainty |
+| Network Investigator | Interpret reports and inspect network dependencies | Faults, prerequisites, evidence links and clarification questions |
+| Field Resource Planner | Check skills, availability, access and power resources | Resource constraints, feasible actions and conflict warnings |
+| Service Priority Assessor | Apply human-approved weights to service associations | Service priorities and trade-off explanations |
+| Plan Reviewer | Challenge evidence and candidate plans | Revision requests, unresolved concerns and escalations |
 
-Agents will share structured findings and use one another's outputs. Graph algorithms and scheduling tools will calculate dependencies and validate resource constraints. Language models will support interpretation and coordination rather than serve as unchecked numerical schedulers.
+A deterministic Python coordinator routes messages, versions shared state and enforces budgets. NetworkX supports dependency and path checks; CP-SAT builds schedules; separate software validates encoded feasibility. The coordinator and these tools are not additional AI agents.
 
 ```mermaid
 flowchart TD
-    A[Incident reports and resources] --> B[Investigate failures and dependencies]
-    B --> C[Coordinate resources and service priorities]
-    C --> D[Generate restoration schedule]
-    D --> E{Review passes?}
-    E -->|Revise| C
-    E -->|Yes| F[Human review and approval]
-    F --> G[Simulate approved actions]
-    G --> H[Progress and new incidents]
-    H --> B
+    A[Reports and scenario state] --> B[Validate inputs and version state]
+    B --> C[Specialists exchange findings]
+    C --> D[Build constrained schedule]
+    D --> E[Plan Reviewer challenges candidate]
+    E --> F{Independent checks pass?}
+    F -->|Revise within budget| C
+    F -->|Escalate| G[Operator clarification]
+    G -->|Confirmed update| B
+    F -->|Yes| H{Human approval?}
+    H -->|Reject or revise| G
+    H -->|Approve| I[Simulate approved actions]
+    I --> J{Conditions changed?}
+    J -->|Yes| B
+    J -->|No| K[Record outcomes]
 ```
 
-Coordination will use bounded rounds, validated outputs, and explicit escalation when facts cannot be established. Detailed message schemas and workflow decisions will be documented in `docs/Workflow.md`.
+Typed messages carry sender, recipient, incident ID, state version, finding, evidence IDs and requested action. Critical contradictions require authoritative confirmation or operator clarification. Revision loops stop or escalate when evidence or budgets are exhausted.
 
-## Illustrative scenario
+See [Workflow.md](docs/Workflow.md) for the detailed process, message example, decision rules and failure handling.
 
-A generator is initially considered for the largest failed tower. Investigation reveals that the tower also has a backhaul failure. The agents compare repairing that dependency with powering another site that serves a critical facility. A subsequent road closure triggers a revised plan.
+## Illustrative collaboration
 
-This is a planned demonstration scenario, not a reported operational outcome.
+A draft allocates a generator to Site A. The Investigator finds A's backhaul is down; the Resource Planner finds the fibre-skilled crew cannot reach it because the access road is closed. The Priority Assessor identifies reachable Site B where backup power can restore a critical service. The Reviewer challenges the allocation to A, and the coordinator requests confirmation and revises the schedule while recording A's unmet repair.
+
+This synthetic example illustrates how findings change the shared plan. Actual timings and outcomes will come from the simulator.
 
 ## Scope and data
 
-The target MVP covers one fictional operator, approximately 15–20 sites, explicit backhaul dependencies, two repair crews, limited backup power, and a small road network.
-
-| Data | Planned approach |
+| Item | MVP decision |
 | --- | --- |
-| Roads and facility locations | Public geographic data where accessible, with attribution |
-| Network topology and dependencies | Clearly labelled synthetic scenarios |
-| Crews, generators, fuel, and repair durations | Documented simulation assumptions |
-| Incident reports and updates | Authored scenarios with independently checked expected facts |
-| Optional cell observations | Assess availability and suitability before adoption |
+| Network | One fictional operator, 15–20 sites, explicit dependencies |
+| Resources | Two repair crews and limited generators |
+| Simulation horizon | 12 hours |
+| Supported actions | Equipment repair, link repair and generator deployment |
+| Restoration condition | Working equipment, adequate power and a valid path to the core |
+| Initial synthetic parameters | Repairs: 30–120 minutes; travel: 5–60 minutes; generator autonomy: 2–6 hours |
+| Geographic context | Optional OpenStreetMap roads/facilities, with attribution |
+| Optional cell context | OpenCellID, subject to access and suitability checks |
 
-Public cell observations do not establish an operator's topology, outage status, or complete physical site inventory. Simulated service availability will not be presented as certified radio coverage.
+Network topology, resources, incidents and durations will be generated as reproducible synthetic scenarios. Service objects prevent overlapping-site double counts. Publish seeds, parameter assumptions, licences, provenance and transformations with the adopted data.
 
-Do not add confidential operator or organizer data without authorization. Keep provenance, access dates, licences, and synthetic assumptions with each adopted dataset. Dataset acquisition is still pending.
+Live network control, autonomous dispatch, detailed radio propagation, national deployment and generator fuel replenishment are outside the MVP scope. Public cell observations are not an operator's topology or a complete physical-site inventory. Simulation findings require practitioner and operator validation before operational use.
 
-## Proposed technology choices
+## Technology and model decisions
 
-| Layer | Candidate approach |
+| Layer | Planned choice |
 | --- | --- |
-| Application | Python with a local web dashboard |
-| Network analysis | NetworkX |
+| Application | Python 3.11+ and Streamlit |
+| Agent orchestration | Explicit Python coordinator, typed messages and versioned shared state |
+| Initial LLM provider | OpenAI hosted API through its Python SDK and a provider adapter |
+| Model selection | Test other hosted models on development cases; freeze the selected model/configuration before held-out evaluation |
+| Graph analysis | NetworkX |
 | Scheduling | Google OR-Tools CP-SAT |
-| Agent orchestration | Explicit Python coordination loop and shared structured state |
-| Local inference | Ollama with a suitable locally tested model |
-| Storage | SQLite and versioned JSON/CSV files |
+| Validation | Pydantic schemas and an independent feasibility checker |
+| Storage and traces | SQLite, JSON/CSV and JSONL |
+| Verification | pytest and reproducible scenario fixtures |
 
-These choices are provisional. Pin tested dependencies and record the actual model, licence, settings, and hardware in `docs/PROJECT_DETAILS.md` as implementation progresses. Local inference avoids paid API calls but still consumes hardware resources and electricity.
+Agents use separate prompts and contexts, initially running sequentially. The primary single-/multi-agent comparison uses the same provider and exact model across all roles. Alternative models or per-role configurations are separate experiments, not silent substitutions. Local LLM execution is outside the current plan.
 
-## Repository layout
+The exact model ID/version, supported settings, SDK and dependency versions will be recorded in [PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) and the benchmark manifest. API cost, request latency, tokens, retries and rate limits will be measured; no cost-free inference claim is made.
 
-The repository root represents the `university-project/` root illustrated in the competition guidelines. Required submission paths are:
+## Repository layout and current status
 
-| Path | Purpose |
-| --- | --- |
-| `project/main.py` | Application entry point |
-| `project/requirements.txt` | Tested Python dependencies |
-| `README.md` | Project overview, setup, and execution guide |
-| `docs/Proposal.docx` | Competition proposal |
-| `docs/Workflow.md` | Workflow, communication, and implementation process |
-| `docs/PROJECT_DETAILS.md` | Features, technical details, dependencies, and AI-tool disclosures |
-| `project-demo.mp4` | Demonstration video |
+The repository root corresponds to the `university-project/` root in the competition guidelines.
 
-Optional supporting folders may include `data/`, `tests/`, and `results/`. The proposal and video must be real deliverables, not empty placeholder files.
+| Path | Purpose | Status |
+| --- | --- | --- |
+| [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
+| [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
+| [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
+| [project/main.py](project/main.py) | Required application entry point | Placeholder; implementation pending |
+| [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Placeholder; versions pending |
+| `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
+| `tests/` | Verification code and fixtures | Placeholder |
+| `results/` | Benchmark outputs and traces | Placeholder |
+| `project-demo.mp4` | Actual-execution demonstration video | Pending |
 
 ## Development setup
 
-Clone the repository:
+Prepare a checkout and Python environment:
 
 ```bash
 git clone https://github.com/inthiiii/hyperreaility-sliit.git
 cd hyperreaility-sliit
-```
-
-For the planned Python implementation, create an isolated environment:
-
-```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-**The runnable application and dependency list are not established by this README.** Once `project/requirements.txt` and `project/main.py` contain the implementation, the intended commands are:
+The application and dependency list are not yet runnable. Once implemented and pinned, the planned Streamlit launch sequence is:
 
 ```bash
 python -m pip install -r project/requirements.txt
-python project/main.py
+streamlit run project/main.py
 ```
 
-Update this section with the tested Python version, model setup, exact launch command, dashboard address, and sample scenario before the MVP submission.
+Verify and update this command, tested Python version, model configuration, dashboard address and sample-scenario instructions before the MVP submission. Configure the API key as a backend environment variable; never put credentials in the README, source, committed environment files or browser code. Other providers will use their own documented configuration through the adapter.
 
 ## Evaluation plan
 
-Compare the same documented tasks across:
+Compare a priority heuristic, conventional CP-SAT, a tool-assisted single agent, RE:L!NK and human participants. Remove the Reviewer and disable inter-agent feedback separately to test their contribution.
 
-1. A simple priority-based heuristic.
-2. A conventional optimizer using structured inputs.
-3. A single AI agent with comparable tools and information.
-4. The proposed multi-agent system.
-5. Human participants, with expertise and test conditions disclosed.
+| Evaluation decision | Plan |
+| --- | --- |
+| Cases | 10 development and 20 held-out scenarios; two held-out cases per predefined category |
+| AI repetitions | Three runs per scenario/configuration; scenario median used for paired differences |
+| Fair comparison | Same provider, exact model/version, supported generation/reasoning settings, tools, evidence and context cap within each pair |
+| Aggregate automated-run caps | 12 model calls, 24,000 input tokens, 4,800 output tokens and 180 seconds; include retries and reported reasoning usage where applicable |
+| Scheduler cap | Five seconds per attempt |
+| Human comparison | Target four consenting participants on six shared small cases; manual schedule entry, no AI/automatic optimization, up to ten minutes per case |
+| Reporting | Actual usage/cost, paired differences, failures, escalation and exploratory scenario-level bootstrap intervals |
 
-Measure critical service restoration time, weighted service downtime, crew travel, resource and dependency violations, planning latency, unsupported assumptions, and compute use. Reserve unseen scenarios and repeat AI runs. Report clean structured cases separately from ambiguous or changing incident cases.
+Cases include equipment/power faults, coupled backhaul failures, skill shortages, road closures, conflicting or stale reports, missing critical evidence, generator exhaustion and mid-incident resource loss.
 
-No benchmark results are available in this initial README. Targets must not be presented as achieved improvements.
+The primary metric is weighted service downtime over 12 hours, alongside unweighted service-hours and unmet services. Also measure critical-service interruption, feasibility, evidence precision/recall/F1, planning and replanning time, API cost, reassignments and geographic outcomes. Separate automated planning, human approval and simulated restoration time.
+
+Proposed targets are at least **10% median paired downtime reduction** versus the single agent on positive-baseline cases, no higher run-failure rate, **zero encoded violations in accepted plans**, **evidence F1 ≥0.90** and automated runs within **180 seconds**. Report zero-baseline cases, all-case absolute differences and unmet targets. No measured benchmark results are available yet.
+
+The full protocol and limitations are in [PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md).
+
+## Human oversight, security and reliability
+
+- Human approval authorizes simulation only and is bound to the current plan/state version.
+- Material changes invalidate approval and trigger reviewed replanning.
+- Use at most three revision rounds and one schema-repair retry per model response; all retries share the global budgets.
+- Use bounded backoff for transient API failures and rate limits. Escalate on unresolved critical facts, exhausted budgets, network loss or quota exhaustion.
+- Treat incident reports as untrusted data; restrict tools and controlled state writes.
+- Send only synthetic or explicitly authorized, appropriately redacted incident data to external APIs. Exclude confidential organizer materials and review provider data-handling terms.
+- Commit only synthetic/redacted traces; never commit credentials or sensitive data.
 
 ## Delivery milestones
 
 | Milestone | Target |
 | --- | --- |
-| Proposal | 20 November 2026 |
-| Internal MVP submission | **28 November 2026** |
-| Official MVP and complete project plan deadline | 29 November 2026 |
-| Grand finale for shortlisted teams | 7 December 2026 |
+| Proposal | Uploaded 20 November 2026 |
+| Development and integration | 20–25 November 2026 |
+| Evaluation and evidence | 26 November 2026 |
+| Documentation, video and clean-install check | 27 November 2026 |
+| Internal MVP and complete project plan upload | **28 November 2026, 6:00 PM** |
+| Official MVP and complete project plan deadline | **29 November 2026, 11:59 PM** |
+| Final-day feature development for shortlisted teams | 7 December 2026 |
 
-The internal target preserves a contingency day. Confirm final submission procedures against organizer announcements.
+All times are Sri Lanka time. The internal target preserves contingency time. The demonstration video will show actual execution and meet the MP4/H.264/AAC, 5–10 minute, minimum 720p and maximum 100 MB requirements.
 
 ## Team HyperReAIlity
 
-| Member | Role |
+| Member | Proposed implementation ownership |
 | --- | --- |
-| Ihthisham Irshad | Team Leader |
-| Zahra Hassan | Team Member |
-| Eyaas Ajmal | Team Member |
-| Kiruthika Vijayakumar | Team Member |
+| Ihthisham Irshad — Team Leader | Architecture, agent coordination and integration |
+| Zahra Hassan | Simulator and scheduling |
+| Eyaas Ajmal | Interface, workflow and approval |
+| Kiruthika Vijayakumar | Research, benchmarking and evaluation |
 
 **University:** Sri Lanka Institute of Information Technology (SLIIT)  
 **Domain:** Telecommunications  
@@ -194,23 +225,23 @@ The internal target preserves a contingency day. Confirm final submission proced
 
 ## Collaboration and disclosures
 
-- Use focused branches and pull requests for implementation work.
-- Keep documentation aligned with demonstrated capabilities.
-- Never commit API keys, passwords, access tokens, or private environment files.
-- Acknowledge reused code, frameworks, models, datasets, and applicable licences.
-- Declare every AI model, service, and development assistant actually used in `docs/PROJECT_DETAILS.md`.
-- Preserve organizer access throughout the competition.
-- Disclose simulations, mocked components, and incomplete features.
+Use focused implementation branches and pull requests, integrate daily through shared schemas and fixtures, and keep documentation aligned with implemented behavior. Preserve organizer access throughout the competition.
+
+Declare every AI model, service, coding assistant, reused component and applicable licence in [PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md). Disclose simulated, mocked and incomplete components; reported outputs must come from the submitted system. Update the initial disclosure register as team members use additional tools or adopt dependencies.
 
 ## References
 
+- [Submitted proposal and research bibliography](docs/Proposal.docx)
+- [OpenAI API reference](https://developers.openai.com/api/reference/overview)
+- [OpenAI API pricing](https://developers.openai.com/api/docs/pricing)
+- [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data)
 - [ITU Disaster Connectivity Map](https://www.itu.int/en/ITU-D/Emergency-Telecommunications/Pages/Disaster-Connectivity-Map.aspx)
 - [Google OR-Tools](https://developers.google.com/optimization)
 - [OpenStreetMap copyright and data licence](https://www.openstreetmap.org/copyright)
-- [OpenCellID documentation](https://docs.opencellid.org/docs/introduction)
+- [OpenCellID data-access documentation](https://docs.opencellid.org/docs/downloads/overview)
 
 Competition requirements are governed by the organizer-provided overview and university submission guidelines. References do not imply endorsement of RE:L!NK.
 
 ## Licence
 
-The team has not yet selected a project licence. Third-party software, models, and datasets remain subject to their respective licences. Do not assume this repository grants open-source reuse rights without an explicit licence.
+The team has not yet selected a project licence. Third-party software, models and datasets remain subject to their respective licences. Do not assume this repository grants open-source reuse rights without an explicit licence.
