@@ -21,3 +21,7 @@ venv/
 .coverage
 htmlcov/
 *.log
+
+# Synthetic incident run records and local benchmark outputs
+results/local_runs/
+results/local_benchmarks/

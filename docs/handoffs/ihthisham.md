@@ -20,10 +20,17 @@ python -m project.core.demo --scenario tests/core/fixtures/DEMO-005.json --mode 
 
 ## Next integrations
 
-Publish the shared models first. Zahra imports ScenarioInput/SimulationResult and supplies evaluator isolation, event execution and metrics. Eyaas imports Coordinator, approve and check_approval. Operator-confirmation reports must be recorded before evidence is resolved; clients must rebuild a new state version after material changes. Never mutate an approved object in place expecting its approval to survive.
+Publish the shared models first. Zahra imports ScenarioInput/SimulationResult and supplies evaluator isolation, event execution and metrics. Eyaas should use CoreSession with a fresh Coordinator for every Prepare operation; approve_run is the reviewed-run approval gate. Operator-confirmation reports must be recorded before evidence is resolved; clients must rebuild a new state version after material changes. Never mutate an approved object in place expecting its approval to survive.
 
-Required follow-up: persistent traces, authenticated operator identity, full future-event lifecycle and independent evaluation. Exact model ID is intentionally unset until the user selects/tests a hosted model. Some transport environments may require optional SOCKS dependencies; no live provider transport was validated here.
+Completed at the 23 November checkpoint: persistent traces, session/approval boundary, preflight and benchmark infrastructure. Required follow-up: authenticated operator identity, full future-event lifecycle and independent restoration evaluation. Exact model ID is intentionally unset until the user selects/tests a hosted model. Some transport environments may require optional SOCKS dependencies; no live provider transport was validated here.
 
 ## AI disclosure
 
 Source and tests were created with ChatGPT/Codex assistance. Fixture parser is deterministic and narrowly scoped. Fake adapter responses verify orchestration only. Do not count them as real model results or claim four-agent superiority without the planned paired evaluation.
+
+
+## 23 November pre-merge checkpoint
+
+Full suite: **69 passed**. Offline CLI: awaiting_approval, one action, zero model calls. Paired heuristic/optimizer development smoke: two attempts, both awaiting_approval; actual restoration scores deliberately absent pending Zahra's simulator. Live model inference was not performed: the original local environment contains a key but no exact model ID. New tests exercise trace integrity/redaction, failed-run retention, stale approval, repeat execution, failed replacement, scheduling feedback, specialist reassessment, ablations and benchmark guards.
+
+Read `docs/PREMERGE_CHECKPOINT.md` next. The writable checkout is an update source; apply its patch to the Documents repository, test there, then commit/push your own branch. Do not count fake-client tests or these development fixtures as held-out model evaluation.

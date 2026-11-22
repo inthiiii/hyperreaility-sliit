@@ -44,17 +44,26 @@ No hosted requests or spend were performed during implementation. Adapter tests 
 
 Whole-run defaults are 12 calls, 24000 input and 4800 output tokens, and 180 seconds. All JSON repairs consume the shared allowance. Input reservations use conservative UTF-8 byte counts plus framing; output reservations use the requested maximum. This may stop a run earlier than actual token usage would require. Actual reported token usage, request/model IDs, errors and latency are recorded separately. Provider responses with missing usage or incomplete output fail closed. Automatic transport retries are disabled, avoiding uncounted SDK retries; transient failures currently escalate instead of retrying.
 
-A CP-SAT attempt is capped at five seconds with one worker and a recorded seed. Solver failure/timeout without a usable result falls back explicitly to the labelled greedy baseline. Model-adapter failure never silently falls back to template mode. The coordinator's result and usage records are returned for persistence; durable JSONL/SQLite storage, authenticated operator accounts and UI session binding remain integration work.
+A CP-SAT attempt is capped at five seconds with one worker and a recorded seed. Solver failure/timeout without a usable result falls back explicitly to the labelled greedy baseline. Model-adapter failure never silently falls back to template mode. The demo persists private, atomic JSON run records with checksums and credential-pattern redaction in ignored results/local_runs/. Records include state, plans, messages, usage, failure reasons and metadata. Checksums detect accidental changes; they are not signatures. Authenticated operator accounts and dashboard session binding remain integration work.
 
 ## Work for teammates and remaining integration
 
-- Zahra: loader and independent simulator, including generator expiry and timed world events. Use `check_approval` with current state before simulation. Implement independent metrics; do not reuse the planner's claimed score.
+- Zahra: loader and independent simulator, including generator expiry and timed world events. Connect the pure simulator callback through `CoreSession`; it checks content-bound approval before simulation. Implement independent metrics; do not reuse the planner's claimed score.
 - Eyaas: replace the environment screen with the agreed dashboard and coordinator calls; prevent rerender API calls, capture operator identity and invalidate approvals on updates.
 - Kiruthika: manual QA and reproducible defects, with actual outcomes.
-- Ihthisham: integrate remaining event/replanning lifecycle and histories with Zahra; durable traces; model settings frozen for evaluation; update status docs with real results.
+- Ihthisham: integrate event/replanning lifecycle with Zahra after her merge; select and verify hosted model settings, freeze the evaluation protocol, and record real results.
 
 Static snapshots are implemented; in-progress work/resumption and crew-loss event execution are not. Unknown evidence currently escalates globally. CP-SAT supports rooted trees and five-minute-aligned inputs, not arbitrary network meshes or a detailed fuel model. No measured benchmark improvement, human study, general field-message robustness or production readiness is claimed.
 
 ## Verification
 
 The automated core suite tests contract rejection, uncertainty/conflict/stale evidence, solver outputs, independent validation failures, content-bound approval, coordinator exchanges, bounded revisions, schema repair and budget exhaustion. See the latest handoff for the recorded run. AI assistance: ChatGPT/Codex generated and exercised these core modules; hosted OpenAI/OpenRouter calls were not used. Add this assistance and all actual future model IDs to the project's disclosure register before submission.
+
+
+## Pre-merge update — 23 November 2026
+
+The independent work is ready for teammate integration. See `docs/PREMERGE_CHECKPOINT.md` for commands, responsibilities and verification. This update adds persistent run records, the dashboard approval/session boundary, local hosted-model preflight, frozen benchmark manifests and optional reviewer/feedback ablations. Scheduling revisions can switch the heuristic to the optimizer; evidence revisions reassess both specialists. Review payloads use current-version specialist messages rather than duplicating the full transcript.
+
+Recognized fixture reports are independently retained by the resolver so an agent cannot omit a known contradictory fixture report. Claims contradicting a cited recognized sentence are rejected. This does not establish semantic entailment for arbitrary field messages. Input remains untrusted, and general-language evidence verification needs further development and testing.
+
+Role output reservations are 700 tokens for extraction, 300 for a specialist finding and 400 for review, inside the same whole-run limits. Larger scenarios or revision loops may exhaust the conservative input allowance and escalate. These are measurable failures, not omitted evaluation cases. No transport retry or model selection is automatic.

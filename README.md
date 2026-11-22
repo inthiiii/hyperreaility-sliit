@@ -245,3 +245,8 @@ Competition requirements are governed by the organizer-provided overview and uni
 ## Licence
 
 The team has not yet selected a project licence. Third-party software, models and datasets remain subject to their respective licences. Do not assume this repository grants open-source reuse rights without an explicit licence.
+
+
+### Core pre-merge checkpoint
+
+The core now includes atomic local run records, a framework-independent `CoreSession` approval boundary, hosted-model preflight, and paired benchmark infrastructure. Current verification: 69 automated tests pass; no live model or independent restoration evaluation has been performed. See [pre-merge instructions](docs/PREMERGE_CHECKPOINT.md) for the stopping point and teammate integration contracts.

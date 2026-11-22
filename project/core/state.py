@@ -16,6 +16,19 @@ def build_verified_state(scenario:ScenarioInput, facts:list[EvidenceFact], confi
     reports={r.report_id:r for r in scenario.reports}
     grouped=defaultdict(list)
     all_facts=[*facts,*(confirmations or [])]
+    # Independently retain recognized authoritative fixture reports, even if an agent
+    # omits one side of a conflict. This is a narrow parser, not semantic verification.
+    from project.agents.extraction import template_facts
+    recognized=template_facts(scenario)
+    by_report={f.evidence_ids[0]:f for f in recognized}
+    for fact in all_facts:
+        for rid in fact.evidence_ids:
+            expected=by_report.get(rid)
+            if expected and (fact.target_type,fact.target_id,fact.attribute,fact.value)!=(expected.target_type,expected.target_id,expected.attribute,expected.value):
+                raise ValueError('Fact contradicts the cited fixture report')
+    existing={(rid,f.target_type,f.target_id,f.attribute) for f in all_facts for rid in f.evidence_ids}
+    all_facts.extend(f for f in recognized if reports[f.evidence_ids[0]].source_type in AUTHORITY
+                     and (f.evidence_ids[0],f.target_type,f.target_id,f.attribute) not in existing)
     confirm_ids={id(f) for f in (confirmations or [])}
     for fact in all_facts:
         if any(rid not in reports for rid in fact.evidence_ids):

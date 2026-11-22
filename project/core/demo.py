@@ -13,6 +13,7 @@ def main():
     parser.add_argument('--mode',choices=['template','single','multi'],default='template')
     parser.add_argument('--planner',choices=['cp_sat','greedy'],default='cp_sat')
     parser.add_argument('--output')
+    parser.add_argument('--trace-dir',default='results/local_runs')
     args=parser.parse_args()
     # No broad file-reader tool is given to agents. This CLI accepts a deliberate human-selected input.
     raw=json.loads(Path(args.scenario).read_text())
@@ -20,8 +21,12 @@ def main():
     adapter=None
     if args.mode!='template':
         load_dotenv(Path(__file__).resolve().parents[2]/'.env')
+        from project.llm.health import preflight
+        health=preflight()
+        if health['status']=='blocked':
+            print(json.dumps(health,indent=2));raise SystemExit(2)
         adapter=HostedAdapter.from_env()
-    try:result=Coordinator(adapter,planner=args.planner).run(scenario,args.mode)
+    try:result=Coordinator(adapter,planner=args.planner,trace_dir=args.trace_dir).run(scenario,args.mode)
     finally:
         if adapter:adapter.close()
     value=result.model_dump_json(indent=2)
