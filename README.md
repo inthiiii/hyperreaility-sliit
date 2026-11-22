@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: proposal submitted; initial design documentation available; MVP implementation pending.** The application entry point and dependency list are currently placeholders. Features below describe the planned MVP. This README will be updated with verified setup instructions and results as development progresses.
+> **Status: development environment and initial core implementation available.** Typed contracts, independent validation, static scheduling, approval and bounded agent coordination are covered by automated core checks. The dashboard remains an environment screen; the independent simulator, timed-event lifecycle and full evaluation are pending. See [core setup and actual limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No measured benchmark results or live hosted-model validation are claimed.
 
 ## Overview
 
@@ -137,10 +137,10 @@ The repository root corresponds to the `university-project/` root in the competi
 | [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
 | [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
 | [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
-| [project/main.py](project/main.py) | Required application entry point | Placeholder; implementation pending |
-| [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Placeholder; versions pending |
+| [project/main.py](project/main.py) | Required application entry point | Environment startup screen; dashboard integration pending |
+| [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
-| `tests/` | Verification code and fixtures | Placeholder |
+| `tests/` | Verification code and fixtures | Core tests and six visible development fixtures available |
 | `results/` | Benchmark outputs and traces | Placeholder |
 | `project-demo.mp4` | Actual-execution demonstration video | Pending |
 
@@ -155,7 +155,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-The application and dependency list are not yet runnable. Once implemented and pinned, the planned Streamlit launch sequence is:
+The environment startup screen can be launched with the recorded dependencies:
 
 ```bash
 python -m pip install -r project/requirements.txt

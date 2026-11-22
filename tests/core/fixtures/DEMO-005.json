@@ -1,0 +1,377 @@
+{
+  "action_options": [
+    {
+      "action_id": "EQ-S01",
+      "duration_minutes": 45,
+      "kind": "equipment_repair",
+      "location": "S01",
+      "required_skill": "equipment",
+      "target_id": "S01"
+    },
+    {
+      "action_id": "EQ-S02",
+      "duration_minutes": 60,
+      "kind": "equipment_repair",
+      "location": "S02",
+      "required_skill": "equipment",
+      "target_id": "S02"
+    },
+    {
+      "action_id": "EQ-S03",
+      "duration_minutes": 60,
+      "kind": "equipment_repair",
+      "location": "S03",
+      "required_skill": "equipment",
+      "target_id": "S03"
+    },
+    {
+      "action_id": "EQ-S04",
+      "duration_minutes": 90,
+      "kind": "equipment_repair",
+      "location": "S04",
+      "required_skill": "equipment",
+      "target_id": "S04"
+    },
+    {
+      "action_id": "EQ-S05",
+      "duration_minutes": 120,
+      "kind": "equipment_repair",
+      "location": "S05",
+      "required_skill": "equipment",
+      "target_id": "S05"
+    },
+    {
+      "action_id": "BH-L01",
+      "duration_minutes": 90,
+      "kind": "link_repair",
+      "location": "S01",
+      "required_skill": "backhaul",
+      "target_id": "L01"
+    },
+    {
+      "action_id": "BH-L02",
+      "duration_minutes": 120,
+      "kind": "link_repair",
+      "location": "S02",
+      "required_skill": "backhaul",
+      "target_id": "L02"
+    },
+    {
+      "action_id": "BH-L03",
+      "duration_minutes": 120,
+      "kind": "link_repair",
+      "location": "S03",
+      "required_skill": "backhaul",
+      "target_id": "L03"
+    },
+    {
+      "action_id": "BH-L04",
+      "duration_minutes": 90,
+      "kind": "link_repair",
+      "location": "S04",
+      "required_skill": "backhaul",
+      "target_id": "L04"
+    },
+    {
+      "action_id": "BH-L05",
+      "duration_minutes": 45,
+      "kind": "link_repair",
+      "location": "S05",
+      "required_skill": "backhaul",
+      "target_id": "L05"
+    },
+    {
+      "action_id": "GEN-G1-S01",
+      "duration_minutes": 15,
+      "generator_id": "G1",
+      "kind": "generator_deploy",
+      "location": "S01",
+      "required_skill": "generator",
+      "target_id": "S01"
+    },
+    {
+      "action_id": "GEN-G1-S02",
+      "duration_minutes": 15,
+      "generator_id": "G1",
+      "kind": "generator_deploy",
+      "location": "S02",
+      "required_skill": "generator",
+      "target_id": "S02"
+    },
+    {
+      "action_id": "GEN-G1-S03",
+      "duration_minutes": 15,
+      "generator_id": "G1",
+      "kind": "generator_deploy",
+      "location": "S03",
+      "required_skill": "generator",
+      "target_id": "S03"
+    },
+    {
+      "action_id": "GEN-G1-S04",
+      "duration_minutes": 15,
+      "generator_id": "G1",
+      "kind": "generator_deploy",
+      "location": "S04",
+      "required_skill": "generator",
+      "target_id": "S04"
+    },
+    {
+      "action_id": "GEN-G1-S05",
+      "duration_minutes": 15,
+      "generator_id": "G1",
+      "kind": "generator_deploy",
+      "location": "S05",
+      "required_skill": "generator",
+      "target_id": "S05"
+    }
+  ],
+  "core_id": "CORE",
+  "crews": [
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C1",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "generator"
+      ]
+    },
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C2",
+      "location": "DEPOT",
+      "skills": [
+        "backhaul",
+        "equipment",
+        "generator"
+      ]
+    }
+  ],
+  "current_time_min": 0,
+  "depot_id": "DEPOT",
+  "generators": [
+    {
+      "autonomy_minutes": 120,
+      "available": true,
+      "deployment_minutes": 15,
+      "generator_id": "G1",
+      "location": "DEPOT",
+      "max_deployments": 1
+    }
+  ],
+  "horizon_min": 720,
+  "links": [
+    {
+      "child": "S01",
+      "link_id": "L01",
+      "parent": "CORE"
+    },
+    {
+      "child": "S02",
+      "link_id": "L02",
+      "parent": "CORE"
+    },
+    {
+      "child": "S03",
+      "link_id": "L03",
+      "parent": "S01"
+    },
+    {
+      "child": "S04",
+      "link_id": "L04",
+      "parent": "S02"
+    },
+    {
+      "child": "S05",
+      "link_id": "L05",
+      "parent": "S01"
+    }
+  ],
+  "observed_state": {
+    "links": {
+      "L01": null,
+      "L02": true,
+      "L03": true,
+      "L04": true,
+      "L05": true
+    },
+    "roads": {
+      "R01": true,
+      "R02": true,
+      "R03": true,
+      "R04": true,
+      "R05": true
+    },
+    "sites": {
+      "S01": {
+        "equipment_ok": true,
+        "grid_power_ok": null
+      },
+      "S02": {
+        "equipment_ok": true,
+        "grid_power_ok": null
+      },
+      "S03": {
+        "equipment_ok": true,
+        "grid_power_ok": true
+      },
+      "S04": {
+        "equipment_ok": true,
+        "grid_power_ok": true
+      },
+      "S05": {
+        "equipment_ok": true,
+        "grid_power_ok": true
+      }
+    }
+  },
+  "policy": {
+    "approved_for_simulation": true,
+    "critical_weight": 5,
+    "evidence_id": "POLICY-001",
+    "evidence_rule": "Authoritative evidence must be consistent; equally authoritative conflicts require confirmation. Recency alone does not verify a fact.",
+    "max_generator_deployments_per_scenario": 1,
+    "on_crew_loss": "Pause affected unfinished work and request operator review; preserve completed repairs.",
+    "standard_weight": 1
+  },
+  "region_label": "Fictional network in a Sri Lanka demonstration context",
+  "reports": [
+    {
+      "observed_at_min": 0,
+      "received_at_min": 0,
+      "report_id": "REP-001",
+      "source_type": "authoritative_snapshot",
+      "text": "S01: grid power is unavailable."
+    },
+    {
+      "observed_at_min": 0,
+      "received_at_min": 0,
+      "report_id": "REP-002",
+      "source_type": "authoritative_snapshot",
+      "text": "S02: grid power is unavailable."
+    },
+    {
+      "observed_at_min": 0,
+      "received_at_min": 0,
+      "report_id": "REP-003",
+      "source_type": "authoritative_snapshot",
+      "text": "L01: backhaul link has failed."
+    }
+  ],
+  "roads": [
+    {
+      "from": "DEPOT",
+      "road_id": "R01",
+      "to": "S01",
+      "travel_minutes": 25
+    },
+    {
+      "from": "DEPOT",
+      "road_id": "R02",
+      "to": "S02",
+      "travel_minutes": 15
+    },
+    {
+      "from": "DEPOT",
+      "road_id": "R03",
+      "to": "S03",
+      "travel_minutes": 10
+    },
+    {
+      "from": "DEPOT",
+      "road_id": "R04",
+      "to": "S04",
+      "travel_minutes": 10
+    },
+    {
+      "from": "DEPOT",
+      "road_id": "R05",
+      "to": "S05",
+      "travel_minutes": 30
+    }
+  ],
+  "scenario_id": "DEMO-005",
+  "schema_version": "0.1",
+  "services": [
+    {
+      "critical": false,
+      "label": "Fictional service 01",
+      "policy_evidence_id": "POLICY-001",
+      "service_id": "V01",
+      "site_id": "S01",
+      "weight": 1
+    },
+    {
+      "critical": true,
+      "label": "Fictional critical facility",
+      "policy_evidence_id": "POLICY-001",
+      "service_id": "V02",
+      "site_id": "S02",
+      "weight": 5
+    },
+    {
+      "critical": false,
+      "label": "Fictional service 03",
+      "policy_evidence_id": "POLICY-001",
+      "service_id": "V03",
+      "site_id": "S03",
+      "weight": 1
+    },
+    {
+      "critical": false,
+      "label": "Fictional service 04",
+      "policy_evidence_id": "POLICY-001",
+      "service_id": "V04",
+      "site_id": "S04",
+      "weight": 1
+    },
+    {
+      "critical": false,
+      "label": "Fictional service 05",
+      "policy_evidence_id": "POLICY-001",
+      "service_id": "V05",
+      "site_id": "S05",
+      "weight": 1
+    }
+  ],
+  "sites": [
+    {
+      "coordinate_system": "synthetic_local_grid",
+      "label": "Fictional site 01",
+      "site_id": "S01",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "coordinate_system": "synthetic_local_grid",
+      "label": "Fictional site 02",
+      "site_id": "S02",
+      "x": 10,
+      "y": 0
+    },
+    {
+      "coordinate_system": "synthetic_local_grid",
+      "label": "Fictional site 03",
+      "site_id": "S03",
+      "x": 20,
+      "y": 0
+    },
+    {
+      "coordinate_system": "synthetic_local_grid",
+      "label": "Fictional site 04",
+      "site_id": "S04",
+      "x": 30,
+      "y": 0
+    },
+    {
+      "coordinate_system": "synthetic_local_grid",
+      "label": "Fictional site 05",
+      "site_id": "S05",
+      "x": 40,
+      "y": 0
+    }
+  ]
+}
