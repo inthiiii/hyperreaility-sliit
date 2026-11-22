@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 import json
 import os
 import time
+import hashlib
 
 class BudgetExceeded(RuntimeError): pass
 
@@ -30,6 +31,7 @@ class RunBudget:
 
     def reserve(self,messages,max_output):
         self.check_time()
+        if type(max_output) is not int or max_output<=0:raise ValueError('Output reservation must be a positive integer')
         # UTF-8 bytes + framing is deliberately conservative, not a tokenizer claim.
         count=sum(len(m['content'].encode('utf-8'))+64 for m in messages)
         if self.calls>=self.max_calls or self.input_reserved+count>self.max_input_tokens or self.output_reserved+max_output>self.max_output_tokens:
@@ -42,6 +44,7 @@ class HostedAdapter:
         if provider not in ('openai','openrouter'):raise ValueError('Unsupported provider')
         if not model or not api_key:raise ValueError('Exact model ID and API key are required')
         self.provider=provider;self.model=model;self.budget=budget or RunBudget()
+        self.injected_client=client is not None
         if client is None:
             from openai import OpenAI
             client=OpenAI(api_key=api_key,base_url=base_url or ('https://openrouter.ai/api/v1' if provider=='openrouter' else None),max_retries=0)
@@ -63,7 +66,9 @@ class HostedAdapter:
           {'role':'user','content':json.dumps(payload,separators=(',',':'))}]
         for attempt in range(2):
             reserved=self.budget.reserve(messages,max_output)
-            record={'provider':self.provider,'model':self.model,'role':role,'attempt':attempt+1,'input_token_upper_estimate':reserved,'output_limit':max_output}
+            record={'provider':self.provider,'model':self.model,'role':role,'attempt':attempt+1,'input_token_upper_estimate':reserved,'output_limit':max_output,
+                    'prompt_sha256':hashlib.sha256(json.dumps(messages,sort_keys=True).encode()).hexdigest(),
+                    'schema_sha256':hashlib.sha256(json.dumps(response_model.model_json_schema(),sort_keys=True).encode()).hexdigest()}
             start=time.monotonic()
             try:
                 kwargs={'model':self.model,'messages':messages,'timeout':min(30,self.budget.remaining_seconds())}
