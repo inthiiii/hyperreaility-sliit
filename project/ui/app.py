@@ -11,8 +11,10 @@ from project.ui.incident import render_incident
 from project.ui.planning import render_planning
 from project.ui.session import get_dashboard_session
 from project.ui.review_service import active_approval
+from project.ui.history import render_history
+from project.ui.outcomes import render_results
 
-PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'Settings')
+PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'History', 'Settings')
 
 
 def _pill(text, amber=False):
@@ -68,20 +70,6 @@ def _overview(choice):
     _steps()
 
 
-def _results(session):
-    st.html('<div class="relink-eyebrow">Results</div>')
-    st.title('Evidence of recovery.')
-    st.write('Measured outcomes will come from the independent simulator.')
-    with st.container(border=True):
-        if session.simulation_result is not None:
-            st.subheader('Simulation result recorded')
-            st.success('A callback result is recorded for the current plan. Detailed measured-outcome views arrive in Push 5.')
-        else:
-            st.subheader('No simulation results yet')
-            st.write('Service restoration, downtime and critical-service interruption appear here after an approved simulation.')
-        st.caption('Independent simulation is pending integration. Planner predictions will remain separately labelled.')
-
-
 def _settings(health, session, choice):
     st.html('<div class="relink-eyebrow">Settings</div>')
     st.title('Know what is ready.')
@@ -111,8 +99,8 @@ def _settings(health, session, choice):
         if choice:
             st.code(choice.key, language=None)
             st.write('Content hash: ' + choice.content_hash[:16])
-        st.write('Available: incident inspection, explicit planning, validation, recorded operator decisions, approval-gated simulator boundary and local records.')
-        st.write('Pending: authenticated identity, independent simulator implementation and measured-outcome views.')
+        st.write('Available: incident inspection, planning, recorded decisions, approval-gated simulator boundary, read-only history, exports and evaluator-output views.')
+        st.write('Pending: authenticated identity, real simulator wiring and validation of actual restoration outcomes.')
 
 
 def render_app(root=None):
@@ -165,6 +153,8 @@ def render_app(root=None):
                 st.warning(issue)
     if page == 'Settings':
         _settings(health, session, choice)
+    elif page == 'History':
+        render_history(root, choice)
     elif choice is None:
         st.title('Prepare your incident workspace.')
         st.error('No valid scenario can be selected.')
@@ -177,6 +167,6 @@ def render_app(root=None):
     elif page == 'Planning':
         render_planning(choice, session, root)
     else:
-        _results(session)
+        render_results(session)
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
             ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')

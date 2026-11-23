@@ -65,3 +65,8 @@ Dashboard consumers use CoreSession with a fresh Coordinator per explicit genera
 ## Operator review and simulator boundary (Push 4)
 
 Dashboard approval/rejection uses the current reviewed RunResult, an exact previously displayed binding and a fresh allowlisted source-file hash. Decisions become active only after their private audit record is written. Rejected runs require a new plan; historical records never automatically restore authorization. The `simulate_approved` service additionally requires matching operator/approval, an explicitly attached backend callback and no prior attempt for that plan hash. It validates returned SimulationResult identity, completed action IDs and finite metrics before exposure. This is interface validation, not independent metric verification. See `docs/DASHBOARD_PUSH4.md` for the synchronous callback adapter contract and hidden-truth isolation. No independent simulator implementation is bundled with this UI checkpoint.
+
+
+## Result presentation and history (Push 5)
+
+History is an allowlisted, bounded, read-only view of saved records; it never restores plans or authorization. SimulationResult metrics preserve nulls and use explicit run_metadata.metric_units when available. The trajectory table preserves reported flat fields; optional run_metadata.trajectory_plot supplies documented time_field/series/time_unit defaults. Without those defaults the operator explicitly selects numeric plotting fields; meanings/units are not inferred. Non-finite output is rejected before JSON serialization. See docs/DASHBOARD_PUSH5.md for record cross-linking, scope and limits. This completes the dashboard presentation interface, not real simulator validation.

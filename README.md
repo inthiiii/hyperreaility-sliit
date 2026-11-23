@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: tested core and dashboard foundation available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. The Planning page now prepares actual core schedules, evidence, validation and run records through explicit actions. Operator approval/rejection is recorded with content-bound checks. Actual independent simulation, timed events and measured evaluation remain pending. See [dashboard Push 4](docs/DASHBOARD_PUSH4.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
+> **Status: tested core and dashboard interface available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. The Planning page now prepares actual core schedules, evidence, validation and run records through explicit actions. Operator approval/rejection is recorded with content-bound checks. Actual independent simulation, timed events and measured evaluation remain pending. See [dashboard Push 5](docs/DASHBOARD_PUSH5.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
 
 ## Overview
 
@@ -137,7 +137,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
 | [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
 | [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
-| [project/main.py](project/main.py) | Required application entry point | Incident inspection, planning and recorded approval/rejection available; real simulator/results integration pending |
+| [project/main.py](project/main.py) | Required application entry point | Dashboard Pushes 1–5 available; real loader/simulator integration and outcome verification pending |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
 | `tests/` | Verification code and fixtures | Core tests and six visible development fixtures available |
@@ -270,3 +270,8 @@ Planning now connects to the real core with explicit offline/hosted modes, CP-SA
 ### Dashboard Push 4
 
 Operator approval/rejection now records exact run/plan/state bindings, notes and local audit history. Stale clicks, changed inputs, invalid/escalated plans and duplicate decisions are blocked; rejection revokes approval. A typed, approval-gated simulation boundary is ready, but the app attaches no mock simulator: simulation remains disabled until Zahra's independent evaluator is connected. **146 tests pass**, including 77 UI/service checks. See [Push 4 setup and simulator contract](docs/DASHBOARD_PUSH4.md).
+
+
+### Dashboard Push 5 and independent merge
+
+Read-only local run/decision/attempt history, safe exports and evaluator-output tables/charts are available. Missing results remain pending, null metrics remain unavailable, and opening history never restores authorization or starts inference. **161 tests pass**, including 92 UI/service checks. The dashboard workstream can be reviewed and merged independently; the real evaluator, actual outcome verification and full-system evaluation remain pending. See [Push 5](docs/DASHBOARD_PUSH5.md) and the [merge checklist](docs/DASHBOARD_MERGE_CHECKLIST.md).

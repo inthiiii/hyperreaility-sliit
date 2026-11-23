@@ -56,6 +56,14 @@ def simulate_approved(session, choice, expected_binding, operator_id, root):
             raise ValueError('Invalid completed action IDs')
         if any(value is not None and not math.isfinite(value) for value in simulation.metrics.values()):
             raise ValueError('Non-finite simulation metric')
+        def finite_tree(value):
+            if isinstance(value, float) and not math.isfinite(value):raise ValueError('Non-finite simulator output')
+            if isinstance(value, dict):
+                for item in value.values():finite_tree(item)
+            if isinstance(value, list):
+                for item in value:finite_tree(item)
+        # Check before JSON-mode serialization can convert infinities to null.
+        finite_tree(simulation.model_dump(mode='python'))
         # Recheck after callback; copied arguments cannot change the live approval.
         ensure_current_source(session, choice, root)
         check_approval(session.core.approval, result.plan, result.state)

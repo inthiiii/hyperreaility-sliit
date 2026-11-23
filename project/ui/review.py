@@ -26,7 +26,7 @@ def _simulation_callback(session, choice, root, binding):
     try:
         status = simulate_approved(session, choice, binding, st.session_state.get('operator_label', ''), root)
         session.review_feedback = {'kind': 'success' if status in ('completed', 'duplicate') else 'error',
-            'message': 'Simulation result recorded. Detailed outcome views arrive in Push 5.' if status == 'completed' else
+            'message': 'Simulation result recorded. Open Results to inspect evaluator-reported outcomes.' if status == 'completed' else
                        'Simulation was already attempted; it was not run again.' if status == 'duplicate' else
                        'Simulation failed or returned an invalid result. No automatic retry was made; inspect the attempt record.'}
     except (ReviewBlocked, IntegrationNotReady) as error:

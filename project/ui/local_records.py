@@ -18,7 +18,7 @@ def save_record(directory, record_id, payload):
     try:
         descriptor = os.open(temporary, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
         with os.fdopen(descriptor, 'w') as stream:
-            json.dump(envelope, stream, indent=2);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+            json.dump(envelope, stream, indent=2, allow_nan=False);stream.write('\n');stream.flush();os.fsync(stream.fileno())
         os.replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
