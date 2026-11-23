@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: development environment and initial core implementation available.** Typed contracts, independent validation, static scheduling, approval and bounded agent coordination are covered by automated core checks. The dashboard remains an environment screen; the independent simulator, timed-event lifecycle and full evaluation are pending. See [core setup and actual limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No measured benchmark results or live hosted-model validation are claimed.
+> **Status: tested core and dashboard interface available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. The Planning page now prepares actual core schedules, evidence, validation and run records through explicit actions. Operator approval/rejection is recorded with content-bound checks. Actual independent simulation, timed events and measured evaluation remain pending. See [dashboard Push 5](docs/DASHBOARD_PUSH5.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
 
 ## Overview
 
@@ -137,7 +137,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
 | [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
 | [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
-| [project/main.py](project/main.py) | Required application entry point | Environment startup screen; dashboard integration pending |
+| [project/main.py](project/main.py) | Required application entry point | Dashboard Pushes 1–5 available; real loader/simulator integration and outcome verification pending |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
 | `tests/` | Verification code and fixtures | Core tests and six visible development fixtures available |
@@ -155,14 +155,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-The environment startup screen can be launched with the recorded dependencies:
+Launch the dashboard foundation from the repository root:
 
 ```bash
 python -m pip install -r project/requirements.txt
-streamlit run project/main.py
+python -m streamlit run project/main.py
 ```
 
-Verify and update this command, tested Python version, model configuration, dashboard address and sample-scenario instructions before the MVP submission. Configure the API key as a backend environment variable; never put credentials in the README, source, committed environment files or browser code. Other providers will use their own documented configuration through the adapter.
+The dashboard defaults to DEMO-005 from six clearly labelled development fixtures until approved processed inputs are available. Run `python -m pytest -q` to verify the current core and UI checks. See [Push 1 setup and limits](docs/DASHBOARD_PUSH1.md); update model configuration and final sample-scenario instructions before submission. Configure the API key as a backend environment variable; never put credentials in the README, source, committed environment files or browser code. Other providers will use their own documented configuration through the adapter.
 
 ## Evaluation plan
 
@@ -214,10 +214,10 @@ All times are Sri Lanka time. The internal target preserves contingency time. Th
 
 | Member | Proposed implementation ownership |
 | --- | --- |
-| Ihthisham Irshad — Team Leader | Architecture, agent coordination and integration |
-| Zahra Hassan | Simulator and scheduling |
+| Ihthisham Irshad — Team Leader | Architecture, scheduling, agent coordination and integration |
+| Zahra Hassan | Data preprocessing, loader, independent simulator and metrics |
 | Eyaas Ajmal | Interface, workflow and approval |
-| Kiruthika Vijayakumar | Research, benchmarking and evaluation |
+| Kiruthika Vijayakumar | Manual QA, defect reports and documentation support |
 
 **University:** Sri Lanka Institute of Information Technology (SLIIT)  
 **Domain:** Telecommunications  
@@ -250,3 +250,28 @@ The team has not yet selected a project licence. Third-party software, models an
 ### Core pre-merge checkpoint
 
 The core now includes atomic local run records, a framework-independent `CoreSession` approval boundary, hosted-model preflight, and paired benchmark infrastructure. Current verification: 69 automated tests pass; no live model or independent restoration evaluation has been performed. See [pre-merge instructions](docs/PREMERGE_CHECKPOINT.md) for the stopping point and teammate integration contracts.
+
+
+### Dashboard Push 1
+
+The operator workspace foundation is available: five navigation views, safe scenario selection, overview, configuration checks and per-session state. Push 1 verification: **83 tests passed**, including 14 UI checks. Browsing makes no model requests. Planning and simulation controls are intentionally disabled until their integration pushes. See [dashboard handoff](docs/handoffs/eyaas.md).
+
+
+### Dashboard Push 2
+
+The Incident page now provides a synthetic dependency schematic, optional access-road layer, site observations and dependency inspection, searchable reports with provenance, crew/generator inventory, permitted action options and policy-weighted service associations. Snapshot observations remain separate from report text; no service restoration is inferred by browsing. Verification: **96 tests pass**, including 27 UI checks. See [Push 2 behavior and limits](docs/DASHBOARD_PUSH2.md).
+
+
+### Dashboard Push 3
+
+Planning now connects to the real core with explicit offline/hosted modes, CP-SAT/heuristic selection, actual schedules and travel/work timelines, evidence, agent messages, independent validation and run metadata. Per-session request guards prevent duplicate inference; retries and replacing a run clear old approval/results. Offline is the default. **117 tests pass**, including 48 UI/service checks; hosted tests use injected clients, not paid requests. See [Push 3 setup, verification and limits](docs/DASHBOARD_PUSH3.md).
+
+
+### Dashboard Push 4
+
+Operator approval/rejection now records exact run/plan/state bindings, notes and local audit history. Stale clicks, changed inputs, invalid/escalated plans and duplicate decisions are blocked; rejection revokes approval. A typed, approval-gated simulation boundary is ready, but the app attaches no mock simulator: simulation remains disabled until Zahra's independent evaluator is connected. **146 tests pass**, including 77 UI/service checks. See [Push 4 setup and simulator contract](docs/DASHBOARD_PUSH4.md).
+
+
+### Dashboard Push 5 and independent merge
+
+Read-only local run/decision/attempt history, safe exports and evaluator-output tables/charts are available. Missing results remain pending, null metrics remain unavailable, and opening history never restores authorization or starts inference. **161 tests pass**, including 92 UI/service checks. The dashboard workstream can be reviewed and merged independently; the real evaluator, actual outcome verification and full-system evaluation remain pending. See [Push 5](docs/DASHBOARD_PUSH5.md) and the [merge checklist](docs/DASHBOARD_MERGE_CHECKLIST.md).

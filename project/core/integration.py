@@ -6,12 +6,14 @@ class IntegrationNotReady(RuntimeError):pass
 class CoreSession:
     """One instance per operator session. Simulator callback belongs to Zahra."""
     def __init__(self,simulator=None):
-        self.simulator=simulator;self.current=None;self.approval=None;self.executed=set()
+        self.simulator=simulator;self.current=None;self.approval=None;self.executed=set();self._next_state_version=1
     def prepare(self,coordinator,scenario,mode='template'):
-        version=1 if self.current is None else self.current.state.state_version+1
+        version=self._next_state_version
+        self._next_state_version+=1
         self.approval=None
         self.current=None # A failed replacement must not leave an old plan executable.
         self.current=coordinator.run(scenario,mode,state_version=version)
+        self._next_state_version=max(self._next_state_version,self.current.state.state_version+1)
         return self.current
     def approve(self,operator_id):
         if self.current is None:raise ValueError('Prepare a plan first')

@@ -1,0 +1,30 @@
+/* Local system fonts and CSS only; no remote assets or JavaScript. */
+:root { --relink-mint: #69e3c6; --relink-muted: #9baec2; }
+[data-testid="stAppViewContainer"] {
+  background: radial-gradient(ellipse at 90% 0%, #15302e55, transparent 45%), #0b1018;
+}
+[data-testid="stSidebar"] { background: #0e1621; border-right: 1px solid #233141; }
+[data-testid="stHeader"] { background: transparent; }
+.block-container { padding-top: 2.6rem; padding-bottom: 3rem; max-width: 1440px; }
+h1, h2, h3 { letter-spacing: -.035em; }
+h1 { font-size: 2.6rem !important; line-height: 1.12 !important; font-weight: 650 !important; }
+h2 { font-size: 1.45rem !important; }
+[data-testid="stCaptionContainer"] { color: #9baec2; }
+[data-testid="stMetric"] { background: #121b27; border: 1px solid #233141; border-radius: 14px; padding: 1.1rem; }
+[data-testid="stMetricValue"] { font-size: 2rem; color: #edf5fc; }
+[data-testid="stVerticalBlockBorderWrapper"] > div { border-color: #263545 !important; border-radius: 14px !important; }
+.relink-brand { font-size: 1.65rem; font-weight: 800; letter-spacing: -.07em; color: #f0f7fc; margin: .4rem 0 .1rem; }
+.relink-brand span { color: var(--relink-mint); }
+.relink-eyebrow { color: var(--relink-mint); text-transform: uppercase; font-size: .7rem; font-weight: 700; letter-spacing: .18em; margin-bottom: .6rem; }
+.relink-muted { color: #9baec2; font-size: .86rem; line-height: 1.65; }
+.relink-pill { display: inline-block; color: #a4f0d9; border: 1px solid #2c665b; background: #16352f; border-radius: 30px; padding: .26rem .65rem; font-size: .73rem; margin: .3rem .3rem .4rem 0; }
+.relink-pill.amber { background: #332a17; color: #f5d58a; border-color: #66552e; }
+.relink-step { padding: .35rem .15rem .7rem; }
+.relink-step-no { color: #70879f; font-size: .72rem; letter-spacing: .12em; }
+.relink-step-title { font-size: 1.04rem; font-weight: 650; margin: .45rem 0; color: #e8eef5; }
+.relink-rule { border-top: 1px solid #263545; margin: 1.1rem 0; }
+.relink-footer { border-top: 1px solid #263545; padding-top: 1rem; margin-top: 1.8rem; color: #8fa3b8; font-size: .75rem; }
+@media (max-width: 720px) {
+  .block-container { padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+  h1 { font-size: 2rem !important; }
+}

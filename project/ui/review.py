@@ -1,0 +1,106 @@
+"""Human review controls. Callback arguments bind the previously displayed plan."""
+import streamlit as st
+
+from project.core.integration import IntegrationNotReady
+from project.core.tracing import redact
+from project.ui.review_service import ReviewBlocked, active_approval, record_decision, review_context
+from project.ui.simulation_service import simulate_approved
+
+
+def _decision_callback(session, choice, root, binding, decision):
+    try:
+        status = record_decision(session, choice, binding, decision,
+            st.session_state.get('operator_label', ''), st.session_state.get('review_note', ''), root)
+        session.review_feedback = {'kind': 'success', 'message':
+            'Decision already recorded; no duplicate record created.' if status == 'duplicate' else
+            'Approval recorded for simulation only.' if status == 'approve' else
+            'Plan rejected. Any previous approval was revoked.'}
+    except ReviewBlocked as error:
+        session.review_feedback = {'kind': 'error', 'message': str(error)}
+    except Exception as error:
+        session.review_feedback = {'kind': 'error', 'message':
+            'Decision could not be recorded (' + type(error).__name__ + '). No new approval is active.'}
+
+
+def _simulation_callback(session, choice, root, binding):
+    try:
+        status = simulate_approved(session, choice, binding, st.session_state.get('operator_label', ''), root)
+        session.review_feedback = {'kind': 'success' if status in ('completed', 'duplicate') else 'error',
+            'message': 'Simulation result recorded. Open Results to inspect evaluator-reported outcomes.' if status == 'completed' else
+                       'Simulation was already attempted; it was not run again.' if status == 'duplicate' else
+                       'Simulation failed or returned an invalid result. No automatic retry was made; inspect the attempt record.'}
+    except (ReviewBlocked, IntegrationNotReady) as error:
+        session.review_feedback = {'kind': 'error', 'message': str(error)}
+    except Exception as error:
+        session.review_feedback = {'kind': 'error', 'message': 'Simulation request stopped (' + type(error).__name__ + ').'}
+
+
+def render_review(choice, session, root):
+    st.divider()
+    st.subheader('Review and approval')
+    st.caption('Approval authorizes simulation only. It never dispatches a crew or controls a real network. '
+               'Operator labels are recorded for this local demo; they are not authenticated identities.')
+    ready = False;binding = None;reason = None
+    try:
+        result, binding = review_context(session, choice)
+        ready = True
+    except ReviewBlocked as error:
+        reason = str(error)
+    if st.session_state.get('review_note_input_hash') != choice.content_hash:
+        st.session_state.pop('review_note', None)
+        st.session_state['review_note_input_hash'] = choice.content_hash
+    operator = st.session_state.get('operator_label', '').strip()
+    operator_valid = 1 <= len(operator) <= 120
+    approved = active_approval(session, choice)
+    rejected = bool(ready and session.last_decision and session.last_decision.binding == binding
+                    and session.last_decision.approval.decision == 'reject')
+    if rejected:
+        st.error('This plan was rejected. Generate a new plan before requesting approval.')
+    elif approved:
+        st.success('Approved for simulation by ' + session.core.approval.operator_id + '.')
+    elif ready:
+        st.info('Awaiting your decision. Inspect the schedule, evidence and validation before approving or rejecting.')
+    elif reason:
+        st.warning(reason)
+    if ready and not operator_valid:
+        st.info('Enter an operator label of 1–120 characters in the sidebar to record a decision.')
+    st.text_area('Review note (optional)', key='review_note', max_chars=2000, disabled=not ready or session.busy,
+                 placeholder='Reason for the decision, constraints or follow-up needed')
+    yes, no = st.columns(2)
+    yes.button('Approve plan', key='approve_plan', type='primary', width='stretch',
+        disabled=not ready or not operator_valid or approved or rejected or session.busy,
+        on_click=_decision_callback, args=(session, choice, root, binding, 'approve'))
+    no.button('Reject plan', key='reject_plan', width='stretch',
+        disabled=not ready or not operator_valid or rejected or session.busy,
+        help='Rejecting an already approved plan revokes its approval.',
+        on_click=_decision_callback, args=(session, choice, root, binding, 'reject'))
+    feedback = session.review_feedback
+    if feedback:
+        (st.success if feedback['kind'] == 'success' else st.error)(feedback['message'])
+    record = session.last_decision
+    if record:
+        with st.expander('Recorded operator decision'):
+            st.json(redact(record.model_dump(mode='json')))
+            st.caption('Record ID: ' + record.decision_id + ' · Stored locally under results/local_runs/decisions/. '
+                       'Changing the plan, state or incident invalidates its approval.')
+    st.subheader('Approved simulation')
+    connected = session.core.simulator is not None
+    if not connected:
+        st.info('Independent simulator not connected. Approval can be recorded, but simulation remains disabled until Zahra’s evaluator is integrated.')
+    else:
+        st.caption('Connected implementation: ' + (session.simulator_label or 'Application callback'))
+    already = bool(session.core.approval and session.core.approval.plan_hash in session.simulation_requests)
+    same_operator = bool(approved and operator == session.core.approval.operator_id)
+    if approved and operator_valid and not same_operator:
+        st.warning('Use the operator label recorded on the approval before simulating.')
+    st.button('Simulate approved plan', key='simulate_plan', width='stretch',
+        disabled=not connected or not approved or not same_operator or already or session.busy,
+        on_click=_simulation_callback, args=(session, choice, root, binding))
+    if session.simulation_attempt:
+        attempt = session.simulation_attempt
+        if attempt['status'] == 'completed':
+            st.success('Independent callback result recorded for this plan. No new simulation occurs on rerender.')
+        elif attempt['status'] == 'failed':
+            st.error('The simulation attempt did not produce an accepted result. Generate a fresh plan after investigating; this attempt will not run again automatically.')
+        with st.expander('Simulation attempt record'):
+            st.json(redact(attempt))
