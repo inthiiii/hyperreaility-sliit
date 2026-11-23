@@ -25,6 +25,12 @@ class DashboardSession:
     planning_generation: int = 0
     planning_requests: set[str] = field(default_factory=set)
     planning_attempt: dict | None = None
+    last_decision: Any = None
+    decision_history: list = field(default_factory=list)
+    review_feedback: dict | None = None
+    simulation_requests: set[str] = field(default_factory=set)
+    simulation_attempt: dict | None = None
+    simulator_label: str | None = None
 
     def select(self, choice: ScenarioChoice) -> bool:
         if (self.selected_key, self.scenario_hash) == (choice.key, choice.content_hash):
@@ -38,6 +44,11 @@ class DashboardSession:
         self.planning_generation = 0
         self.planning_requests.clear()
         self.planning_attempt = None
+        self.last_decision = None
+        self.review_feedback = None
+        self.simulation_requests.clear()
+        self.simulation_attempt = None
+        self.simulator_label = None
         return True
 
     def clear_selection(self) -> bool:
@@ -51,6 +62,11 @@ class DashboardSession:
         self.planning_generation = 0
         self.planning_requests.clear()
         self.planning_attempt = None
+        self.last_decision = None
+        self.review_feedback = None
+        self.simulation_requests.clear()
+        self.simulation_attempt = None
+        self.simulator_label = None
         return True
 
 

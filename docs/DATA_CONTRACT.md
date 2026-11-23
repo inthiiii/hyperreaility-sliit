@@ -60,3 +60,8 @@ The independent simulator must compute actual evaluation downtime over the compl
 ## Dashboard planning boundary (Push 3)
 
 Dashboard consumers use CoreSession with a fresh Coordinator per explicit generation request. Prepare reserves monotonically increasing state versions even after a failed attempt or UI-cleared plan, and the next version advances beyond any evidence-review revisions. Scenario changes create a fresh session with content-bound approval still required. UI request deduplication is an additional per-browser-session guard, not a durable transaction mechanism. Read `docs/DASHBOARD_PUSH3.md` for request/failure behavior; operator approval and simulator execution remain the next integration milestone.
+
+
+## Operator review and simulator boundary (Push 4)
+
+Dashboard approval/rejection uses the current reviewed RunResult, an exact previously displayed binding and a fresh allowlisted source-file hash. Decisions become active only after their private audit record is written. Rejected runs require a new plan; historical records never automatically restore authorization. The `simulate_approved` service additionally requires matching operator/approval, an explicitly attached backend callback and no prior attempt for that plan hash. It validates returned SimulationResult identity, completed action IDs and finite metrics before exposure. This is interface validation, not independent metric verification. See `docs/DASHBOARD_PUSH4.md` for the synchronous callback adapter contract and hidden-truth isolation. No independent simulator implementation is bundled with this UI checkpoint.

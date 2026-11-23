@@ -10,6 +10,7 @@ from project.ui.catalog import load_catalog
 from project.ui.incident import render_incident
 from project.ui.planning import render_planning
 from project.ui.session import get_dashboard_session
+from project.ui.review_service import active_approval
 
 PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'Settings')
 
@@ -22,7 +23,7 @@ def _steps():
     labels = (
         ('01', 'Understand the incident', 'Choose a validated scenario and establish the operating context.', 'Available'),
         ('02', 'Build a recovery plan', 'Inspect evidence and coordinate a feasible restoration schedule.', 'Available'),
-        ('03', 'Review and approve', 'Keep the operator in control before any simulated action.', 'Pending integration'),
+        ('03', 'Review and approve', 'Keep the operator in control before any simulated action.', 'Available'),
         ('04', 'Measure the outcome', 'Compare independently simulated service restoration.', 'Awaiting simulator'),
     )
     for column, (number, title, description, status) in zip(st.columns(4), labels):
@@ -61,19 +62,23 @@ def _overview(choice):
         st.subheader('Planning workspace')
         st.write('Open Planning to generate a schedule and inspect the recorded evidence and checks.')
         st.caption('Planning runs only when you explicitly click Generate plan on the Planning page.')
-        st.caption('Operator approval and independent simulation are pending integration.')
+        st.caption('Review and record your decision on Planning. Simulation awaits the independent evaluator.')
     st.write('')
     st.subheader('From incident to measured recovery')
     _steps()
 
 
-def _results():
+def _results(session):
     st.html('<div class="relink-eyebrow">Results</div>')
     st.title('Evidence of recovery.')
     st.write('Measured outcomes will come from the independent simulator.')
     with st.container(border=True):
-        st.subheader('No simulation results yet')
-        st.write('Service restoration, downtime and critical-service interruption appear here after an approved simulation.')
+        if session.simulation_result is not None:
+            st.subheader('Simulation result recorded')
+            st.success('A callback result is recorded for the current plan. Detailed measured-outcome views arrive in Push 5.')
+        else:
+            st.subheader('No simulation results yet')
+            st.write('Service restoration, downtime and critical-service interruption appear here after an approved simulation.')
         st.caption('Independent simulation is pending integration. Planner predictions will remain separately labelled.')
 
 
@@ -98,15 +103,16 @@ def _settings(health, session, choice):
         st.write('Session: ' + session.session_id[:8])
         st.write(f'Selection revision: {session.selection_revision}')
         st.write('Scenario: ' + (choice.scenario.scenario_id if choice else 'None'))
-        st.write('Approval: none — controls pending integration')
+        status = 'Approved for simulation' if choice and active_approval(session, choice) else 'Rejected' if session.last_decision and session.last_decision.approval.decision == 'reject' else 'Not approved'
+        st.write('Approval: ' + status)
         st.caption('Navigation reruns preserve this browser session. Reloading or reconnecting may start a new session. '
                    'An operator label does not authenticate a user.')
     with st.expander('Data source and implementation status'):
         if choice:
             st.code(choice.key, language=None)
             st.write('Content hash: ' + choice.content_hash[:16])
-        st.write('Available: incident inspection, explicit planning, schedules, evidence, validation, run records and configuration inspection.')
-        st.write('Pending: operator approval UI, authenticated identity, simulator and measured outcomes.')
+        st.write('Available: incident inspection, explicit planning, validation, recorded operator decisions, approval-gated simulator boundary and local records.')
+        st.write('Pending: authenticated identity, independent simulator implementation and measured-outcome views.')
 
 
 def render_app(root=None):
@@ -171,6 +177,6 @@ def render_app(root=None):
     elif page == 'Planning':
         render_planning(choice, session, root)
     else:
-        _results()
+        _results(session)
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
             ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')

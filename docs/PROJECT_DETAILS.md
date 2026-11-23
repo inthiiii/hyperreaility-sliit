@@ -9,14 +9,14 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.4 — explicit dashboard planning checkpoint |
+| Document version | 0.5 — operator review and simulator boundary checkpoint |
 | Last updated | 23 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
 
 ## 1. Current implementation status
 
-As of 23 November, the core implementation is merged and dashboard Pushes 1–2 are pushed and Push 3 is prepared on feature/dashboard. The core supports typed contracts, static scheduling, validation, bounded orchestration, approval and run records. The dashboard adds navigation, visible scenario selection, overview/configuration status, session invalidation and read-only incident network, report, resource and policy views. The Planning page now connects to actual core generation with schedules, evidence, messages, validation, run records and duplicate-request protection. Verification: 117 tests passed, including 48 UI/service checks. Operator approval UI, independent simulation, dynamic execution and live hosted-model evaluation remain pending. See [dashboard checkpoint](DASHBOARD_PUSH3.md) and [core implementation](CORE_IMPLEMENTATION.md).
+As of 23 November, the core implementation is merged and dashboard Pushes 1–3 are pushed and Push 4 is prepared on feature/dashboard. The core supports typed contracts, static scheduling, validation, bounded orchestration, approval and run records. The dashboard adds navigation, visible scenario selection, overview/configuration status, session invalidation and read-only incident network, report, resource and policy views. The Planning page now connects to actual core generation with schedules, evidence, messages, validation, run records and duplicate-request protection. Recorded approval/rejection, stale/source checks, decision audits and a typed simulator boundary are also implemented. Verification: 146 tests passed, including 77 UI/service checks. The application attaches no mock evaluator. Real independent simulation, authenticated identity, measured-outcome views, dynamic execution and live hosted-model evaluation remain pending. See [dashboard checkpoint](DASHBOARD_PUSH4.md) and [core implementation](CORE_IMPLEMENTATION.md).
 
 OpenAI's hosted API is the initial selected LLM provider. Other hosted models will be evaluated during development. The exact runtime model ID, SDK version and supported settings will be recorded when the integration is established and frozen before held-out evaluation. Local LLM execution is outside the current implementation plan.
 
@@ -123,7 +123,7 @@ Required paths are `project/main.py`, `project/requirements.txt`, `README.md`, `
 
 | Tool, service or material | Use and current status |
 | --- | --- |
-| ChatGPT / Codex — OpenAI | Used for proposal/documentation, core code and tests, and dashboard Pushes 1–3 implementation, verification and handoffs. Exact session model identifiers were not recorded. This coding assistance is separate from runtime model inference; no live API inference was performed for these checkpoints. |
+| ChatGPT / Codex — OpenAI | Used for proposal/documentation, core code and tests, and dashboard Pushes 1–4 implementation, verification and handoffs. Exact session model identifiers were not recorded. This coding assistance is separate from runtime model inference; no live API inference was performed for these checkpoints. |
 | OpenAI API | Selected initial runtime provider; API integration and exact model ID/version must be recorded as development proceeds. Do not list an untested model as implemented. |
 | Claude-labelled proposal draft supplied by the team | Used as comparative drafting/reference material during proposal review. Originating model/version is not independently verified; team members must record any direct Claude use and its purpose. This is not evidence of a Claude runtime integration. |
 | Other hosted models | Planned development comparison; add actual provider/model/version, dates, settings and purpose when tested. |

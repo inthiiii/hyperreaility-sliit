@@ -61,6 +61,9 @@ def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, 
     session.core.current = None
     session.core.approval = None
     session.simulation_result = None
+    session.last_decision = None
+    session.review_feedback = None
+    session.simulation_attempt = None
     attempt = {'format_version': 1, 'attempt_id': str(uuid4()), 'request_key': key,
                'started_at_utc': datetime.now(timezone.utc).isoformat(),
                'scenario_id': choice.scenario.scenario_id, 'input_hash': choice.content_hash,
@@ -116,6 +119,9 @@ def begin_new_attempt(session):
     session.core.current = None
     session.core.approval = None
     session.simulation_result = None
+    session.last_decision = None
+    session.review_feedback = None
+    session.simulation_attempt = None
 
 
 def schedule_rows(result):

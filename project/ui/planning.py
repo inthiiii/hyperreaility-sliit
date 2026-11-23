@@ -5,6 +5,7 @@ import streamlit as st
 
 from project.core.tracing import redact
 from project.llm.health import preflight
+from project.ui.review import render_review
 from project.ui.planning_service import (
     begin_new_attempt, fact_rows, prepare_plan, request_key, schedule_rows, timeline_rows,
 )
@@ -103,9 +104,9 @@ def _details(result, attempt):
 
 def _result(result, attempt):
     if result.mode == 'template':
-        st.caption('OFFLINE TEMPLATE BASELINE · zero hosted inference · no independent simulation')
+        st.caption('OFFLINE TEMPLATE BASELINE · zero hosted inference')
     if result.status == 'awaiting_approval':
-        st.success('Plan prepared for operator review. No approval has been given and no simulation has run.')
+        st.success('Candidate generated. Review the operator decision and simulation status below.')
     else:
         st.error('Planning escalated. Operator clarification or a revised request is required.')
     for reason in result.reasons:
@@ -201,8 +202,4 @@ def render_planning(choice, session, root):
         _result(result, attempt)
     elif not attempt:
         st.info('No plan generated. Choose a mode and scheduler, then explicitly generate a plan.')
-    st.divider()
-    approve, simulate = st.columns(2)
-    approve.button('Approve plan', disabled=True, width='stretch')
-    simulate.button('Simulate approved plan', disabled=True, width='stretch')
-    st.caption('Approval and simulation controls connect in Push 4. Agent review is not operator approval.')
+    render_review(choice, session, root)
