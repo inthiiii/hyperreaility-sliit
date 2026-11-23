@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: tested core and dashboard foundation available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. UI planning controls, the independent simulator, timed events and measured evaluation remain pending. See [dashboard Push 2](docs/DASHBOARD_PUSH2.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
+> **Status: tested core and dashboard foundation available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. The Planning page now prepares actual core schedules, evidence, validation and run records through explicit actions. Operator approval UI, independent simulation, timed events and measured evaluation remain pending. See [dashboard Push 3](docs/DASHBOARD_PUSH3.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
 
 ## Overview
 
@@ -137,7 +137,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
 | [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
 | [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
-| [project/main.py](project/main.py) | Required application entry point | Dashboard foundation; planning/approval/results controls pending integration |
+| [project/main.py](project/main.py) | Required application entry point | Incident inspection and explicit planning available; approval/simulation/results integration pending |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
 | `tests/` | Verification code and fixtures | Core tests and six visible development fixtures available |
@@ -260,3 +260,8 @@ The operator workspace foundation is available: five navigation views, safe scen
 ### Dashboard Push 2
 
 The Incident page now provides a synthetic dependency schematic, optional access-road layer, site observations and dependency inspection, searchable reports with provenance, crew/generator inventory, permitted action options and policy-weighted service associations. Snapshot observations remain separate from report text; no service restoration is inferred by browsing. Verification: **96 tests pass**, including 27 UI checks. See [Push 2 behavior and limits](docs/DASHBOARD_PUSH2.md).
+
+
+### Dashboard Push 3
+
+Planning now connects to the real core with explicit offline/hosted modes, CP-SAT/heuristic selection, actual schedules and travel/work timelines, evidence, agent messages, independent validation and run metadata. Per-session request guards prevent duplicate inference; retries and replacing a run clear old approval/results. Offline is the default. **117 tests pass**, including 48 UI/service checks; hosted tests use injected clients, not paid requests. See [Push 3 setup, verification and limits](docs/DASHBOARD_PUSH3.md).

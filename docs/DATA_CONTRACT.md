@@ -55,3 +55,8 @@ The CP-SAT model requires current time, horizon, work durations and generator au
 The primary model objective maximizes predicted weighted service availability over the remaining horizon. It accounts for equipment, power, each upstream site's status and each backhaul link. Fewer actions, then earlier completions are secondary tie-breakers. Config includes solver status/bound, seed, worker count, slot length and **predicted** remaining availability/downtime. OPTIMAL refers only to this encoded static model; it is not evidence of real-world or hidden-world optimality.
 
 The independent simulator must compute actual evaluation downtime over the complete 720-minute horizon. For replanning, retain prior interval contributions; do not reset the clock. Never display planner predictions as measured simulator results.
+
+
+## Dashboard planning boundary (Push 3)
+
+Dashboard consumers use CoreSession with a fresh Coordinator per explicit generation request. Prepare reserves monotonically increasing state versions even after a failed attempt or UI-cleared plan, and the next version advances beyond any evidence-review revisions. Scenario changes create a fresh session with content-bound approval still required. UI request deduplication is an additional per-browser-session guard, not a durable transaction mechanism. Read `docs/DASHBOARD_PUSH3.md` for request/failure behavior; operator approval and simulator execution remain the next integration milestone.

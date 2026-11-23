@@ -8,6 +8,7 @@ import streamlit as st
 from project.llm.health import preflight
 from project.ui.catalog import load_catalog
 from project.ui.incident import render_incident
+from project.ui.planning import render_planning
 from project.ui.session import get_dashboard_session
 
 PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'Settings')
@@ -20,7 +21,7 @@ def _pill(text, amber=False):
 def _steps():
     labels = (
         ('01', 'Understand the incident', 'Choose a validated scenario and establish the operating context.', 'Available'),
-        ('02', 'Build a recovery plan', 'Inspect evidence and coordinate a feasible restoration schedule.', 'Pending integration'),
+        ('02', 'Build a recovery plan', 'Inspect evidence and coordinate a feasible restoration schedule.', 'Available'),
         ('03', 'Review and approve', 'Keep the operator in control before any simulated action.', 'Pending integration'),
         ('04', 'Measure the outcome', 'Compare independently simulated service restoration.', 'Awaiting simulator'),
     )
@@ -42,7 +43,7 @@ def _overview(choice):
     for column, (label, value, help_text) in zip(st.columns(4), (
         ('Sites', len(scenario.sites), 'Fictional sites described by the selected visible input.'),
         ('Crews', len(scenario.crews), 'Inventory count; availability is checked during planning.'),
-        ('Reports', len(scenario.reports), 'Visible reports; findings have not been extracted in this dashboard.'),
+        ('Reports', len(scenario.reports), 'Visible report inventory; inspect extracted/resolved facts on Planning after a run.'),
         ('Horizon', f'{scenario.horizon_min / 60:g} h', 'Total scenario horizon, not time until a real-world deadline.'),
     )):
         column.metric(label, value, help=help_text)
@@ -58,25 +59,12 @@ def _overview(choice):
         st.caption('Synthetic network positions are not real tower locations or coverage estimates.')
     with right, st.container(border=True):
         st.subheader('Planning workspace')
-        st.write('Your incident is ready to inspect. Planning controls are not connected yet.')
-        st.button('Generate recovery plan', disabled=True, type='primary', width='stretch',
-                  help='Planning controls are pending integration. Browsing never calls a model.')
-        st.caption('No plan generated · No operator approval · No simulated outcome')
+        st.write('Open Planning to generate a schedule and inspect the recorded evidence and checks.')
+        st.caption('Planning runs only when you explicitly click Generate plan on the Planning page.')
+        st.caption('Operator approval and independent simulation are pending integration.')
     st.write('')
     st.subheader('From incident to measured recovery')
     _steps()
-
-
-def _planning():
-    st.html('<div class="relink-eyebrow">Planning</div>')
-    st.title('A plan worth reviewing.')
-    st.write('Evidence, resource constraints and service priorities will inform each candidate plan.')
-    with st.container(border=True):
-        st.subheader('No plan generated')
-        st.write('Planning and approval controls are pending integration.')
-        for column, label in zip(st.columns(3), ('Generate plan', 'Approve plan', 'Simulate approved plan')):
-            column.button(label, disabled=True, width='stretch')
-    st.caption('No agents have been invoked and no plan has been approved.')
 
 
 def _results():
@@ -117,8 +105,8 @@ def _settings(health, session, choice):
         if choice:
             st.code(choice.key, language=None)
             st.write('Content hash: ' + choice.content_hash[:16])
-        st.write('Available: scenario selection, incident network/evidence/resource/priority views, session isolation and configuration inspection.')
-        st.write('Pending: planning controls, authenticated identity, simulator and measured outcomes.')
+        st.write('Available: incident inspection, explicit planning, schedules, evidence, validation, run records and configuration inspection.')
+        st.write('Pending: operator approval UI, authenticated identity, simulator and measured outcomes.')
 
 
 def render_app(root=None):
@@ -181,7 +169,7 @@ def render_app(root=None):
     elif page == 'Incident':
         render_incident(choice)
     elif page == 'Planning':
-        _planning()
+        render_planning(choice, session, root)
     else:
         _results()
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'

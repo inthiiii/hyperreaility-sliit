@@ -20,6 +20,11 @@ class DashboardSession:
     core: CoreSession = field(default_factory=CoreSession)
     simulation_result: Any = None
     busy: bool = False
+    planning_mode: str = 'template'
+    planning_scheduler: str = 'cp_sat'
+    planning_generation: int = 0
+    planning_requests: set[str] = field(default_factory=set)
+    planning_attempt: dict | None = None
 
     def select(self, choice: ScenarioChoice) -> bool:
         if (self.selected_key, self.scenario_hash) == (choice.key, choice.content_hash):
@@ -30,6 +35,9 @@ class DashboardSession:
         self.core = CoreSession()
         self.simulation_result = None
         self.busy = False
+        self.planning_generation = 0
+        self.planning_requests.clear()
+        self.planning_attempt = None
         return True
 
     def clear_selection(self) -> bool:
@@ -40,6 +48,9 @@ class DashboardSession:
         self.core = CoreSession()
         self.simulation_result = None
         self.busy = False
+        self.planning_generation = 0
+        self.planning_requests.clear()
+        self.planning_attempt = None
         return True
 
 
