@@ -1,0 +1,3 @@
+target_type,target_id,attribute,reported_value,report_id,expected_resolution
+site,S01,equipment_ok,False,REP-001,verified
+site,S02,grid_power_ok,False,REP-002,verified

@@ -1,0 +1,6 @@
+road_id,from,to,travel_minutes
+R01,DEPOT,S01,25
+R02,DEPOT,S02,15
+R03,DEPOT,S03,10
+R04,DEPOT,S04,10
+R05,DEPOT,S05,30

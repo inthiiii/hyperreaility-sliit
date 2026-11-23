@@ -1,0 +1,24 @@
+{
+  "case_count": 31,
+  "checks": [
+    "Context IDs unique and coordinate bounds checked",
+    "Report IDs unique; whitespace normalized",
+    "Unknown values preserved",
+    "Conflicting and stale reports retained",
+    "Future events and answer labels excluded from processed agent inputs"
+  ],
+  "context": {
+    "districts": 25,
+    "geometry_reprojection": "None; source longitude/latitude retained.",
+    "geometry_topology_validation": "Not performed; add GIS validity checks if geometry is used beyond display.",
+    "western_context_districts": 3
+  },
+  "split_counts": {
+    "candidate_evaluation": 20,
+    "demo": 1,
+    "development": 10
+  },
+  "warnings": [
+    "All synthetic cases are unreviewed drafts. Do not claim held-out validity, balanced difficulty or benchmark results before independent audit."
+  ]
+}

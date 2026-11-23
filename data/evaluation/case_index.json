@@ -1,0 +1,312 @@
+[
+  {
+    "category": "equipment_only",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-001",
+    "seed": 22001,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_only",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-002",
+    "seed": 22002,
+    "site_count": 17,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_and_backhaul",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-003",
+    "seed": 22003,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "skill_shortage",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-004",
+    "seed": 22004,
+    "site_count": 19,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "route_closure",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-005",
+    "seed": 22005,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "conflicting_reports",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-006",
+    "seed": 22006,
+    "site_count": 15,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "stale_reports",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-007",
+    "seed": 22007,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "missing_critical_evidence",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-008",
+    "seed": 22008,
+    "site_count": 17,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "generator_exhaustion",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-009",
+    "seed": 22009,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "resource_loss_replanning",
+    "intended_split": "development",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEV-010",
+    "seed": 22010,
+    "site_count": 19,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "equipment_only",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-001",
+    "seed": 32001,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "equipment_only",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-002",
+    "seed": 32002,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_only",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-003",
+    "seed": 32003,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_only",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-004",
+    "seed": 32004,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_and_backhaul",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-005",
+    "seed": 32005,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_and_backhaul",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-006",
+    "seed": 32006,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "skill_shortage",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-007",
+    "seed": 32007,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "skill_shortage",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-008",
+    "seed": 32008,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "route_closure",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-009",
+    "seed": 32009,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "route_closure",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-010",
+    "seed": 32010,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "conflicting_reports",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-011",
+    "seed": 32011,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "conflicting_reports",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-012",
+    "seed": 32012,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "stale_reports",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-013",
+    "seed": 32013,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "stale_reports",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-014",
+    "seed": 32014,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "missing_critical_evidence",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-015",
+    "seed": 32015,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "missing_critical_evidence",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-016",
+    "seed": 32016,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "generator_exhaustion",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-017",
+    "seed": 32017,
+    "site_count": 20,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "generator_exhaustion",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-018",
+    "seed": 32018,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "resource_loss_replanning",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-019",
+    "seed": 32019,
+    "site_count": 16,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "resource_loss_replanning",
+    "intended_split": "candidate_evaluation",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "EVAL-020",
+    "seed": 32020,
+    "site_count": 18,
+    "split_status": "candidate_only_not_frozen"
+  },
+  {
+    "category": "power_and_backhaul",
+    "intended_split": "demo",
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "scenario_id": "DEMO-005",
+    "seed": 22005,
+    "site_count": 5,
+    "split_status": "candidate_only_not_frozen"
+  }
+]

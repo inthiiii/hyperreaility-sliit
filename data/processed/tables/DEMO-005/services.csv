@@ -1,0 +1,6 @@
+service_id,site_id,label,critical,weight,policy_evidence_id
+V01,S01,Fictional service 01,False,1,POLICY-001
+V02,S02,Fictional critical facility,True,5,POLICY-001
+V03,S03,Fictional service 03,False,1,POLICY-001
+V04,S04,Fictional service 04,False,1,POLICY-001
+V05,S05,Fictional service 05,False,1,POLICY-001
