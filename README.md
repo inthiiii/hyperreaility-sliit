@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: development environment and initial core implementation available.** Typed contracts, independent validation, static scheduling, approval and bounded agent coordination are covered by automated core checks. The dashboard remains an environment screen; the independent simulator, timed-event lifecycle and full evaluation are pending. See [core setup and actual limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No measured benchmark results or live hosted-model validation are claimed.
+> **Status: tested core and dashboard foundation available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview and configuration status. UI planning controls, the independent simulator, timed events and measured evaluation remain pending. See [dashboard Push 1](docs/DASHBOARD_PUSH1.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
 
 ## Overview
 
@@ -137,7 +137,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
 | [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
 | [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
-| [project/main.py](project/main.py) | Required application entry point | Environment startup screen; dashboard integration pending |
+| [project/main.py](project/main.py) | Required application entry point | Dashboard foundation; planning/approval/results controls pending integration |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
 | `tests/` | Verification code and fixtures | Core tests and six visible development fixtures available |
@@ -155,14 +155,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-The environment startup screen can be launched with the recorded dependencies:
+Launch the dashboard foundation from the repository root:
 
 ```bash
 python -m pip install -r project/requirements.txt
-streamlit run project/main.py
+python -m streamlit run project/main.py
 ```
 
-Verify and update this command, tested Python version, model configuration, dashboard address and sample-scenario instructions before the MVP submission. Configure the API key as a backend environment variable; never put credentials in the README, source, committed environment files or browser code. Other providers will use their own documented configuration through the adapter.
+The dashboard defaults to DEMO-005 from six clearly labelled development fixtures until approved processed inputs are available. Run `python -m pytest -q` to verify the current core and UI checks. See [Push 1 setup and limits](docs/DASHBOARD_PUSH1.md); update model configuration and final sample-scenario instructions before submission. Configure the API key as a backend environment variable; never put credentials in the README, source, committed environment files or browser code. Other providers will use their own documented configuration through the adapter.
 
 ## Evaluation plan
 
@@ -214,10 +214,10 @@ All times are Sri Lanka time. The internal target preserves contingency time. Th
 
 | Member | Proposed implementation ownership |
 | --- | --- |
-| Ihthisham Irshad — Team Leader | Architecture, agent coordination and integration |
-| Zahra Hassan | Simulator and scheduling |
+| Ihthisham Irshad — Team Leader | Architecture, scheduling, agent coordination and integration |
+| Zahra Hassan | Data preprocessing, loader, independent simulator and metrics |
 | Eyaas Ajmal | Interface, workflow and approval |
-| Kiruthika Vijayakumar | Research, benchmarking and evaluation |
+| Kiruthika Vijayakumar | Manual QA, defect reports and documentation support |
 
 **University:** Sri Lanka Institute of Information Technology (SLIIT)  
 **Domain:** Telecommunications  
@@ -250,3 +250,8 @@ The team has not yet selected a project licence. Third-party software, models an
 ### Core pre-merge checkpoint
 
 The core now includes atomic local run records, a framework-independent `CoreSession` approval boundary, hosted-model preflight, and paired benchmark infrastructure. Current verification: 69 automated tests pass; no live model or independent restoration evaluation has been performed. See [pre-merge instructions](docs/PREMERGE_CHECKPOINT.md) for the stopping point and teammate integration contracts.
+
+
+### Dashboard Push 1
+
+The operator workspace foundation is available: five navigation views, safe scenario selection, overview, configuration checks and per-session state. Current verification: **83 tests pass**, including 14 UI checks. Browsing makes no model requests. Planning and simulation controls are intentionally disabled until their integration pushes. See [dashboard handoff](docs/handoffs/eyaas.md).

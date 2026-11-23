@@ -9,14 +9,14 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.1 — initial design and disclosure record |
-| Last updated | 20 November 2026 |
+| Document version | 0.2 — core and dashboard foundation checkpoint |
+| Last updated | 23 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
 
 ## 1. Current implementation status
 
-This initial document records the submitted proposal and planned MVP. At the repository review on 20 November, the proposal and README were populated; the application entry point, dependency list and supporting documentation were placeholders. A working application, integrated model, scenario dataset and benchmark results have not yet been verified. Update this record as implementation is completed.
+As of 23 November, the core implementation is merged and the dashboard Push 1 update is prepared on feature/dashboard. The core supports typed contracts, static scheduling, validation, bounded orchestration, approval and run records. The dashboard adds navigation, visible scenario selection, overview, configuration status and session invalidation. Verification: 83 tests passed, including 14 UI checks. The independent simulator, dynamic execution, integrated planning UI and live hosted-model evaluation remain pending. See [dashboard checkpoint](DASHBOARD_PUSH1.md) and [core implementation](CORE_IMPLEMENTATION.md).
 
 OpenAI's hosted API is the initial selected LLM provider. Other hosted models will be evaluated during development. The exact runtime model ID, SDK version and supported settings will be recorded when the integration is established and frozen before held-out evaluation. Local LLM execution is outside the current implementation plan.
 
@@ -73,7 +73,7 @@ Typed messages will carry sender, recipient, incident ID, state version, finding
 | Operator interface | Streamlit |
 | Verification | pytest, scenario fixtures and independent feasibility checks |
 
-These are design choices, not a verified installed dependency list. Populate `project/requirements.txt` with tested versions and update the README with the actual launch command before the MVP submission. Credentials must remain backend environment variables and must never enter Git.
+The installed environment is recorded in `project/requirements.txt`; the current checks use Python 3.11 and Streamlit 1.67.0. The README contains the dashboard launch command. Final clean-install and full-system dependency verification remain due before submission. Credentials must remain backend environment variables and must never enter Git.
 
 ## 6. Data, licences and simulator assumptions
 
@@ -110,10 +110,10 @@ The coordinator will retain at most three revision rounds and one schema-repair 
 
 | Member | Proposed work allocation |
 | --- | --- |
-| Ihthisham Irshad — Team Leader | Architecture, agent coordination and integration |
-| Zahra Hassan | Simulator and scheduling |
+| Ihthisham Irshad — Team Leader | Architecture, scheduling, agent coordination and integration |
+| Zahra Hassan | Data preprocessing, loader, independent simulator and metrics |
 | Eyaas Ajmal | Interface, workflow and approval |
-| Kiruthika Vijayakumar | Research, benchmarking and evaluation |
+| Kiruthika Vijayakumar | Manual QA, defect reports and documentation support |
 
 Development starts on 20 November 2026. Target internal MVP and complete project plan upload is **28 November, 6:00 PM Sri Lanka time**; official Phase 1 deadline is **29 November, 11:59 PM**. Finalists also implement the features provided on 7 December.
 
@@ -123,7 +123,7 @@ Required paths are `project/main.py`, `project/requirements.txt`, `README.md`, `
 
 | Tool, service or material | Use and current status |
 | --- | --- |
-| ChatGPT / Codex — OpenAI | Used for proposal/documentation drafting, revision, review and file preparation. Exact session model identifiers were not recorded. Team review and verification remain necessary. |
+| ChatGPT / Codex — OpenAI | Used for proposal/documentation, core code and tests, and dashboard Push 1 implementation, verification and handoffs. Exact session model identifiers were not recorded. This coding assistance is separate from runtime model inference; no live API inference was performed for these checkpoints. |
 | OpenAI API | Selected initial runtime provider; API integration and exact model ID/version must be recorded as development proceeds. Do not list an untested model as implemented. |
 | Claude-labelled proposal draft supplied by the team | Used as comparative drafting/reference material during proposal review. Originating model/version is not independently verified; team members must record any direct Claude use and its purpose. This is not evidence of a Claude runtime integration. |
 | Other hosted models | Planned development comparison; add actual provider/model/version, dates, settings and purpose when tested. |
