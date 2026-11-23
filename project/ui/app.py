@@ -1,4 +1,4 @@
-"""Push 1 dashboard foundation: browsing and configuration, never model inference."""
+"""Dashboard foundation and incident inspection; rendering never invokes a model."""
 from html import escape
 from pathlib import Path
 
@@ -7,6 +7,7 @@ import streamlit as st
 
 from project.llm.health import preflight
 from project.ui.catalog import load_catalog
+from project.ui.incident import render_incident
 from project.ui.session import get_dashboard_session
 
 PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'Settings')
@@ -66,19 +67,6 @@ def _overview(choice):
     _steps()
 
 
-def _incident(choice):
-    st.html('<div class="relink-eyebrow">Incident</div>')
-    st.title('The operating context.')
-    st.write('The selected scenario is validated against the shared visible-input contract.')
-    with st.container(border=True):
-        st.subheader(choice.scenario.scenario_id)
-        st.write(choice.scenario.region_label)
-        st.write(f'{len(choice.scenario.sites)} sites · {len(choice.scenario.crews)} crews · '
-                 f'{len(choice.scenario.generators)} generators · {len(choice.scenario.reports)} reports')
-    st.info('The network diagram, evidence tables and detailed resource views are pending integration.')
-    st.caption('No hidden evaluator truth is loaded by this dashboard.')
-
-
 def _planning():
     st.html('<div class="relink-eyebrow">Planning</div>')
     st.title('A plan worth reviewing.')
@@ -129,8 +117,8 @@ def _settings(health, session, choice):
         if choice:
             st.code(choice.key, language=None)
             st.write('Content hash: ' + choice.content_hash[:16])
-        st.write('Available: local scenario selection, session isolation and configuration inspection.')
-        st.write('Pending: incident detail views, planning controls, authenticated identity, simulator and measured outcomes.')
+        st.write('Available: scenario selection, incident network/evidence/resource/priority views, session isolation and configuration inspection.')
+        st.write('Pending: planning controls, authenticated identity, simulator and measured outcomes.')
 
 
 def render_app(root=None):
@@ -191,7 +179,7 @@ def render_app(root=None):
     elif page == 'Overview':
         _overview(choice)
     elif page == 'Incident':
-        _incident(choice)
+        render_incident(choice)
     elif page == 'Planning':
         _planning()
     else:

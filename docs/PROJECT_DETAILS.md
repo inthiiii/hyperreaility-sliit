@@ -9,14 +9,14 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.2 — core and dashboard foundation checkpoint |
+| Document version | 0.3 — dashboard incident inspection checkpoint |
 | Last updated | 23 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
 
 ## 1. Current implementation status
 
-As of 23 November, the core implementation is merged and the dashboard Push 1 update is prepared on feature/dashboard. The core supports typed contracts, static scheduling, validation, bounded orchestration, approval and run records. The dashboard adds navigation, visible scenario selection, overview, configuration status and session invalidation. Verification: 83 tests passed, including 14 UI checks. The independent simulator, dynamic execution, integrated planning UI and live hosted-model evaluation remain pending. See [dashboard checkpoint](DASHBOARD_PUSH1.md) and [core implementation](CORE_IMPLEMENTATION.md).
+As of 23 November, the core implementation is merged and dashboard Push 1 is pushed and Push 2 is prepared on feature/dashboard. The core supports typed contracts, static scheduling, validation, bounded orchestration, approval and run records. The dashboard adds navigation, visible scenario selection, overview/configuration status, session invalidation and read-only incident network, report, resource and policy views. Verification: 96 tests passed, including 27 UI checks. The independent simulator, dynamic execution, integrated planning UI and live hosted-model evaluation remain pending. See [dashboard checkpoint](DASHBOARD_PUSH2.md) and [core implementation](CORE_IMPLEMENTATION.md).
 
 OpenAI's hosted API is the initial selected LLM provider. Other hosted models will be evaluated during development. The exact runtime model ID, SDK version and supported settings will be recorded when the integration is established and frozen before held-out evaluation. Local LLM execution is outside the current implementation plan.
 
@@ -123,7 +123,7 @@ Required paths are `project/main.py`, `project/requirements.txt`, `README.md`, `
 
 | Tool, service or material | Use and current status |
 | --- | --- |
-| ChatGPT / Codex — OpenAI | Used for proposal/documentation, core code and tests, and dashboard Push 1 implementation, verification and handoffs. Exact session model identifiers were not recorded. This coding assistance is separate from runtime model inference; no live API inference was performed for these checkpoints. |
+| ChatGPT / Codex — OpenAI | Used for proposal/documentation, core code and tests, and dashboard Pushes 1–2 implementation, verification and handoffs. Exact session model identifiers were not recorded. This coding assistance is separate from runtime model inference; no live API inference was performed for these checkpoints. |
 | OpenAI API | Selected initial runtime provider; API integration and exact model ID/version must be recorded as development proceeds. Do not list an untested model as implemented. |
 | Claude-labelled proposal draft supplied by the team | Used as comparative drafting/reference material during proposal review. Originating model/version is not independently verified; team members must record any direct Claude use and its purpose. This is not evidence of a Claude runtime integration. |
 | Other hosted models | Planned development comparison; add actual provider/model/version, dates, settings and purpose when tested. |

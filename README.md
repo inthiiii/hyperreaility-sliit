@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: tested core and dashboard foundation available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview and configuration status. UI planning controls, the independent simulator, timed events and measured evaluation remain pending. See [dashboard Push 1](docs/DASHBOARD_PUSH1.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
+> **Status: tested core and dashboard foundation available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. UI planning controls, the independent simulator, timed events and measured evaluation remain pending. See [dashboard Push 2](docs/DASHBOARD_PUSH2.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
 
 ## Overview
 
@@ -254,4 +254,9 @@ The core now includes atomic local run records, a framework-independent `CoreSes
 
 ### Dashboard Push 1
 
-The operator workspace foundation is available: five navigation views, safe scenario selection, overview, configuration checks and per-session state. Current verification: **83 tests pass**, including 14 UI checks. Browsing makes no model requests. Planning and simulation controls are intentionally disabled until their integration pushes. See [dashboard handoff](docs/handoffs/eyaas.md).
+The operator workspace foundation is available: five navigation views, safe scenario selection, overview, configuration checks and per-session state. Push 1 verification: **83 tests passed**, including 14 UI checks. Browsing makes no model requests. Planning and simulation controls are intentionally disabled until their integration pushes. See [dashboard handoff](docs/handoffs/eyaas.md).
+
+
+### Dashboard Push 2
+
+The Incident page now provides a synthetic dependency schematic, optional access-road layer, site observations and dependency inspection, searchable reports with provenance, crew/generator inventory, permitted action options and policy-weighted service associations. Snapshot observations remain separate from report text; no service restoration is inferred by browsing. Verification: **96 tests pass**, including 27 UI checks. See [Push 2 behavior and limits](docs/DASHBOARD_PUSH2.md).
