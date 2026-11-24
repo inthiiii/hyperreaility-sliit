@@ -134,12 +134,13 @@ def test_missing_known_fixture_facts_are_retained(load_case):
     assert not state.unresolved_facts
 
 
-def test_benchmark_manifest_and_no_fake_scores(tmp_path):
+def test_benchmark_manifest_and_independent_scores(tmp_path):
     source=Path(__file__).parent/'fixtures'/'DEMO-005.json'
     rows=run_benchmark([source],tmp_path/'experiment',repeats=1)
-    assert len(rows)==2 and all(x['actual_weighted_downtime'] is None for x in rows)
+    assert len(rows)==2 and all(x['scoring_status']=='scored' for x in rows)
+    assert all(x['actual_weighted_downtime']==5760 for x in rows)
     manifest=json.loads((tmp_path/'experiment'/'manifest.json').read_text())
-    assert manifest['scoring_status']=='pending_independent_simulator'
+    assert manifest['scoring_status']=='independent_incident_evaluator_connected'
     assert len(list((tmp_path/'experiment'/'runs').glob('*.json')))==2
     with pytest.raises(FileExistsError):run_benchmark([source],tmp_path/'experiment',repeats=1)
 

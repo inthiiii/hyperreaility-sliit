@@ -34,3 +34,15 @@ Source and tests were created with ChatGPT/Codex assistance. Fixture parser is d
 Full suite: **69 passed**. Offline CLI: awaiting_approval, one action, zero model calls. Paired heuristic/optimizer development smoke: two attempts, both awaiting_approval; actual restoration scores deliberately absent pending Zahra's simulator. Live model inference was not performed: the original local environment contains a key but no exact model ID. New tests exercise trace integrity/redaction, failed-run retention, stale approval, repeat execution, failed replacement, scheduling feedback, specialist reassessment, ablations and benchmark guards.
 
 Read `docs/PREMERGE_CHECKPOINT.md` next. The writable checkout is an update source; apply its patch to the Documents repository, test there, then commit/push your own branch. Do not count fake-client tests or these development fixtures as held-out model evaluation.
+
+## Benchmark scoring gap fix (24 November; review checkpoint)
+
+The benchmark runner now scores validated plans through the independent incident
+evaluator, including fresh-approved continuation after resource loss. This
+supersedes earlier notes that benchmark restoration scores were absent. Input/truth
+binding, complete-horizon checks, separate escalation/failure/incomplete statuses,
+episode artifacts and aggregate budgets are covered by regression tests. Full
+suite: 364 passed. Offline CLI smoke: eight attempts, four scored and four expected
+evidence escalations, zero model calls. See ../BENCHMARK_SCORING.md for exact
+commands and fixture outcomes. No live inference, formal baseline-fairness changes
+or remaining implementation steps were performed in this checkpoint.
