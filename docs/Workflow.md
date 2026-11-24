@@ -2,9 +2,9 @@
 
 **Restore connectivity. Coordinate recovery.**
 
-**Team:** HyperReAIlity, SLIIT  
-**Competition:** Innodata AI Catalyst 2026 - University Track  
-**Version:** 0.2 — implemented simulation and continuation  
+**Team:** HyperReAIlity, SLIIT
+**Competition:** Innodata AI Catalyst 2026 - University Track
+**Version:** 0.2 — implemented simulation and continuation
 **Last updated:** 24 November 2026
 
 This file describes the proposed process from the submitted [Proposal.docx](Proposal.docx). The planned agent design remains subject to hosted evaluation. Independent static/event simulation and the approval-gated continuation path are implemented; see handoffs/zahra.md for verified semantics and limits. See [PROJECT_DETAILS.md](PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
