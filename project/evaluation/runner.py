@@ -1,90 +1,280 @@
-"""Run paired core baselines. No simulator, restoration score, or savings is invented."""
+"""Paired workflow attempts scored by the isolated, approval-gated evaluator.
+
+Benchmark approvals use an explicitly labelled automated test operator. They are
+not real human approvals. The evaluator's truth and future events never enter a
+coordinator payload; only reached visible checkpoints are supplied on replans.
+"""
 import argparse
 import csv
 import hashlib
 import importlib.metadata
 import json
+import math
 from pathlib import Path
 import random
 import time
-from datetime import datetime,timezone
-from project.core.coordinator import Coordinator
-from project.core.schemas import ScenarioInput
+from datetime import datetime, timezone
+from uuid import uuid4
+
+from project.core.coordinator import Coordinator, approve_run
+from project.core.schemas import ScenarioInput, SimulationResult
 from project.core.state import digest
-from project.llm.client import HostedAdapter
+from project.data.loader import CaseLoader
+from project.data.evaluator import EvaluatorLoader
+from project.simulation.episode import IncidentEpisode
+from project.llm.client import HostedAdapter, RunBudget, BudgetExceeded
 from project.llm.health import preflight
 
-VARIANTS={
-    'heuristic':('template','greedy',True,True),
-    'optimizer':('template','cp_sat',True,True),
-    'single':('single','cp_sat',True,True),
-    'multi':('multi','cp_sat',True,True),
-    'no_reviewer':('multi','cp_sat',False,True),
-    'no_feedback':('multi','cp_sat',True,False),
+VARIANTS = {
+    'heuristic': ('template', 'greedy', True, True),
+    'optimizer': ('template', 'cp_sat', True, True),
+    'single': ('single', 'cp_sat', True, True),
+    'multi': ('multi', 'cp_sat', True, True),
+    'no_reviewer': ('multi', 'cp_sat', False, True),
+    'no_feedback': ('multi', 'cp_sat', True, False),
 }
-def source_hash():
-    root=Path(__file__).resolve().parents[1]
-    return digest({str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(root.rglob('*.py'))})
+DATA_ROOT = Path(__file__).resolve().parents[2] / 'data'
+LIMITS = {'max_calls': 12, 'max_input_tokens': 24000, 'max_output_tokens': 4800, 'max_seconds': 180}
 
-def run_benchmark(paths,output,variants=('heuristic','optimizer'),repeats=3,seed=22,allow_live=False):
-    if repeats<1:raise ValueError('Repeats must be positive')
-    if not variants or any(v not in VARIANTS for v in variants):raise ValueError('Unknown or empty variant list')
-    if len(set(variants))!=len(variants):raise ValueError('Duplicate variants')
-    cases=[ScenarioInput.model_validate_json(Path(p).read_text()) for p in paths]
-    if not cases or len({c.scenario_id for c in cases})!=len(cases):raise ValueError('Provide unique visible scenario IDs')
-    hosted=any(VARIANTS[v][0]!='template' for v in variants)
-    if hosted and (not allow_live or preflight()['status']=='blocked'):
-        raise ValueError('Hosted benchmarks require --allow-live and a configured model/key')
-    output=Path(output)
-    output.mkdir(parents=True,exist_ok=True)
-    # Exclusive manifest prevents silently overwriting or mixing experiments.
-    manifest={'format_version':1,'created_at_utc':datetime.now(timezone.utc).isoformat(),
-        'source_sha256':source_hash(),'cases':{c.scenario_id:digest(c) for c in cases},
-        'variants':list(variants),'repeats':repeats,'order_seed':seed,
-        'model_configuration':preflight() if hosted else None,
-        'packages':{name:importlib.metadata.version(name) for name in ('pydantic','ortools','networkx','openai')},
-        'scoring_status':'pending_independent_simulator','scope':'static visible inputs; template baselines are not LLM agents'}
-    with (output/'manifest.json').open('x') as stream:json.dump(manifest,stream,indent=2)
-    jobs=[(c,v,n) for c in cases for n in range(repeats) for v in variants]
-    random.Random(seed).shuffle(jobs)
-    rows=[]
-    with (output/'attempts.jsonl').open('x') as stream:
-        for case,variant,repeat in jobs:
-            mode,planner,reviewer,feedback=VARIANTS[variant]
-            adapter=None;started=time.monotonic()
-            row={'scenario_id':case.scenario_id,'variant':variant,'repeat':repeat,
-                 'status':'failed','plan_feasible':False,'model_calls':0,'actual_weighted_downtime':None,
-                 'scoring_status':'pending_independent_simulator'}
+
+def source_hash():
+    root = Path(__file__).resolve().parents[1]
+    return digest({str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+                   for p in sorted(root.rglob('*.py'))})
+
+
+def _save(path, payload):
+    encoded = json.dumps(payload, indent=2, allow_nan=False) + '\n'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('x', encoding='utf-8', newline='\n') as stream:
+        stream.write(encoded)
+
+
+def _remaining_budget(started, used):
+    remaining = {
+        'max_calls': LIMITS['max_calls'] - used['calls'],
+        'max_input_tokens': LIMITS['max_input_tokens'] - used['input'],
+        'max_output_tokens': LIMITS['max_output_tokens'] - used['output'],
+        'max_seconds': LIMITS['max_seconds'] - (time.monotonic() - started),
+    }
+    if any(value <= 0 for value in remaining.values()):
+        raise BudgetExceeded('Whole-incident benchmark budget exhausted')
+    return RunBudget(**remaining)
+
+
+def _check_time(started):
+    if time.monotonic() - started >= LIMITS['max_seconds']:
+        raise BudgetExceeded('Whole-incident benchmark time exhausted')
+
+
+def _score(result, case):
+    """A prefix is never a final score, even if it contains a numeric downtime."""
+    if result.run_metadata.get('measurement_scope') != 'complete_incident':
+        raise ValueError('Final independent score requires complete incident coverage')
+    metrics = result.metrics
+    if metrics.get('horizon_min') != case.horizon_min or metrics.get('measured_duration_min') != case.horizon_min:
+        raise ValueError('Evaluator did not cover the full incident horizon')
+    total = sum(service.weight for service in case.services) * case.horizon_min
+    for field in ('weighted_downtime_min', 'weighted_available_min', 'total_weighted_horizon_min'):
+        value = metrics.get(field)
+        if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+            raise ValueError('Invalid independent metric')
+    if (metrics['total_weighted_horizon_min'] != total or
+            not math.isclose(metrics['weighted_downtime_min'] + metrics['weighted_available_min'], total, abs_tol=1e-9)):
+        raise ValueError('Independent service-minute accounting does not balance')
+    return {
+        'actual_weighted_downtime': metrics['weighted_downtime_min'],
+        'actual_weighted_available_minutes': metrics['weighted_available_min'],
+        'actual_unweighted_available_minutes': metrics.get('unweighted_available_min'),
+        'actual_unweighted_downtime_minutes': metrics.get('unweighted_downtime_min'),
+        'actual_critical_service_downtime_minutes': metrics.get('critical_service_downtime_min'),
+        'actual_first_restoration_min': metrics.get('first_restoration_min'),
+        'actual_services_available_at_horizon_end': metrics.get('services_available_at_horizon_end'),
+        'actual_unmet_needs_count': metrics.get('unmet_needs_count'),
+        'baseline_weighted_downtime': metrics.get('baseline_weighted_downtime_min'),
+        'measured_duration_min': metrics['measured_duration_min'],
+    }
+
+
+def _attempt(case, variant, repeat, output, data_root, max_episodes):
+    mode, planner, reviewer, feedback = VARIANTS[variant]
+    started = time.monotonic()
+    used = {'calls': 0, 'input': 0, 'output': 0}
+    usage = []
+    episode = None
+    scenario = case
+    version = 1
+    row = {'job_id': str(uuid4()), 'scenario_id': case.scenario_id, 'variant': variant, 'repeat': repeat,
+           'status': 'failed', 'plan_feasible': False, 'model_calls': 0,
+           'actual_weighted_downtime': None, 'scoring_status': 'not_scored_failed',
+           'approval_mode': 'automated_benchmark_operator', 'approved_episodes': 0,
+           'run_ids': [], 'episode_artifacts': [], 'model_usage': [], 'api_cost': None,
+           'failure_phase': None}
+    phase = 'planning'
+    try:
+        for episode_number in range(max_episodes):
+            phase = 'budget'
+            budget = _remaining_budget(started, used)
+            adapter = None
+            result = None
+            phase = 'planning'
             try:
-                if mode!='template':adapter=HostedAdapter.from_env()
-                result=Coordinator(adapter,planner=planner,reviewer_enabled=reviewer,
-                    feedback_enabled=feedback,trace_dir=output/'runs').run(case,mode)
-                row.update(run_id=result.run_id,status=result.status,
-                    plan_feasible=bool(result.validation and result.validation.valid),
-                    model_calls=len(result.model_usage),input_tokens=sum(x.get('input_tokens',0) for x in result.model_usage),
-                    output_tokens=sum(x.get('output_tokens',0) for x in result.model_usage))
-            except Exception as error:row['error_type']=type(error).__name__
+                if mode != 'template':
+                    adapter = HostedAdapter.from_env(budget=budget)
+                result = Coordinator(adapter, budget=budget, planner=planner, reviewer_enabled=reviewer,
+                    feedback_enabled=feedback, trace_dir=output/'runs').run(scenario, mode, state_version=version)
             finally:
-                if adapter:adapter.close()
-            row['duration_seconds']=time.monotonic()-started
-            rows.append(row);stream.write(json.dumps(row)+'\n');stream.flush()
-    columns=sorted({k for row in rows for k in row})
-    with (output/'attempts.csv').open('w',newline='') as stream:
-        writer=csv.DictWriter(stream,fieldnames=columns);writer.writeheader();writer.writerows(rows)
+                # Capture attempts even if client construction, a workflow or cleanup fails.
+                usage.extend(dict(item) for item in budget.records)
+                used['calls'] += budget.calls
+                used['input'] += max(budget.input_reserved, sum(r.get('input_tokens', 0) for r in budget.records))
+                used['output'] += max(budget.output_reserved, sum(r.get('output_tokens', 0) for r in budget.records))
+                if adapter is not None:
+                    try:
+                        adapter.close()
+                    except Exception as error:
+                        row.setdefault('cleanup_errors', []).append(type(error).__name__)
+            _check_time(started)
+            row['run_id'] = result.run_id
+            row['run_ids'].append(result.run_id)
+            row['plan_feasible'] = bool(result.validation and result.validation.valid)
+            if result.status != 'awaiting_approval':
+                row.update(status='escalated', scoring_status='not_scored_escalated',
+                           escalation_reasons=result.reasons)
+                break
+            phase = 'approval'
+            approval = approve_run(result, 'Automated benchmark operator')
+            phase = 'evaluator_input_binding'
+            if episode is None:
+                # A shared scenario ID alone must never pair unrelated input and truth.
+                loader = CaseLoader(data_root/'processed/agent_inputs')
+                canonical = loader.load_case(loader.find(case.scenario_id))
+                if digest(canonical) != digest(case):
+                    raise ValueError('Benchmark input differs from its registered evaluator case')
+                truth = EvaluatorLoader(data_root/'evaluation/ground_truth').load(case.scenario_id)
+                row['evaluator_truth_hash'] = digest(truth)
+                episode = IncidentEpisode(case, truth)
+            phase = 'simulation'
+            raw = episode.advance(scenario, result.plan, approval, state=result.state)
+            simulation = SimulationResult.model_validate(raw)
+            if (simulation.scenario_id, simulation.plan_id, simulation.state_version) != (
+                    case.scenario_id, result.plan.plan_id, result.state.state_version):
+                raise ValueError('Evaluator output identity mismatch')
+            # Validate raw numbers before JSON-mode serialization could turn NaN/Inf into null.
+            def finite_tree(value):
+                if isinstance(value, float) and not math.isfinite(value): raise ValueError('Non-finite evaluator output')
+                if isinstance(value, dict):
+                    for item in value.values(): finite_tree(item)
+                if isinstance(value, (list, tuple)):
+                    for item in value: finite_tree(item)
+            finite_tree(simulation.model_dump(mode='python'))
+            _check_time(started)
+            row['approved_episodes'] += 1
+            relative = Path('simulations') / (row['job_id'] + f'-{episode_number}.json')
+            _save(output/relative, {'job_id': row['job_id'], 'run_id': result.run_id,
+                'approval_mode': row['approval_mode'], 'approval': approval.model_dump(mode='json'),
+                'state_hash': digest(result.state), 'result_hash': digest(simulation),
+                'result': simulation.model_dump(mode='json')})
+            row['episode_artifacts'].append(relative.as_posix())
+            if episode.complete:
+                phase = 'score_validation'
+                row.update(_score(simulation, case))
+                row.update(status='completed', scoring_status='scored')
+                break
+            if not episode.paused or not simulation.run_metadata.get('replan_required'):
+                raise ValueError('Evaluator stopped without completion or a replan checkpoint')
+            scenario = episode.checkpoint()
+            if scenario.current_time_min <= result.state.scenario.current_time_min:
+                raise ValueError('Incident checkpoint did not advance')
+            version = result.state.state_version + 1
+        else:
+            row.update(status='incomplete', scoring_status='not_scored_episode_limit', failure_phase='episode_limit')
+    except Exception as error:
+        row.update(status='failed', scoring_status='not_scored_failed',
+                   failure_phase=phase, error_type=type(error).__name__)
+        # Do not leave a score from any failed/incomplete path.
+        row['actual_weighted_downtime'] = None
+    finally:
+        row['model_calls'] = used['calls']
+        row['model_usage'] = usage
+        row['input_tokens'] = sum(r.get('input_tokens', 0) for r in usage) if used['calls'] == len(usage) and all('input_tokens' in r for r in usage) else None
+        row['output_tokens'] = sum(r.get('output_tokens', 0) for r in usage) if used['calls'] == len(usage) and all('output_tokens' in r for r in usage) else None
+        row['usage_complete'] = row['input_tokens'] is not None and row['output_tokens'] is not None
+        row['input_reserved_upper_bound'] = used['input']
+        row['output_reserved_upper_bound'] = used['output']
+        row['duration_seconds'] = time.monotonic() - started
+    return row
+
+
+def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3, seed=22,
+                  allow_live=False, *, data_root=None, max_episodes=10):
+    if type(repeats) is not int or repeats < 1:
+        raise ValueError('Repeats must be positive integers')
+    if not variants or any(v not in VARIANTS for v in variants):
+        raise ValueError('Unknown or empty variant list')
+    if len(set(variants)) != len(variants):
+        raise ValueError('Duplicate variants')
+    if type(max_episodes) is not int or not 1 <= max_episodes <= 100:
+        raise ValueError('Episode limit must be an integer in [1,100]')
+    cases = [ScenarioInput.model_validate_json(Path(p).read_text()) for p in paths]
+    if not cases or len({c.scenario_id for c in cases}) != len(cases):
+        raise ValueError('Provide unique visible scenario IDs')
+    hosted = any(VARIANTS[v][0] != 'template' for v in variants)
+    if hosted and (not allow_live or preflight()['status'] == 'blocked'):
+        raise ValueError('Hosted benchmarks require --allow-live and a configured model/key')
+    data_root = Path(data_root or DATA_ROOT).resolve()
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    manifest = {'format_version': 2, 'created_at_utc': datetime.now(timezone.utc).isoformat(),
+        'source_sha256': source_hash(), 'cases': {c.scenario_id: digest(c) for c in cases},
+        'variants': list(variants), 'repeats': repeats, 'order_seed': seed,
+        'model_configuration': preflight() if hosted else None,
+        'packages': {name: importlib.metadata.version(name) for name in ('pydantic', 'ortools', 'networkx', 'openai')},
+        'scoring_status': 'independent_incident_evaluator_connected',
+        'approval_mode': 'automated_benchmark_operator', 'whole_incident_limits': LIMITS,
+        'max_episodes': max_episodes,
+        'scope': 'Engineering scoring integration; template baselines are not LLM agents. Independent held-out review and formal AI baseline fairness remain separate gates.'}
+    _save(output/'manifest.json', manifest)
+    jobs = [(c, v, n) for c in cases for n in range(repeats) for v in variants]
+    random.Random(seed).shuffle(jobs)
+    rows = []
+    with (output/'attempts.jsonl').open('x', encoding='utf-8') as stream:
+        for case, variant, repeat in jobs:
+            row = _attempt(case, variant, repeat, output, data_root, max_episodes)
+            encoded = json.dumps(row, allow_nan=False)
+            rows.append(row)
+            stream.write(encoded + '\n');stream.flush()
+    columns = sorted({key for row in rows for key in row})
+    with (output/'attempts.csv').open('x', newline='', encoding='utf-8') as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n');writer.writeheader()
+        writer.writerows({key: json.dumps(value) if isinstance(value, (dict, list)) else value
+                         for key, value in row.items()} for row in rows)
+    _save(output/'summary.json', {'attempts': len(rows),
+        'scored': sum(r['scoring_status'] == 'scored' for r in rows),
+        'escalated': sum(r['status'] == 'escalated' for r in rows),
+        'failed': sum(r['status'] == 'failed' for r in rows),
+        'incomplete': sum(r['status'] == 'incomplete' for r in rows),
+        'claims_multi_agent_superiority': False})
     return rows
 
+
 def main():
-    parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scenarios',nargs='+',required=True)
-    parser.add_argument('--output',required=True)
-    parser.add_argument('--variants',nargs='+',choices=list(VARIANTS),default=['heuristic','optimizer'])
-    parser.add_argument('--repeats',type=int,default=3)
-    parser.add_argument('--seed',type=int,default=22)
-    parser.add_argument('--allow-live',action='store_true')
-    args=parser.parse_args()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--scenarios', nargs='+', required=True)
+    parser.add_argument('--output', required=True)
+    parser.add_argument('--variants', nargs='+', choices=list(VARIANTS), default=['heuristic', 'optimizer'])
+    parser.add_argument('--repeats', type=int, default=3)
+    parser.add_argument('--seed', type=int, default=22)
+    parser.add_argument('--allow-live', action='store_true')
+    parser.add_argument('--data-root', type=Path)
+    parser.add_argument('--max-episodes', type=int, default=10)
+    args = parser.parse_args()
     from dotenv import load_dotenv
     load_dotenv(Path(__file__).resolve().parents[2]/'.env')
-    rows=run_benchmark(args.scenarios,args.output,args.variants,args.repeats,args.seed,args.allow_live)
-    print(json.dumps({'attempts':len(rows),'failed_or_escalated':sum(r['status']!='awaiting_approval' for r in rows),
-                      'scoring_status':'pending_independent_simulator'},indent=2))
-if __name__=='__main__':main()
+    rows = run_benchmark(args.scenarios, args.output, args.variants, args.repeats, args.seed, args.allow_live,
+                         data_root=args.data_root, max_episodes=args.max_episodes)
+    print(json.dumps({'attempts': len(rows), 'scored': sum(r['scoring_status'] == 'scored' for r in rows),
+                      'scoring_status': 'independent_incident_evaluator_connected'}, indent=2))
+
+if __name__ == '__main__':
+    main()
