@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Independent structural and edge-case checks, not benchmark validation."""
+import csv
+import hashlib
 import json
 from collections import Counter
 from pathlib import Path
@@ -7,7 +9,31 @@ ROOT = Path(__file__).resolve().parents[1]
 def read(p): return json.loads(p.read_text())
 def check(condition, message):
     if not condition: raise ValueError(message)
+def check_manifest(root):
+    """Verify every tracked dataset byte and reject missing/duplicate entries."""
+    allowed = ('data/raw/', 'data/processed/', 'data/evaluation/')
+    seen = set()
+    with (root / 'data/file_manifest.csv').open(encoding='utf-8', newline='') as stream:
+        for row in csv.DictReader(stream):
+            name = row['path']
+            check(name.startswith(allowed) and '..' not in Path(name).parts,
+                  f'Unsafe manifest path: {name}')
+            check(name not in seen, f'Duplicate manifest entry: {name}')
+            seen.add(name)
+            path = root / name
+            check(path.is_file(), f'Missing manifest file: {name}')
+            content = path.read_bytes()
+            check(len(content) == int(row['bytes']), f'Manifest size mismatch: {name}')
+            check(hashlib.sha256(content).hexdigest() == row['sha256'],
+                  f'Manifest checksum mismatch: {name}')
+    actual = {p.relative_to(root).as_posix()
+              for folder in allowed for p in (root / folder).rglob('*') if p.is_file()}
+    check(seen == actual, 'Manifest does not cover all dataset files')
+    return len(seen)
+
 def main():
+    manifest_count = check_manifest(ROOT)
+    print(f'PASS: {manifest_count} dataset file sizes and SHA-256 checksums match.')
     index = read(ROOT/'data/evaluation/case_index.json')
     check(Counter(m['intended_split'] for m in index) == {'demo':1,'development':10,'candidate_evaluation':20}, 'Wrong case counts')
     check(len({m['scenario_id'] for m in index}) == 31, 'Duplicate case IDs')

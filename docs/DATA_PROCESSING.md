@@ -47,3 +47,12 @@ Keep operational code and evaluator code separate. Agents must not have a genera
 - https://www.geoboundaries.org/api.html
 - https://www.openstreetmap.org/copyright
 - https://openrouter.ai/docs/api_reference/limits
+
+### Dataset integrity after Git checkout
+
+Processed CSVs use UTF-8 and LF line endings, and `.gitattributes` keeps dataset
+line endings stable across checkouts. `python scripts/check_data.py` verifies
+that every raw, processed and evaluation file appears exactly once in
+`data/file_manifest.csv`, with its actual byte size and SHA-256 checksum.
+After intentionally changing datasets, rerun `python scripts/prepare_data.py`
+and then `python scripts/check_data.py` before committing the updated manifest.
