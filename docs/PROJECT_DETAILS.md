@@ -9,7 +9,7 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.7 — independent simulation and continuation checkpoint |
+| Document version | 0.8 — matched hosted workflow and operator clarification checkpoint |
 | Last updated | 24 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
@@ -165,3 +165,9 @@ made. The exact coding-assistant model identifier was not recorded. Earlier
 Claude Code tooling/model details in Zahra's handoff are self-reported. Independent
 human evaluation review is PENDING and must not be represented as performed by
 these coding tools.
+
+## Hosted execution and fairness checkpoint — 24 November
+
+The single-agent baseline now traverses the same investigation, resources, priorities and review stages as the four-role workflow. Both receive the same operational context, deterministic tools and whole-incident caps. Agent requests can conservatively defer evidence-linked actions, version the state, and force a new validated schedule; they cannot change approved weights or mutate evaluator truth.
+
+Benchmark manifests freeze the selected provider/model, endpoint fingerprint, supported generation settings, protocol, runtime and source/input hashes. Paired summaries exclude unsuccessful jobs and model-version mismatches from downtime differences while reporting their counts. Raw extraction F1 is computed before deterministic fixture fill-in and reports label coverage. Charges remain unmeasured. Live provider verification is pending an exact model selection; injected-client tests are not provider results. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md).

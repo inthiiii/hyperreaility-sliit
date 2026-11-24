@@ -58,3 +58,18 @@ same-incident continuation metrics. See [operator confirmation](../OPERATOR_CONF
 for workflow, regression coverage and remaining identity/verification limits.
 This checkpoint supersedes earlier statements that operator clarification was absent;
 live hosted-model evaluation remains a later priority.
+
+## Priority Steps 3 and 4 — combined hosted/fairness checkpoint
+
+Implemented the matched four-stage hosted workflow, actionable conservative
+agent requests, raw extraction scoring, model/configuration drift checks, paired
+comparison artifacts and bounded live-check command. The dashboard surfaces
+action deferrals before separate operator approval. This is Ihthisham's
+workstream; no new teammate co-author is attached.
+
+Offline CLI: four baseline attempts (DEMO-005 and DEV-010, heuristic/optimizer),
+all scored by the independent evaluator. DEV-010 retains its two-approval
+continuation semantics. No live provider request was made: an exact OpenAI
+model ID is still required. See [HOSTED_FAIRNESS.md](../HOSTED_FAIRNESS.md).
+
+Full regression at this checkpoint: **411 passed in 42.65 seconds**.

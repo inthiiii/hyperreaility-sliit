@@ -25,9 +25,9 @@ def _route(graph,origin,option,generators):
         route.extend(path[1:])
     return route,minutes
 
-def _eligible(state):
+def _eligible(state, excluded_action_ids=()):
     gens={g.generator_id:g for g in state.scenario.generators}
-    return [o for o in state.scenario.action_options if action_needed(state,o) and
+    return [o for o in state.scenario.action_options if o.action_id not in excluded_action_ids and action_needed(state,o) and
             (o.kind!='generator_deploy' or gens[o.generator_id].available)]
 
 def _finish(state,actions,config):
@@ -44,12 +44,12 @@ def _finish(state,actions,config):
     if not result.valid: raise ValueError('Planner emitted invalid schedule: '+str(result.model_dump()))
     return plan
 
-def greedy_plan(state:VerifiedState) -> Plan:
+def greedy_plan(state:VerifiedState, *, excluded_action_ids=()) -> Plan:
     """Feasible earliest-finish heuristic. Not claimed to optimize downtime."""
     graph=road_graph(state);s=state.scenario;gens={g.generator_id:g for g in s.generators}
     ready={c.crew_id:max(s.current_time_min,c.available_from_min) for c in s.crews}
     locations={c.crew_id:c.location for c in s.crews};actions=[];used=False
-    pending=_eligible(state)
+    pending=_eligible(state,excluded_action_ids)
     while pending:
         choices=[]
         for o in pending:
@@ -68,12 +68,12 @@ def greedy_plan(state:VerifiedState) -> Plan:
         ready[cid]=end;locations[cid]=o.location
         if o.kind=='generator_deploy':used=True
         pending.remove(o)
-    return _finish(state,actions,{'algorithm':'greedy_earliest_finish','objective':'heuristic; not downtime optimal'})
+    return _finish(state,actions,{'algorithm':'greedy_earliest_finish','objective':'heuristic; not downtime optimal', 'deferred_action_ids':sorted(excluded_action_ids)})
 
-def plan(state:VerifiedState, solver_seconds:float=5, seed:int=22) -> Plan:
+def plan(state:VerifiedState, solver_seconds:float=5, seed:int=22, *, excluded_action_ids=()) -> Plan:
     if not 0<solver_seconds<=5:raise ValueError('Solver budget must be in (0,5] seconds')
     s=state.scenario;obs=state.resolved_observations;graph=road_graph(state)
-    options=_eligible(state);gens={g.generator_id:g for g in s.generators}
+    options=_eligible(state,excluded_action_ids);gens={g.generator_id:g for g in s.generators}
     if s.current_time_min%SLOT or s.horizon_min%SLOT or any(g.autonomy_minutes%SLOT for g in s.generators):
         raise ValueError('CP-SAT v0.1 current time, horizon and generator autonomy must align to five-minute slots')
     if any(o.duration_minutes%SLOT for o in options):raise ValueError('CP-SAT v0.1 work durations must be multiples of five minutes')
@@ -174,8 +174,8 @@ def plan(state:VerifiedState, solver_seconds:float=5, seed:int=22) -> Plan:
             'seed':seed,'workers':1,'slot_minutes':SLOT,'prediction_only':True,'tie_breakers':['fewer actions','earlier work completion'],
             'limitations':['static rooted tree','unknown assets unavailable','no in-progress work or future-event scheduling']}
     if result not in (cp_model.OPTIMAL,cp_model.FEASIBLE):
-        fallback=greedy_plan(state)
-        fallback.planner_config={**config,'fallback':'greedy_earliest_finish','fallback_config':fallback.planner_config}
+        fallback=greedy_plan(state,excluded_action_ids=excluded_action_ids)
+        fallback.planner_config={**config,'deferred_action_ids':sorted(excluded_action_ids),'fallback':'greedy_earliest_finish','fallback_config':fallback.planner_config}
         return fallback
     config['objective_value']=solver.objective_value;config['best_objective_bound']=solver.best_objective_bound
     predicted=solver.value(sum(objectives))
@@ -192,4 +192,5 @@ def plan(state:VerifiedState, solver_seconds:float=5, seed:int=22) -> Plan:
                 generator_id=o.generator_id,departure_min=ready,travel_route=route,
                 work_start_min=solver.value(starts[i])*SLOT,work_end_min=solver.value(ends[i])*SLOT))
             location=o.location;ready=solver.value(ends[i])*SLOT;prev=i
+    config['deferred_action_ids']=sorted(excluded_action_ids)
     return _finish(state,actions,config)

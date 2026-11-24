@@ -61,7 +61,7 @@ def hosted(choice, multi=False, error=None):
     finding = json.dumps({'finding': 'Resource/priority constraints inspected', 'evidence_ids': ['REP-001'],
                           'clarification_required': False})
     review = json.dumps({'decision': 'approve', 'findings': [], 'evidence_ids': ['REP-001'], 'revision_request': ''})
-    replies = [error] if error else [facts, finding, finding, review] if multi else [facts, review]
+    replies = [error] if error else [facts, finding, finding, review]
     client = FakeClient(replies)
     adapter = HostedAdapter('openai', 'injected-model', 'fake-key', client=client)
     return adapter, client
@@ -97,7 +97,7 @@ def test_explicit_new_attempt_revokes_state_and_increases_version(session, choic
     assert session.core.current.run_id != old.run_id and session.core.current.state.state_version == 2
 
 
-@pytest.mark.parametrize('mode,calls', [('single', 2), ('multi', 4)])
+@pytest.mark.parametrize('mode,calls', [('single', 4), ('multi', 4)])
 def test_hosted_modes_use_real_coordinator_and_close_adapter(mode, calls, session, choice, ui_root, monkeypatch):
     configure(monkeypatch);adapter, client = hosted(choice, multi=mode == 'multi')
     assert prepare_plan(session, choice, mode, 'cp_sat', ui_root, adapter_factory=lambda: adapter) == 'awaiting_approval'
@@ -254,15 +254,15 @@ def test_ui_hosted_click_and_rerun_use_injected_client_only(ui_root, choice, mon
     at.selectbox(key='planning_mode').select('single').run()
     assert not client.requests
     at.button(key='generate_plan').click().run()
-    assert not at.exception and client.closed and len(client.requests) == 2
+    assert not at.exception and client.closed and len(client.requests) == 4
     at.run()
-    assert not at.exception and len(client.requests) == 2 and at.button(key='generate_plan').disabled
+    assert not at.exception and len(client.requests) == 4 and at.button(key='generate_plan').disabled
     assert 'sk-never-send-or-display' not in str(at)
     run_id = at.session_state[SESSION_KEY].core.current.run_id
     at.radio(key='workspace_page').set_value('Settings').run()
     at.radio(key='workspace_page').set_value('Planning').run()
     assert not at.exception and at.selectbox(key='planning_mode').value == 'single'
-    assert len(client.requests) == 2 and at.session_state[SESSION_KEY].core.current.run_id == run_id
+    assert len(client.requests) == 4 and at.session_state[SESSION_KEY].core.current.run_id == run_id
 
 
 def test_core_versions_follow_reviewer_revision_versions(choice):
@@ -285,8 +285,8 @@ def test_core_trace_failure_preserves_hosted_usage_without_active_plan(session, 
     def fail(*args):raise OSError('private path and sk-secret-trace-error')
     monkeypatch.setattr(tracing, 'save_run', fail)
     assert prepare_plan(session, choice, 'single', 'cp_sat', ui_root, adapter_factory=lambda: adapter) == 'failed'
-    assert client.closed and len(client.requests) == 2 and session.core.current is None
-    assert len(session.planning_attempt['model_usage']) == 2
+    assert client.closed and len(client.requests) == 4 and session.core.current is None
+    assert len(session.planning_attempt['model_usage']) == 4
     assert 'sk-secret' not in json.dumps(session.planning_attempt)
     assert prepare_plan(session, choice, 'single', 'cp_sat', ui_root, adapter_factory=lambda: adapter) == 'duplicate'
 
@@ -311,3 +311,27 @@ def test_control_changes_show_old_run_label_without_regenerating(ui_root, monkey
     assert not at.exception and at.button(key='generate_plan').disabled
     assert at.session_state[SESSION_KEY].core.current.run_id == run_id
     assert any('Controls differ' in element.value for element in at.info)
+
+
+def test_ui_shows_model_deferral_before_separate_operator_approval(ui_root,choice,monkeypatch):
+    configure(monkeypatch);adapter,client=hosted(choice)
+    facts=json.dumps({'facts':[f.model_dump() for f in template_facts(choice.scenario)]})
+    hold=json.dumps({'finding':'Synthetic action hold for operator review','evidence_ids':['REP-001'],
+        'requests':[{'kind':'defer_action','action_ids':['GEN-G1-S02'],'evidence_ids':['REP-001'],
+                     'reason':'Fictional test-only inspection requires operator review before allocation.'}]})
+    finding=json.dumps({'finding':'Approved policy checked','evidence_ids':['REP-001']})
+    review=json.dumps({'decision':'approve','findings':[],'evidence_ids':['REP-001']})
+    client.replies=iter([facts,hold,finding,review])
+    monkeypatch.setattr(HostedAdapter,'from_env',lambda:adapter)
+    at=planning_app(ui_root,monkeypatch)
+    at.text_input(key='operator_label').input('Test operator').run()
+    at.selectbox(key='planning_mode').select('single').run()
+    assert not client.requests
+    at.button(key='generate_plan').click().run()
+    assert not at.exception and client.closed and len(client.requests)==4
+    session=at.session_state[SESSION_KEY]
+    assert session.core.current.status=='awaiting_approval' and session.core.approval is None
+    assert session.core.current.metadata['decision_effects']
+    assert all(a.action_id!='GEN-G1-S02' for a in session.core.current.plan.actions)
+    assert any('Agent-requested action deferrals changed this candidate' in w.value for w in at.warning)
+    assert not at.button(key='approve_plan').disabled and at.button(key='simulate_plan').disabled

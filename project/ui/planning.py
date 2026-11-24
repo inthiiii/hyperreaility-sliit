@@ -23,6 +23,13 @@ def _schedule(result):
         return
     if result.status == 'escalated':
         st.warning('Candidate retained for inspection only. This run did not clear review and cannot be approved.')
+    effects=result.metadata.get('decision_effects',[])
+    if effects:
+        st.warning('Agent-requested action deferrals changed this candidate. Review the reasons and unmet needs before approval.')
+        st.dataframe([{'Agent':e['sender'],'Actions':', '.join(e['applied_action_ids']),
+                       'Reason':e['request']['reason'],'Evidence':', '.join(e['request']['evidence_ids'])} for e in effects],
+                     hide_index=True,width='stretch')
+        st.caption('These are conservative model requests, not independently verified operational facts or policy changes.')
     rows = schedule_rows(result)
     if rows:
         st.dataframe(rows, hide_index=True, width='stretch')

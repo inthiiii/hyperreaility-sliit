@@ -13,18 +13,22 @@ from .planner import plan,greedy_plan
 from .validator import validate
 from project.agents.extraction import template_facts
 from project.llm.client import RunBudget,BudgetExceeded
+from project.evaluation.extraction import extraction_metrics
+from project.agents.protocol import DecisionRequest, TASKS, PROTOCOL_VERSION, visible_context
 
 class FactBatch(Contract):facts:list[EvidenceFact]
 class Finding(Contract):
     finding:str
     evidence_ids:list[str]
     clarification_required:bool=False
+    requests:list[DecisionRequest]=Field(default_factory=list)
 class Review(Contract):
     decision:Literal['approve','revise','escalate']
     findings:list[str]
     evidence_ids:list[str]
     revision_request:str=''
     revision_kind:Literal['evidence','schedule']='evidence'
+    requests:list[DecisionRequest]=Field(default_factory=list)
 
 class RunResult(Contract):
     run_id:str
@@ -56,54 +60,83 @@ class Coordinator:
         self.budget.check_time()
         if mode!='template' and self.adapter is None:raise ValueError('Hosted adapter required; no silent offline fallback')
         if self.budget.calls or self.budget.records:raise ValueError('Use a fresh coordinator/budget for each run')
-        messages=[];reasons=[];state=build_verified_state(scenario,[],state_version=state_version)
+        messages=[];reasons=[];effects=[];raw_extraction=None;deferred=set();context=visible_context(scenario);state=build_verified_state(scenario,[],state_version=state_version)
         candidate=None;validation=None
         reports=[r.model_dump() for r in scenario.reports]
         def message(sender,recipient,content):
             messages.append({'sender':sender,'recipient':recipient,'incident_id':scenario.scenario_id,
                              'state_version':state_version,'finding':content})
-        def invoke(role,payload,model):
+        def invoke(role,payload,model,stage):
             self.budget.check_time()
-            result=self.adapter.complete(role,payload,model,max_output=700 if model is FactBatch else 300 if model is Finding else 400)
+            shared={k:v for k,v in context.items() if k not in ('reports','observations','site_ids')}
+            payload={**payload,'reports':reports,'site_ids':context['site_ids'],'stage':stage,'task':TASKS[stage],
+                     'shared_context':shared,'context_sha256':digest(context),
+                     'state_version':state_version,'resolved_observations':state.resolved_observations.model_dump(),
+                     'active_deferred_action_ids':sorted(deferred)}
+            # Both modes see the same findings. Distinct role identities are the
+            # controlled workflow difference, not a hidden information advantage.
+            payload['agent_findings']=[{'sender':m['sender'],'state_version':m['state_version'],'finding':m['finding']} for m in messages
+                                     if m['sender'] not in ('deterministic_scheduler','coordinator') and 'facts' not in m['finding']][-3:]
+            if not self.feedback_enabled:payload['agent_findings']=[]
+            result=self.adapter.complete(role,payload,model,max_output=700 if model is FactBatch else 400)
             evidence=set(result.evidence_ids) if hasattr(result,'evidence_ids') else {rid for f in result.facts for rid in f.evidence_ids}
             allowed={r.report_id for r in scenario.reports}|{scenario.policy.evidence_id}
             if not evidence<=allowed:raise ValueError('Agent cited nonexistent evidence')
+            for request in getattr(result,'requests',[]):
+                if not set(request.evidence_ids)<=allowed:raise ValueError('Decision request cited nonexistent evidence')
+                if not request.reason.strip() or len(set(request.action_ids))!=len(request.action_ids):
+                    raise ValueError('Invalid decision request')
+                if not set(request.action_ids)<={a.action_id for a in scenario.action_options}:
+                    raise ValueError('Decision request references nonexistent action')
             message(role,'coordinator',result.model_dump())
             return result
+        def apply_requests(finding,role):
+            nonlocal state,state_version
+            for request in finding.requests:
+                added=set(request.action_ids)-deferred
+                if not added:continue
+                if not self.feedback_enabled:
+                    reasons.append('Agent requested action deferral; feedback disabled for ablation');return
+                deferred.update(added)
+                state_version+=1
+                state=build_verified_state(scenario,state.facts,state_version=state_version)
+                effect={'sender':role,'state_version':state_version,'request':request.model_dump(),
+                        'applied_action_ids':sorted(added),'effect':'excluded_from_candidate_schedule',
+                        'operational_fact_verified':False}
+                effects.append(effect);message('coordinator','deterministic_scheduler',effect)
         def assess_specialists():
-            resource=invoke('field_resource_planner',{'evidence':reports,'observations':state.resolved_observations.model_dump(),
-               'crews':[c.model_dump() for c in scenario.crews],'generators':[g.model_dump() for g in scenario.generators],
-               'roads':[r.model_dump(by_alias=True) for r in scenario.roads]},Finding)
-            priority=invoke('service_priority_assessor',{'services':[s.model_dump() for s in scenario.services],
-               'policy':scenario.policy.model_dump(),'resource_finding':resource.model_dump(),'evidence':reports},Finding)
-            if resource.clarification_required or priority.clarification_required:
-                reasons.append('Specialist requires operator clarification')
+            for stage,identity in [('resources','field_resource_planner'),('priorities','service_priority_assessor')]:
+                role=identity if mode=='multi' else 'single_agent'
+                finding=invoke(role,{},Finding,stage)
+                if finding.clarification_required:
+                    reasons.append('Specialist requires operator clarification');return
+                apply_requests(finding,role)
         try:
             if mode=='template':
                 facts=template_facts(scenario);message('template_baseline','coordinator',{'facts':[f.model_dump() for f in facts],'not_llm':True})
             else:
                 facts=invoke('network_investigator' if mode=='multi' else 'single_agent',{'reports':reports,'site_ids':[s.site_id for s in scenario.sites],
-                     'link_ids':[l.link_id for l in scenario.links],'road_ids':[r.road_id for r in scenario.roads]},FactBatch).facts
+                     'link_ids':[l.link_id for l in scenario.links],'road_ids':[r.road_id for r in scenario.roads]},FactBatch,'investigate').facts
+            if mode!='template':raw_extraction=extraction_metrics(scenario,facts)
             state=build_verified_state(scenario,facts,state_version=state_version)
             if state.unresolved_facts:
                 reasons.extend(state.unresolved_facts)
-            if mode=='multi' and not reasons:assess_specialists()
+            if mode!='template' and not reasons:assess_specialists()
             if not reasons:
                 for revision in range(4):
                     self.budget.check_time()
-                    candidate=greedy_plan(state) if self.planner=='greedy' else plan(state,solver_seconds=min(5,self.budget.remaining_seconds()))
+                    candidate=greedy_plan(state,excluded_action_ids=deferred) if self.planner=='greedy' else plan(state,solver_seconds=min(5,self.budget.remaining_seconds()),excluded_action_ids=deferred)
                     validation=validate(candidate,state);message('deterministic_scheduler','coordinator',candidate.model_dump())
                     self.budget.check_time()
+                    if deferred & {a.action_id for a in candidate.actions}:
+                        raise ValueError('Scheduler violated a recorded action deferral')
                     if not validation.valid:
                         reasons.append('Independent validation failed');break
                     if mode=='template' or not self.reviewer_enabled:break
-                    review=invoke('plan_reviewer' if mode=='multi' else 'single_agent',{'plan':candidate.model_dump(),'validation':validation.model_dump(),
-                       'agent_findings':[m for m in messages if m['state_version']==state_version and m['sender'] in ('field_resource_planner','service_priority_assessor')],'reports':reports,
-                       'tool_state':{'observations':state.resolved_observations.model_dump(),
-                           'crews':[c.model_dump() for c in scenario.crews],'generators':[g.model_dump() for g in scenario.generators],
-                           'roads':[r.model_dump(by_alias=True) for r in scenario.roads],
-                           'links':[l.model_dump() for l in scenario.links],'services':[s.model_dump() for s in scenario.services],
-                           'policy':scenario.policy.model_dump()}},Review)
+                    review=invoke('plan_reviewer' if mode=='multi' else 'single_agent',
+                        {'plan':candidate.model_dump(),'validation':validation.model_dump(),'reports':reports},Review,'review')
+                    if review.requests and (review.decision!='revise' or review.revision_kind!='schedule'):
+                        raise ValueError('Reviewer requests require an explicit scheduling revision')
                     if review.decision=='approve':break
                     if review.decision=='escalate' or revision==3:
                         reasons.extend(review.findings or ['Review did not approve within revision budget']);break
@@ -112,16 +145,20 @@ class Coordinator:
                     if not review.revision_request:
                         reasons.append('Reviewer requested revision without a concrete request');break
                     if review.revision_kind=='schedule':
+                        if review.requests:
+                            apply_requests(review,'plan_reviewer' if mode=='multi' else 'single_agent')
+                            if reasons:break
+                            continue
                         if self.planner=='cp_sat':
                             reasons.append('Scheduling revision requires an explicit new constraint; operator clarification needed');break
                         self.planner='cp_sat'
                         message('coordinator','deterministic_scheduler',{'revision_request':review.revision_request,'planner':'cp_sat'})
                         continue
                     revised=invoke('network_investigator' if mode=='multi' else 'single_agent',{'reports':reports,'revision_request':review.revision_request,
-                       'previous_facts':[f.model_dump() for f in state.facts]},FactBatch)
+                       'previous_facts':[f.model_dump() for f in state.facts]},FactBatch,'investigate')
                     state_version+=1
                     state=build_verified_state(scenario,revised.facts,state_version=state_version)
-                    if mode=='multi' and not state.unresolved_facts:assess_specialists()
+                    if mode!='template' and not state.unresolved_facts:assess_specialists()
                     if reasons:break
                     if state.unresolved_facts:
                         reasons.extend(state.unresolved_facts);break
@@ -133,7 +170,8 @@ class Coordinator:
                          state=state,plan=candidate,validation=validation,messages=messages,
                          model_usage=list(self.budget.records),reasons=reasons,
                          metadata={"started_at_utc":started_at,"duration_seconds":time.monotonic()-self.budget.started,
-                           "input_hash":digest(scenario),"planner":self.planner,"reviewer_enabled":self.reviewer_enabled,
+                           "raw_extraction_metrics":raw_extraction,"protocol_version":PROTOCOL_VERSION,"context_sha256":digest(context),"decision_effects":effects,
+                           "deferred_action_ids":sorted(deferred),"input_hash":digest(scenario),"planner":self.planner,"reviewer_enabled":self.reviewer_enabled,
                            "feedback_enabled":self.feedback_enabled,"simulation_status":"not_integrated",
                            "transport":"none" if self.adapter is None else ("injected_test_client" if self.adapter.injected_client else "hosted"),
                            "budget":{"max_calls":self.budget.max_calls,"max_input_tokens":self.budget.max_input_tokens,

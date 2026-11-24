@@ -4,7 +4,7 @@
 
 **Team:** HyperReAIlity, SLIIT
 **Competition:** Innodata AI Catalyst 2026 - University Track
-**Version:** 0.3 — operator clarification, simulation and continuation
+**Version:** 0.4 — matched hosted workflow, clarification and simulation
 **Last updated:** 24 November 2026
 
 This file describes the proposed process from the submitted [Proposal.docx](Proposal.docx). The planned agent design remains subject to hosted evaluation. Independent static/event simulation and the approval-gated continuation path are implemented; see handoffs/zahra.md for verified semantics and limits. See [PROJECT_DETAILS.md](PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
@@ -166,3 +166,7 @@ session state; history is read-only and cannot restore authorization.
 ## Implemented clarification checkpoint
 
 Planning now provides an explicit operator confirmation form. Recording evidence preserves the source reports, versions the state, clears prior plan/approval and requires a separately reviewed replacement plan. Corrections and confirmation history are auditable. See [OPERATOR_CONFIRMATION.md](OPERATOR_CONFIRMATION.md) for supported facts, continuation semantics and verification limits.
+
+## Matched hosted workflow checkpoint
+
+Both hosted modes now traverse investigation, resource assessment, priority assessment and review. Single mode retains one agent identity; multi mode uses four role contexts. Operational context, deterministic tools and whole-incident caps match. Evidence-linked deferral requests change the next validated candidate, retain unmet needs and appear before human approval. Benchmark configuration and usage are recorded, and paired summaries report exclusions/failures alongside measured downtime. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md). Live provider verification awaits the exact model ID.
