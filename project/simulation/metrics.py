@@ -80,6 +80,8 @@ def compute_metrics(services: list[ServiceRef], segments: list[Segment], horizon
         'total_weighted_horizon_min': total_weighted,
         'weighted_available_min': weighted_available,
         'weighted_downtime_min': total_weighted - weighted_available,
+        'unweighted_available_min': sum(available_min.values()),
+        'unweighted_downtime_min': n * horizon_min - sum(available_min.values()),
         'unweighted_availability': (sum(available_min.values()) / (n * horizon_min)) if n else None,
         'critical_service_downtime_min': sum(horizon_min - available_min[sid] for sid in crit),
         'first_restoration_min': first_restoration,

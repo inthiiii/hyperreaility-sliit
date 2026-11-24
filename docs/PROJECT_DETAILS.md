@@ -9,14 +9,23 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.6 — dashboard independent merge checkpoint |
+| Document version | 0.7 — independent simulation and continuation checkpoint |
 | Last updated | 24 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
 
 ## 1. Current implementation status
 
-As of 24 November, the core implementation is merged and dashboard Pushes 1–4 are pushed and Push 5 is prepared on feature/dashboard for independent review/merge. The core supports typed contracts, static scheduling, validation, bounded orchestration, approval and run records. The dashboard adds navigation, visible scenario selection, overview/configuration status, session invalidation and read-only incident network, report, resource and policy views. The Planning page now connects to actual core generation with schedules, evidence, messages, validation, run records and duplicate-request protection. Recorded approval/rejection, stale/source checks, decision audits and a typed simulator boundary are also implemented. Read-only history, exports and evaluator-output presentation are implemented. Verification: 161 tests passed, including 92 UI/service checks. The application attaches no mock evaluator. Real independent simulation, authenticated identity, actual outcome verification, dynamic execution and live hosted-model evaluation remain pending. See [dashboard checkpoint](DASHBOARD_PUSH5.md) and [core implementation](CORE_IMPLEMENTATION.md).
+The completion branch now contains Zahra's preprocessing assets, typed allowlisted
+loader, separate evaluator, independent physical simulation, deterministic metrics
+and approval-gated incident continuation. Static scheduling, recorded review,
+source/state binding, event-time pauses, safe visible updates and fresh approval
+before resume are connected to the dashboard. Full-horizon measurements remain
+null until a paused incident completes. The data release is checksummed and
+frozen as a candidate snapshot; independent human held-out review remains pending.
+See [Zahra acceptance](ZAHRA_ACCEPTANCE.md) and [handoff](handoffs/zahra.md) for
+actual checks, run commands and scope limits. No live hosted-model evaluation,
+commercial validation, production authentication or real network control is claimed.
 
 OpenAI's hosted API is the initial selected LLM provider. Other hosted models will be evaluated during development. The exact runtime model ID, SDK version and supported settings will be recorded when the integration is established and frozen before held-out evaluation. Local LLM execution is outside the current implementation plan.
 
@@ -143,3 +152,16 @@ The research context and full bibliography are in [Proposal.docx](Proposal.docx)
 - [OpenCellID data-access documentation](https://docs.opencellid.org/docs/downloads/overview)
 
 Before the final MVP submission, replace planned status with verified implementation status, pin dependencies/model configuration, complete the disclosure register, document the actual setup, link execution evidence and reconcile this file with the README, workflow and proposal.
+
+
+## 24 November continuation disclosure
+
+Zahra's existing code/commits are retained. Ihthisham used ChatGPT/Codex to complete
+incident continuation, boundary and loader hardening, data audit/freeze protection,
+dashboard integration, tests and handoff. The continuation commits include the
+requested Zahra co-author trailer. Python/pytest, Streamlit AppTest and a local
+browser were used for verification. No inference API calls or paid model runs were
+made. The exact coding-assistant model identifier was not recorded. Earlier
+Claude Code tooling/model details in Zahra's handoff are self-reported. Independent
+human evaluation review is PENDING and must not be represented as performed by
+these coding tools.

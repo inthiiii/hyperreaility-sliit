@@ -11,6 +11,8 @@ def render_outcome(result, prefix, historical=False):
     test_output = bool(result.run_metadata.get('test_only') or result.run_metadata.get('injected_test'))
     if test_output:
         st.warning('TEST OUTPUT · injected/test callback data, not measured restoration evidence.')
+    if result.run_metadata.get('measurement_scope') == 'elapsed_prefix':
+        st.warning('PARTIAL EPISODE · Measurements cover only minute 0 to ' + str(result.run_metadata.get('observed_until_min')) + '. The incident must be resumed before reporting full-horizon outcomes.')
     st.success('Evaluator result recorded' + (' in this historical record.' if historical else ' for the current plan.'))
     st.text(f'{result.scenario_id} · Plan {result.plan_id} · State {result.state_version}')
     st.caption('Evaluator-reported outputs are shown as returned. Interface checks do not validate the physical model or metric accuracy. '
@@ -35,7 +37,7 @@ def render_outcome(result, prefix, historical=False):
             tooltip=['Service:N', 'Start (min):Q', 'End (min):Q', 'Available minutes:Q'])
         st.altair_chart(chart, width='stretch')
     if result.run_metadata.get('replan_required'):
-        st.warning('Replanning required. This output does not authorize another plan or establish a completed replan/resume cycle.')
+        st.warning('Replanning required. Accept the event update on Planning and approve a new plan to continue the same incident.')
     action_outcomes = result.run_metadata.get('action_outcomes')
     if isinstance(action_outcomes, dict) and action_outcomes:
         st.subheader('Action outcomes')
@@ -87,9 +89,12 @@ def render_outcome(result, prefix, historical=False):
         file_name='relink-simulation-result.json', mime='application/json', key=prefix + '_result_json', on_click='ignore')
 
 
-def render_results(session):
+def render_results(session, choice=None):
     st.html('<div class="relink-eyebrow">Results</div>')
     st.title('Evidence of recovery.')
+    if choice is not None:
+        from project.ui.workflow import render_workflow
+        render_workflow(session, choice)
     result, issue = current_outcome(session)
     if issue:st.warning(issue)
     if result is None:

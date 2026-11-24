@@ -36,6 +36,15 @@ def _simulation_callback(session, choice, root, binding):
         session.review_feedback = {'kind': 'error', 'message': 'Simulation request stopped (' + type(error).__name__ + ').'}
 
 
+def _continue_callback(session, choice, root):
+    from project.ui.continuation import accept_checkpoint
+    try:
+        accept_checkpoint(session, choice, root)
+        st.session_state.pop('review_note', None)
+    except Exception:
+        session.review_feedback = {'kind': 'error', 'message': 'Checkpoint could not be accepted. Refresh and inspect the episode record.'}
+
+
 def render_review(choice, session, root):
     st.divider()
     st.subheader('Review and approval')
@@ -98,11 +107,17 @@ def render_review(choice, session, root):
         disabled=not connected or not approved or not same_operator or already or session.busy,
         on_click=_simulation_callback, args=(session, choice, root, binding))
     if connected:
-        st.caption('Static episodes only. Event/replanning episodes stop without publishing incomplete measurements.')
+        st.caption('Incident events pause execution. Accept the visible update, generate a new plan and approve it before continuing.')
     if session.simulation_attempt:
         attempt = session.simulation_attempt
         if attempt['status'] == 'completed':
-            st.success('Independent callback result recorded for this plan. No new simulation occurs on rerender.')
+            paused = bool(session.simulation_result and session.simulation_result.run_metadata.get('replan_required'))
+            if paused:
+                st.warning('Incident paused at a resource update. Results cover elapsed time only; the full horizon is not yet measured.')
+                st.button('Accept event update and replan', key='accept_event_update',
+                          disabled=session.busy, on_click=_continue_callback, args=(session, choice, root))
+            else:
+                st.success('Independent incident result recorded. No new simulation occurs on rerender.')
         elif attempt['status'] == 'unsupported':
             st.warning('Simulator support is pending for this episode. No result was published and no automatic retry will run.')
         elif attempt['status'] == 'failed':

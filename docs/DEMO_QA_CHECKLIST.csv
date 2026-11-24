@@ -1,0 +1,9 @@
+ID,Scenario,Steps,Expected,Automated coverage,Manual status,Tester,Notes
+QA-01,DEMO-005,Generate and approve offline,Measured static result after approval; no automatic rerun,test_ui_reject_retry_approve_and_scenario_change,BROWSER VERIFIED (Codex),Codex automation,24 November: completion checkout; real static backend.
+QA-02,DEV-006,Generate offline,Clarification required; approve and simulate disabled,test_real_conflict_and_missing_evidence_escalate,NOT RUN,,
+QA-03,DEV-008,Generate offline,Unknowns retained; clarification required,test_real_conflict_and_missing_evidence_escalate,NOT RUN,,
+QA-04,DEMO-005,Reject then explicitly start new attempt,Old plan rejected; new run has no inherited approval,test_rejection_is_terminal_until_explicit_new_attempt,NOT RUN,,
+QA-05,DEMO-005 -> DEV-006,Approve then change scenario,Previous plan approval and results cleared,test_ui_reject_retry_approve_and_scenario_change,NOT RUN,,
+QA-06,Unsupported episode,Run only after backend integration,Support pending; no partial result; no automatic retry,test_ui_unsupported_result_is_explained_on_planning_and_results (injected test callback),NOT RUN,,
+QA-07,DEMO-005 (backend required),Generate approve simulate open Results,720 weighted available; 5760 weighted downtime; first restoration 30,test_streamlit_click_flow_uses_real_simulator (backend required),BROWSER VERIFIED (Codex),Codex automation,24 November: completion checkout; real static backend.
+QA-08,DEV-010,Generate approve simulate; accept event; generate reapprove resume,Pause60; no full-horizon prefix score; finish720 with downtime9250,test_browser_two_approvals_finish_one_incident,BROWSER VERIFIED (Codex),Codex automation,Not independent human QA

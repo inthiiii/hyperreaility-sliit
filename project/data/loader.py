@@ -11,6 +11,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from pydantic import ValidationError
 from project.core.schemas import ScenarioInput
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -56,7 +57,14 @@ class CaseLoader:
     def load_case(self, path: str | Path) -> ScenarioInput:
         """Validate a processed case against the shared version 0.1 schema."""
         resolved = self._allowed(path)
-        return ScenarioInput.model_validate_json(resolved.read_bytes())
+        try:
+            scenario = ScenarioInput.model_validate_json(resolved.read_bytes())
+        except ValidationError as exc:
+            fields = ', '.join('.'.join(map(str, e['loc'])) or 'document' for e in exc.errors(include_input=False))
+            raise LoaderError(f'{resolved.stem}: invalid scenario fields: {fields}') from None
+        if scenario.scenario_id != resolved.stem:
+            raise LoaderError(f'{resolved.stem}: scenario_id disagrees with file name')
+        return scenario
 
     def find(self, scenario_id: str) -> Path:
         """Resolve a scenario ID such as DEMO-005 to its approved file."""

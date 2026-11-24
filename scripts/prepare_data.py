@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def write_json(path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False, sort_keys=True) + '\n')
+    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False, sort_keys=True) + '\n', encoding='utf-8', newline='\n')
 
 def csv_rows(path, rows, fields):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -30,6 +30,8 @@ def positions(geometry):
     return list(walk(geometry['coordinates']))
 
 def prepare():
+    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists():
+        raise ValueError('Dataset release is frozen. Create a reviewed new version instead of regenerating in place.')
     summary = {'context': {}, 'case_count': 0, 'split_counts': {}, 'checks': [], 'warnings': []}
     raw_geo = ROOT / 'data/raw/geoboundaries/lka_adm2_simplified.geojson'
     if raw_geo.exists():

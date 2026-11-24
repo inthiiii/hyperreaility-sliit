@@ -276,13 +276,17 @@ Operator approval/rejection now records exact run/plan/state bindings, notes and
 
 Read-only local run/decision/attempt history, safe exports and evaluator-output tables/charts are available. Missing results remain pending, null metrics remain unavailable, and opening history never restores authorization or starts inference. **161 tests pass**, including 92 UI/service checks. The dashboard workstream can be reviewed and merged independently; the real evaluator, actual outcome verification and full-system evaluation remain pending. See [Push 5](docs/DASHBOARD_PUSH5.md) and the [merge checklist](docs/DASHBOARD_MERGE_CHECKLIST.md).
 
-### Static simulator dashboard integration
+### Independent simulation and incident continuation
 
-The dashboard can attach Zahra's independent simulator when its backend modules
-are installed. It reconnects after scenario changes and runs only after a recorded
-operator approval. Results show measured service intervals, documented metric
-units and action outcomes. With starter data alone, simulation stays disabled.
-Dynamic continuation remains pending; this milestone refuses unsupported episodes
-instead of publishing incomplete measurements. See
-[the integration guide](docs/DASHBOARD_STATIC_INTEGRATION.md) for dependencies,
-DEMO-005's expected results and the offline verification flow.
+The dashboard connects the real evaluator after explicit operator approval.
+DEMO-005 demonstrates static recovery; DEV-010 pauses at crew loss, accepts a
+visible update, generates a revised plan and requires fresh approval before
+continuing the same incident. Results show measured service intervals, metric
+units and action outcomes; prefix measurements never masquerade as full-horizon
+results. No real equipment is dispatched.
+
+See [Zahra's handoff](docs/handoffs/zahra.md),
+[the acceptance matrix](docs/ZAHRA_ACCEPTANCE.md), and
+[the rehearsal guide](docs/DEMO_AND_FAILURE_FLOWS.md).
+The data release is frozen as a candidate snapshot. Independent human review and
+hosted-model benchmarking remain separate required validation work.

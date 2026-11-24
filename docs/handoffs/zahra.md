@@ -1,105 +1,164 @@
-# Zahra handoff: starter data, loader, independent simulator, metrics
+# Zahra delivery handoff: preprocessing, independent simulation and continuation
 
-Date: 23 November 2026. Author: Zahra Hassan (HyperReAIlity). Work done with Claude Code (model claude-sonnet-5-5) editing and running commands in the local checkout.
+Updated 24 November 2026. Branch: `feature/zahra-completion`.
+Zahra's original starter-data commit `53fa58a` and implementation `13b00ea`
+are preserved as merge ancestry (`cbd1d2e` integrates current main). Continuation
+commits retain Ihthisham's configured Git identity and the requested trailer:
+`Co-authored-by: Zahra Hassan <zahrahasan2163@gmail.com>`.
 
-## Branches and commits
+## Delivered software
 
-| Branch | Content | Base |
-|---|---|---|
-| `feature/starter-data` (PR 1, merge first) | commit `53fa58a`: starter scripts, data, `DATA_PROCESSING.md`, `DAY_1_PLAN.md` | `main` at `8c4f807` |
-| `feature/data-simulator` (PR 2) | loader, evaluator loader, simulator, metrics, tests, this handoff | `feature/starter-data` |
+- Public Sri Lanka geographic context (25 districts, three Western districts),
+  retained source/license metadata and attribution; no real telecom inventory.
+- One five-site demo, ten development cases, twenty draft evaluation candidates.
+  Raw snapshots remain unchanged. JSON is authoritative; nulls and contradictory,
+  stale and missing evidence remain explicit.
+- Reproducible preparation, strict file/byte/hash validation (201 files), an
+  automated structural/literal-label audit and a frozen candidate-release snapshot.
+- Allowlisted typed input loader with filename/ID consistency, path/symlink escape
+  rejection and field-level errors that do not echo invalid input values.
+- Separate evaluator loader. Models, agents and the core never import it or see
+  hidden future events. `project.data.audit` is evaluator-side tooling only.
+- Independent static simulation, generator transport/deployment/depletion,
+  equipment/link repairs, full upstream dependency checks and deterministic
+  service metrics. No planner prediction is used as a measured outcome.
+- Persistent evaluator-side `IncidentEpisode`: pause at resource observations,
+  retain work, locations, fuel timers and elapsed metrics, accept a new visible
+  checkpoint, require a higher state version and a freshly approved plan, then
+  continue the same incident to minute 720.
+- Dashboard attachment, source freshness checks, operator decisions, partial-result
+  labeling, continuation controls, measured intervals/action outcomes, history and
+  exports. Scenario changes clear live authorization and incident state.
 
-PR 2 contains PR 1's commit until PR 1 is merged. After PR 1 merges: `git fetch origin && git merge origin/main` on `feature/data-simulator` (do not force push).
+## Exact run commands
 
-## Changed files
-
-- Starter pack (PR 1): `scripts/` (4 files), `data/` (210 files incl. raw geoBoundaries provenance, attribution, `file_manifest.csv`, `quality_report.json`), `docs/DATA_PROCESSING.md`, `docs/DAY_1_PLAN.md`.
-- `project/data/loader.py`, `project/data/evaluator.py`, `project/data/__init__.py`
-- `project/simulation/engine.py`, `project/simulation/metrics.py`, `project/simulation/__init__.py`
-- `tests/data/test_data_loader.py`; `tests/simulation/{conftest,sim_helpers,test_sim_engine,test_sim_metrics,test_sim_integration}.py`
-- `docs/handoffs/zahra.md`
-
-Not copied from the starter ZIP: its `docs/DATA_CONTRACT.md` (the repository already has Ihthisham's authoritative version), `docs/manual_qa.csv` (Kiruthika's QA sheet; add on her request) and the ZIP `README.md`. No shared files (`schemas.py`, `requirements.txt`, `.gitignore`, `README.md`) were edited.
-
-## Setup and run
-
-```powershell
+```bash
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r project/requirements.txt     # or: pydantic==2.14.4 networkx==3.6.1 pytest==9.2.0 ortools==9.15.6755 openai==3.57.0 python-dotenv==1.2.4
+source .venv/bin/activate
+python -m pip install -r project/requirements.txt
 python scripts/check_data.py
-python -m pytest tests/data tests/simulation -q
+python -m pytest -q
+python -m streamlit run project/main.py
 ```
 
-Programmatic use:
+No extra dependency was introduced. Tested on the team's macOS/Python 3.11
+virtual environment using the existing pinned dependencies. No hosted inference,
+paid API, network download or local LLM is used by this delivery verification.
+
+To reproduce the audit/smoke checks without overwriting retained evidence:
+
+```bash
+python -m project.data.audit --output /tmp/relink-data-audit-new.json
+python -m scripts.verify_delivery --output /tmp/relink-delivery-smoke-new.json
+```
+
+Outputs use exclusive creation; choose a new path if one exists. Published audit
+and smoke records are under `docs/evaluation/`. `FROZEN_DATASET.json` is an
+immutable working-candidate snapshot, NOT proof of independent held-out validity.
+The generation, preparation and download scripts refuse to overwrite this frozen
+release. For subsequent dataset changes, create a separately reviewed release in
+a new branch/directory; preserve this release and its hashes. Do not remove the
+freeze merely to make a failing checksum check pass.
+
+## Interfaces and operational semantics
 
 ```python
-from project.data.loader import load_case              # agent-safe, allowlisted
-from project.data.evaluator import EvaluatorLoader      # harness only, never agents
-from project.simulation.engine import simulate, session_callback
+from project.data.loader import load_case
+from project.data.evaluator import EvaluatorLoader  # evaluator harness only
+from project.simulation.episode import IncidentEpisode
 
-result = simulate(scenario, approved_plan, approval, EvaluatorLoader().load(scenario.scenario_id), state=verified_state)
-
-session = CoreSession()
-session.simulator = session_callback(session, EvaluatorLoader())   # Eyaas: wires the real simulator
+scenario = load_case('development/DEV-010.json')
+episode = IncidentEpisode(scenario, EvaluatorLoader().load(scenario.scenario_id))
+# Supply a genuinely reviewed plan, its matching approval and verified state:
+result = episode.advance(scenario, plan, approval, state=verified_state)
+if episode.paused:
+    visible_update = episode.checkpoint()
+    # Core prepares a new state/plan; operator approves it before the next advance.
 ```
 
-`state` is optional but should be passed: it binds the approval to the exact verified state hash.
+`simulate(scenario, plan, approval, isolated_truth, state=...)` supports static
+runs and returns a prefix result for an eventful run. Use IncidentEpisode or
+`session_callback(core_session, truth_loader)` for continuation; the callback has
+a `checkpoint()` accessor for its safe visible snapshot. Never create a fresh
+simulator at each replan and score the elapsed interval again.
 
-## Completed
+Actions finishing at the event minute complete first. The lost crew's unfinished
+work gets no partial repair credit and must restart if rescheduled. Only
+unaffected work already departed continues under its original approval; later
+scheduled departures are cancelled for fresh review. Such a committed crew is
+reserved until its already-approved work ends; its projected destination is not
+available early. A lost crew's in-transit position is the last reached node and
+cannot authorize further travel. A collected generator lost before deployment
+is unavailable; recovery/refuelling/redeployment remain outside the one-deployment
+MVP. Generator expiry is measured by the evaluator. A replan sees only the public
+resource specification's expected expiry and observations already reached, not
+unobserved private future resource values.
 
-1. Starter data inspected and published (PR 1). Inventory confirmed: 25 districts, 3 Western subset, 1 demo, 10 development, 20 evaluation candidates.
-2. `load_case(path) -> ScenarioInput`: reads only `<agent_inputs>/<demo|development|candidate_evaluation>/<ID>.json`; rejects `..`, absolute paths outside the root, wrong depth/extension, oversized files; validates with the shared schema.
-3. Separate `EvaluatorLoader`/`EvaluatorTruth` for private truth. A test fails if `project/agents`, `project/core` or `project/llm` mention `ground_truth`, `raw/synthetic`, `project.data.evaluator` or `project.simulation`.
-4. `simulate(scenario, approved_plan, approval, isolated_truth)`: requires an approving, matching approval (decision, plan ID, state version, plan hash, state hash, optionally verified-state hash); re-checks plan structure independently; runs on a deep copy of truth; ignores planner predictions. Truth drives equipment/power/link/road state, crew windows and generator autonomy.
-5. Full dependency path (site and every upstream site: equipment + power, every link, core), recomputed after every event, each service counted once, cycle/disconnected guard (`TopologyError`).
-6. Exact integer-minute integration on half-open intervals; no sampling. Same-minute rule and log order documented in `engine.py`.
-7. `metrics.py`: weighted downtime = total weighted horizon minutes - weighted available minutes; unweighted availability; critical service downtime (service-minutes); first restoration (null if none; an initially-up service is not a restoration); services available at horizon end; unmet needs. Also baseline (no action) downtime and reduction. Integrated over [0, horizon), clock never reset.
-8. Crew-loss future event (minute 60): completed work preserved, unfinished work of the lost crew paused, observation emitted at its time only, `replan_required` set. Unit-tested; **the replan loop itself is pending** (no continuation of a paused plan; a new state version and approval are required).
+`ScenarioInput.active_generators` is an optional backwards-compatible field for
+observed running deployments and expected expiry. The CP-SAT tool accounts for
+these during the remaining horizon and cannot redeploy unavailable generators.
+`simulated_completion` reports record completed approved work as a new physical
+state; they do not resolve unrelated contradictory reports by recency.
 
-## Checks and actual outcomes (Windows 11, Python 3.14.7)
+At a pause, `measurement_scope=elapsed_prefix`, `observed_until_min` is the stop
+minute, full-horizon availability/downtime/end-state fields are null, and explicit
+`*_so_far_min` values measure the prefix. At final completion,
+`measurement_scope=complete_incident` and metrics integrate exactly over [0,720).
+Events at minute 720 affect final state but add no positive-duration availability.
 
-- `python scripts/check_data.py`: PASS (run from the ZIP folder and from the repository).
-- All 31 processed inputs validate against `project.core.schemas.ScenarioInput`; 201 manifest SHA-256 values match.
-- `python -m pytest tests/data tests/simulation -q`: **146 passed** in about 5 s.
-- Whole repository `python -m pytest -q`: 214 passed, **1 failed**: `tests/core/test_premerge.py::test_trace_roundtrip_private_and_tamper` asserts POSIX file mode `0o600`, which Windows does not report. Ihthisham's test; not changed. Likely a Windows-only artefact, not verified on macOS/Linux by me.
-- Numerical example (DEMO-005, generator G1 to S02, work ends minute 30, autonomy 120): S02 and S04 available on [30,150), weights total 6, weighted available 720, weighted downtime 5760 of 6480, first restoration 30, critical downtime 600, nothing available at horizon end. Link repair alone restores nothing. Link repair plus generator at S01 restores S01, S03 and S05 on [115,235).
-- Integration with Ihthisham's merged core (template mode, no model call): the planned DEMO-005 action simulated to the figures above. Smoke run over all 31 cases: 25 reached awaiting_approval and simulated without error; 6 escalated (unresolved facts) and were not simulated. These are plumbing checks, not benchmark results.
+## Numerical acceptance
 
-## Model and tools
+DEMO-005: G1 reaches S02 at 15, deployment ends at 30, expires at 150. V02/V04
+are available on [30,150): weighted availability 720, weighted downtime 5760,
+unweighted availability 240 service-minutes, unweighted downtime 3360, first
+restoration 30, final services 0.
 
-Claude Code with claude-sonnet-5-5 wrote the code and tests; Python, pytest, Git. Starter pack was produced earlier with ChatGPT/Codex assistance (see `data/ATTRIBUTION.md`). No inference API, no key, no model call in any of my components. API smoke test: not applicable.
+DEV-010: first episode stops at 60. G1 was activated at 25 and expires at 145;
+the unaffected equipment work remains committed until 145. After fresh approval,
+13 weighted services contribute 13*120 and the S01 branch contributes 10*575.
+Total weighted availability is 7310; downtime is 23*720-7310 = 9250. End state
+has ten available services. This is a fixture calculation, not a commercial or
+multi-agent benchmark result.
 
-## Assumptions
+## Actual verification evidence
 
-- Version 0.1 scope: tree backhaul, one generator deployment, no grid-repair action, static road travel times.
-- A service at site S needs S and all ancestors powered; generator power applies only to its target site.
-- Crew-loss patch applies at the event minute; an action ending exactly then completes.
-- A failed or paused action blocks that crew's later actions (replanning needed).
-- Weights come from `ScenarioInput.services` (schema checks they match policy).
-- `SimulationResult` has no per-service field, so per-service intervals and action outcomes are in `run_metadata` (`service_availability`, `action_outcomes`). I did not alter the shared schema.
+- Data check: 201 sizes/SHA-256 values, 31 structures, uncertainty isolation,
+  references, 25 districts and the hand-calculated dependency example pass.
+- Full final test count is recorded in `docs/ZAHRA_ACCEPTANCE.md`.
+- `docs/evaluation/DELIVERY_SMOKE.json`: 31 offline template cases, 25 completed
+  incidents and six escalated cases, zero model calls. All three resource-loss
+  scenarios reached completion through fresh approval on each episode.
+- Browser rehearsal performed on the completion checkout: DEMO-005 approval and
+  measured results; DEV-010 pause, accept update, new plan/state, new approval,
+  resume and complete. These are local synthetic tests.
+- Existing tests verify rejection, stale/source binding, duplicate execution,
+  visible-only input loading and non-finite/tampered output rejection. Added
+  numerical tests cover horizon events, resumed expiry, partial work, successive
+  hidden events, missing approval and unobserved resource-truth isolation.
 
-## Known issues and limits
+## Remaining external validation and scope limits
 
-- All 31 cases are unreviewed synthetic drafts; the 20 evaluation candidates are not a validated held-out set. Do not report benchmark claims.
-- District GeoJSON is display context only (ODbL 1.0, represented year 2017); geometry topology was not validated; fictional x/y never mixed with lon/lat.
-- Git on Windows may store `data/processed/context/districts.csv` with LF while `file_manifest.csv` hashes the original CRLF bytes; the manifest test accepts either. A `.gitattributes` for `data/` would remove this ambiguity (shared file; Ihthisham's call).
-- I did not see a separate "Data and Simulation Handbook" file, only the work guide; its extra requirements may not be reflected.
-- Persisted/idempotent execution across restarts and rolling-horizon replanning remain integration work.
+Independent human review of the candidate evaluation set is still PENDING. The
+software audit cannot sign off as Kiruthika or another independent reviewer.
+Candidates share generator templates; independently vary topology, constraints
+and report wording, review labels/outcomes, and version/refreeze a new release
+before claiming a validated held-out benchmark. Twenty review entries are supplied
+in `docs/evaluation/HUMAN_REVIEW.csv`. Do not tune prompts against these answers
+and then call the same cases held out. All evidence here is synthetic; no operator
+or commercial deployment is validated.
 
-## What others must connect
+The incident checkpoint is private in-memory session state. Restarting the app or
+losing the session requires starting a new incident; loading history never
+restores an approval or silently resumes execution. Cross-process durable resume,
+real authentication, dispatch, refuelling and general network topologies are not
+part of this MVP. The CP-SAT scheduler retains its five-minute input restrictions;
+use the exposed greedy scheduler for supported non-aligned event times. The event
+engine integrates integer-minute intervals exactly.
 
-- Ihthisham: review PR 1 then PR 2; add pinned dependencies if wanted; decide on the Windows file-mode test and `.gitattributes`.
-- Eyaas: `session.simulator = session_callback(session, EvaluatorLoader())`; read `metrics`, `trajectory`, `run_metadata['service_availability']`; show `run_metadata['replan_required']`; never import `project.data.evaluator` in dashboard code that agents can reach.
-- Kiruthika: `manual_qa.csv` is available in the starter ZIP; QA the scenario text and flag problems rather than editing evaluation files in place.
+## Tools and attribution
 
-## Staged files and PR steps
-
-```powershell
-git add project/data project/simulation tests/data tests/simulation docs/handoffs/zahra.md
-git diff --cached --stat
-git commit -m "Add loader, independent simulator and metrics"
-git push -u origin feature/data-simulator
-```
-
-Open PR 1 (`feature/starter-data` to `main`) first, request Ihthisham's review, merge, then open PR 2 (`feature/data-simulator` to `main`) with these checks and limits.
+Zahra's existing handoff reported Claude Code with `claude-sonnet-5-5` on Windows;
+that is retained as her report, not independently verified model provenance.
+The 24 November continuation used ChatGPT/Codex, Python, pytest, Streamlit AppTest,
+local browser rehearsal and Git. Runtime OpenAI inference was not exercised.
+The exact coding-assistant model identifier was not recorded in the repository.

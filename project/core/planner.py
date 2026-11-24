@@ -136,7 +136,8 @@ def plan(state:VerifiedState, solver_seconds:float=5, seed:int=22) -> Plan:
             cache[key]=conjunction([selected[i],before],f'done_{i}_{t}')
         return cache[key]
     def generator_on(sid,t):
-        terms=[]
+        terms=[m.new_constant(1) for active in s.active_generators
+               if active.site_id == sid and active.expires_at_min > t*SLOT]
         for i,o in enumerate(options):
             if o.kind!='generator_deploy' or o.target_id!=sid:continue
             active=m.new_bool_var(f'fuel_{i}_{t}')

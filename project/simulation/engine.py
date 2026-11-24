@@ -69,6 +69,8 @@ def evaluate_services(parents: dict, core_id: str, services: list, equipment: di
 
 
 def _authorize(scenario: ScenarioInput, plan: Plan, approval: Approval, state: VerifiedState | None):
+    if not isinstance(approval, Approval):
+        raise SimulationRejected(['A matching explicit approval is required'])
     problems = []
     if approval.decision != 'approve':
         problems.append('Approval decision is not approve')
@@ -139,6 +141,9 @@ def _check_plan(scenario: ScenarioInput, plan: Plan, road_by_edge: dict) -> list
                 continue
             if a.departure_min < ready:
                 bad.append(f'{a.action_id}: overlaps previous crew work')
+            if not a.travel_route:
+                bad.append(f'{a.action_id}: empty travel route')
+                continue
             if a.travel_route[0] != location or a.travel_route[-1] != opt.location:
                 bad.append(f'{a.action_id}: route endpoints disagree with crew location or work site')
             travel = 0
@@ -168,9 +173,25 @@ def _check_truth(scenario: ScenarioInput, truth: EvaluatorTruth) -> None:
         problems.append('Truth crews do not match scenario')
     if {g.generator_id for g in truth.generators} != {g.generator_id for g in scenario.generators}:
         problems.append('Truth generators do not match scenario')
+    if len({c.crew_id for c in truth.crews}) != len(truth.crews) or len({g.generator_id for g in truth.generators}) != len(truth.generators):
+        problems.append('Duplicate truth resources')
+    places = {s.site_id for s in scenario.sites} | {scenario.depot_id}
+    for crew in truth.crews:
+        if crew.location not in places or crew.available_from_min >= crew.available_until_min:
+            problems.append('Invalid truth crew location/window')
+    if any(g.location not in places for g in truth.generators):
+        problems.append('Invalid truth generator location')
+    if len({e.event_id for e in truth.future_events}) != len(truth.future_events):
+        problems.append('Duplicate future event IDs')
+    if len({e.operator_report.report_id for e in truth.future_events}) != len(truth.future_events):
+        problems.append('Duplicate event report IDs')
     for ev in truth.future_events:
+        if ev.operator_report.observed_at_min != ev.at_min or ev.at_min > scenario.horizon_min:
+            problems.append('Invalid future observation time')
+        if ev.operator_report.report_id in {r.report_id for r in scenario.reports}:
+            problems.append('Event report collides with initial evidence')
         p = ev.truth_patch
-        if p.crew_id not in {c.crew_id for c in scenario.crews} or p.available_until_min < ev.at_min:
+        if p.crew_id not in {c.crew_id for c in scenario.crews} or p.available_until_min != ev.at_min:
             problems.append(f'{ev.event_id}: invalid crew patch')
     if problems:
         raise SimulationRejected(problems)
@@ -272,12 +293,24 @@ def _run(scenario, truth, plan_actions, events, *, road_by_edge, parents, servic
         segments.append(Segment(b, end, avail))
         log.append({'t': b, 'type': 'availability', 'available_services': sorted(avail),
                     'weighted_available': sum(s.weight for s in services if s.service_id in avail)})
-    for t, kind, key, payload in timeline[idx:]:  # events at or after the horizon
+    for t, kind, key, payload in timeline[idx:]:  # boundary events, not later events
+        if t > horizon:
+            continue
+        if kind == 'action_completed':
+            if payload['kind'] == 'equipment_repair': equipment[payload['target_id']] = True
+            elif payload['kind'] == 'link_repair': links[payload['target_id']] = True
+            else: gen_site[payload['generator_id']] = payload['target_id']
+        elif kind == 'generator_expired':
+            gen_site.pop(key, None)
         log.append({'t': t, 'type': kind, **payload})
+    powered = {s for s, g in grid.items() if g} | set(gen_site.values())
+    final = evaluate_services(parents, scenario.core_id, services, equipment, powered, links)
+    log.append({'t': horizon, 'type': 'availability', 'available_services': sorted(final),
+                'weighted_available': sum(s.weight for s in services if s.service_id in final)})
     return log, segments, outcomes
 
 
-def simulate(scenario: ScenarioInput, approved_plan: Plan, approval: Approval,
+def _simulate_static(scenario: ScenarioInput, approved_plan: Plan, approval: Approval,
              isolated_truth: EvaluatorTruth, *, state: VerifiedState | None = None) -> SimulationResult:
     """Shared function agreement: simulate(scenario, approved_plan, approval, isolated_truth).
 
@@ -285,6 +318,12 @@ def simulate(scenario: ScenarioInput, approved_plan: Plan, approval: Approval,
     exact verified state. Inputs are never mutated.
     """
     _authorize(scenario, approved_plan, approval, state)
+    if scenario.current_time_min != 0:
+        raise SimulationRejected(['Nonzero incident time requires the original IncidentEpisode checkpoint'])
+    if state is not None:
+        from project.core.validator import validate
+        if not validate(approved_plan, state).valid:
+            raise SimulationRejected(['Independent current-state validation failed'])
     _check_truth(scenario, isolated_truth)
     road_by_edge = {frozenset((r.origin, r.to)): r for r in scenario.roads}
     bad = _check_plan(scenario, approved_plan, road_by_edge)
@@ -305,7 +344,11 @@ def simulate(scenario: ScenarioInput, approved_plan: Plan, approval: Approval,
     metrics['actions_completed'] = sum(1 for s, _ in outcomes.values() if s == 'completed')
     metrics['actions_not_completed'] = sum(1 for s, _ in outcomes.values() if s != 'completed')
 
-    final = segments[-1].available
+    final = frozenset(log[-1]['available_services'])
+    if metrics['first_restoration_min'] is None and final - segments[-1].available:
+        metrics['first_restoration_min'] = scenario.horizon_min
+    metrics['services_available_at_horizon_end'] = len(final)
+    metrics['unmet_needs_count'] = len(services) - len(final)
     unmet = [f'service:{s.service_id}' for s in scenario.services if s.service_id not in final]
     completed = [e['action_id'] for e in log if e['type'] == 'action_completed']
     replan = any(e['type'] == 'observation' for e in log)
@@ -326,12 +369,19 @@ def simulate(scenario: ScenarioInput, approved_plan: Plan, approval: Approval,
             for s in scenario.services},
         'action_outcomes': {k: {'status': v[0], 'reason': v[1]} for k, v in sorted(outcomes.items())},
         'replan_required': replan,
-        'future_event_support': 'implemented; unit-tested; replanning loop not integrated (pending)',
+        'future_event_support': 'IncidentEpisode supports pause/checkpoint/fresh-approved continuation',
     }
     return SimulationResult(scenario_id=scenario.scenario_id, plan_id=approved_plan.plan_id,
                             state_version=approved_plan.state_version, trajectory=log,
                             completed_actions=completed, unmet_needs=unmet, metrics=metrics,
                             run_metadata=metadata)
+
+
+def simulate(scenario, approved_plan, approval, isolated_truth, *, state=None):
+    if isolated_truth.future_events:
+        from .episode import IncidentEpisode
+        return IncidentEpisode(scenario, isolated_truth).advance(scenario, approved_plan, approval, state=state)
+    return _simulate_static(scenario, approved_plan, approval, isolated_truth, state=state)
 
 
 def session_callback(session, truth_loader):
@@ -341,7 +391,15 @@ def session_callback(session, truth_loader):
     session's recorded approval so the simulator re-checks it independently.
     ``truth_loader`` is an EvaluatorLoader held by the harness, never by agents.
     """
+    from .episode import IncidentEpisode
+    episode = None
     def callback(state: VerifiedState, plan: Plan) -> SimulationResult:
-        truth = truth_loader.load(state.scenario_id)
-        return simulate(state.scenario, plan, session.approval, truth, state=state)
+        nonlocal episode
+        if episode is None:
+            episode = IncidentEpisode(state.scenario, truth_loader.load(state.scenario_id))
+        return episode.advance(state.scenario, plan, session.approval, state=state)
+    def checkpoint():
+        if episode is None: raise SimulationRejected(['No incident has run'])
+        return episode.checkpoint()
+    callback.checkpoint = checkpoint
     return callback

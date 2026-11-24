@@ -14,6 +14,7 @@ from project.ui.session import get_dashboard_session
 from project.ui.review_service import active_approval
 from project.ui.history import render_history
 from project.ui.outcomes import render_results
+from project.ui.workflow import render_workflow
 
 PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'History', 'Settings')
 
@@ -42,6 +43,7 @@ def _overview(choice, session):
     st.html('<div class="relink-eyebrow">Incident workspace</div>')
     st.title('Restore with a clearer picture.')
     st.write('Bring the incident, field resources and recovery decisions into one workspace.')
+    render_workflow(session, choice)
     st.html(_pill('Synthetic scenario') + _pill('Dashboard foundation', True))
     st.write('')
     for column, (label, value, help_text) in zip(st.columns(4), (
@@ -65,7 +67,7 @@ def _overview(choice, session):
         st.subheader('Planning workspace')
         st.write('Open Planning to generate a schedule and inspect the recorded evidence and checks.')
         st.caption('Planning runs only when you explicitly click Generate plan on the Planning page.')
-        st.caption('Review and approve on Planning, then simulate the static episode.' if session.core.simulator else
+        st.caption('Review and approve on Planning, then simulate or continue the incident.' if session.core.simulator else
                    'Review and record your decision on Planning. Simulation awaits the independent evaluator.')
     st.write('')
     st.subheader('From incident to measured recovery')
@@ -103,7 +105,7 @@ def _settings(health, session, choice):
             st.write('Content hash: ' + choice.content_hash[:16])
         st.write('Available: incident inspection, planning, recorded decisions, approval-gated simulator boundary, read-only history, exports and evaluator-output views.')
         st.write('Simulator: ' + (session.simulator_label or 'Not installed/connected'))
-        st.write('Pending: event-driven continuation, independent benchmark audit and authenticated identity.')
+        st.write('Pending: independent human benchmark audit and authenticated production identity.')
 
 
 def render_app(root=None):
@@ -136,6 +138,7 @@ def render_app(root=None):
             choice = by_key[key]
             changed = session.select(choice)
             connect_static_backend(session, choice, root)
+            choice = session.continuation_choice or choice
             if changed and session.selection_revision > 1:
                 st.caption('Scenario changed. Previous plan, approval and results were cleared.')
             st.caption('Development fixture' if catalog.using_fixtures else 'Processed demo/development input')
@@ -171,6 +174,6 @@ def render_app(root=None):
     elif page == 'Planning':
         render_planning(choice, session, root)
     else:
-        render_results(session)
+        render_results(session, choice)
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
             ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')

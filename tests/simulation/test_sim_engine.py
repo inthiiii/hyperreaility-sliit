@@ -214,7 +214,8 @@ def test_crew_loss_pauses_unfinished_work_keeps_completed_and_requests_replan(de
     outcomes = r.run_metadata['action_outcomes']
     assert outcomes['GEN-G1-S02']['status'] == 'completed' and outcomes['BH-L02']['status'] == 'paused'
     assert r.completed_actions == ['GEN-G1-S02']
-    assert avail(r, 'V02') == [[30, 150]]                     # completed repair preserved
+    assert avail(r, 'V02') == [[30, 60]]                      # prefix stops at event; future fuel is not scored
+    assert r.metrics['services_available_at_horizon_end'] is None
     assert r.run_metadata['replan_required'] is True
     obs = [e for e in r.trajectory if e['type'] == 'observation']
     assert len(obs) == 1 and obs[0]['t'] == 60 and obs[0]['replan_required'] is True
