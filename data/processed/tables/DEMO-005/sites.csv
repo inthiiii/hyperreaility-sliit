@@ -1,0 +1,6 @@
+site_id,label,x,y,coordinate_system
+S01,Fictional site 01,0,0,synthetic_local_grid
+S02,Fictional site 02,10,0,synthetic_local_grid
+S03,Fictional site 03,20,0,synthetic_local_grid
+S04,Fictional site 04,30,0,synthetic_local_grid
+S05,Fictional site 05,40,0,synthetic_local_grid

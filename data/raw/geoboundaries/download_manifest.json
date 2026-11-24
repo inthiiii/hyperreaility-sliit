@@ -1,0 +1,21 @@
+{
+  "dataset": "geoBoundaries gbOpen Sri Lanka ADM2 simplified boundaries",
+  "retrieved_utc": "2026-11-21T18:26:53.232514+00:00",
+  "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/LKA/ADM2/",
+  "resolved_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/LKA/ADM2/",
+  "geometry_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2_simplified.geojson",
+  "resolved_geometry_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2_simplified.geojson",
+  "source_commit_from_download_url": "9469f09",
+  "boundary_id": "LKA-ADM2-46371173",
+  "year_represented": "2017",
+  "original_license": "Open Data Commons Open Database License 1.0",
+  "source": "OpenStreetMap, Wambacher",
+  "expected_units": 25,
+  "actual_units": 25,
+  "purpose": "Optional geographic display only; not telecom infrastructure, roads or live hazard data.",
+  "sha256": {
+    "CITATION-AND-USE-geoBoundaries.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "lka_adm2_simplified.geojson": "90c7e2940f78f85d9810a1f0915627b660a2b6efe381c2becf245b4cbaa8286c",
+    "metadata.json": "d5e4ea2abd3071d18d0cf0c8fc8cd9b32feaaa3477432eb63ecde7d76188eb9d"
+  }
+}

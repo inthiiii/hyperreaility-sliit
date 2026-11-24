@@ -1,0 +1,2 @@
+# Keep checksummed datasets identical across macOS, Linux and Windows checkouts.
+data/** text eol=lf

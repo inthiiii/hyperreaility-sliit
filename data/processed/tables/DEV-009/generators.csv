@@ -1,0 +1,2 @@
+generator_id,location,available,autonomy_minutes,deployment_minutes,max_deployments
+G1,DEPOT,True,120,15,1

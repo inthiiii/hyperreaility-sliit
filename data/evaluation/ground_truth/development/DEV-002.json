@@ -1,0 +1,161 @@
+{
+  "crews": [
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C1",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "generator"
+      ]
+    },
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C2",
+      "location": "DEPOT",
+      "skills": [
+        "backhaul",
+        "equipment",
+        "generator"
+      ]
+    }
+  ],
+  "evaluation_notes": [
+    "Runtime validation uses verified observations only.",
+    "Hidden truth is for evaluation/simulation, never an agent tool.",
+    "No optimal plan or expected improvement is claimed."
+  ],
+  "expected_report_facts": [
+    {
+      "attribute": "grid_power_ok",
+      "expected_resolution": "verified",
+      "report_id": "REP-001",
+      "reported_value": false,
+      "target_id": "S02",
+      "target_type": "site"
+    }
+  ],
+  "future_events": [],
+  "generators": [
+    {
+      "autonomy_minutes": 300,
+      "available": true,
+      "deployment_minutes": 15,
+      "generator_id": "G1",
+      "location": "DEPOT",
+      "max_deployments": 1
+    }
+  ],
+  "links": {
+    "L01": true,
+    "L02": true,
+    "L03": true,
+    "L04": true,
+    "L05": true,
+    "L06": true,
+    "L07": true,
+    "L08": true,
+    "L09": true,
+    "L10": true,
+    "L11": true,
+    "L12": true,
+    "L13": true,
+    "L14": true,
+    "L15": true,
+    "L16": true,
+    "L17": true
+  },
+  "missing_facts": [],
+  "roads": {
+    "R01": true,
+    "R02": true,
+    "R03": true,
+    "R04": true,
+    "R05": true,
+    "R06": true,
+    "R07": true,
+    "R08": true,
+    "R09": true,
+    "R10": true,
+    "R11": true,
+    "R12": true,
+    "R13": true,
+    "R14": true,
+    "R15": true,
+    "R16": true,
+    "R17": true
+  },
+  "scenario_id": "DEV-002",
+  "sites": {
+    "S01": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S02": {
+      "equipment_ok": true,
+      "grid_power_ok": false
+    },
+    "S03": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S04": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S05": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S06": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S07": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S08": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S09": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S10": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S11": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S12": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S13": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S14": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S15": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S16": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S17": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    }
+  }
+}
