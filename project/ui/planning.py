@@ -6,6 +6,7 @@ import streamlit as st
 from project.core.tracing import redact
 from project.llm.health import preflight
 from project.ui.review import render_review
+from project.ui.workflow import render_workflow
 from project.ui.planning_service import (
     begin_new_attempt, fact_rows, prepare_plan, request_key, schedule_rows, timeline_rows,
 )
@@ -138,6 +139,15 @@ def render_planning(choice, session, root):
     st.html('<div class="relink-eyebrow">Planning workspace</div>')
     st.title('A plan worth reviewing.')
     st.text('Selected incident: ' + choice.scenario.scenario_id)
+    if choice.scenario.current_time_min:
+        st.info(f'Continuing the same incident at minute {choice.scenario.current_time_min} of {choice.scenario.horizon_min}. A new plan and fresh approval are required.')
+        committed = (session.continuation_context or {}).get('committed_actions', [])
+        if committed:
+            st.caption('Already-started unaffected work continues under the earlier approval. These crews remain reserved until the listed work end.')
+            st.dataframe(committed, hide_index=True, width='stretch')
+        if choice.scenario.active_generators:
+            st.caption('Running generators: expected expiry comes from the visible inventory specification; fuel is not reset by replanning.')
+            st.dataframe([g.model_dump() for g in choice.scenario.active_generators], hide_index=True, width='stretch')
     st.write('Prepare a schedule, inspect its evidence and review the independent checks.')
     # Widget keys are removed when their page is not rendered; retain preferences
     # separately so returning from another view never changes the selected mode.
@@ -176,6 +186,7 @@ def render_planning(choice, session, root):
         if attempted:
             if st.button('Start a new attempt', key='new_planning_attempt', disabled=session.busy, width='stretch'):
                 begin_new_attempt(session)
+                st.session_state.pop('review_note', None)
                 st.rerun()
     if generate:
         with st.spinner('Preparing and independently checking the plan…'):
@@ -202,4 +213,5 @@ def render_planning(choice, session, root):
         _result(result, attempt)
     elif not attempt:
         st.info('No plan generated. Choose a mode and scheduler, then explicitly generate a plan.')
+    render_workflow(session, choice)
     render_review(choice, session, root)

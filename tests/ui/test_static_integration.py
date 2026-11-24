@@ -72,7 +72,7 @@ def test_static_demo_approved_measured_recorded_and_not_repeated(case):
     assert result.metrics['weighted_available_min'] == 720
     assert result.metrics['first_restoration_min'] == 30
     assert result.run_metadata['planner_prediction_used'] is False
-    assert result.run_metadata['integration_scope'] == 'static_episode'
+    assert result.run_metadata['integration_scope'] == 'event_episode'
     assert all(row['Unit'] != 'Not specified' for row in metric_rows(result))
     assert [(r['Service'], r['Start (min)'], r['End (min)']) for r in service_interval_rows(result)] == [
         ('V02', 30, 150), ('V04', 30, 150)]
@@ -100,28 +100,31 @@ def test_new_selection_gets_fresh_core_and_callback(case):
     assert session.simulation_result is None
 
 
-def test_dynamic_case_publishes_no_partial_measurements(case, monkeypatch):
-    from project.data.evaluator import EvaluatorLoader
+def test_dynamic_case_stops_at_event_without_full_horizon_claim(case, monkeypatch):
+    from project.data.evaluator import EvaluatorLoader, FutureEvent, OperatorReport, TruthPatch
     session, choice, root, binding = approve(case)
     truth = EvaluatorLoader(root / 'data/evaluation/ground_truth').load('DEMO-005')
-    truth.future_events.append(object())
+    truth.future_events = [FutureEvent(event_id='EV-1', at_min=60,
+        operator_report=OperatorReport(report_id='OBS-1', source_type='confirmed_field_update', observed_at_min=60,
+                                      text='Crew C2 is unavailable.'),
+        truth_patch=TruthPatch(crew_id='C2', available_until_min=60))]
     monkeypatch.setattr(EvaluatorLoader, 'load', lambda *args: truth)
-    assert simulate_approved(session, choice, binding, 'Operator', root) == 'unsupported'
-    assert session.simulation_result is None and session.simulation_attempt['status'] == 'unsupported'
-    assert not session.core.executed
-    history = load_history(root)
-    assert not history.issues and any(e.status == 'unsupported' for e in history.entries)
+    assert simulate_approved(session, choice, binding, 'Operator', root) == 'completed'
+    assert session.simulation_result.run_metadata['replan_required'] is True
+    assert session.simulation_result.metrics['weighted_downtime_min'] is None
+    assert session.simulation_result.metrics['observed_until_min'] == 60
     assert simulate_approved(session, choice, binding, 'Operator', root) == 'duplicate'
 
 
-def test_horizon_expiry_bug_is_blocked_until_backend_fixed(case, monkeypatch):
+def test_horizon_expiry_is_scored_without_stale_end_state(case, monkeypatch):
     from project.data.evaluator import EvaluatorLoader
     session, choice, root, binding = approve(case)
     truth = EvaluatorLoader(root / 'data/evaluation/ground_truth').load('DEMO-005')
-    truth.generators[0].autonomy_minutes = 690  # deployment ends 30; expiry at horizon 720
+    truth.generators[0].autonomy_minutes = 690
     monkeypatch.setattr(EvaluatorLoader, 'load', lambda *args: truth)
-    assert simulate_approved(session, choice, binding, 'Operator', root) == 'unsupported'
-    assert session.simulation_result is None
+    assert simulate_approved(session, choice, binding, 'Operator', root) == 'completed'
+    assert session.simulation_result.metrics['services_available_at_horizon_end'] == 0
+    assert session.simulation_result.metrics['weighted_available_min'] == 6 * 690
 
 
 def test_streamlit_click_flow_uses_real_simulator(case, monkeypatch):

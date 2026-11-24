@@ -1,2 +1,5 @@
 # Keep checksummed datasets identical across macOS, Linux and Windows checkouts.
 data/** text eol=lf
+
+# Downloaded provenance is retained byte-for-byte, including source newlines.
+data/raw/geoboundaries/** -text

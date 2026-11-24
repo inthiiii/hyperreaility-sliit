@@ -13,7 +13,7 @@ CATEGORIES = [
 
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8', newline='\n')
 
 def case(case_id, category, seed, n=15):
     rng = random.Random(seed)
@@ -151,6 +151,8 @@ def case(case_id, category, seed, n=15):
             'agent_input': agent_input, 'evaluation_truth': truth}
 
 def generate():
+    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists():
+        raise ValueError('Dataset release is frozen. Create a reviewed new version instead of regenerating in place.')
     out = ROOT / 'data/raw/synthetic'
     specs = []
     for split, copies, seed_base, prefix in [('development', 1, 22000, 'DEV'), ('candidate_evaluation', 2, 32000, 'EVAL')]:

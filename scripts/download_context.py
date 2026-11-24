@@ -17,6 +17,8 @@ def read(url):
         return response.read(), response.geturl()
 
 def download():
+    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists():
+        raise ValueError('Dataset release is frozen. Create a reviewed new version instead of regenerating in place.')
     RAW.mkdir(parents=True, exist_ok=True)
     metadata_bytes, resolved = read(API)
     metadata = json.loads(metadata_bytes)
@@ -60,7 +62,7 @@ def download():
         'purpose': 'Optional geographic display only; not telecom infrastructure, roads or live hazard data.',
         'sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(RAW.iterdir()) if p.is_file() and p.name != 'download_manifest.json'}
     }
-    (RAW / 'download_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    (RAW / 'download_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8', newline='\n')
     print(f'Downloaded {len(geometry["features"])} districts, {len(geometry_bytes):,} geometry bytes; licence: {metadata["boundaryLicense"]}')
 
 if __name__ == '__main__':

@@ -56,7 +56,7 @@ def review_context(session, choice):
 def ensure_current_source(session, choice, root):
     # Button callbacks run before Streamlit rerenders/reloads the catalog. Check
     # disk freshness here too, rather than trusting the last displayed object.
-    if not any(item.key == choice.key and item.content_hash == choice.content_hash
+    if not any(item.key == choice.key and (item.content_hash == (session.source_hash or choice.content_hash))
                for item in load_catalog(root).choices):
         session.core.approval = None
         raise ReviewBlocked('The selected input file changed or is no longer available. Refresh and generate a new plan.')

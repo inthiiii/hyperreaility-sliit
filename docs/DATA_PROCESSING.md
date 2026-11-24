@@ -56,3 +56,19 @@ that every raw, processed and evaluation file appears exactly once in
 `data/file_manifest.csv`, with its actual byte size and SHA-256 checksum.
 After intentionally changing datasets, rerun `python scripts/prepare_data.py`
 and then `python scripts/check_data.py` before committing the updated manifest.
+
+### Completed loader, audit and release protection (24 November)
+
+The shared typed loader is `project.data.loader.load_case`; it validates filenames,
+IDs, references, topology and times using the shared models. Evaluator answers are
+loaded separately through `project.data.evaluator.EvaluatorLoader`.
+`python -m project.data.audit --output /tmp/new-audit.json` performs a literal-label,
+uncertainty and structural audit without inference. The published candidate pack
+is frozen by docs/evaluation/FROZEN_DATASET.json; check_data verifies those bytes
+as well as the working manifest. Refresh/generation/preparation now refuse to
+modify this frozen release in place. Preserve it when preparing a reviewed new
+release. Freeze protection is reproducibility, not evidence that the candidates
+are independently reviewed or held out. HUMAN_REVIEW.csv remains PENDING.
+
+The older Day 1 scope notes are historical. Independent loader, simulation and
+approval-gated continuation are now implemented; see handoffs/zahra.md.

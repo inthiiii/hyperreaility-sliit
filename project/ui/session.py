@@ -31,12 +31,20 @@ class DashboardSession:
     simulation_requests: set[str] = field(default_factory=set)
     simulation_attempt: dict | None = None
     simulator_label: str | None = None
+    source_hash: str | None = None
+    continuation_choice: Any = None
+    checkpoint_provider: Any = None
+    continuation_context: Any = None
 
     def select(self, choice: ScenarioChoice) -> bool:
-        if (self.selected_key, self.scenario_hash) == (choice.key, choice.content_hash):
+        if (self.selected_key, self.source_hash or self.scenario_hash) == (choice.key, choice.content_hash):
             return False
         self.selected_key = choice.key
         self.scenario_hash = choice.content_hash
+        self.source_hash = choice.content_hash
+        self.continuation_choice = None
+        self.checkpoint_provider = None
+        self.continuation_context = None
         self.selection_revision += 1
         self.core = CoreSession()
         self.simulation_result = None
@@ -54,7 +62,10 @@ class DashboardSession:
     def clear_selection(self) -> bool:
         if self.selected_key is None:
             return False
-        self.selected_key = self.scenario_hash = None
+        self.selected_key = self.scenario_hash = self.source_hash = None
+        self.continuation_choice = None
+        self.checkpoint_provider = None
+        self.continuation_context = None
         self.selection_revision += 1
         self.core = CoreSession()
         self.simulation_result = None

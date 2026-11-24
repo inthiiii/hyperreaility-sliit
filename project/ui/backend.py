@@ -6,10 +6,11 @@ from project.core.integration import IntegrationNotReady
 from project.core.state import digest
 from project.ui.simulation_service import attach_simulator
 
-LABEL = 'Zahra independent simulator · static episodes'
+LABEL = 'Zahra independent simulator · event checkpoints and approved continuation'
 
 # Units are defined by the version 0.1 simulator, not inferred from metric values.
 METRIC_UNITS = {
+    'measured_duration_min': 'incident minutes',
     'horizon_min': 'incident minutes', 'services_total': 'services',
     'total_weighted_horizon_min': 'weighted service-minutes',
     'weighted_available_min': 'weighted service-minutes',
@@ -20,8 +21,13 @@ METRIC_UNITS = {
     'services_available_at_horizon_end': 'services', 'unmet_needs_count': 'services',
     'baseline_weighted_downtime_min': 'weighted service-minutes',
     'weighted_downtime_reduction_min': 'weighted service-minutes',
+    'observed_until_min': 'incident minutes', 'incident_horizon_min': 'incident minutes',
+    'unweighted_available_min': 'service-minutes', 'unweighted_downtime_min': 'service-minutes',
     'actions_completed': 'actions', 'actions_not_completed': 'actions',
 }
+
+METRIC_UNITS.update({key.replace('_min', '_so_far_min') if key.endswith('_min') else key + '_so_far': unit
+                     for key, unit in list(METRIC_UNITS.items())})
 
 
 def connect_static_backend(session, choice, root):
@@ -35,32 +41,33 @@ def connect_static_backend(session, choice, root):
         engine = import_module('project.simulation.engine')
         evaluator = import_module('project.data.evaluator')
         loader = import_module('project.data.loader')
+        episodes = import_module('project.simulation.episode')
     except ImportError:
         return False  # Data-only main remains usable before the simulator merges.
     core = session.core
 
+    episode = None
+    root_hash = choice.content_hash
+
     def callback(state, plan):
-        # Revalidate the selected visible source; do not substitute fixture truth.
-        visible = loader.CaseLoader(root / 'data/processed/agent_inputs').load_case(
-            root / choice.key)
-        if digest(visible) != digest(state.scenario):
-            raise ValueError('Selected scenario changed before simulation')
-        truth = evaluator.EvaluatorLoader(root / 'data/evaluation/ground_truth').load(state.scenario_id)
-        if truth.future_events or state.scenario.current_time_min != 0:
-            raise IntegrationNotReady('Dynamic continuation is pending; this milestone supports static episodes only')
-        # Version 0.1 reports the pre-horizon state for events exactly at the horizon.
-        # Block affected runs until the backend corrects that boundary behavior.
-        generators = {g.generator_id: g for g in truth.generators}
-        for action in plan.actions:
-            if action.work_end_min == state.scenario.horizon_min or (
-                    action.kind == 'generator_deploy' and
-                    action.work_end_min + generators[action.generator_id].autonomy_minutes == state.scenario.horizon_min):
-                raise IntegrationNotReady('Exact-horizon event support awaits the simulator boundary fix')
-        result = engine.simulate(state.scenario, plan, core.approval, truth, state=state)
+        nonlocal episode
+        visible = loader.CaseLoader(root / 'data/processed/agent_inputs').load_case(root / choice.key)
+        if digest(visible) != root_hash:
+            raise ValueError('Selected source changed before simulation')
+        if episode is None:
+            truth = evaluator.EvaluatorLoader(root / 'data/evaluation/ground_truth').load(state.scenario_id)
+            episode = episodes.IncidentEpisode(visible, truth)
+        result = episode.advance(state.scenario, plan, core.approval, state=state)
         metadata = dict(result.run_metadata)
-        metadata.update(metric_units=METRIC_UNITS, integration_scope='static_episode',
-                        evaluator_truth_hash=digest(truth))
+        metadata.update(metric_units=METRIC_UNITS, integration_scope='event_episode',
+                        source_input_hash=root_hash)
         return result.model_copy(update={'run_metadata': metadata})
 
+    def checkpoint():
+        if episode is None:
+            raise IntegrationNotReady('No incident checkpoint exists')
+        return episode.checkpoint()
+
+    session.checkpoint_provider = checkpoint
     attach_simulator(session, callback, LABEL)
     return True

@@ -2,12 +2,12 @@
 
 **Restore connectivity. Coordinate recovery.**
 
-**Team:** HyperReAIlity, SLIIT  
-**Competition:** Innodata AI Catalyst 2026 - University Track  
-**Version:** 0.1 — initial planned workflow  
-**Last updated:** 20 November 2026
+**Team:** HyperReAIlity, SLIIT
+**Competition:** Innodata AI Catalyst 2026 - University Track
+**Version:** 0.2 — implemented simulation and continuation
+**Last updated:** 24 November 2026
 
-This file describes the proposed process from the submitted [Proposal.docx](Proposal.docx). It is an initial design, not proof of a working implementation. Update stages, schemas and execution instructions to match the completed MVP. See [PROJECT_DETAILS.md](PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
+This file describes the proposed process from the submitted [Proposal.docx](Proposal.docx). The planned agent design remains subject to hosted evaluation. Independent static/event simulation and the approval-gated continuation path are implemented; see handoffs/zahra.md for verified semantics and limits. See [PROJECT_DETAILS.md](PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
 
 ## 1. Inputs and outputs
 
@@ -147,3 +147,18 @@ The proposed success targets and full metric definitions are in [PROJECT_DETAILS
 | 29, 11:59 PM | Official Phase 1 deadline; contingency verification |
 
 All times are Sri Lanka time. Before final submission, reconcile this workflow with implemented behavior, replace illustrative schemas with actual contracts and link representative traces and a reproducible execution guide.
+
+
+## Implemented incident continuation
+
+A simulation advances only to the next unrevealed incident event or horizon.
+At a crew-loss event it records completed work, pauses affected unfinished work
+without partial repair credit, cancels later departures and retains unaffected
+already-started work under its original approval. The operator accepts a visible
+checkpoint, generates a revised plan and approves a higher state version before
+resuming. The private episode retains equipment/link state, fuel timers, crew
+reservations and all elapsed service intervals. Full-horizon metrics are null for
+partial episodes; final metrics cover the original 720-minute timeline exactly
+once. Expected generator expiry is part of the visible continuation contract;
+private future incident events are never passed to agents. Checkpoints are local
+session state; history is read-only and cannot restore authorization.

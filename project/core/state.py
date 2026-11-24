@@ -4,7 +4,7 @@ import json
 from collections import defaultdict
 from .schemas import EvidenceFact, ScenarioInput, VerifiedState
 
-AUTHORITY = {'authoritative_snapshot', 'confirmed_field_update', 'operator_confirmation'}
+AUTHORITY = {'authoritative_snapshot', 'confirmed_field_update', 'operator_confirmation', 'simulated_completion'}
 
 def digest(obj) -> str:
     value=obj.model_dump(mode='json',by_alias=True) if hasattr(obj,'model_dump') else obj
@@ -47,7 +47,12 @@ def build_verified_state(scenario:ScenarioInput, facts:list[EvidenceFact], confi
         if typ=='site': original=getattr(observations.sites[target],attr)
         else: original=getattr(observations,typ+'s' if typ=='link' else 'roads')[target]
         confirmed=[f for f in group if all(reports[r].source_type=='operator_confirmation' for r in f.evidence_ids)]
-        candidates=confirmed or [f for f in group if all(reports[r].source_type in AUTHORITY for r in f.evidence_ids)]
+        observed_completions=[f for f in group if all(reports[r].source_type=='simulated_completion' for r in f.evidence_ids)]
+        # Completed approved work establishes a new physical state; this is not
+        # a recency-based resolution of contradictory field reports.
+        latest_completion=max((reports[r].observed_at_min for f in observed_completions for r in f.evidence_ids), default=-1)
+        completed=[f for f in observed_completions if max(reports[r].observed_at_min for r in f.evidence_ids)==latest_completion]
+        candidates=confirmed or completed or [f for f in group if all(reports[r].source_type in AUTHORITY for r in f.evidence_ids)]
         values={f.value for f in candidates if f.value is not None}
         conflict=any(f.status=='conflict' for f in candidates) or len(values)>1
         if original is not None and not confirmed and values and original not in values: conflict=True

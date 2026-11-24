@@ -90,6 +90,12 @@ class Policy(Contract):
     max_generator_deployments_per_scenario: Literal[1] = 1
     on_crew_loss: str
 
+class ActiveGenerator(Contract):
+    """Observed running deployment with expected expiry from public resource specification."""
+    generator_id: str
+    site_id: str
+    expires_at_min: int = Field(gt=0, strict=True)
+
 class ScenarioInput(Contract):
     schema_version: Literal['0.1']
     scenario_id: str = Field(min_length=1)
@@ -105,6 +111,7 @@ class ScenarioInput(Contract):
     crews: list[Crew]
     generators: list[Generator]
     observed_state: Observations
+    active_generators: list[ActiveGenerator] = Field(default_factory=list)
     action_options: list[ActionOption]
     reports: list[Report]
     policy: Policy
@@ -174,6 +181,13 @@ class ScenarioInput(Contract):
                     gen=gens.get(action.generator_id)
                     if not gen or action.required_skill!='generator' or action.duration_minutes!=gen.deployment_minutes:
                         raise ValueError('Invalid generator deployment option')
+        active_ids = set()
+        for active in self.active_generators:
+            if active.generator_id not in gens or active.site_id not in sites or active.generator_id in active_ids:
+                raise ValueError('Invalid or duplicate active generator')
+            if gens[active.generator_id].available or active.expires_at_min <= self.current_time_min:
+                raise ValueError('Running generator must be unavailable for redeployment and unexpired')
+            active_ids.add(active.generator_id)
         for report in self.reports:
             if report.observed_at_min>report.received_at_min or report.received_at_min>self.current_time_min:
                 raise ValueError('Report time ordering or future evidence invalid')

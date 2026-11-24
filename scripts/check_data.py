@@ -31,7 +31,20 @@ def check_manifest(root):
     check(seen == actual, 'Manifest does not cover all dataset files')
     return len(seen)
 
+def check_frozen(root):
+    path = root / 'docs/evaluation/FROZEN_DATASET.json'
+    if not path.exists(): return
+    frozen = read(path)
+    for row in frozen['files']:
+        name = row['path']
+        check(name.startswith(('data/raw/', 'data/processed/', 'data/evaluation/')) and '..' not in Path(name).parts,
+              'Unsafe frozen release path')
+        content = (root / name).read_bytes()
+        check(len(content) == row['bytes'] and hashlib.sha256(content).hexdigest() == row['sha256'],
+              'Frozen dataset changed: ' + name)
+
 def main():
+    check_frozen(ROOT)
     manifest_count = check_manifest(ROOT)
     print(f'PASS: {manifest_count} dataset file sizes and SHA-256 checksums match.')
     index = read(ROOT/'data/evaluation/case_index.json')
