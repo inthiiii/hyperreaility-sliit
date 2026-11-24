@@ -1,0 +1,872 @@
+{
+  "format_version": 1,
+  "payload": {
+    "run_id": "b2efa341-b131-4787-8b8b-ffda37543a5e",
+    "mode": "single",
+    "status": "awaiting_approval",
+    "state": {
+      "scenario_id": "DEMO-005",
+      "state_version": 1,
+      "source_hash": "095856c9f2463c125b0be5f3f131e9d0a6673ab0ff0f396270f40f63c7a18408",
+      "scenario": {
+        "schema_version": "0.1",
+        "scenario_id": "DEMO-005",
+        "region_label": "Fictional network in a Sri Lanka demonstration context",
+        "current_time_min": 0,
+        "horizon_min": 720,
+        "core_id": "CORE",
+        "depot_id": "DEPOT",
+        "sites": [
+          {
+            "site_id": "S01",
+            "label": "Fictional site 01",
+            "x": 0.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S02",
+            "label": "Fictional site 02",
+            "x": 10.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S03",
+            "label": "Fictional site 03",
+            "x": 20.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S04",
+            "label": "Fictional site 04",
+            "x": 30.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S05",
+            "label": "Fictional site 05",
+            "x": 40.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          }
+        ],
+        "links": [
+          {
+            "link_id": "L01",
+            "parent": "CORE",
+            "child": "S01"
+          },
+          {
+            "link_id": "L02",
+            "parent": "CORE",
+            "child": "S02"
+          },
+          {
+            "link_id": "L03",
+            "parent": "S01",
+            "child": "S03"
+          },
+          {
+            "link_id": "L04",
+            "parent": "S02",
+            "child": "S04"
+          },
+          {
+            "link_id": "L05",
+            "parent": "S01",
+            "child": "S05"
+          }
+        ],
+        "roads": [
+          {
+            "road_id": "R01",
+            "origin": "DEPOT",
+            "to": "S01",
+            "travel_minutes": 25
+          },
+          {
+            "road_id": "R02",
+            "origin": "DEPOT",
+            "to": "S02",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R03",
+            "origin": "DEPOT",
+            "to": "S03",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R04",
+            "origin": "DEPOT",
+            "to": "S04",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R05",
+            "origin": "DEPOT",
+            "to": "S05",
+            "travel_minutes": 30
+          }
+        ],
+        "services": [
+          {
+            "service_id": "V01",
+            "site_id": "S01",
+            "label": "Fictional service 01",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V02",
+            "site_id": "S02",
+            "label": "Fictional critical facility",
+            "critical": true,
+            "weight": 5,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V03",
+            "site_id": "S03",
+            "label": "Fictional service 03",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V04",
+            "site_id": "S04",
+            "label": "Fictional service 04",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V05",
+            "site_id": "S05",
+            "label": "Fictional service 05",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          }
+        ],
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ],
+        "observed_state": {
+          "sites": {
+            "S01": {
+              "equipment_ok": true,
+              "grid_power_ok": null
+            },
+            "S02": {
+              "equipment_ok": true,
+              "grid_power_ok": null
+            },
+            "S03": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S04": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S05": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            }
+          },
+          "links": {
+            "L01": null,
+            "L02": true,
+            "L03": true,
+            "L04": true,
+            "L05": true
+          },
+          "roads": {
+            "R01": true,
+            "R02": true,
+            "R03": true,
+            "R04": true,
+            "R05": true
+          }
+        },
+        "active_generators": [],
+        "action_options": [
+          {
+            "action_id": "EQ-S01",
+            "kind": "equipment_repair",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S02",
+            "kind": "equipment_repair",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S03",
+            "kind": "equipment_repair",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S04",
+            "kind": "equipment_repair",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S05",
+            "kind": "equipment_repair",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 120,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L01",
+            "kind": "link_repair",
+            "target_id": "L01",
+            "location": "S01",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L02",
+            "kind": "link_repair",
+            "target_id": "L02",
+            "location": "S02",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L03",
+            "kind": "link_repair",
+            "target_id": "L03",
+            "location": "S03",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L04",
+            "kind": "link_repair",
+            "target_id": "L04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L05",
+            "kind": "link_repair",
+            "target_id": "L05",
+            "location": "S05",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "GEN-G1-S01",
+            "kind": "generator_deploy",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S02",
+            "kind": "generator_deploy",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S03",
+            "kind": "generator_deploy",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S04",
+            "kind": "generator_deploy",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S05",
+            "kind": "generator_deploy",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          }
+        ],
+        "reports": [
+          {
+            "report_id": "REP-001",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "S01: grid power is unavailable."
+          },
+          {
+            "report_id": "REP-002",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "S02: grid power is unavailable."
+          },
+          {
+            "report_id": "REP-003",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "L01: backhaul link has failed."
+          }
+        ],
+        "policy": {
+          "evidence_id": "POLICY-001",
+          "approved_for_simulation": true,
+          "standard_weight": 1,
+          "critical_weight": 5,
+          "evidence_rule": "Authoritative evidence must be consistent; equally authoritative conflicts require confirmation. Recency alone does not verify a fact.",
+          "max_generator_deployments_per_scenario": 1,
+          "on_crew_loss": "Pause affected unfinished work and request operator review; preserve completed repairs."
+        }
+      },
+      "resolved_observations": {
+        "sites": {
+          "S01": {
+            "equipment_ok": true,
+            "grid_power_ok": false
+          },
+          "S02": {
+            "equipment_ok": true,
+            "grid_power_ok": false
+          },
+          "S03": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S04": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S05": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          }
+        },
+        "links": {
+          "L01": false,
+          "L02": true,
+          "L03": true,
+          "L04": true,
+          "L05": true
+        },
+        "roads": {
+          "R01": true,
+          "R02": true,
+          "R03": true,
+          "R04": true,
+          "R05": true
+        }
+      },
+      "facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports grid power unavailable."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S02",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports grid power unavailable."
+        },
+        {
+          "target_type": "link",
+          "target_id": "L01",
+          "attribute": "backhaul_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-003"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports the backhaul link failed."
+        }
+      ],
+      "unresolved_facts": []
+    },
+    "plan": {
+      "plan_id": "9a31d002-e15f-4120-ba21-0392269fae9b",
+      "scenario_id": "DEMO-005",
+      "state_version": 1,
+      "state_hash": "72fbdeadbb3a86a16075d0e81e696911d27c15ea5b60f8285b22db0a9a1d0c7f",
+      "actions": [
+        {
+          "action_id": "GEN-G1-S02",
+          "kind": "generator_deploy",
+          "target_id": "S02",
+          "crew_id": "C1",
+          "generator_id": "G1",
+          "departure_min": 0,
+          "travel_route": [
+            "DEPOT",
+            "S02"
+          ],
+          "work_start_min": 15,
+          "work_end_min": 30
+        }
+      ],
+      "unmet_needs": [
+        "Grid outage at S01; any generator recovery is temporary and requires simulator evaluation",
+        "Grid outage at S02; any generator recovery is temporary and requires simulator evaluation",
+        "Unscheduled fault option: BH-L01",
+        "Unscheduled fault option: GEN-G1-S01"
+      ],
+      "evidence_ids": [
+        "POLICY-001",
+        "REP-001",
+        "REP-002",
+        "REP-003"
+      ],
+      "planner_config": {
+        "algorithm": "cp_sat_time_indexed",
+        "solver_status": "OPTIMAL",
+        "solver_seconds_cap": 5,
+        "seed": 22,
+        "workers": 1,
+        "slot_minutes": 5,
+        "prediction_only": true,
+        "tie_breakers": [
+          "fewer actions",
+          "earlier work completion"
+        ],
+        "limitations": [
+          "static rooted tree",
+          "unknown assets unavailable",
+          "no in-progress work or future-event scheduling"
+        ],
+        "objective_value": 1246601.0,
+        "best_objective_bound": 1246601.0,
+        "predicted_weighted_available_minutes_remaining": 720,
+        "predicted_weighted_downtime_remaining": 5760,
+        "deferred_action_ids": []
+      },
+      "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+    },
+    "validation": {
+      "valid": true,
+      "violations": []
+    },
+    "messages": [
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "facts": [
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "grid_power_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-001"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports grid power unavailable."
+            },
+            {
+              "target_type": "site",
+              "target_id": "S02",
+              "attribute": "grid_power_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-002"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports grid power unavailable."
+            },
+            {
+              "target_type": "link",
+              "target_id": "L01",
+              "attribute": "backhaul_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-003"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports the backhaul link failed."
+            }
+          ]
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "finding": "REP-001 and REP-002 confirm grid power is unavailable at S01 and S02, while equipment is working at both sites; equipment repairs are therefore not justified. REP-003 confirms L01 has failed, so BH-L01 is the evidence-supported repair action. C2 has the backhaul skill and is available from DEPOT; R01 is available, and the listed 90-minute repair can be reached in 25 minutes. No supplied evidence supports deferring BH-L01. Generator deployments are available for the two grid-outage sites, but one generator deployment is permitted per scenario; the supplied evidence does not establish a reason to defer either deployment. Service weights and critical status are supplied by POLICY-001.",
+          "evidence_ids": [
+            "REP-001",
+            "REP-002",
+            "REP-003",
+            "POLICY-001"
+          ],
+          "clarification_required": false,
+          "requests": []
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "finding": "Approved weights define the trade-off: V02 at S02 has weight 5; V01, V03, V04, and V05 each have weight 1. The supplied evidence supports prioritizing restoration of S02\u2019s service: its grid power is unavailable, and L01\u2019s failure prevents connectivity to S01 and downstream S03 and S05. S02\u2019s own upstream link L02 is reported working. No clarification is needed to choose between services with these known weights. No evidence-linked conservative defer_action request is necessary.",
+          "evidence_ids": [
+            "REP-001",
+            "REP-002",
+            "REP-003",
+            "POLICY-001"
+          ],
+          "clarification_required": false,
+          "requests": []
+        }
+      },
+      {
+        "sender": "deterministic_scheduler",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "plan_id": "9a31d002-e15f-4120-ba21-0392269fae9b",
+          "scenario_id": "DEMO-005",
+          "state_version": 1,
+          "state_hash": "72fbdeadbb3a86a16075d0e81e696911d27c15ea5b60f8285b22db0a9a1d0c7f",
+          "actions": [
+            {
+              "action_id": "GEN-G1-S02",
+              "kind": "generator_deploy",
+              "target_id": "S02",
+              "crew_id": "C1",
+              "generator_id": "G1",
+              "departure_min": 0,
+              "travel_route": [
+                "DEPOT",
+                "S02"
+              ],
+              "work_start_min": 15,
+              "work_end_min": 30
+            }
+          ],
+          "unmet_needs": [
+            "Grid outage at S01; any generator recovery is temporary and requires simulator evaluation",
+            "Grid outage at S02; any generator recovery is temporary and requires simulator evaluation",
+            "Unscheduled fault option: BH-L01",
+            "Unscheduled fault option: GEN-G1-S01"
+          ],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "REP-003"
+          ],
+          "planner_config": {
+            "algorithm": "cp_sat_time_indexed",
+            "solver_status": "OPTIMAL",
+            "solver_seconds_cap": 5,
+            "seed": 22,
+            "workers": 1,
+            "slot_minutes": 5,
+            "prediction_only": true,
+            "tie_breakers": [
+              "fewer actions",
+              "earlier work completion"
+            ],
+            "limitations": [
+              "static rooted tree",
+              "unknown assets unavailable",
+              "no in-progress work or future-event scheduling"
+            ],
+            "objective_value": 1246601.0,
+            "best_objective_bound": 1246601.0,
+            "predicted_weighted_available_minutes_remaining": 720,
+            "predicted_weighted_downtime_remaining": 5760,
+            "deferred_action_ids": []
+          },
+          "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "decision": "approve",
+          "findings": [
+            "Ready for human review and subsequent independent simulation; this does not establish execution or physical restoration.",
+            "REP-001 and REP-002 confirm grid outages at S01 and S02. Equipment is reported working at both sites, so equipment repairs are not indicated; a generator can provide temporary power but cannot repair backhaul.",
+            "REP-003 confirms L01 has failed. BH-L01 is not scheduled, leaving S01 and its downstream sites S03 and S05 disconnected; this is a known service limitation, not by itself a violation given limited resources and the fewer-actions tie-break.",
+            "The scheduled S02 generator deployment is consistent with the outage evidence and uses the single permitted deployment. S02 is the critical service with approved weight 5; the other listed services have weight 1. The prediction does not prove restoration, and the independent evaluator should assess physical outcomes after approval."
+          ],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "REP-003"
+          ],
+          "revision_request": "",
+          "revision_kind": "evidence",
+          "requests": []
+        }
+      }
+    ],
+    "model_usage": [
+      {
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 1600,
+        "output_limit": 700,
+        "prompt_sha256": "a31a810767bf10fbb8476f749eb093d2b31299ac0e869dafce147a79effb18ed",
+        "schema_sha256": "4af21b39e57acfb217f8f891c130a35bcaccc28c1698d8c08cc1c43b093ac595",
+        "request_id": "resp_0b60609e90246d9e016b05cadec61c87d0b570cb51a31741a5",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 1600,
+        "output_tokens": 188,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "ce90e365b2dea74035cee1da91fb827885c0fa0aab8d38a4c7ff84d45b7f2615",
+        "status": "ok",
+        "latency_seconds": 2.3349492920096964
+      },
+      {
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 1557,
+        "output_limit": 400,
+        "prompt_sha256": "c2219bd0aceb2973a7974da346d4fdbb9b1f054c9a05470c3e8240a8a692af97",
+        "schema_sha256": "f104bce3c217e46f0f9475e42f17ec12c5ac8a15821df3d97b0d353c4cdb6988",
+        "request_id": "resp_00fa696660ac0c2b016b05cae171c087d084d324347430dc91",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 1557,
+        "output_tokens": 185,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "e688d90082ac4c76f380ec593fa5434cadaac37435bdc93ccdf328da80a2643b",
+        "status": "ok",
+        "latency_seconds": 2.513619000033941
+      },
+      {
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 1737,
+        "output_limit": 400,
+        "prompt_sha256": "42a0186240443988da69fef29f3620e82845199cbc967c0ec6ec438cb16f4e6e",
+        "schema_sha256": "f104bce3c217e46f0f9475e42f17ec12c5ac8a15821df3d97b0d353c4cdb6988",
+        "request_id": "resp_0de1285b692775db016b05cae442c087d0be804242a1e02c2d",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 1737,
+        "output_tokens": 148,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "357e107f2ab1566c488286afe8bfdcb2ee59157de9697c902e1ec2907f25e7b0",
+        "status": "ok",
+        "latency_seconds": 2.021826250012964
+      },
+      {
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 2462,
+        "output_limit": 400,
+        "prompt_sha256": "e860890f71e78801e12cd3bfe54fa9fa54b6a8febb2b0384e39951f44b8e655c",
+        "schema_sha256": "36feb174e3c2a98c577bfe78635e21d027faeee46e3c3b7b60431d7a8be366da",
+        "request_id": "resp_08e8b7fd72bd337d016b05cae7169487d0a5139d8ad3998c7d",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2462,
+        "output_tokens": 210,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "b13f4221915e8918574d50d6b35866e573664f058c00513926db906a6fb52ee3",
+        "status": "ok",
+        "latency_seconds": 3.1165476249880157
+      }
+    ],
+    "reasons": [],
+    "metadata": {
+      "started_at_utc": "2026-11-24T17:35:21.049552+00:00",
+      "duration_seconds": 16.956940832955297,
+      "auxiliary_requests": [
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 1600,
+          "latency_seconds": 5.562961416959297
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 1557,
+          "latency_seconds": 0.29299500002525747
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 1737,
+          "latency_seconds": 0.3185172080411576
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2462,
+          "latency_seconds": 0.39404229196952656
+        }
+      ],
+      "raw_extraction_metrics": {
+        "label_source": "recognized fixture sentences, not hidden physical truth",
+        "raw_model_output_only": true,
+        "stage": "initial_extraction",
+        "labelled_reports": 3,
+        "unlabelled_reports": 0,
+        "true_positive": 3,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "unlabelled_predictions": 0
+      },
+      "protocol_version": "matched-workflow-v3",
+      "context_sha256": "e104251f4a65cd580c7001a482941a244f0ebb20b63cefb13ff85b7c3ff85cdb",
+      "decision_effects": [],
+      "deferred_action_ids": [],
+      "input_hash": "095856c9f2463c125b0be5f3f131e9d0a6673ab0ff0f396270f40f63c7a18408",
+      "planner": "cp_sat",
+      "reviewer_enabled": true,
+      "feedback_enabled": true,
+      "simulation_status": "not_integrated",
+      "transport": "hosted",
+      "budget": {
+        "max_calls": 12,
+        "max_input_tokens": 24000,
+        "max_output_tokens": 4800,
+        "max_seconds": 179.99996733298758
+      }
+    }
+  },
+  "sha256": "3f4b2e93ad7779e10d0b1951e5418f57697a1351a3459cdf8d2ae913354c76ac"
+}

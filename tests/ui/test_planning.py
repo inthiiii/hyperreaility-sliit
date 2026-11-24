@@ -335,3 +335,13 @@ def test_ui_shows_model_deferral_before_separate_operator_approval(ui_root,choic
     assert all(a.action_id!='GEN-G1-S02' for a in session.core.current.plan.actions)
     assert any('Agent-requested action deferrals changed this candidate' in w.value for w in at.warning)
     assert not at.button(key='approve_plan').disabled and at.button(key='simulate_plan').disabled
+
+
+def test_reasoning_setting_changes_hosted_request_identity_only(session,choice,monkeypatch):
+    configure(monkeypatch)
+    monkeypatch.setenv('LLM_REASONING_EFFORT','none')
+    single=request_key(session,choice,'single','cp_sat')
+    template=request_key(session,choice,'template','cp_sat')
+    monkeypatch.setenv('LLM_REASONING_EFFORT','low')
+    assert request_key(session,choice,'single','cp_sat')!=single
+    assert request_key(session,choice,'template','cp_sat')==template

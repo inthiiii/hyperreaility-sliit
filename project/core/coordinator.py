@@ -170,7 +170,7 @@ class Coordinator:
                          state=state,plan=candidate,validation=validation,messages=messages,
                          model_usage=list(self.budget.records),reasons=reasons,
                          metadata={"started_at_utc":started_at,"duration_seconds":time.monotonic()-self.budget.started,
-                           "raw_extraction_metrics":raw_extraction,"protocol_version":PROTOCOL_VERSION,"context_sha256":digest(context),"decision_effects":effects,
+                           "auxiliary_requests":list(self.budget.auxiliary_records),"raw_extraction_metrics":raw_extraction,"protocol_version":PROTOCOL_VERSION,"context_sha256":digest(context),"decision_effects":effects,
                            "deferred_action_ids":sorted(deferred),"input_hash":digest(scenario),"planner":self.planner,"reviewer_enabled":self.reviewer_enabled,
                            "feedback_enabled":self.feedback_enabled,"simulation_status":"not_integrated",
                            "transport":"none" if self.adapter is None else ("injected_test_client" if self.adapter.injected_client else "hosted"),

@@ -73,3 +73,22 @@ continuation semantics. No live provider request was made: an exact OpenAI
 model ID is still required. See [HOSTED_FAIRNESS.md](../HOSTED_FAIRNESS.md).
 
 Full regression at this checkpoint: **411 passed in 42.65 seconds**.
+
+## Joint live Luna completion checkpoint — 24 November
+
+Selected `gpt-6-luna`, reasoning `none`, Responses API with exact input counting.
+Both hosted demo workflows and the real dashboard approval/simulation path are
+verified. Final full regression: **428 passed in 43.08 seconds**.
+
+The final matched-workflow-v4 cohort has 10 development cases × 3 repeats ×
+4 variants = 120 attempts: 61 scored incidents and 59 escalations. Raw labelled
+fixture extraction micro-F1 was 100% in each variant; the metric excludes
+unlabelled reports and does not establish independent natural-language accuracy.
+Eleven comparable single/multi pairs all tied; no restoration superiority claim.
+A separate real permit challenge changed the validated candidate through a typed
+resource hold, but its reviewer escalated, so it was not approved/simulated.
+
+Earlier rounds and failures are retained. See [Luna validation](../LUNA_LIVE_VALIDATION.md)
+for current results, traces, limitations and reproduction. Joint co-author credit
+is requested for all four team members. Independent case review and final
+release/participant evidence remain later priorities.

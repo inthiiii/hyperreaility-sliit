@@ -82,6 +82,7 @@ def _settings(health, session, choice):
         st.subheader('Hosted model')
         st.write(f'Provider: {health["provider"]}')
         st.write(f'Model: {health["model"] or "Not selected"}')
+        st.write('Reasoning effort: ' + (health.get('reasoning_effort') or 'Provider default'))
         st.write('API credential: ' + ('Present' if health['key_present'] else 'Missing'))
         if health['status'] == 'blocked':
             st.warning('Hosted planning configuration is incomplete.')

@@ -1,0 +1,42 @@
+{
+  "scope": "modified demo engineering challenge; not registered/held-out or physical evaluation",
+  "model": "gpt-6-luna",
+  "input_sha256": "6a7fd6c2176e6287cb51954c375204271d52a23bc44dd5f999d0819dcab1b6cf",
+  "status": "escalated",
+  "run_id": "40808681-4d8a-4618-9c1e-48e8766977ce",
+  "unconstrained_actions": [
+    "GEN-G1-S02"
+  ],
+  "agent_candidate_actions": [
+    "GEN-G1-S01",
+    "BH-L01"
+  ],
+  "effects": [
+    {
+      "sender": "field_resource_planner",
+      "state_version": 2,
+      "request": {
+        "kind": "defer_action",
+        "action_ids": [
+          "GEN-G1-S02"
+        ],
+        "evidence_ids": [
+          "PERMIT-S02"
+        ],
+        "reason": "Generator placement at S02 is not permitted during the current planning window."
+      },
+      "applied_action_ids": [
+        "GEN-G1-S02"
+      ],
+      "effect": "excluded_from_candidate_schedule",
+      "operational_fact_verified": false
+    }
+  ],
+  "validated": true,
+  "model_calls": 4,
+  "schedule_changed": true,
+  "reasons": [
+    "Reviewer requested revision without a concrete request"
+  ],
+  "claims_restoration_improvement": false
+}

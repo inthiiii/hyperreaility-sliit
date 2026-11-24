@@ -176,7 +176,7 @@ def render_planning(choice, session, root):
     if mode == 'template':
         st.caption('Offline fixture-template extraction and real core scheduling. This baseline makes no model requests.')
     else:
-        st.caption(f'Hosted provider: {health["provider"]} · Model: {health["model"] or "Not configured"}')
+        st.caption(f'Hosted provider: {health["provider"]} · Model: {health["model"] or "Not configured"} · Reasoning: {health.get("reasoning_effort") or "Provider default"}')
         st.warning('Generate plan sends the visible synthetic incident to the configured hosted API and can incur charges. '
                    'Selecting this mode alone makes no request.')
         if blocked:

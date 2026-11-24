@@ -1,0 +1,2 @@
+# Optional: only required when the environment routes SDK requests over SOCKS.
+socksio==1.0.0
