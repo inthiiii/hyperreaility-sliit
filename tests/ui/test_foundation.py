@@ -125,7 +125,8 @@ def test_navigation_and_reruns_preserve_session_without_api_calls(monkeypatch, f
         assert not at.exception
         assert at.session_state[SESSION_KEY].session_id == session_id
         assert at.session_state[SESSION_KEY].core is core
-        assert all(button.disabled for button in at.button if button.key != 'generate_plan')
+        assert all(button.disabled for button in at.button
+                   if button.key in {'approve_plan', 'reject_plan', 'simulate_plan', 'accept_event_update'})
         assert at.session_state[SESSION_KEY].core.current is None
     at.text_input(key='operator_label').input('Test operator').run()
     assert at.session_state[SESSION_KEY].session_id == session_id

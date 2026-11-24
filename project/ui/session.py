@@ -35,6 +35,10 @@ class DashboardSession:
     continuation_choice: Any = None
     checkpoint_provider: Any = None
     continuation_context: Any = None
+    confirmation_choice: Any = None
+    confirmation_requests: set[str] = field(default_factory=set)
+    confirmation_history: list = field(default_factory=list)
+    confirmation_feedback: Any = None
 
     def select(self, choice: ScenarioChoice) -> bool:
         if (self.selected_key, self.source_hash or self.scenario_hash) == (choice.key, choice.content_hash):
@@ -45,6 +49,10 @@ class DashboardSession:
         self.continuation_choice = None
         self.checkpoint_provider = None
         self.continuation_context = None
+        self.confirmation_choice = None
+        self.confirmation_requests.clear()
+        self.confirmation_history.clear()
+        self.confirmation_feedback = None
         self.selection_revision += 1
         self.core = CoreSession()
         self.simulation_result = None
@@ -66,6 +74,10 @@ class DashboardSession:
         self.continuation_choice = None
         self.checkpoint_provider = None
         self.continuation_context = None
+        self.confirmation_choice = None
+        self.confirmation_requests.clear()
+        self.confirmation_history.clear()
+        self.confirmation_feedback = None
         self.selection_revision += 1
         self.core = CoreSession()
         self.simulation_result = None

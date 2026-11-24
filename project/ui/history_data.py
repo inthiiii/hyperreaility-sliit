@@ -14,12 +14,13 @@ from project.core.schemas import SimulationResult
 from project.core.state import digest
 from project.core.tracing import redact
 from project.ui.review_service import DecisionRecord
+from project.ui.confirmation_service import ConfirmationRecord
 
 MAX_BYTES = 8_000_000
 MAX_RECORDS = 200
 MAX_TOTAL_BYTES = 32_000_000
 MAX_SCAN_PER_KIND = 1000
-KINDS = {'run': '', 'decision': 'decisions', 'simulation': 'simulation_attempts', 'attempt': 'ui_attempts'}
+KINDS = {'run': '', 'decision': 'decisions', 'simulation': 'simulation_attempts', 'attempt': 'ui_attempts', 'confirmation': 'confirmations'}
 HIDDEN_KEYS = {'ground_truth', 'isolated_truth', 'evaluation_truth', 'raw_truth', 'future_events', 'hidden_events'}
 
 
@@ -75,6 +76,16 @@ def _validate(kind, payload, filename):
         if record.decision_id != filename:
             raise ValueError('Decision identity mismatch')
         return record.run_id, record.scenario_id, record.approval.decision, record.recorded_at_utc.isoformat()
+    if kind == 'confirmation':
+        record = ConfirmationRecord.model_validate(payload)
+        if record.confirmation_id != filename or record.updated_state.scenario_id != record.scenario_id:
+            raise ValueError('Confirmation identity mismatch')
+        if (record.updated_state.source_hash != record.input_hash_after or
+                digest(record.updated_state.scenario) != record.input_hash_after or
+                record.report.source_type != 'operator_confirmation' or
+                not any(r == record.report for r in record.updated_state.scenario.reports)):
+            raise ValueError('Confirmation input/evidence binding mismatch')
+        return record.run_id, record.scenario_id, 'recorded', record.recorded_at_utc.isoformat()
     if payload.get('attempt_id') != filename or not isinstance(payload.get('scenario_id'), str):
         raise ValueError('Attempt identity mismatch')
     if kind == 'simulation':

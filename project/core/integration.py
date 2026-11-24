@@ -7,6 +7,14 @@ class CoreSession:
     """One instance per operator session. Simulator callback belongs to Zahra."""
     def __init__(self,simulator=None):
         self.simulator=simulator;self.current=None;self.approval=None;self.executed=set();self._next_state_version=1
+    @property
+    def next_state_version(self):
+        return self._next_state_version
+    def invalidate_for_state_update(self):
+        version=self._next_state_version
+        self._next_state_version+=1
+        self.current=None;self.approval=None
+        return version
     def prepare(self,coordinator,scenario,mode='template'):
         version=self._next_state_version
         self._next_state_version+=1

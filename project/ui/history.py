@@ -23,7 +23,7 @@ def render_history(root, choice=None):
         return
     kind_column, scenario_column, query_column = st.columns([1, 1, 1.5])
     with kind_column:
-        kind = st.selectbox('Record type', ['All', 'run', 'decision', 'simulation', 'attempt'], key='history_kind')
+        kind = st.selectbox('Record type', ['All', 'run', 'decision', 'simulation', 'attempt', 'confirmation'], key='history_kind')
     with scenario_column:
         scenarios = ['All', *sorted({item.scenario_id for item in catalog.entries})]
         if st.session_state.get('history_scenario') not in scenarios:

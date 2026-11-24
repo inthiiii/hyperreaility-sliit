@@ -75,6 +75,7 @@ class ActionOption(Contract):
     generator_id: str | None = None
 
 class Report(Contract):
+    supersedes_report_ids: list[str] = Field(default_factory=list, exclude_if=lambda value: not value)
     report_id: str
     source_type: str
     observed_at_min: int = Field(strict=True)
@@ -188,7 +189,15 @@ class ScenarioInput(Contract):
             if gens[active.generator_id].available or active.expires_at_min <= self.current_time_min:
                 raise ValueError('Running generator must be unavailable for redeployment and unexpired')
             active_ids.add(active.generator_id)
+        earlier_reports = {}
         for report in self.reports:
+            if report.supersedes_report_ids:
+                if report.source_type != 'operator_confirmation' or len(set(report.supersedes_report_ids)) != len(report.supersedes_report_ids):
+                    raise ValueError('Only explicit operator confirmations can supersede earlier confirmations')
+                if any(rid not in earlier_reports or earlier_reports[rid].source_type != 'operator_confirmation'
+                       for rid in report.supersedes_report_ids):
+                    raise ValueError('Superseded confirmation must be an earlier operator report')
+            earlier_reports[report.report_id] = report
             if report.observed_at_min>report.received_at_min or report.received_at_min>self.current_time_min:
                 raise ValueError('Report time ordering or future evidence invalid')
         return self

@@ -29,6 +29,13 @@ def build_verified_state(scenario:ScenarioInput, facts:list[EvidenceFact], confi
     existing={(rid,f.target_type,f.target_id,f.attribute) for f in all_facts for rid in f.evidence_ids}
     all_facts.extend(f for f in recognized if reports[f.evidence_ids[0]].source_type in AUTHORITY
                      and (f.evidence_ids[0],f.target_type,f.target_id,f.attribute) not in existing)
+    superseded = set()
+    for report in scenario.reports:
+        for rid in report.supersedes_report_ids:
+            new, old = by_report.get(report.report_id), by_report.get(rid)
+            if new is None or old is None or (new.target_type,new.target_id,new.attribute)!=(old.target_type,old.target_id,old.attribute):
+                raise ValueError('A correction may only supersede a confirmation of the same fact')
+            superseded.add(rid)
     confirm_ids={id(f) for f in (confirmations or [])}
     for fact in all_facts:
         if any(rid not in reports for rid in fact.evidence_ids):
@@ -46,13 +53,18 @@ def build_verified_state(scenario:ScenarioInput, facts:list[EvidenceFact], confi
     for (typ,target,attr),group in grouped.items():
         if typ=='site': original=getattr(observations.sites[target],attr)
         else: original=getattr(observations,typ+'s' if typ=='link' else 'roads')[target]
-        confirmed=[f for f in group if all(reports[r].source_type=='operator_confirmation' for r in f.evidence_ids)]
+        confirmed=[f for f in group if all(reports[r].source_type=='operator_confirmation' and r not in superseded for r in f.evidence_ids)]
         observed_completions=[f for f in group if all(reports[r].source_type=='simulated_completion' for r in f.evidence_ids)]
         # Completed approved work establishes a new physical state; this is not
         # a recency-based resolution of contradictory field reports.
         latest_completion=max((reports[r].observed_at_min for f in observed_completions for r in f.evidence_ids), default=-1)
         completed=[f for f in observed_completions if max(reports[r].observed_at_min for r in f.evidence_ids)==latest_completion]
-        candidates=confirmed or completed or [f for f in group if all(reports[r].source_type in AUTHORITY for r in f.evidence_ids)]
+        # Physical completion at a later incident time is a new observed state,
+        # not a contradiction to an earlier human confirmation of a fault.
+        latest_confirmation=max((reports[r].observed_at_min for f in confirmed for r in f.evidence_ids), default=-1)
+        if latest_completion > latest_confirmation:
+            confirmed=[]
+        candidates=confirmed or completed or [f for f in group if all(reports[r].source_type in AUTHORITY and r not in superseded for r in f.evidence_ids)]
         values={f.value for f in candidates if f.value is not None}
         conflict=any(f.status=='conflict' for f in candidates) or len(values)>1
         if original is not None and not confirmed and values and original not in values: conflict=True

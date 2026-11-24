@@ -27,3 +27,15 @@ Merge the dashboard workstream after review/checks. Connect Zahra's real loader/
 ## Assistance and authorship
 
 Pushes 1–5 were prepared with ChatGPT/Codex assistance in Ihthisham's development session for the dashboard workstream. No Git author, co-author, commit, push or merge was created by the installer. Record each person's actual contributions in later commits and update the handoff with the resulting commit ID after pushing. No runtime model ID was selected or tested in this checkpoint.
+
+
+## Priority Step 2 — operator clarification (24 November)
+
+The joint core/dashboard integration now records explicit operator fact confirmation,
+retains original reports and auditable corrections, advances state versions, clears
+stale plans/approval, and requires separate replanning and approval. History exposes
+confirmation records. The independent evaluator preserves its physical truth and
+same-incident continuation metrics. See [operator confirmation](../OPERATOR_CONFIRMATION.md)
+for workflow, regression coverage and remaining identity/verification limits.
+This checkpoint supersedes earlier statements that operator clarification was absent;
+live hosted-model evaluation remains a later priority.
