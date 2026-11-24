@@ -96,4 +96,41 @@ The initial matched-protocol commit was prepared for Ihthisham's core/coordinato
 
 ## Selected-model follow-up
 
-The joint Luna checkpoint uses protocol `matched-workflow-v4`, which makes repair semantics, the weighted-availability objective and the approval-before-simulation boundary explicit in both modes. In particular, equipment repair cannot restore grid power. Input-token counting is exact on the selected Responses path; auxiliary count requests and generations are audited separately. Regression tests disable personal `.env` loading and provider credentials. Team co-author attribution is attached to the joint follow-up commit at the user's request.
+The 24 November joint Luna checkpoint used protocol `matched-workflow-v4`, which makes repair semantics, the weighted-availability objective and the approval-before-simulation boundary explicit in both modes. In particular, equipment repair cannot restore grid power. Input-token counting is exact on the selected Responses path; auxiliary count requests and generations are audited separately. Regression tests disable personal `.env` loading and provider credentials. Team co-author attribution is attached to the joint follow-up commit at the user's request.
+
+
+## Current protocol — 25 November
+
+`matched-workflow-v13` retains equal four-stage access, tools and whole-incident caps.
+Both modes receive lossless action codebooks/CSV and an encoding of the complete
+known snapshot; explicit unknowns remain unknown. This reduces repeated framing,
+not operational information. Tests decode every development fixture back to its
+original action and observation fields, including quoted IDs and null values.
+
+Responses uses provider-enforced strict JSON Schema plus local Pydantic and
+reference validation. Evidence enums contain only supplied report IDs (and policy
+for decision stages); investigators cannot substitute policy for an incident
+report. Rejected semantic outputs are retained as rejected audit records.
+
+Per-call output limits are investigation 700, resources 450, priorities 450 and
+review 500 tokens in both modes. The aggregate 12-generation, 24,000-input,
+4,800-output and 180-second incident caps remain unchanged across replanning.
+Counter requests consume time and are separately audited. There is one bounded
+schema repair, charged to those same limits.
+
+Reviewer clarification reuses an unchanged validated candidate. A new typed hold
+always advances state, regenerates/validates the candidate and requires fresh
+explicit review, even if the original response said approve. Repeating an existing
+hold can acknowledge it without creating a fake revision. Four reviews maximum
+(initial plus three revision/clarification rounds); exhaustion escalates. The
+no-feedback ablation cannot use the clarification loop.
+
+The review receives exact work-end arithmetic and a per-service static forecast
+computed solely from visible state, public generator autonomy and candidate work.
+It includes unaffected/upstream-dependent services and labels remaining-horizon
+predictions separately from independent simulator measurements. No unseen events,
+private labels or evaluator truth enter these tools. Forecasts are reproducible
+from the stored verified state and candidate.
+
+See [the completion update](PRIORITY_3_4_COMPLETION.md) for current measured results,
+including unsuccessful attempts and the remaining quality limits.

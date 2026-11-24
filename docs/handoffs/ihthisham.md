@@ -92,3 +92,25 @@ Earlier rounds and failures are retained. See [Luna validation](../LUNA_LIVE_VAL
 for current results, traces, limitations and reproduction. Joint co-author credit
 is requested for all four team members. Independent case review and final
 release/participant evidence remain later priorities.
+
+
+## Priority 3–4 follow-up — 25 November
+
+Completed strict hosted schemas with valid evidence-ID constraints, lossless
+context compaction, bounded review clarification, fresh review after every new
+hold, retained rejected-output audit, and visible-state arithmetic/service
+forecast tools. Regression: **458 passed in 43.87 seconds**. Both workflow modes
+retain equal context/tools and unchanged aggregate incident caps. See
+[the completion update](../PRIORITY_3_4_COMPLETION.md) for live outcomes and all
+remaining quality limits. Follow-up credit includes Ihthisham, Zahra, Eyaas and
+Kiruthika; work was prepared with ChatGPT/Codex in Ihthisham's session.
+
+Stop before Priority 5–7 and leave the pull request for review.
+
+
+Final current-source v13 development comparison: 120 attempts (10 cases ×
+3 repeats × 4 variants), 57 full-horizon scores and 63 escalations. Full multi
+completed 12/30 versus single 16/30. All 12 comparable scored pairs tied; no
+restoration advantage. Raw recognized-fixture extraction F1 is 100%, with the
+coverage limits in the completion document. Implementation is delivered;
+operational reliability still needs improvement. Stop before Priority 5–7.

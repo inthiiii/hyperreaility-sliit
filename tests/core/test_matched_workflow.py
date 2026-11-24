@@ -29,7 +29,7 @@ def test_single_and_multi_have_equal_stages_context_tools_and_output_caps(load_c
         assert result.status=='awaiting_approval' and result.validation.valid
         requests=a.client.requests
         payloads.append([json.loads(r['messages'][1]['content']) for r in requests])
-        assert [r['max_completion_tokens'] for r in requests]==[700,400,400,400]
+        assert [r['max_completion_tokens'] for r in requests]==[700,450,450,500]
         assert all(r['response_format']=={'type':'json_object'} for r in requests)
         assert [p['stage'] for p in payloads[-1]]==['investigate','resources','priorities','review']
         assert len({p['context_sha256'] for p in payloads[-1]})==1

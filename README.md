@@ -140,7 +140,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [project/main.py](project/main.py) | Required application entry point | Integrated dashboard, live hosted planning, approval and independent incident simulation |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
-| `tests/` | Verification code and fixtures | 428 automated tests; data, simulation, core, evaluation and UI checks |
+| `tests/` | Verification code and fixtures | 458 automated tests; data, simulation, core, evaluation and UI checks |
 | `results/` | Benchmark outputs and traces | Development aggregate reports published; raw local traces ignored by Git |
 | `project-demo.mp4` | Actual-execution demonstration video | Pending |
 
@@ -315,3 +315,14 @@ LLM_API=responses
 ```
 
 Restart Streamlit after changing settings. Responses input-token counts are checked before generation; count requests are audited separately from the 12 model-generation limit. Their latency counts toward the same run deadline. Chat Completions remains available with `LLM_API=chat_completions`. SOCKS environments additionally need `python -m pip install -r project/requirements-proxy.txt`; direct connections do not require that file.
+
+
+### Priority 3–4 completion update — 25 November
+
+The selected Luna workflow now uses strict structured responses, lossless compact
+operational context, bounded reviewer clarification and visible-state service
+forecasting. New operational holds always require a newly validated candidate and
+fresh review; operator approval remains separate. Full regression: **458 passed**.
+See [the completion update](docs/PRIORITY_3_4_COMPLETION.md) for current live
+results, evidence and limits. Earlier benchmark cohorts retain their original
+protocol labels and must not be pooled. Priority 5–7 remain separate milestones.

@@ -1,0 +1,140 @@
+{
+  "job_id": "7a89dbb6-3f82-4f31-a250-dc36dec56570",
+  "scenario_id": "DEV-010",
+  "variant": "multi",
+  "repeat": 0,
+  "status": "escalated",
+  "plan_feasible": false,
+  "model_calls": 3,
+  "actual_weighted_downtime": null,
+  "scoring_status": "not_scored_escalated",
+  "approval_mode": "automated_benchmark_operator",
+  "approved_episodes": 0,
+  "run_ids": [
+    "0425684b-d110-40cf-bed5-71e91549e209"
+  ],
+  "episode_artifacts": [],
+  "model_usage": [
+    {
+      "response_format": "json_schema",
+      "api_mode": "responses",
+      "input_count_method": "server_exact",
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "role": "network_investigator",
+      "attempt": 1,
+      "input_token_upper_estimate": 2703,
+      "output_limit": 700,
+      "prompt_sha256": "f16c4968686c0d54091768296b9612897cff0c864aa67a1ef0fbf623f01bf5cf",
+      "schema_sha256": "013ad3eb041c4dcbe4a17418377e0ed97ec3d32e2e7f92b0e577eec4e1a4ae7a",
+      "request_id": "resp_0167c4e59abc7b4b016b05fc5100d887d08de1500fae20069c",
+      "returned_model": "gpt-6-luna",
+      "input_tokens": 2703,
+      "output_tokens": 135,
+      "response_status": "completed",
+      "finish_reason": "stop",
+      "response_sha256": "9c1f6747cda61f6f47a6cae64d10d2343fa661b2044700c492b4a0084e6ea746",
+      "status": "ok",
+      "latency_seconds": 1.7602933750022203
+    },
+    {
+      "response_format": "json_schema",
+      "api_mode": "responses",
+      "input_count_method": "server_exact",
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "role": "field_resource_planner",
+      "attempt": 1,
+      "input_token_upper_estimate": 2534,
+      "output_limit": 450,
+      "prompt_sha256": "65dc2713c4fd8b0bc40300f198117280f78d7491de6e7a2022cd052f15733f5f",
+      "schema_sha256": "dcec79bd45bed42eaaac36789a0edd8f8a39ba698a52ea960f8cffcde1311ed0",
+      "request_id": "resp_098d512465cbdc25016b05fc5304f887d09aa2cb92298d3d86",
+      "returned_model": "gpt-6-luna",
+      "input_tokens": 2534,
+      "output_tokens": 127,
+      "response_status": "completed",
+      "finish_reason": "stop",
+      "response_sha256": "ecaab9f6d81b3dc718c4660040edeaa0142035b8b7f892b30034f7b60992a828",
+      "status": "ok",
+      "latency_seconds": 2.259517165948637
+    },
+    {
+      "response_format": "json_schema",
+      "api_mode": "responses",
+      "input_count_method": "server_exact",
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "role": "service_priority_assessor",
+      "attempt": 1,
+      "input_token_upper_estimate": 2641,
+      "output_limit": 450,
+      "prompt_sha256": "368363415bda491169f38262fb93bece6e8307c90255b66625457ee088f2b510",
+      "schema_sha256": "dcec79bd45bed42eaaac36789a0edd8f8a39ba698a52ea960f8cffcde1311ed0",
+      "request_id": "resp_06c158ce321e625a016b05fc556dcc87d0b0fb145d231442ce",
+      "returned_model": "gpt-6-luna",
+      "input_tokens": 2641,
+      "output_tokens": 202,
+      "response_status": "completed",
+      "finish_reason": "stop",
+      "response_sha256": "5342533cab311bc2bf98c0c2aa9c33f4e9f4687dcefeb4fdf81f16cc6c803761",
+      "status": "ok",
+      "latency_seconds": 2.641229666012805
+    }
+  ],
+  "api_cost": null,
+  "failure_phase": null,
+  "model_configuration": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "api_mode": "responses",
+    "reasoning_effort": "none",
+    "response_format": "json_schema",
+    "temperature": "provider_default",
+    "sdk_retries": 0,
+    "schema_repair_attempts": 1,
+    "protocol_version": "matched-workflow-v13"
+  },
+  "decision_effect_count": 0,
+  "run_id": "0425684b-d110-40cf-bed5-71e91549e209",
+  "escalation_reasons": [
+    "Specialist requires operator clarification"
+  ],
+  "auxiliary_requests": [
+    {
+      "kind": "input_token_count",
+      "model": "gpt-6-luna",
+      "status": "ok",
+      "input_tokens": 2703,
+      "latency_seconds": 9.000339332967997
+    },
+    {
+      "kind": "input_token_count",
+      "model": "gpt-6-luna",
+      "status": "ok",
+      "input_tokens": 2534,
+      "latency_seconds": 0.2479683340061456
+    },
+    {
+      "kind": "input_token_count",
+      "model": "gpt-6-luna",
+      "status": "ok",
+      "input_tokens": 2641,
+      "latency_seconds": 0.25374283402925357
+    }
+  ],
+  "auxiliary_request_count": 3,
+  "returned_models": [
+    "gpt-6-luna"
+  ],
+  "input_tokens": 7878,
+  "output_tokens": 464,
+  "usage_complete": true,
+  "input_reserved_upper_bound": 7878,
+  "output_reserved_upper_bound": 464,
+  "duration_seconds": 16.185135458013974
+}

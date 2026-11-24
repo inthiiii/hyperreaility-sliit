@@ -104,7 +104,7 @@ def model_configuration():
     health=preflight()
     return {'provider':health['provider'],'model':health['model'],
             'endpoint_sha256':digest(os.environ.get('LLM_BASE_URL','')),
-            'api_mode':health.get('api_mode','chat_completions'),'reasoning_effort':health.get('reasoning_effort'),'response_format':'json_object','temperature':'provider_default',
+            'api_mode':health.get('api_mode','chat_completions'),'reasoning_effort':health.get('reasoning_effort'),'response_format':'json_schema' if health.get('api_mode')=='responses' else 'json_object','temperature':'provider_default',
             'sdk_retries':0,'schema_repair_attempts':1,'protocol_version':PROTOCOL_VERSION}
 
 

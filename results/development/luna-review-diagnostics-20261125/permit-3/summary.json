@@ -1,0 +1,20 @@
+{
+  "scope": "modified demo engineering challenge; not registered/held-out or physical evaluation",
+  "model": "gpt-6-luna",
+  "input_sha256": "6a7fd6c2176e6287cb51954c375204271d52a23bc44dd5f999d0819dcab1b6cf",
+  "status": "escalated",
+  "run_id": "a9a0dcde-ed37-4401-b311-cc26d10b9db0",
+  "unconstrained_actions": [
+    "GEN-G1-S02"
+  ],
+  "agent_candidate_actions": null,
+  "effects": [],
+  "validated": false,
+  "model_calls": 2,
+  "fresh_approval_possible": false,
+  "schedule_changed": false,
+  "reasons": [
+    "Specialist requires operator clarification"
+  ],
+  "claims_restoration_improvement": false
+}

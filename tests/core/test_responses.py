@@ -30,7 +30,10 @@ def test_responses_uses_counted_payload_and_records_real_usage_not_bytes():
     c=ResponsesClient(['{"facts":[]}']);a=make(c)
     a.complete('investigator',{'large':'x'*10000},FactBatch)
     assert c.counts[0]['input']==c.generations[0]['input']
-    assert c.counts[0]['text']==c.generations[0]['text']=={'format':{'type':'json_object'}}
+    assert c.counts[0]['text']==c.generations[0]['text']
+    assert c.generations[0]['text']['format']['type']=='json_schema'
+    assert c.generations[0]['text']['format']['strict'] is True
+    assert c.generations[0]['text']['format']['schema']['required']==['facts']
     assert c.generations[0]['reasoning']=={'effort':'none'} and c.generations[0]['store'] is False
     assert a.budget.input_reserved==100 and a.budget.calls==1
     assert a.budget.records[0]['input_count_method']=='server_exact'
@@ -73,3 +76,35 @@ def test_incomplete_response_retains_usage_and_cannot_reach_a_typed_result():
 
 def test_openrouter_cannot_silently_take_openai_responses_path():
     with pytest.raises(ValueError):HostedAdapter('openrouter','gpt-6-luna','not-a-key',api_mode='responses')
+
+
+def test_strict_schema_requires_all_fields_without_removing_validation_constraints():
+    from project.core.coordinator import Review
+    from project.llm.client import strict_response_schema
+    schema=strict_response_schema(Review)
+    assert schema['required']==list(schema['properties'])
+    assert schema['additionalProperties'] is False
+    assert schema['properties']['findings']['maxItems']==3
+    assert schema['properties']['findings']['items']['maxLength']==240
+    request=schema['$defs']['DecisionRequest']
+    assert request['required']==list(request['properties']) and request['additionalProperties'] is False
+
+
+def test_strict_schema_binds_only_real_evidence_without_guessing():
+    from project.llm.client import strict_response_schema
+    from project.core.coordinator import Finding
+    schema=strict_response_schema(Finding,{'REP-A','POLICY-1'})
+    assert schema['properties']['evidence_ids']['items']['enum']==['POLICY-1','REP-A']
+    assert schema['$defs']['DecisionRequest']['properties']['evidence_ids']['items']['enum']==['POLICY-1','REP-A']
+    empty=strict_response_schema(FactBatch,set())
+    assert empty['properties']['facts']['maxItems']==0
+    assert 'maxItems' not in empty['$defs']['EvidenceFact']['properties']['evidence_ids']
+    assert empty['$defs']['EvidenceFact']['properties']['evidence_ids']['minItems']==1
+
+
+def test_count_and_generation_share_evidence_bound_schema():
+    c=ResponsesClient(['{"facts":[]}']);a=make(c)
+    a.complete('investigator',{},FactBatch,evidence_ids={'REP-A'})
+    schema=c.generations[0]['text']['format']['schema']
+    assert schema['$defs']['EvidenceFact']['properties']['evidence_ids']['items']['enum']==['REP-A']
+    assert c.counts[0]['text']==c.generations[0]['text']

@@ -9,7 +9,7 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.9 — selected Luna and real hosted execution checkpoint |
+| Document version | 0.10 — strict hosted workflow and bounded review completion |
 | Last updated | 24 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
@@ -170,3 +170,20 @@ these coding tools.
 The single-agent baseline now traverses the same investigation, resources, priorities and review stages as the four-role workflow. Both receive the same operational context, deterministic tools and whole-incident caps. Agent requests can conservatively defer evidence-linked actions, version the state, and force a new validated schedule; they cannot change approved weights or mutate evaluator truth.
 
 Benchmark manifests freeze the selected provider/model, endpoint fingerprint, supported generation settings, protocol, runtime and source/input hashes. Paired summaries exclude unsuccessful jobs and model-version mismatches from downtime differences while reporting their counts. Raw extraction F1 is computed before deterministic fixture fill-in and reports label coverage. Charges remain unmeasured. Real Luna smoke checks and development comparisons are now recorded separately from injected-client tests in LUNA_LIVE_VALIDATION.md. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md).
+
+
+## Priority 3–4 completion — 25 November
+
+Current operational protocol: `matched-workflow-v13`, OpenAI `gpt-6-luna`,
+reasoning `none`, Responses strict JSON Schema. Shared lossless context and
+identical per-stage allowances preserve the matched comparison. Reviewer arithmetic
+and service forecasts use visible state only; measurements still come from the
+independent incident evaluator after separate approval. Unknowns, new holds,
+stale approvals and exhausted budgets remain blocking conditions.
+
+Full repository regression: **458 passed in 43.87 seconds**. Current live outcomes,
+retained failures and reproducible evidence are in
+[PRIORITY_3_4_COMPLETION.md](PRIORITY_3_4_COMPLETION.md). This continuation was
+implemented with ChatGPT/Codex in Ihthisham's session; all four requested co-author
+trailers are included. Runtime Luna is distinct from the coding assistant. No
+independent human study or held-out evaluation was conducted for this checkpoint.

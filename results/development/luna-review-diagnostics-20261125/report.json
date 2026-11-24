@@ -1,0 +1,1668 @@
+{
+  "scope": "engineering diagnostics; not held-out performance or pooled comparison",
+  "focused_runs": [
+    {
+      "directory": "results/local_benchmarks/luna-v10-dynamic-20261125",
+      "manifest_sha256": "2a5ff4cfe56ee6f734578da06dd0f75e60373689d1903d2c384ad77517b45071",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 7,
+          "input_tokens": 20311,
+          "output_tokens": 1311,
+          "escalation_reasons": [
+            "ValueError: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 0,
+          "model_calls": 7,
+          "input_tokens": 21238,
+          "output_tokens": 1007,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v11-dynamic-20261125",
+      "manifest_sha256": "f32d5cc7b648731aa11256e2266377b6409ddf43188606347b2aa048612b00bb",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 6,
+          "input_tokens": 16635,
+          "output_tokens": 916,
+          "escalation_reasons": [
+            "ValueError: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 8,
+          "input_tokens": 22370,
+          "output_tokens": 1201,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v12-dynamic-20261125",
+      "manifest_sha256": "376b37e8684c92697edcb4b42fff05228ad348fd5d57494b9ad6cdae20ba5dcf",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 8,
+          "input_tokens": 23365,
+          "output_tokens": 1289,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 7,
+          "input_tokens": 19656,
+          "output_tokens": 1109,
+          "escalation_reasons": [
+            "Specialist requires operator clarification"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v5-focused-20261125",
+      "manifest_sha256": "59bfc5e24701e765f22995048d3ce2f8bf398d7b9ef057fe8d52e61fe7448cf3",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 7,
+          "input_tokens": 23307,
+          "output_tokens": 874,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 0,
+          "model_calls": 3,
+          "input_tokens": 9610,
+          "output_tokens": 448,
+          "escalation_reasons": [
+            "Specialist requires operator clarification"
+          ]
+        },
+        {
+          "scenario_id": "DEMO-005",
+          "variant": "single",
+          "status": "completed",
+          "scoring_status": "scored",
+          "approved_episodes": 1,
+          "model_calls": 4,
+          "input_tokens": 7849,
+          "output_tokens": 564,
+          "escalation_reasons": null
+        },
+        {
+          "scenario_id": "DEMO-005",
+          "variant": "multi",
+          "status": "completed",
+          "scoring_status": "scored",
+          "approved_episodes": 1,
+          "model_calls": 8,
+          "input_tokens": 17240,
+          "output_tokens": 1088,
+          "escalation_reasons": null
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v6-dynamic-20261125",
+      "manifest_sha256": "50d116ea383cb8517b2a1a2a622c4aa2daa5494e0acac9d993315b8377f9f31e",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 7,
+          "input_tokens": null,
+          "output_tokens": null,
+          "escalation_reasons": [
+            "BadRequestError: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 0,
+          "model_calls": 3,
+          "input_tokens": 8875,
+          "output_tokens": 417,
+          "escalation_reasons": [
+            "Specialist requires operator clarification"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v7-dynamic-20261125",
+      "manifest_sha256": "286ecced286f067d773389cd09b399d1121ad1ec583ef6c467d3531d5ce2841c",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 0,
+          "model_calls": 7,
+          "input_tokens": 21363,
+          "output_tokens": 892,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 7,
+          "input_tokens": 21196,
+          "output_tokens": 868,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v8-dynamic-20261125",
+      "manifest_sha256": "2730a6edb37a4749b00ebf0108950307924536f0ac5e3b00de4d1e580c6ab3af",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 8,
+          "input_tokens": 22377,
+          "output_tokens": 1002,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 0,
+          "model_calls": 3,
+          "input_tokens": 7695,
+          "output_tokens": 327,
+          "escalation_reasons": [
+            "Specialist requires operator clarification"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v9-dynamic-20261125",
+      "manifest_sha256": "6f0526ff15d9e4578c26292edeb49ab1da6d70272106d508e1d4e78f61684597",
+      "attempts": [
+        {
+          "scenario_id": "DEV-010",
+          "variant": "multi",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 0,
+          "model_calls": 5,
+          "input_tokens": 14968,
+          "output_tokens": 658,
+          "escalation_reasons": [
+            "The prior review asserts S02 equipment is not working, but supplied authoritative evidence confirms only its grid outage; complete-state encoding marks unreported equipment status as working.",
+            "The candidate repairs confirmed failed equipment at S01 and deploys the sole generator at critical S02. No evidence correction or typed defer_action is supported by the supplied facts."
+          ]
+        },
+        {
+          "scenario_id": "DEV-010",
+          "variant": "single",
+          "status": "escalated",
+          "scoring_status": "not_scored_escalated",
+          "approved_episodes": 1,
+          "model_calls": 8,
+          "input_tokens": 22766,
+          "output_tokens": 1214,
+          "escalation_reasons": [
+            "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+          ]
+        }
+      ]
+    }
+  ],
+  "permit_trials": [
+    {
+      "trial": 1,
+      "source_directory": "results/local_benchmarks/luna-live-influence-v5-20261125",
+      "protocol_version": "matched-workflow-v5",
+      "scope": "modified demo engineering check; different protocol trials are not a controlled comparison",
+      "status": "awaiting_approval",
+      "schedule_changed": true,
+      "fresh_approval_possible": true,
+      "model_calls": 4,
+      "input_sha256": "6a7fd6c2176e6287cb51954c375204271d52a23bc44dd5f999d0819dcab1b6cf",
+      "summary": "results/development/luna-review-diagnostics-20261125/permit-1/summary.json"
+    },
+    {
+      "trial": 2,
+      "source_directory": "results/local_benchmarks/luna-live-influence-v12-20261125",
+      "protocol_version": "matched-workflow-v12",
+      "scope": "modified demo engineering check; different protocol trials are not a controlled comparison",
+      "status": "escalated",
+      "schedule_changed": false,
+      "fresh_approval_possible": false,
+      "model_calls": 2,
+      "input_sha256": "6a7fd6c2176e6287cb51954c375204271d52a23bc44dd5f999d0819dcab1b6cf",
+      "summary": "results/development/luna-review-diagnostics-20261125/permit-2/summary.json"
+    },
+    {
+      "trial": 3,
+      "source_directory": "results/local_benchmarks/luna-live-influence-v12-repeat2-20261125",
+      "protocol_version": "matched-workflow-v12",
+      "scope": "modified demo engineering check; different protocol trials are not a controlled comparison",
+      "status": "escalated",
+      "schedule_changed": false,
+      "fresh_approval_possible": false,
+      "model_calls": 2,
+      "input_sha256": "6a7fd6c2176e6287cb51954c375204271d52a23bc44dd5f999d0819dcab1b6cf",
+      "summary": "results/development/luna-review-diagnostics-20261125/permit-3/summary.json"
+    }
+  ],
+  "unattached_transport_batch": {
+    "attempts": [
+      {
+        "scenario_id": "DEV-001",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-001",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-002",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-003",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-004",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-005",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-006",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-007",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-008",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-009",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "single",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "multi",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "no_reviewer",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "no_reviewer",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "single",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "multi",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "multi",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "no_feedback",
+        "repeat": 2,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "no_feedback",
+        "repeat": 1,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "single",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "no_feedback",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      },
+      {
+        "scenario_id": "DEV-010",
+        "variant": "no_reviewer",
+        "repeat": 0,
+        "status": "escalated",
+        "model_calls": 0,
+        "auxiliary_request_count": 1,
+        "escalation_reasons": [
+          "APIConnectionError: workflow stopped; inspect structured usage and evidence"
+        ]
+      }
+    ],
+    "model_generations": 0,
+    "excluded_from_final_cohort": true
+  },
+  "no_report_confirmation": [
+    {
+      "scenario_id": "DEV-008",
+      "variant": "multi",
+      "status": "escalated",
+      "model_calls": 1,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "single",
+      "status": "escalated",
+      "model_calls": 1,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    }
+  ]
+}

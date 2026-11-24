@@ -1,0 +1,1504 @@
+{
+  "format_version": 1,
+  "payload": {
+    "run_id": "785063a3-e8d5-48cb-8376-31d970d7286a",
+    "mode": "multi",
+    "status": "awaiting_approval",
+    "state": {
+      "scenario_id": "DEV-001",
+      "state_version": 1,
+      "source_hash": "117978261badf81edb6c35a35d0cd344f5a73a356f950d37b730e3a5f5a594f2",
+      "scenario": {
+        "schema_version": "0.1",
+        "scenario_id": "DEV-001",
+        "region_label": "Fictional network in a Sri Lanka demonstration context",
+        "current_time_min": 0,
+        "horizon_min": 720,
+        "core_id": "CORE",
+        "depot_id": "DEPOT",
+        "sites": [
+          {
+            "site_id": "S01",
+            "label": "Fictional site 01",
+            "x": 0.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S02",
+            "label": "Fictional site 02",
+            "x": 10.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S03",
+            "label": "Fictional site 03",
+            "x": 20.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S04",
+            "label": "Fictional site 04",
+            "x": 30.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S05",
+            "label": "Fictional site 05",
+            "x": 40.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S06",
+            "label": "Fictional site 06",
+            "x": 0.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S07",
+            "label": "Fictional site 07",
+            "x": 10.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S08",
+            "label": "Fictional site 08",
+            "x": 20.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S09",
+            "label": "Fictional site 09",
+            "x": 30.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S10",
+            "label": "Fictional site 10",
+            "x": 40.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S11",
+            "label": "Fictional site 11",
+            "x": 0.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S12",
+            "label": "Fictional site 12",
+            "x": 10.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S13",
+            "label": "Fictional site 13",
+            "x": 20.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S14",
+            "label": "Fictional site 14",
+            "x": 30.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S15",
+            "label": "Fictional site 15",
+            "x": 40.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid"
+          },
+          {
+            "site_id": "S16",
+            "label": "Fictional site 16",
+            "x": 0.0,
+            "y": 30.0,
+            "coordinate_system": "synthetic_local_grid"
+          }
+        ],
+        "links": [
+          {
+            "link_id": "L01",
+            "parent": "CORE",
+            "child": "S01"
+          },
+          {
+            "link_id": "L02",
+            "parent": "CORE",
+            "child": "S02"
+          },
+          {
+            "link_id": "L03",
+            "parent": "S01",
+            "child": "S03"
+          },
+          {
+            "link_id": "L04",
+            "parent": "S02",
+            "child": "S04"
+          },
+          {
+            "link_id": "L05",
+            "parent": "S01",
+            "child": "S05"
+          },
+          {
+            "link_id": "L06",
+            "parent": "S02",
+            "child": "S06"
+          },
+          {
+            "link_id": "L07",
+            "parent": "S01",
+            "child": "S07"
+          },
+          {
+            "link_id": "L08",
+            "parent": "S02",
+            "child": "S08"
+          },
+          {
+            "link_id": "L09",
+            "parent": "S01",
+            "child": "S09"
+          },
+          {
+            "link_id": "L10",
+            "parent": "S02",
+            "child": "S10"
+          },
+          {
+            "link_id": "L11",
+            "parent": "S01",
+            "child": "S11"
+          },
+          {
+            "link_id": "L12",
+            "parent": "S02",
+            "child": "S12"
+          },
+          {
+            "link_id": "L13",
+            "parent": "S01",
+            "child": "S13"
+          },
+          {
+            "link_id": "L14",
+            "parent": "S02",
+            "child": "S14"
+          },
+          {
+            "link_id": "L15",
+            "parent": "S01",
+            "child": "S15"
+          },
+          {
+            "link_id": "L16",
+            "parent": "S02",
+            "child": "S16"
+          }
+        ],
+        "roads": [
+          {
+            "road_id": "R01",
+            "origin": "DEPOT",
+            "to": "S01",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R02",
+            "origin": "DEPOT",
+            "to": "S02",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R03",
+            "origin": "DEPOT",
+            "to": "S03",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R04",
+            "origin": "DEPOT",
+            "to": "S04",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R05",
+            "origin": "DEPOT",
+            "to": "S05",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R06",
+            "origin": "DEPOT",
+            "to": "S06",
+            "travel_minutes": 25
+          },
+          {
+            "road_id": "R07",
+            "origin": "DEPOT",
+            "to": "S07",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R08",
+            "origin": "DEPOT",
+            "to": "S08",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R09",
+            "origin": "DEPOT",
+            "to": "S09",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R10",
+            "origin": "DEPOT",
+            "to": "S10",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R11",
+            "origin": "DEPOT",
+            "to": "S11",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R12",
+            "origin": "DEPOT",
+            "to": "S12",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R13",
+            "origin": "DEPOT",
+            "to": "S13",
+            "travel_minutes": 30
+          },
+          {
+            "road_id": "R14",
+            "origin": "DEPOT",
+            "to": "S14",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R15",
+            "origin": "DEPOT",
+            "to": "S15",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R16",
+            "origin": "DEPOT",
+            "to": "S16",
+            "travel_minutes": 30
+          }
+        ],
+        "services": [
+          {
+            "service_id": "V01",
+            "site_id": "S01",
+            "label": "Fictional service 01",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V02",
+            "site_id": "S02",
+            "label": "Fictional critical facility",
+            "critical": true,
+            "weight": 5,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V03",
+            "site_id": "S03",
+            "label": "Fictional service 03",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V04",
+            "site_id": "S04",
+            "label": "Fictional service 04",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V05",
+            "site_id": "S05",
+            "label": "Fictional service 05",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V06",
+            "site_id": "S06",
+            "label": "Fictional service 06",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V07",
+            "site_id": "S07",
+            "label": "Fictional service 07",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V08",
+            "site_id": "S08",
+            "label": "Fictional service 08",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V09",
+            "site_id": "S09",
+            "label": "Fictional service 09",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V10",
+            "site_id": "S10",
+            "label": "Fictional service 10",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V11",
+            "site_id": "S11",
+            "label": "Fictional service 11",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V12",
+            "site_id": "S12",
+            "label": "Fictional service 12",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V13",
+            "site_id": "S13",
+            "label": "Fictional service 13",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V14",
+            "site_id": "S14",
+            "label": "Fictional service 14",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V15",
+            "site_id": "S15",
+            "label": "Fictional service 15",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V16",
+            "site_id": "S16",
+            "label": "Fictional service 16",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          }
+        ],
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 360,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ],
+        "observed_state": {
+          "sites": {
+            "S01": {
+              "equipment_ok": null,
+              "grid_power_ok": true
+            },
+            "S02": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S03": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S04": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S05": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S06": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S07": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S08": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S09": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S10": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S11": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S12": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S13": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S14": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S15": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S16": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            }
+          },
+          "links": {
+            "L01": true,
+            "L02": true,
+            "L03": true,
+            "L04": true,
+            "L05": true,
+            "L06": true,
+            "L07": true,
+            "L08": true,
+            "L09": true,
+            "L10": true,
+            "L11": true,
+            "L12": true,
+            "L13": true,
+            "L14": true,
+            "L15": true,
+            "L16": true
+          },
+          "roads": {
+            "R01": true,
+            "R02": true,
+            "R03": true,
+            "R04": true,
+            "R05": true,
+            "R06": true,
+            "R07": true,
+            "R08": true,
+            "R09": true,
+            "R10": true,
+            "R11": true,
+            "R12": true,
+            "R13": true,
+            "R14": true,
+            "R15": true,
+            "R16": true
+          }
+        },
+        "active_generators": [],
+        "action_options": [
+          {
+            "action_id": "EQ-S01",
+            "kind": "equipment_repair",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S02",
+            "kind": "equipment_repair",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S03",
+            "kind": "equipment_repair",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S04",
+            "kind": "equipment_repair",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S05",
+            "kind": "equipment_repair",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S06",
+            "kind": "equipment_repair",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S07",
+            "kind": "equipment_repair",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S08",
+            "kind": "equipment_repair",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S09",
+            "kind": "equipment_repair",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S10",
+            "kind": "equipment_repair",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S11",
+            "kind": "equipment_repair",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S12",
+            "kind": "equipment_repair",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S13",
+            "kind": "equipment_repair",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S14",
+            "kind": "equipment_repair",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S15",
+            "kind": "equipment_repair",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S16",
+            "kind": "equipment_repair",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 120,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L01",
+            "kind": "link_repair",
+            "target_id": "L01",
+            "location": "S01",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L02",
+            "kind": "link_repair",
+            "target_id": "L02",
+            "location": "S02",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L03",
+            "kind": "link_repair",
+            "target_id": "L03",
+            "location": "S03",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L04",
+            "kind": "link_repair",
+            "target_id": "L04",
+            "location": "S04",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L05",
+            "kind": "link_repair",
+            "target_id": "L05",
+            "location": "S05",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L06",
+            "kind": "link_repair",
+            "target_id": "L06",
+            "location": "S06",
+            "duration_minutes": 30,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L07",
+            "kind": "link_repair",
+            "target_id": "L07",
+            "location": "S07",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L08",
+            "kind": "link_repair",
+            "target_id": "L08",
+            "location": "S08",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L09",
+            "kind": "link_repair",
+            "target_id": "L09",
+            "location": "S09",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L10",
+            "kind": "link_repair",
+            "target_id": "L10",
+            "location": "S10",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L11",
+            "kind": "link_repair",
+            "target_id": "L11",
+            "location": "S11",
+            "duration_minutes": 30,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L12",
+            "kind": "link_repair",
+            "target_id": "L12",
+            "location": "S12",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L13",
+            "kind": "link_repair",
+            "target_id": "L13",
+            "location": "S13",
+            "duration_minutes": 30,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L14",
+            "kind": "link_repair",
+            "target_id": "L14",
+            "location": "S14",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L15",
+            "kind": "link_repair",
+            "target_id": "L15",
+            "location": "S15",
+            "duration_minutes": 30,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L16",
+            "kind": "link_repair",
+            "target_id": "L16",
+            "location": "S16",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "GEN-G1-S01",
+            "kind": "generator_deploy",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S02",
+            "kind": "generator_deploy",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S03",
+            "kind": "generator_deploy",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S04",
+            "kind": "generator_deploy",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S05",
+            "kind": "generator_deploy",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S06",
+            "kind": "generator_deploy",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S07",
+            "kind": "generator_deploy",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S08",
+            "kind": "generator_deploy",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S09",
+            "kind": "generator_deploy",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S10",
+            "kind": "generator_deploy",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S11",
+            "kind": "generator_deploy",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S12",
+            "kind": "generator_deploy",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S13",
+            "kind": "generator_deploy",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S14",
+            "kind": "generator_deploy",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S15",
+            "kind": "generator_deploy",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S16",
+            "kind": "generator_deploy",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          }
+        ],
+        "reports": [
+          {
+            "report_id": "REP-001",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "S01: equipment has failed."
+          }
+        ],
+        "policy": {
+          "evidence_id": "POLICY-001",
+          "approved_for_simulation": true,
+          "standard_weight": 1,
+          "critical_weight": 5,
+          "evidence_rule": "Authoritative evidence must be consistent; equally authoritative conflicts require confirmation. Recency alone does not verify a fact.",
+          "max_generator_deployments_per_scenario": 1,
+          "on_crew_loss": "Pause affected unfinished work and request operator review; preserve completed repairs."
+        }
+      },
+      "resolved_observations": {
+        "sites": {
+          "S01": {
+            "equipment_ok": false,
+            "grid_power_ok": true
+          },
+          "S02": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S03": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S04": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S05": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S06": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S07": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S08": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S09": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S10": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S11": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S12": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S13": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S14": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S15": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S16": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          }
+        },
+        "links": {
+          "L01": true,
+          "L02": true,
+          "L03": true,
+          "L04": true,
+          "L05": true,
+          "L06": true,
+          "L07": true,
+          "L08": true,
+          "L09": true,
+          "L10": true,
+          "L11": true,
+          "L12": true,
+          "L13": true,
+          "L14": true,
+          "L15": true,
+          "L16": true
+        },
+        "roads": {
+          "R01": true,
+          "R02": true,
+          "R03": true,
+          "R04": true,
+          "R05": true,
+          "R06": true,
+          "R07": true,
+          "R08": true,
+          "R09": true,
+          "R10": true,
+          "R11": true,
+          "R12": true,
+          "R13": true,
+          "R14": true,
+          "R15": true,
+          "R16": true
+        }
+      },
+      "facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot explicitly reports equipment failure at S01."
+        }
+      ],
+      "unresolved_facts": []
+    },
+    "plan": {
+      "plan_id": "597d312a-6b74-4806-bfbd-7cfd9641f1c4",
+      "scenario_id": "DEV-001",
+      "state_version": 1,
+      "state_hash": "a46f7ac3f97497ca563205c7cca457f5fadfae4be375c82346d5f62fd65b7efe",
+      "actions": [
+        {
+          "action_id": "EQ-S01",
+          "kind": "equipment_repair",
+          "target_id": "S01",
+          "crew_id": "C1",
+          "generator_id": null,
+          "departure_min": 0,
+          "travel_route": [
+            "DEPOT",
+            "S01"
+          ],
+          "work_start_min": 5,
+          "work_end_min": 95
+        }
+      ],
+      "unmet_needs": [],
+      "evidence_ids": [
+        "POLICY-001",
+        "REP-001"
+      ],
+      "planner_config": {
+        "algorithm": "cp_sat_time_indexed",
+        "solver_status": "OPTIMAL",
+        "solver_seconds_cap": 5,
+        "seed": 22,
+        "workers": 1,
+        "slot_minutes": 5,
+        "prediction_only": true,
+        "tie_breakers": [
+          "fewer actions",
+          "earlier work completion"
+        ],
+        "limitations": [
+          "static rooted tree",
+          "unknown assets unavailable",
+          "no in-progress work or future-event scheduling"
+        ],
+        "objective_value": 3955436.0,
+        "best_objective_bound": 3955436.0,
+        "predicted_weighted_available_minutes_remaining": 13640,
+        "predicted_weighted_downtime_remaining": 760,
+        "deferred_action_ids": []
+      },
+      "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+    },
+    "validation": {
+      "valid": true,
+      "violations": []
+    },
+    "messages": [
+      {
+        "sender": "network_investigator",
+        "recipient": "coordinator",
+        "incident_id": "DEV-001",
+        "state_version": 1,
+        "finding": {
+          "facts": [
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "equipment_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-001"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot explicitly reports equipment failure at S01."
+            }
+          ]
+        }
+      },
+      {
+        "sender": "field_resource_planner",
+        "recipient": "coordinator",
+        "incident_id": "DEV-001",
+        "state_version": 1,
+        "finding": {
+          "clarification_required": false,
+          "requests": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001"
+          ],
+          "finding": "S01 equipment is confirmed failed (REP-001); its grid power is known good. Other equipment, power, links, and roads default to working. No permits or operational holds are specified. Available crews and routes support action; no defer requests are required."
+        }
+      },
+      {
+        "sender": "service_priority_assessor",
+        "recipient": "coordinator",
+        "incident_id": "DEV-001",
+        "state_version": 1,
+        "finding": {
+          "clarification_required": false,
+          "requests": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001"
+          ],
+          "finding": "S01 equipment failure is confirmed (REP-001); its power and upstream path are known working. Other sites and paths default to working. Apply approved weights: S02 is critical (5), all others standard (1). No unresolved critical facts or policy block require a hold."
+        }
+      },
+      {
+        "sender": "deterministic_scheduler",
+        "recipient": "coordinator",
+        "incident_id": "DEV-001",
+        "state_version": 1,
+        "finding": {
+          "plan_id": "597d312a-6b74-4806-bfbd-7cfd9641f1c4",
+          "scenario_id": "DEV-001",
+          "state_version": 1,
+          "state_hash": "a46f7ac3f97497ca563205c7cca457f5fadfae4be375c82346d5f62fd65b7efe",
+          "actions": [
+            {
+              "action_id": "EQ-S01",
+              "kind": "equipment_repair",
+              "target_id": "S01",
+              "crew_id": "C1",
+              "generator_id": null,
+              "departure_min": 0,
+              "travel_route": [
+                "DEPOT",
+                "S01"
+              ],
+              "work_start_min": 5,
+              "work_end_min": 95
+            }
+          ],
+          "unmet_needs": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001"
+          ],
+          "planner_config": {
+            "algorithm": "cp_sat_time_indexed",
+            "solver_status": "OPTIMAL",
+            "solver_seconds_cap": 5,
+            "seed": 22,
+            "workers": 1,
+            "slot_minutes": 5,
+            "prediction_only": true,
+            "tie_breakers": [
+              "fewer actions",
+              "earlier work completion"
+            ],
+            "limitations": [
+              "static rooted tree",
+              "unknown assets unavailable",
+              "no in-progress work or future-event scheduling"
+            ],
+            "objective_value": 3955436.0,
+            "best_objective_bound": 3955436.0,
+            "predicted_weighted_available_minutes_remaining": 13640,
+            "predicted_weighted_downtime_remaining": 760,
+            "deferred_action_ids": []
+          },
+          "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+        }
+      },
+      {
+        "sender": "plan_reviewer",
+        "recipient": "coordinator",
+        "incident_id": "DEV-001",
+        "state_version": 1,
+        "finding": {
+          "decision": "approve",
+          "revision_kind": "evidence",
+          "revision_request": "",
+          "requests": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001"
+          ],
+          "findings": [
+            "S01\u2019s confirmed equipment failure is supported by REP-001; supplied state marks its grid power, upstream link, and road as working. The repair is consistent with the evidence.",
+            "Action timing checks: travel is included in work_start_min, and 5 + 90 = 95. Validation reports no violations.",
+            "The per-service forecast totals 13,640 weighted available minutes and agrees with the scheduler prediction. Approval is for human review, not execution or measured restoration."
+          ]
+        }
+      }
+    ],
+    "model_usage": [
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "network_investigator",
+        "attempt": 1,
+        "input_token_upper_estimate": 2409,
+        "output_limit": 700,
+        "prompt_sha256": "8b519ee003869d74b08c618f3f6a014edf3f9ac10237257e44436e75d886f227",
+        "schema_sha256": "eda4571c05deaa0732780ee393a603973d7ee35954d380cc35f2a99de796cd83",
+        "request_id": "resp_037e241fe5476f56016b05fc25628487d08ba4cfc21653de7d",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2409,
+        "output_tokens": 73,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "f5985183b53417c71af101883941b8ca1089b05aed199d318335405c305fd79b",
+        "status": "ok",
+        "latency_seconds": 1.3422329999739304
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "field_resource_planner",
+        "attempt": 1,
+        "input_token_upper_estimate": 2254,
+        "output_limit": 450,
+        "prompt_sha256": "db848f29fd95e7e38783ec9b0afd4873c8e78c8ab09ffae78727395e4b426283",
+        "schema_sha256": "417475748db13ae7ed667ea3cc5fc179a6f8a3c2a1d3d24045b6dabc83bf2d90",
+        "request_id": "resp_0260547b44ba4a8c016b05fc26f63c87d0828508b31c7a6266",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2254,
+        "output_tokens": 86,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "11f651f9b65db2ea2b081c0754dcde4fe89d79b3541a0f38ec84ffbfbe2f0dfa",
+        "status": "ok",
+        "latency_seconds": 3.959298875008244
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "service_priority_assessor",
+        "attempt": 1,
+        "input_token_upper_estimate": 2320,
+        "output_limit": 450,
+        "prompt_sha256": "d8c8fda7bf3607afee9ebfff0e039ea8baf3daee5bee31cc4bee6997bb68653d",
+        "schema_sha256": "417475748db13ae7ed667ea3cc5fc179a6f8a3c2a1d3d24045b6dabc83bf2d90",
+        "request_id": "resp_04d361f6f81a7fc9016b05fc2ba03487d0bdd5cb70c941023e",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2320,
+        "output_tokens": 90,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "30fab146399358ac3b2cd47fa0e478cb82317fa5bd840958ab9be1b3376b8354",
+        "status": "ok",
+        "latency_seconds": 1.7437200830318034
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "plan_reviewer",
+        "attempt": 1,
+        "input_token_upper_estimate": 3186,
+        "output_limit": 500,
+        "prompt_sha256": "bd6714d868842c96ae1cc7c9de4ffadae95fecce39fa0fdc908b522fd3d863ba",
+        "schema_sha256": "f3c0f3f4c3b0aef2db92bb576f00775c19ff81e0845c883b2537e2fa31782b38",
+        "request_id": "resp_0cdf26547dd945dd016b05fc2db41487d0acb9279665e5e130",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 3186,
+        "output_tokens": 137,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "7d8c9f670103162f36e882117dd520f099779366c9ca7b882347d1a2c26dffea",
+        "status": "ok",
+        "latency_seconds": 2.6207643339876086
+      }
+    ],
+    "reasons": [],
+    "metadata": {
+      "started_at_utc": "2026-11-24T21:05:35.998510+00:00",
+      "duration_seconds": 16.18498466699384,
+      "auxiliary_requests": [
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2409,
+          "latency_seconds": 5.219763334025629
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2254,
+          "latency_seconds": 0.2600657499860972
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2320,
+          "latency_seconds": 0.6790637499652803
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 3186,
+          "latency_seconds": 0.26190658297855407
+        }
+      ],
+      "raw_extraction_metrics": {
+        "label_source": "recognized fixture sentences, not hidden physical truth",
+        "raw_model_output_only": true,
+        "stage": "initial_extraction",
+        "labelled_reports": 1,
+        "unlabelled_reports": 0,
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "unlabelled_predictions": 0
+      },
+      "protocol_version": "matched-workflow-v13",
+      "context_sha256": "2ae1d94d6fb6f2c18323dd5f07e0db44dc2648c89115affe56605ec914727338",
+      "decision_effects": [],
+      "deferred_action_ids": [],
+      "input_hash": "117978261badf81edb6c35a35d0cd344f5a73a356f950d37b730e3a5f5a594f2",
+      "planner": "cp_sat",
+      "reviewer_enabled": true,
+      "feedback_enabled": true,
+      "simulation_status": "not_integrated",
+      "transport": "hosted",
+      "budget": {
+        "max_calls": 12,
+        "max_input_tokens": 24000,
+        "max_output_tokens": 4800,
+        "max_seconds": 179.9999784999527
+      }
+    }
+  },
+  "sha256": "3f6a69679c9e5cabee786ec62314df6bb0fc81f53985a56d4148857efb149f22"
+}

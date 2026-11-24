@@ -2,6 +2,8 @@
 
 **Date:** 24 November 2026. **Team:** Ihthisham Irshad, Zahra Hassan, Eyaas Ajmal and Kiruthika Vijayakumar.
 
+> Historical 24 November checkpoint. The [25 November completion update](PRIORITY_3_4_COMPLETION.md) documents the current protocol, regression and follow-up outcomes. Results below remain evidence for their original source/protocol only.
+
 ## What is implemented and verified
 
 The application now uses OpenAI `gpt-6-luna`, explicit reasoning effort `none`, and the Responses API. Both the single-agent and four-role workflows have completed real hosted demo runs followed by approval-gated independent simulation. A separate dashboard rehearsal showed all four role exchanges, four actual generations, a validated candidate, simulation blocked before approval, and a matching result after an explicitly labelled synthetic rehearsal approval.
@@ -58,7 +60,7 @@ The v4 [modified-demo permit challenge](../results/development/luna-live-influen
 
 The Reviewer then escalated for a revision without a concrete request. The candidate was therefore **not approved or simulated**. This verifies live influence on a validated candidate, not full-incident success, physical permit enforcement, a restoration benefit or a reason to bypass review. Inspect the [input](../results/development/luna-live-influence-v4/input.json) and [actual role trace](../results/development/luna-live-influence-v4/run.json). It is a modified-demo engineering challenge outside the registered ten-case comparison. The earlier [unsuccessful v3 challenge](../results/development/luna-live-influence/summary.json) is also retained.
 
-The selected operational protocol is now `matched-workflow-v4`. A separate [successful current-protocol multi-agent example](../results/development/luna-v4-live-example/multi.json) and [measured summary](../results/development/luna-v4-live-example/summary.json) are published. The dashboard/demo smoke artifacts above predate the final report-level prompt refinement and verify the same API/UI/approval integration.
+The operational protocol at this historical checkpoint was `matched-workflow-v4`. A separate [successful current-protocol multi-agent example](../results/development/luna-v4-live-example/multi.json) and [measured summary](../results/development/luna-v4-live-example/summary.json) are published. The dashboard/demo smoke artifacts above predate the final report-level prompt refinement and verify the same API/UI/approval integration.
 
 ## Diagnostic work retained
 

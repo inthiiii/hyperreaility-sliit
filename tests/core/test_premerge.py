@@ -115,11 +115,11 @@ def test_no_feedback_ablation(load_case):
 
 
 def test_evidence_revision_reassesses_specialists(load_case):
-    s=load_case();a=adapter([batch(s),finding(),finding(),review('revise'),batch(s),finding(),finding(),review()])
+    s=load_case();a=adapter([batch(s),finding(),finding(),review('revise'),review('revise'),batch(s),finding(),finding(),review()])
     result=Coordinator(a,budget=a.budget).run(s,'multi')
     # Known usage replaces each completed reservation; both specialist rounds
     # and the final review must still occur under the unchanged whole-run caps.
-    assert result.status=='awaiting_approval' and len(a.client.requests)==8
+    assert result.status=='awaiting_approval' and len(a.client.requests)==9
     assert sum(m['sender']=='field_resource_planner' for m in result.messages)==2
 
 
