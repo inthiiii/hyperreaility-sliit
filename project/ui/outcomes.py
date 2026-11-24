@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from project.ui.history_data import csv_export, json_export, public_payload
-from project.ui.outcome_data import current_outcome, metric_rows, numeric_fields, plot_rows, trajectory_rows
+from project.ui.outcome_data import current_outcome, metric_rows, numeric_fields, plot_rows, trajectory_rows, service_interval_rows
 
 
 def render_outcome(result, prefix, historical=False):
@@ -24,6 +24,23 @@ def render_outcome(result, prefix, historical=False):
                            mime='text/csv', key=prefix + '_metrics_csv', on_click='ignore')
     else:
         st.info('No metrics were returned. Missing values are not assumed to be zero.')
+    intervals = service_interval_rows(result)
+    if intervals:
+        st.subheader('Measured service availability')
+        st.caption('Bars show the evaluator’s half-open availability intervals [start, end), in incident minutes.')
+        st.dataframe(intervals, hide_index=True, width='stretch')
+        chart = alt.Chart(pd.DataFrame(intervals)).mark_bar().encode(
+            x=alt.X('Start (min):Q', title='Incident minutes'), x2='End (min):Q',
+            y=alt.Y('Service:N'), color='Critical:N',
+            tooltip=['Service:N', 'Start (min):Q', 'End (min):Q', 'Available minutes:Q'])
+        st.altair_chart(chart, width='stretch')
+    if result.run_metadata.get('replan_required'):
+        st.warning('Replanning required. This output does not authorize another plan or establish a completed replan/resume cycle.')
+    action_outcomes = result.run_metadata.get('action_outcomes')
+    if isinstance(action_outcomes, dict) and action_outcomes:
+        st.subheader('Action outcomes')
+        st.dataframe(public_payload([{'Action': key, **value} for key, value in action_outcomes.items()
+                                    if isinstance(value, dict)]), hide_index=True, width='stretch')
     st.subheader('Restoration trajectory')
     rows = trajectory_rows(result)
     if not rows:

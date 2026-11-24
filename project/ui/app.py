@@ -7,6 +7,7 @@ import streamlit as st
 
 from project.llm.health import preflight
 from project.ui.catalog import load_catalog
+from project.ui.backend import connect_static_backend
 from project.ui.incident import render_incident
 from project.ui.planning import render_planning
 from project.ui.session import get_dashboard_session
@@ -21,12 +22,12 @@ def _pill(text, amber=False):
     return f'<span class="relink-pill{" amber" if amber else ""}">{escape(text)}</span>'
 
 
-def _steps():
+def _steps(connected=False):
     labels = (
         ('01', 'Understand the incident', 'Choose a validated scenario and establish the operating context.', 'Available'),
         ('02', 'Build a recovery plan', 'Inspect evidence and coordinate a feasible restoration schedule.', 'Available'),
         ('03', 'Review and approve', 'Keep the operator in control before any simulated action.', 'Available'),
-        ('04', 'Measure the outcome', 'Compare independently simulated service restoration.', 'Awaiting simulator'),
+        ('04', 'Measure the outcome', 'Compare independently simulated service restoration.', 'Available' if connected else 'Awaiting simulator'),
     )
     for column, (number, title, description, status) in zip(st.columns(4), labels):
         with column, st.container(border=True):
@@ -36,7 +37,7 @@ def _steps():
                     + _pill(status, status != 'Available'))
 
 
-def _overview(choice):
+def _overview(choice, session):
     scenario = choice.scenario
     st.html('<div class="relink-eyebrow">Incident workspace</div>')
     st.title('Restore with a clearer picture.')
@@ -64,10 +65,11 @@ def _overview(choice):
         st.subheader('Planning workspace')
         st.write('Open Planning to generate a schedule and inspect the recorded evidence and checks.')
         st.caption('Planning runs only when you explicitly click Generate plan on the Planning page.')
-        st.caption('Review and record your decision on Planning. Simulation awaits the independent evaluator.')
+        st.caption('Review and approve on Planning, then simulate the static episode.' if session.core.simulator else
+                   'Review and record your decision on Planning. Simulation awaits the independent evaluator.')
     st.write('')
     st.subheader('From incident to measured recovery')
-    _steps()
+    _steps(session.core.simulator is not None)
 
 
 def _settings(health, session, choice):
@@ -100,7 +102,8 @@ def _settings(health, session, choice):
             st.code(choice.key, language=None)
             st.write('Content hash: ' + choice.content_hash[:16])
         st.write('Available: incident inspection, planning, recorded decisions, approval-gated simulator boundary, read-only history, exports and evaluator-output views.')
-        st.write('Pending: authenticated identity, real simulator wiring and validation of actual restoration outcomes.')
+        st.write('Simulator: ' + (session.simulator_label or 'Not installed/connected'))
+        st.write('Pending: event-driven continuation, independent benchmark audit and authenticated identity.')
 
 
 def render_app(root=None):
@@ -132,6 +135,7 @@ def render_app(root=None):
                                key='scenario_picker', label_visibility='collapsed')
             choice = by_key[key]
             changed = session.select(choice)
+            connect_static_backend(session, choice, root)
             if changed and session.selection_revision > 1:
                 st.caption('Scenario changed. Previous plan, approval and results were cleared.')
             st.caption('Development fixture' if catalog.using_fixtures else 'Processed demo/development input')
@@ -161,7 +165,7 @@ def render_app(root=None):
         st.write('Add approved visible inputs under data/processed/agent_inputs/demo or development. '
                  'The bundled tests/core/fixtures folder is the development fallback.')
     elif page == 'Overview':
-        _overview(choice)
+        _overview(choice, session)
     elif page == 'Incident':
         render_incident(choice)
     elif page == 'Planning':

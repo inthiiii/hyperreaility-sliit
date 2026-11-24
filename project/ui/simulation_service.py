@@ -75,12 +75,13 @@ def simulate_approved(session, choice, expected_binding, operator_id, root):
     except Exception as error:
         session.simulation_result = None
         attempt.pop('result', None);attempt.pop('result_hash', None)
-        attempt.update(status='failed', error_type=type(error).__name__,
+        attempt.update(status='unsupported' if isinstance(error, IntegrationNotReady) else 'failed',
+                       error_type=type(error).__name__,
                        finished_at_utc=datetime.now(timezone.utc).isoformat())
         try:
             save_record(directory, attempt['attempt_id'], attempt)
         except Exception:
             attempt['audit_warning'] = 'Simulation attempt record could not be saved.'
-        return 'failed'
+        return 'unsupported' if isinstance(error, IntegrationNotReady) else 'failed'
     finally:
         session.busy = False
