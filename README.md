@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: tested core and dashboard interface available.** Static scheduling, validation, approval boundaries and bounded agent coordination are implemented. The dashboard supports navigation, validated synthetic scenario selection, overview/configuration status and read-only incident network, evidence, resource and policy views. The Planning page now prepares actual core schedules, evidence, validation and run records through explicit actions. Operator approval/rejection is recorded with content-bound checks. Actual independent simulation, timed events and measured evaluation remain pending. See [dashboard Push 5](docs/DASHBOARD_PUSH5.md), [core limitations](docs/CORE_IMPLEMENTATION.md) and [shared contracts](docs/DATA_CONTRACT.md). No live hosted-model validation or measured benchmark improvement is claimed.
+> **Status: integrated synthetic recovery MVP.** The dashboard supports evidence inspection, operator clarification, validated planning, recorded approval, independent incident simulation and event-time continuation. Hosted single-/multi-agent workflows now share four decision stages, operational information, tools and budget caps; evidence-linked deferral requests can change the validated schedule. See [hosted protocol and verification](docs/HOSTED_FAIRNESS.md), [operator clarification](docs/OPERATOR_CONFIRMATION.md) and [benchmark scoring](docs/BENCHMARK_SCORING.md). Live provider verification awaits an exact model ID; no hosted performance advantage is claimed.
 
 ## Overview
 
@@ -290,3 +290,15 @@ See [Zahra's handoff](docs/handoffs/zahra.md),
 [the rehearsal guide](docs/DEMO_AND_FAILURE_FLOWS.md).
 The data release is frozen as a candidate snapshot. Independent human review and
 hosted-model benchmarking remain separate required validation work.
+
+## Matched hosted execution checkpoint
+
+Single-agent and multi-agent workflows use the same four stages and tools. Original evidence, approved weights, independent validation and fresh human approval remain required. The benchmark freezes configuration, records actual usage/failures and emits a paired comparison with exclusions and coverage.
+
+For bounded live verification, select an exact OpenAI model ID and run:
+
+```sh
+python -m project.evaluation.hosted_check --model YOUR_EXACT_MODEL_ID --env-file .env --output results/local_benchmarks/hosted-check-01 --allow-live
+```
+
+This explicitly authorizes two development attempts (single and multi), each capped at 12 calls, 24,000 input tokens, 4,800 output tokens and 180 seconds. API charges are possible and are not estimated. Use a new output directory for each run. See [the protocol](docs/HOSTED_FAIRNESS.md) for assumptions and exact verification status.

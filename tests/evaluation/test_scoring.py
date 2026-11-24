@@ -103,6 +103,8 @@ def test_unusable_evaluator_output_is_not_scored(tmp_path,monkeypatch,damage):
 class FakeAdapter:
     """Injected transport-free single-agent replies, with real budget accounting."""
     injected_client=True
+    provider='openai'
+    model='injected-test'
     def __init__(self,budget,closed):self.budget=budget;self.closed=closed
     def complete(self,role,payload,response_model,max_output=700):
         self.budget.reserve([{'content':'injected response test'}],max_output)
@@ -110,6 +112,7 @@ class FakeAdapter:
         if response_model.__name__=='FactBatch':
             reports=[Report.model_validate(r) for r in payload['reports']]
             return response_model(facts=template_facts(SimpleNamespace(reports=reports)))
+        if response_model.__name__=='Finding':return response_model(finding='Inspected resources and policy',evidence_ids=['REP-001'])
         return response_model.model_validate({'decision':'approve','findings':[],'evidence_ids':[],'revision_request':''})
     def close(self):
         self.closed.append(True)
@@ -126,16 +129,16 @@ def fake_hosted(monkeypatch):
 def test_calls_are_aggregated_across_replans_and_cleanup_failure_does_not_lose_rows(tmp_path,monkeypatch):
     closed=fake_hosted(monkeypatch)
     row=runner.run_benchmark([input_path('DEV-010')],tmp_path,variants=['single'],repeats=1,allow_live=True)[0]
-    assert row['status']=='completed' and row['model_calls']==4
-    assert row['input_tokens']==20 and row['output_tokens']==12
+    assert row['status']=='completed' and row['model_calls']==8
+    assert row['input_tokens']==40 and row['output_tokens']==24
     assert row['usage_complete'] and len(closed)==2 and len(row['cleanup_errors'])==2
     assert 'private cleanup detail' not in (tmp_path/'attempts.jsonl').read_text()
 
 
 def test_whole_incident_budget_cannot_reset_at_replan(tmp_path,monkeypatch):
     fake_hosted(monkeypatch)
-    monkeypatch.setattr(runner,'LIMITS',{**runner.LIMITS,'max_calls':2})
+    monkeypatch.setattr(runner,'LIMITS',{**runner.LIMITS,'max_calls':4})
     row=runner.run_benchmark([input_path('DEV-010')],tmp_path,variants=['single'],repeats=1,allow_live=True)[0]
     assert row['status']=='failed' and row['error_type']=='BudgetExceeded'
-    assert row['failure_phase']=='budget' and row['model_calls']==2
+    assert row['failure_phase']=='budget' and row['model_calls']==4
     assert row['actual_weighted_downtime'] is None and len(row['episode_artifacts'])==1

@@ -67,3 +67,7 @@ The independent work is ready for teammate integration. See `docs/PREMERGE_CHECK
 Recognized fixture reports are independently retained by the resolver so an agent cannot omit a known contradictory fixture report. Claims contradicting a cited recognized sentence are rejected. This does not establish semantic entailment for arbitrary field messages. Input remains untrusted, and general-language evidence verification needs further development and testing.
 
 Role output reservations are 700 tokens for extraction, 300 for a specialist finding and 400 for review, inside the same whole-run limits. Larger scenarios or revision loops may exhaust the conservative input allowance and escalate. These are measurable failures, not omitted evaluation cases. No transport retry or model selection is automatic.
+
+## Priority Steps 3 and 4 checkpoint — 24 November
+
+The matched hosted protocol supersedes the earlier baseline-parity gap: both modes now have the same four stages and operational context/tools under the same caps. Typed, evidence-linked action deferrals can change a candidate and its version; the dashboard shows the effect before separate approval. Actual usage reconciles completed reservations, and benchmark manifests freeze model/protocol settings. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md) for the implemented boundaries and pending live model verification. Earlier test counts and absent-simulator statements above describe historical checkpoints.

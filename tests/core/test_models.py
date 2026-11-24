@@ -49,9 +49,9 @@ def test_model_configuration_required():
     with pytest.raises(ValueError):HostedAdapter('openai','','')
 
 def test_single_agent_can_review_and_revise(load_case):
-    s=load_case();a=adapter([batch(s),review('revise'),batch(s),review()])
+    s=load_case();a=adapter([batch(s),finding(),finding(),review('revise'),batch(s),finding(),finding(),review()])
     r=Coordinator(a).run(s,'single')
-    assert r.status=='awaiting_approval' and len(r.model_usage)==4
+    assert r.status=='awaiting_approval' and len(r.model_usage)==8
     roles={m['sender'] for m in r.messages}
     assert 'single_agent' in roles and 'plan_reviewer' not in roles
 
@@ -77,10 +77,10 @@ def test_exhausted_run_cannot_reach_approval(load_case):
     assert r.status=='escalated' and r.plan is None
 
 def test_revision_round_limit(load_case):
-    s=load_case();a=adapter([batch(s),review('revise'),batch(s),review('revise'),batch(s),review('revise'),batch(s),review('revise')])
+    s=load_case();a=adapter([reply for _ in range(4) for reply in (batch(s),finding(),finding(),review('revise'))])
     r=Coordinator(a).run(s,'single')
     assert r.status=='escalated'
-    assert len(a.client.requests)<=8
+    assert len(a.client.requests)<=12
 
 def test_reported_usage_limit_cannot_authorize(load_case):
     s=load_case();a=adapter([batch(s)])

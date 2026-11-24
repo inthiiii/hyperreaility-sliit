@@ -41,7 +41,7 @@ def test_zero_call_coordinator_cannot_be_reused(load_case):
 
 
 def test_review_escalation_cannot_be_operator_approved(load_case):
-    s=load_case();result=Coordinator(adapter([batch(s),review('escalate')])).run(s,'single')
+    s=load_case();result=Coordinator(adapter([batch(s),finding(),finding(),review('escalate')])).run(s,'single')
     assert result.plan is not None and result.validation.valid
     with pytest.raises(ValueError):approve_run(result,'operator')
 
@@ -86,7 +86,7 @@ def test_output_reservation_positive():
 
 
 def test_prompt_and_schema_fingerprints(load_case):
-    s=load_case();result=Coordinator(adapter([batch(s),review()])).run(s,'single')
+    s=load_case();result=Coordinator(adapter([batch(s),finding(),finding(),review()])).run(s,'single')
     assert result.metadata['transport']=='injected_test_client'
     assert all(len(r['prompt_sha256'])==64 and len(r['schema_sha256'])==64 for r in result.model_usage)
 
@@ -95,7 +95,7 @@ def test_scheduling_feedback_changes_action_plan(load_case):
     s=load_case()
     revision=json.dumps({'decision':'revise','findings':[], 'evidence_ids':['REP-001'],
         'revision_kind':'schedule','revision_request':'Optimize weighted service availability rather than earliest completion'})
-    result=Coordinator(adapter([batch(s),revision,review()]),planner='greedy').run(s,'single')
+    result=Coordinator(adapter([batch(s),finding(),finding(),revision,review()]),planner='greedy').run(s,'single')
     schedules=[m['finding'] for m in result.messages if m['sender']=='deterministic_scheduler']
     assert result.status=='awaiting_approval' and len(schedules)==2
     assert len(schedules[0]['actions'])>len(schedules[1]['actions'])
@@ -117,9 +117,9 @@ def test_no_feedback_ablation(load_case):
 def test_evidence_revision_reassesses_specialists(load_case):
     s=load_case();a=adapter([batch(s),finding(),finding(),review('revise'),batch(s),finding(),finding(),review()])
     result=Coordinator(a,budget=a.budget).run(s,'multi')
-    # Specialist reassessment is real; the conservative global input cap can stop
-    # the second review. Such runs must escalate, never silently skip review.
-    assert result.status=='escalated' and any('BudgetExceeded' in x for x in result.reasons)
+    # Known usage replaces each completed reservation; both specialist rounds
+    # and the final review must still occur under the unchanged whole-run caps.
+    assert result.status=='awaiting_approval' and len(a.client.requests)==8
     assert sum(m['sender']=='field_resource_planner' for m in result.messages)==2
 
 

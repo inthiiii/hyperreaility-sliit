@@ -10,6 +10,8 @@ import hashlib
 import importlib.metadata
 import json
 import math
+import os
+import platform
 from pathlib import Path
 import random
 import time
@@ -24,6 +26,8 @@ from project.data.evaluator import EvaluatorLoader
 from project.simulation.episode import IncidentEpisode
 from project.llm.client import HostedAdapter, RunBudget, BudgetExceeded
 from project.llm.health import preflight
+from project.agents.protocol import protocol_manifest, PROTOCOL_VERSION
+from project.evaluation.comparison import paired_summary
 
 VARIANTS = {
     'heuristic': ('template', 'greedy', True, True),
@@ -45,8 +49,8 @@ def source_hash():
 
 def _save(path, payload):
     encoded = json.dumps(payload, indent=2, allow_nan=False) + '\n'
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open('x', encoding='utf-8', newline='\n') as stream:
+    path.parent.mkdir(parents=True, exist_ok=True,mode=0o700)
+    with open(path,'x',encoding='utf-8',newline='\n',opener=lambda p,flags:os.open(p,flags,0o600)) as stream:
         stream.write(encoded)
 
 
@@ -96,7 +100,15 @@ def _score(result, case):
     }
 
 
-def _attempt(case, variant, repeat, output, data_root, max_episodes):
+def model_configuration():
+    health=preflight()
+    return {'provider':health['provider'],'model':health['model'],
+            'endpoint_sha256':digest(os.environ.get('LLM_BASE_URL','')),
+            'response_format':'json_object','temperature':'provider_default',
+            'sdk_retries':0,'schema_repair_attempts':1,'protocol_version':PROTOCOL_VERSION}
+
+
+def _attempt(case, variant, repeat, output, data_root, max_episodes, configuration=None):
     mode, planner, reviewer, feedback = VARIANTS[variant]
     started = time.monotonic()
     used = {'calls': 0, 'input': 0, 'output': 0}
@@ -109,7 +121,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes):
            'actual_weighted_downtime': None, 'scoring_status': 'not_scored_failed',
            'approval_mode': 'automated_benchmark_operator', 'approved_episodes': 0,
            'run_ids': [], 'episode_artifacts': [], 'model_usage': [], 'api_cost': None,
-           'failure_phase': None}
+           'failure_phase': None,'model_configuration':configuration,'decision_effect_count':0}
     phase = 'planning'
     try:
         for episode_number in range(max_episodes):
@@ -120,7 +132,10 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes):
             phase = 'planning'
             try:
                 if mode != 'template':
+                    if model_configuration()!=configuration:raise ValueError('Hosted configuration changed during the experiment')
                     adapter = HostedAdapter.from_env(budget=budget)
+                    if (adapter.provider,adapter.model)!=(configuration['provider'],configuration['model']):
+                        raise ValueError('Hosted adapter does not match the frozen model configuration')
                 result = Coordinator(adapter, budget=budget, planner=planner, reviewer_enabled=reviewer,
                     feedback_enabled=feedback, trace_dir=output/'runs').run(scenario, mode, state_version=version)
             finally:
@@ -135,6 +150,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes):
                     except Exception as error:
                         row.setdefault('cleanup_errors', []).append(type(error).__name__)
             _check_time(started)
+            row['decision_effect_count']+=len(result.metadata.get('decision_effects',[]))
             row['run_id'] = result.run_id
             row['run_ids'].append(result.run_id)
             row['plan_feasible'] = bool(result.validation and result.validation.valid)
@@ -197,6 +213,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes):
     finally:
         row['model_calls'] = used['calls']
         row['model_usage'] = usage
+        row['returned_models']=sorted({r['returned_model'] for r in usage if r.get('returned_model')})
         row['input_tokens'] = sum(r.get('input_tokens', 0) for r in usage) if used['calls'] == len(usage) and all('input_tokens' in r for r in usage) else None
         row['output_tokens'] = sum(r.get('output_tokens', 0) for r in usage) if used['calls'] == len(usage) and all('output_tokens' in r for r in usage) else None
         row['usage_complete'] = row['input_tokens'] is not None and row['output_tokens'] is not None
@@ -224,31 +241,34 @@ def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3,
         raise ValueError('Hosted benchmarks require --allow-live and a configured model/key')
     data_root = Path(data_root or DATA_ROOT).resolve()
     output = Path(output)
-    output.mkdir(parents=True, exist_ok=True)
-    manifest = {'format_version': 2, 'created_at_utc': datetime.now(timezone.utc).isoformat(),
+    output.mkdir(parents=True, exist_ok=True,mode=0o700)
+    configuration=model_configuration() if hosted else None
+    manifest = {'format_version': 3, 'created_at_utc': datetime.now(timezone.utc).isoformat(),
         'source_sha256': source_hash(), 'cases': {c.scenario_id: digest(c) for c in cases},
         'variants': list(variants), 'repeats': repeats, 'order_seed': seed,
-        'model_configuration': preflight() if hosted else None,
+        'model_configuration': configuration, 'comparison_protocol':protocol_manifest(),
+        'runtime':{'python':platform.python_version(),'platform':platform.platform(),'machine':platform.machine()},
         'packages': {name: importlib.metadata.version(name) for name in ('pydantic', 'ortools', 'networkx', 'openai')},
         'scoring_status': 'independent_incident_evaluator_connected',
         'approval_mode': 'automated_benchmark_operator', 'whole_incident_limits': LIMITS,
         'max_episodes': max_episodes,
-        'scope': 'Engineering scoring integration; template baselines are not LLM agents. Independent held-out review and formal AI baseline fairness remain separate gates.'}
+        'scope': 'Matched tool-assisted workflow comparison. Template baselines are not LLM agents. Independent held-out review remains a separate gate; development results do not establish superiority.'}
     _save(output/'manifest.json', manifest)
     jobs = [(c, v, n) for c in cases for n in range(repeats) for v in variants]
     random.Random(seed).shuffle(jobs)
     rows = []
-    with (output/'attempts.jsonl').open('x', encoding='utf-8') as stream:
+    with open(output/'attempts.jsonl','x',encoding='utf-8',opener=lambda p,flags:os.open(p,flags,0o600)) as stream:
         for case, variant, repeat in jobs:
-            row = _attempt(case, variant, repeat, output, data_root, max_episodes)
+            row = _attempt(case, variant, repeat, output, data_root, max_episodes,configuration)
             encoded = json.dumps(row, allow_nan=False)
             rows.append(row)
             stream.write(encoded + '\n');stream.flush()
     columns = sorted({key for row in rows for key in row})
-    with (output/'attempts.csv').open('x', newline='', encoding='utf-8') as stream:
+    with open(output/'attempts.csv','x',newline='',encoding='utf-8',opener=lambda p,flags:os.open(p,flags,0o600)) as stream:
         writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n');writer.writeheader()
         writer.writerows({key: json.dumps(value) if isinstance(value, (dict, list)) else value
                          for key, value in row.items()} for row in rows)
+    _save(output/'comparison.json',paired_summary(rows))
     _save(output/'summary.json', {'attempts': len(rows),
         'scored': sum(r['scoring_status'] == 'scored' for r in rows),
         'escalated': sum(r['status'] == 'escalated' for r in rows),
