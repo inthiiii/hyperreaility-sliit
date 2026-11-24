@@ -378,7 +378,7 @@ def _simulate_static(scenario: ScenarioInput, approved_plan: Plan, approval: App
 
 
 def simulate(scenario, approved_plan, approval, isolated_truth, *, state=None):
-    if isolated_truth.future_events:
+    if isolated_truth.future_events or scenario.current_time_min != 0:
         from .episode import IncidentEpisode
         return IncidentEpisode(scenario, isolated_truth).advance(scenario, approved_plan, approval, state=state)
     return _simulate_static(scenario, approved_plan, approval, isolated_truth, state=state)

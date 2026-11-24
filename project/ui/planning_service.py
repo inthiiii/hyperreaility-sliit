@@ -149,8 +149,9 @@ def timeline_rows(result):
 
 
 def fact_rows(result):
+    superseded={rid for report in result.state.scenario.reports for rid in report.supersedes_report_ids}
     return [{'Asset': fact.target_type + ':' + fact.target_id, 'Attribute': fact.attribute,
              'Value': 'Unknown' if fact.value is None else 'True' if fact.value else 'False',
-             'Resolver status': fact.status, 'Evidence': ', '.join(fact.evidence_ids),
+             'Resolver status': 'superseded confirmation' if set(fact.evidence_ids)&superseded else fact.status, 'Evidence': ', '.join(fact.evidence_ids),
              'Observed (min)': fact.observed_at_min, 'Received (min)': fact.received_at_min,
              'Reason': fact.reason} for fact in result.state.facts]

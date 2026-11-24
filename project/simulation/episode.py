@@ -18,8 +18,8 @@ from .metrics import Segment, ServiceRef, compute_metrics, service_intervals
 
 class IncidentEpisode:
     def __init__(self, scenario, truth):
-        if scenario.current_time_min != 0:
-            raise SimulationRejected(['An incident must start at minute zero'])
+        if any(e.at_min <= scenario.current_time_min for e in truth.future_events):
+            raise SimulationRejected(['An initial snapshot cannot skip incident events; use the original checkpoint'])
         _check_truth(scenario, truth)
         self._initial = scenario.model_copy(deep=True)
         self._truth = truth.model_copy(deep=True)
@@ -67,6 +67,23 @@ class IncidentEpisode:
         power = {s for s, v in self._grid.items() if v} | {s for s, end in self._active.values() if end > self._time}
         return evaluate_services(self._parents, self._initial.core_id, self._initial.services,
                                  self._equipment, power, self._links)
+
+    @property
+    def visible_hash(self):
+        return digest(self._expected)
+
+    def accept_confirmation(self, scenario):
+        """Rebind visible evidence only; operator assertions never change physical truth."""
+        if self._complete:
+            raise SimulationRejected(['Incident already completed'])
+        scenario=ScenarioInput.model_validate(scenario.model_dump(mode='python'))
+        before=self._expected.model_dump(mode='json');after=scenario.model_dump(mode='json')
+        old=before.pop('reports');new=after.pop('reports')
+        if before!=after or new[:len(old)]!=old or len(new)<=len(old):
+            raise SimulationRejected(['Only appended operator evidence may update an incident checkpoint'])
+        if any(r['source_type']!='operator_confirmation' for r in new[len(old):]):
+            raise SimulationRejected(['An incident evidence update must be an operator confirmation'])
+        self._expected=scenario.model_copy(deep=True)
 
     def advance(self, scenario, plan, approval, *, state=None):
         """Transactionally advance one approved plan to the next incident event/end."""

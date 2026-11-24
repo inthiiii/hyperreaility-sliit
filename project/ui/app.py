@@ -138,10 +138,11 @@ def render_app(root=None):
             choice = by_key[key]
             changed = session.select(choice)
             connect_static_backend(session, choice, root)
-            choice = session.continuation_choice or choice
+            choice = session.continuation_choice or session.confirmation_choice or choice
             if changed and session.selection_revision > 1:
                 st.caption('Scenario changed. Previous plan, approval and results were cleared.')
-            st.caption('Development fixture' if catalog.using_fixtures else 'Processed demo/development input')
+            st.caption('Operator clarification active · inspect resolved facts on Planning' if choice.source=='operator_confirmed' else
+                       'Development fixture' if catalog.using_fixtures else 'Processed demo/development input')
         else:
             session.clear_selection()
             st.warning('No valid visible scenarios found.')

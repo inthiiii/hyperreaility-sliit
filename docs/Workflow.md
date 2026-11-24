@@ -4,7 +4,7 @@
 
 **Team:** HyperReAIlity, SLIIT
 **Competition:** Innodata AI Catalyst 2026 - University Track
-**Version:** 0.2 — implemented simulation and continuation
+**Version:** 0.3 — operator clarification, simulation and continuation
 **Last updated:** 24 November 2026
 
 This file describes the proposed process from the submitted [Proposal.docx](Proposal.docx). The planned agent design remains subject to hosted evaluation. Independent static/event simulation and the approval-gated continuation path are implemented; see handoffs/zahra.md for verified semantics and limits. See [PROJECT_DETAILS.md](PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
@@ -162,3 +162,7 @@ partial episodes; final metrics cover the original 720-minute timeline exactly
 once. Expected generator expiry is part of the visible continuation contract;
 private future incident events are never passed to agents. Checkpoints are local
 session state; history is read-only and cannot restore authorization.
+
+## Implemented clarification checkpoint
+
+Planning now provides an explicit operator confirmation form. Recording evidence preserves the source reports, versions the state, clears prior plan/approval and requires a separately reviewed replacement plan. Corrections and confirmation history are auditable. See [OPERATOR_CONFIRMATION.md](OPERATOR_CONFIRMATION.md) for supported facts, continuation semantics and verification limits.

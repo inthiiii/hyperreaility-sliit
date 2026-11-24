@@ -57,6 +57,10 @@ def connect_static_backend(session, choice, root):
         if episode is None:
             truth = evaluator.EvaluatorLoader(root / 'data/evaluation/ground_truth').load(state.scenario_id)
             episode = episodes.IncidentEpisode(visible, truth)
+        # Only appended, audited operator reports may rebind the visible input.
+        # The engine checks all other fields and never changes its private truth.
+        if digest(state.scenario) != episode.visible_hash:
+            episode.accept_confirmation(state.scenario)
         result = episode.advance(state.scenario, plan, core.approval, state=state)
         metadata = dict(result.run_metadata)
         metadata.update(metric_units=METRIC_UNITS, integration_scope='event_episode',

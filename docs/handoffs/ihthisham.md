@@ -46,3 +46,15 @@ suite: 364 passed. Offline CLI smoke: eight attempts, four scored and four expec
 evidence escalations, zero model calls. See ../BENCHMARK_SCORING.md for exact
 commands and fixture outcomes. No live inference, formal baseline-fairness changes
 or remaining implementation steps were performed in this checkpoint.
+
+
+## Priority Step 2 — operator clarification (24 November)
+
+The joint core/dashboard integration now records explicit operator fact confirmation,
+retains original reports and auditable corrections, advances state versions, clears
+stale plans/approval, and requires separate replanning and approval. History exposes
+confirmation records. The independent evaluator preserves its physical truth and
+same-incident continuation metrics. See [operator confirmation](../OPERATOR_CONFIRMATION.md)
+for workflow, regression coverage and remaining identity/verification limits.
+This checkpoint supersedes earlier statements that operator clarification was absent;
+live hosted-model evaluation remains a later priority.

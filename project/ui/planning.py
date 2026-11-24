@@ -6,6 +6,7 @@ import streamlit as st
 from project.core.tracing import redact
 from project.llm.health import preflight
 from project.ui.review import render_review
+from project.ui.confirmation import render_confirmation
 from project.ui.workflow import render_workflow
 from project.ui.planning_service import (
     begin_new_attempt, fact_rows, prepare_plan, request_key, schedule_rows, timeline_rows,
@@ -140,7 +141,8 @@ def render_planning(choice, session, root):
     st.title('A plan worth reviewing.')
     st.text('Selected incident: ' + choice.scenario.scenario_id)
     if choice.scenario.current_time_min:
-        st.info(f'Continuing the same incident at minute {choice.scenario.current_time_min} of {choice.scenario.horizon_min}. A new plan and fresh approval are required.')
+        prefix = 'Continuing the same incident' if session.continuation_context is not None else 'Incident clock'
+        st.info(f'{prefix} at minute {choice.scenario.current_time_min} of {choice.scenario.horizon_min}. A new plan and fresh approval are required.')
         committed = (session.continuation_context or {}).get('committed_actions', [])
         if committed:
             st.caption('Already-started unaffected work continues under the earlier approval. These crews remain reserved until the listed work end.')
@@ -214,4 +216,5 @@ def render_planning(choice, session, root):
     elif not attempt:
         st.info('No plan generated. Choose a mode and scheduler, then explicitly generate a plan.')
     render_workflow(session, choice)
+    render_confirmation(choice, session, root)
     render_review(choice, session, root)

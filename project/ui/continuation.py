@@ -23,6 +23,7 @@ def accept_checkpoint(session, choice, root):
     selected = ScenarioChoice(choice.key, 'incident_checkpoint', checkpoint, digest(checkpoint))
     begin_new_attempt(session)  # Monotonic CoreSession state versions and old audit history survive.
     session.continuation_context = {'committed_actions': result.run_metadata.get('committed_actions', [])}
+    session.confirmation_choice = None
     session.continuation_choice = selected
     session.scenario_hash = selected.content_hash
     return selected
