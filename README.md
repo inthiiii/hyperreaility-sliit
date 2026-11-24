@@ -275,3 +275,14 @@ Operator approval/rejection now records exact run/plan/state bindings, notes and
 ### Dashboard Push 5 and independent merge
 
 Read-only local run/decision/attempt history, safe exports and evaluator-output tables/charts are available. Missing results remain pending, null metrics remain unavailable, and opening history never restores authorization or starts inference. **161 tests pass**, including 92 UI/service checks. The dashboard workstream can be reviewed and merged independently; the real evaluator, actual outcome verification and full-system evaluation remain pending. See [Push 5](docs/DASHBOARD_PUSH5.md) and the [merge checklist](docs/DASHBOARD_MERGE_CHECKLIST.md).
+
+### Static simulator dashboard integration
+
+The dashboard can attach Zahra's independent simulator when its backend modules
+are installed. It reconnects after scenario changes and runs only after a recorded
+operator approval. Results show measured service intervals, documented metric
+units and action outcomes. With starter data alone, simulation stays disabled.
+Dynamic continuation remains pending; this milestone refuses unsupported episodes
+instead of publishing incomplete measurements. See
+[the integration guide](docs/DASHBOARD_STATIC_INTEGRATION.md) for dependencies,
+DEMO-005's expected results and the offline verification flow.

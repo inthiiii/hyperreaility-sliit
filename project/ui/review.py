@@ -28,6 +28,7 @@ def _simulation_callback(session, choice, root, binding):
         session.review_feedback = {'kind': 'success' if status in ('completed', 'duplicate') else 'error',
             'message': 'Simulation result recorded. Open Results to inspect evaluator-reported outcomes.' if status == 'completed' else
                        'Simulation was already attempted; it was not run again.' if status == 'duplicate' else
+                       'This episode requires unfinished simulator support (dynamic continuation or an exact-horizon event). No measured result was published.' if status == 'unsupported' else
                        'Simulation failed or returned an invalid result. No automatic retry was made; inspect the attempt record.'}
     except (ReviewBlocked, IntegrationNotReady) as error:
         session.review_feedback = {'kind': 'error', 'message': str(error)}
@@ -96,10 +97,14 @@ def render_review(choice, session, root):
     st.button('Simulate approved plan', key='simulate_plan', width='stretch',
         disabled=not connected or not approved or not same_operator or already or session.busy,
         on_click=_simulation_callback, args=(session, choice, root, binding))
+    if connected:
+        st.caption('Static episodes only. Event/replanning episodes stop without publishing incomplete measurements.')
     if session.simulation_attempt:
         attempt = session.simulation_attempt
         if attempt['status'] == 'completed':
             st.success('Independent callback result recorded for this plan. No new simulation occurs on rerender.')
+        elif attempt['status'] == 'unsupported':
+            st.warning('Simulator support is pending for this episode. No result was published and no automatic retry will run.')
         elif attempt['status'] == 'failed':
             st.error('The simulation attempt did not produce an accepted result. Generate a fresh plan after investigating; this attempt will not run again automatically.')
         with st.expander('Simulation attempt record'):

@@ -78,7 +78,7 @@ def _validate(kind, payload, filename):
     if payload.get('attempt_id') != filename or not isinstance(payload.get('scenario_id'), str):
         raise ValueError('Attempt identity mismatch')
     if kind == 'simulation':
-        statuses = ('starting', 'completed', 'failed')
+        statuses = ('starting', 'completed', 'failed', 'unsupported')
         if payload.get('status') == 'completed':
             result = SimulationResult.model_validate(payload.get('result'))
             if payload.get('result_hash') != digest(result) or (result.scenario_id, result.state_version) != (

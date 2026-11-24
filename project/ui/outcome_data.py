@@ -62,3 +62,24 @@ def plot_rows(rows, time_field, series):
     if any(value is None for value in times) or any(right <= left for left, right in zip(times, times[1:])):
         raise ValueError('Time values must be present and strictly increasing; raw rows remain available')
     return [{'Time': row[time_field], 'Series': key, 'Value': row.get(key)} for row in rows for key in series]
+
+
+def service_interval_rows(result):
+    """Project explicit evaluator intervals; never fill unavailable gaps."""
+    records = result.run_metadata.get('service_availability', {})
+    if not isinstance(records, dict):
+        return []
+    rows = []
+    for service, data in records.items():
+        if not isinstance(data, dict) or not isinstance(data.get('intervals'), list):
+            continue
+        for interval in data['intervals']:
+            if (not isinstance(interval, (list, tuple)) or len(interval) != 2 or
+                    any(type(t) not in (int, float) or not math.isfinite(t) for t in interval)):
+                continue
+            start, end = interval
+            if start < 0 or end <= start:
+                continue
+            rows.append({'Service': service, 'Start (min)': start, 'End (min)': end,
+                         'Available minutes': end - start, 'Critical': bool(data.get('critical'))})
+    return rows
