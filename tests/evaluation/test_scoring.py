@@ -55,8 +55,22 @@ def test_dynamic_score_covers_two_approvals_without_resetting_horizon(tmp_path):
 
 
 @pytest.mark.parametrize('sid',['DEV-006','DEV-008'])
-def test_escalated_evidence_never_gets_a_downtime_score(tmp_path,sid):
+def test_unresolved_evidence_is_planned_around_and_scored(tmp_path,sid):
+    # v14 policy: unknown or conflicting facts block only the affected work; the
+    # baseline still produces a validated plan and an independent score.
     row=run(tmp_path,sid)
+    assert row['status']=='completed' and row['scoring_status']=='scored'
+    assert row['actual_weighted_downtime'] is not None and row['episode_artifacts']
+
+
+def test_escalated_runs_never_get_a_downtime_score(tmp_path,monkeypatch):
+    from project.core.orchestrator import AgentOrchestrator
+    original=AgentOrchestrator._no_ai_baseline
+    def failing(self,scenario,version):
+        result=original(self,scenario,version)
+        return result.model_copy(update={'status':'escalated','reasons':['forced for test']})
+    monkeypatch.setattr(AgentOrchestrator,'_no_ai_baseline',failing)
+    row=run(tmp_path,'DEV-006')
     assert row['status']=='escalated' and row['scoring_status']=='not_scored_escalated'
     assert row['actual_weighted_downtime'] is None and not row['episode_artifacts']
 

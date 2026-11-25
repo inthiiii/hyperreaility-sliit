@@ -111,8 +111,7 @@ class AgentOrchestrator:
     # ------------------------------------------------------------------ run
     def run(self, scenario, mode='multi', state_version=1):
         if mode == 'template':
-            return Coordinator(None, budget=self.budget, planner=self.planner, trace_dir=self.trace_dir).run(
-                scenario, 'template', state_version=state_version)
+            return self._no_ai_baseline(scenario, state_version)
         if mode not in ('single', 'multi'):
             raise ValueError('Unknown mode')
         if self._used:
@@ -127,7 +126,7 @@ class AgentOrchestrator:
         self.scenario, self.mode, self.version = scenario, mode, state_version
         self.messages, self.reasons, self.effects = [], [], []
         self.deferred, self.ignored, self.questions, self.proposals = set(), [], [], []
-        self.challenges, self.raw_facts, self.history = [], None, []
+        self.challenges, self.raw_facts, self.history, self.review_notes = [], None, [], []
         self.state = build_verified_state(scenario, [], state_version=state_version)
         candidate = validation = None
         try:
@@ -157,6 +156,7 @@ class AgentOrchestrator:
                       'ignored_reports': [i.model_dump() for i in self.ignored],
                       'operator_questions': questions, 'priority_proposals': self.proposals,
                       'fact_challenges': self.challenges, 'decision_effects': self.effects,
+                      'review_notes': self.review_notes,
                       'deferred_action_ids': sorted(self.deferred), 'input_hash': digest(scenario),
                       'planner': self.planner, 'reviewer_enabled': self.reviewer_enabled,
                       'feedback_enabled': self.feedback_enabled, 'raw_extraction_metrics': None,
@@ -165,6 +165,39 @@ class AgentOrchestrator:
                       'budget': {'max_calls': self.budget.max_calls, 'max_input_tokens': self.budget.max_input_tokens,
                                  'max_output_tokens': self.budget.max_output_tokens,
                                  'max_seconds': self.budget.max_seconds}})
+        if self.trace_dir is not None:
+            from .tracing import save_run
+            save_run(result, self.trace_dir)
+        return result
+
+    # ------------------------------------------------------------------ no-AI baseline
+    def _no_ai_baseline(self, scenario, state_version):
+        """Heuristic / CP-SAT baseline: exact-template parsing only, same plan-around-unknowns rule.
+
+        On free-text evidence the parser recognises nothing, so this measures what
+        scheduling achieves without anyone reading the reports.
+        """
+        from project.agents.extraction import template_facts
+        started = time.monotonic()
+        self.budget.started = started
+        state = build_verified_state(scenario, template_facts(scenario), state_version=state_version)
+        candidate = (greedy_plan(state) if self.planner == 'greedy' else
+                     cp_sat_plan(state, solver_seconds=5))
+        validation = validate(candidate, state)
+        reasons = [] if validation.valid else ['Independent validation failed']
+        result = RunResult(run_id=str(uuid4()), mode='template', status='awaiting_approval' if validation.valid else 'escalated',
+                           state=state, plan=candidate, validation=validation,
+                           messages=[{'sender': 'template_baseline', 'recipient': 'coordinator',
+                                      'incident_id': scenario.scenario_id, 'state_version': state_version,
+                                      'finding': {'facts': [f.model_dump() for f in state.facts], 'not_llm': True}},
+                                     {'sender': 'deterministic_scheduler', 'recipient': 'coordinator',
+                                      'incident_id': scenario.scenario_id, 'state_version': state_version,
+                                      'finding': candidate.model_dump()}],
+                           model_usage=[], reasons=reasons,
+                           metadata={'protocol_version': R.PROTOCOL_VERSION, 'workflow': 'no_ai_baseline',
+                                     'planner': self.planner, 'operator_questions': unresolved_questions(state),
+                                     'duration_seconds': time.monotonic() - started, 'transport': 'none',
+                                     'input_hash': digest(scenario), 'decision_effects': []})
         if self.trace_dir is not None:
             from .tracing import save_run
             save_run(result, self.trace_dir)
@@ -292,7 +325,7 @@ class AgentOrchestrator:
     def _plan_and_review(self):
         if self.reasons:
             return None, None
-        dirty, candidate, validation, nudge = True, None, None, None
+        dirty, candidate, validation = True, None, None
         for revision in range(MAX_REVISIONS + 1):
             self.budget.check_time()
             if dirty:
@@ -313,8 +346,6 @@ class AgentOrchestrator:
                 # The single agent already holds the reports, directory and rules in its
                 # own conversation; resend only what is new.
                 view = {k: v for k, v in view.items() if k not in ('reports', 'site_directory', 'rules')}
-            if nudge:
-                view['coordinator_note'] = nudge
             review = self.call(R.REVIEWER.role, 'review', R.REVIEWER.task, view, R.PlanReview, R.REVIEWER.max_output)
             reports = {r.report_id for r in self.scenario.reports}
             challenges = [c.model_dump() for c in review.fact_challenges if c.report_id in reports]
@@ -324,13 +355,18 @@ class AgentOrchestrator:
                 return candidate, validation
             if review.decision == 'approve' and not challenges and not new_holds:
                 return candidate, validation
+            if not challenges and not new_holds:
+                # A revise with nothing actionable cannot change the plan; keep the reviewer's
+                # comments for the human approver instead of spending budget on another round.
+                self.review_notes.extend(review.findings)
+                self.message('coordinator', 'audit', {'review_without_actionable_change': review.findings})
+                return candidate, validation
             if revision == MAX_REVISIONS:
                 self.reasons.append('Review did not approve within revision budget')
                 return candidate, validation
             if not self.feedback_enabled:
                 self.reasons.append('Review requested revision; feedback disabled for ablation')
                 return candidate, validation
-            nudge = None
             if challenges:
                 self.challenges.extend({'round': revision + 1, **c} for c in challenges)
                 target = 'network_investigator' if self.mode == 'multi' else 'single_agent'
@@ -346,7 +382,4 @@ class AgentOrchestrator:
                 dirty = self.apply_requests(new_holds, R.REVIEWER.role if self.mode == 'multi' else 'single_agent') or dirty
                 if self.reasons:
                     return candidate, validation
-            if not dirty:
-                nudge = ('Your revise decision changed nothing. Give a concrete fact_challenge or a NEW defer_action, '
-                         'otherwise approve the unchanged plan or escalate if it is unsafe.')
         return candidate, validation
