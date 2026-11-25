@@ -86,7 +86,7 @@ def test_live_feed_receives_every_agent_step_without_changing_the_run():
     a = adapter([extraction(perfect_facts('DEV-003')), specialist(), specialist(), review()])
     result = AgentOrchestrator(a, on_message=seen.append).run(s, 'multi')
     working = [m for m in seen if m['recipient'] == 'working']
-    assert [m['stage'] for m in working] == ['investigate', 'resources', 'priorities', 'review']
+    assert [m['stage'] for m in working] == ['investigate', 'resources', 'priorities', 'schedule', 'review']
     assert len(seen) - len(working) == len(result.messages)
 
     def broken(_):

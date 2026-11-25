@@ -119,9 +119,20 @@ def inbox(result):
 STAGE_TEXT = {'investigate': 'reading the incident reports', 'reinvestigate': 're-checking challenged facts',
               'resources': 'checking crews, roads and the generator', 'priorities': 'weighing service priorities',
               'review': 'independently reviewing the plan', 'analyse': 'analysing everything in one context',
-              'reanalyse': 're-analysing after its self-review'}
+              'reanalyse': 're-analysing after its self-review',
+              'schedule': 'building the schedule (software, not AI)'}
 ICONS = {'Extraction': '🔎', 'Shared facts': '📨', 'Specialist finding': '🧭', 'Hold applied': '⏸️',
          'Schedule': '🗓️', 'Review': '✅', 'Challenge': '⚠️', 'Rejected output': '🚫', 'Other': '•'}
+
+
+def feed_line(message):
+    """(markdown line, status label or None) for one live orchestrator message."""
+    if message.get('recipient') == 'working':
+        who = name(message['sender'])
+        return f'⏳ **{who}** is {STAGE_TEXT.get(message.get("stage"), "working")}…', f'{who} is working…'
+    kind, text = _summary(message)
+    return (f'{ICONS.get(kind, "•")} **{name(message.get("sender", "?"))}** → '
+            f'{name(message.get("recipient", "coordinator"))}: {text}'), None
 
 
 class LiveFeed:
@@ -131,13 +142,9 @@ class LiveFeed:
         self.status = status
         self.count = 0
 
-    def line(self, message):
-        if message.get('recipient') == 'working':
-            who = name(message['sender'])
-            return f'⏳ **{who}** is {STAGE_TEXT.get(message.get("stage"), "working")}…', f'{who} is working…'
-        kind, text = _summary(message)
-        return (f'{ICONS.get(kind, "•")} **{name(message.get("sender", "?"))}** → '
-                f'{name(message.get("recipient", "coordinator"))}: {text}'), None
+    @staticmethod
+    def line(message):
+        return feed_line(message)
 
     def __call__(self, message):
         text, label = self.line(message)
