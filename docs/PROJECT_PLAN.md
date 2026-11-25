@@ -100,7 +100,7 @@ Unmet targets will be reported as such.
 | 21–24 Nov | Core contracts, CP-SAT, validator, simulator, dashboard, approval, continuation | I, Z, E | Done |
 | 25 Nov | v2 evaluation freeze, QA rehearsal, gap review | I, K | Done |
 | **26 Nov** | Evidence v3, v14 orchestrator, real single agent, sign-in and roles, human scorer, docs | Z, I, E, K | Done (PRs #17–#20) |
-| 27 Nov | Map, agent timeline, Gantt, question/proposal inbox; dev tuning; **config freeze 18:00**; human sessions; overnight benchmark | E, I, Z, K | Planned |
+| 27 Nov | Map, agent conversation, crew Gantt, operator inbox, field work page; dev tuning; **config freeze 18:00**; human sessions; overnight benchmark | E, I, Z, K | Product + freeze tooling done; benchmark and human sessions pending |
 | 28 Nov | Results analysis, Benchmark page, cost table, final docs, fresh-clone test; **internal freeze 18:00** | All | Planned |
 | 29 Nov | Demo video, release tag, submission before 23:59 | All | Planned |
 | 30 Nov – 6 Dec | Final-day feature drills, 10 slides, 15-minute demo rehearsal | All | Planned |

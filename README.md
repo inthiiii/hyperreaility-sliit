@@ -69,7 +69,11 @@ python -m project.auth.manage seed-demo
 python -m streamlit run project/main.py
 ```
 
-Sign in as `coordinator` to generate a plan and as `manager` to approve and simulate it (same password). Other demo users: `field`, `auditor`, `admin`. The **Offline template baseline** mode needs no API key.
+Sign in as `coordinator` to generate a plan and as `manager` to approve and simulate it (same password). Other demo users: `field`, `auditor`, `admin`.
+
+Pages: **Overview**, **Incident** (reports, crews, roads), **Map** (sites in real towns, replay of the simulated restoration), **Planning** (crew Gantt, agent conversation, operator inbox, approval), **Field work** (crew jobs and field updates), **Results**, **History**, **Settings** (roles).
+
+The **Offline template baseline** needs no API key, but it cannot read free-text reports: on evidence v3 cases it can only plan around unknowns. That limitation is deliberate and is the reason the AI agents exist.
 
 Run the tests:
 

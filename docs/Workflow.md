@@ -93,7 +93,11 @@ Checks run in the service layer. The approver can never be the person who genera
 ## 7. Evaluation workflow
 
 1. **Data:** `releases/evidence-v3-20261126` = 1 demo, 10 development and 20 EVAL2 cases with realistic reports and distractors ([README](../releases/evidence-v3-20261126/README.md)).
-2. **Tune** prompts and settings on development cases only; freeze code commit, model ID, settings, prompts and dataset hashes before EVAL2 runs.
+2. **Tune** prompts and settings on development cases only. Then freeze the code commit, model ID, settings, prompts and dataset hashes before any EVAL2 run:
+   ```bash
+   python -m project.evaluation.freeze create --data-root releases/evidence-v3-20261126/data --output releases/evidence-v3-20261126/FREEZE.json
+   ```
+   The runner's `--freeze` option re-verifies everything and stops on any drift.
 3. **Run** `heuristic`, `optimizer`, `single`, `multi`, `no_reviewer`, `no_feedback` (plus `matched_*` controls), 3 repeats per case, interleaved:
    ```bash
    python -m project.evaluation.runner --scenarios releases/evidence-v3-20261126/data/processed/agent_inputs/development/*.json \
