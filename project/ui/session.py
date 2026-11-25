@@ -38,6 +38,7 @@ class DashboardSession:
     confirmation_choice: Any = None
     confirmation_requests: set[str] = field(default_factory=set)
     confirmation_history: list = field(default_factory=list)
+    priority_decisions: dict = field(default_factory=dict)
     confirmation_feedback: Any = None
 
     def select(self, choice: ScenarioChoice) -> bool:
