@@ -10,7 +10,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project plan](docs/PROJECT_PLAN.md) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Quick start](#quick-start) · [Evaluation](#evaluation)
 
-> **Status (26 Nov 2026):** end-to-end synthetic MVP. Sign-in with roles → four AI specialists read messy incident reports → CP-SAT schedule → independent validation → reviewer challenge loop → hash-bound human approval → independent simulation with mid-incident replanning. A real single-agent baseline and a human-baseline scorer are implemented. The frozen held-out benchmark and human sessions are still pending, and **no multi-agent advantage is claimed yet.**
+> **Status (25 Nov 2026):** end-to-end synthetic MVP. Sign-in with roles → four AI specialists read messy incident reports → CP-SAT schedule → independent validation → reviewer challenge loop → hash-bound human approval → independent simulation with mid-incident replanning. A real single-agent baseline and a human-baseline scorer are implemented. The frozen held-out benchmark and human sessions are still pending, and **no multi-agent advantage is claimed yet.**
 
 ## The problem
 
@@ -117,7 +117,7 @@ python -m project.evaluation.runner \
   --output results/final/development
 ```
 
-Results so far: [v14 live smoke](results/development/v14-smoke-20261126/README.md) (2 development cases, both modes completed, extraction F1 1.0, downtime tied). Earlier v13 development results are in `results/development/`.
+Results so far (development cases only): [tuning passes](results/development/v14-dev-tuning-20261125/README.md). Reading the reports lowers downtime against CP-SAT without AI on 8 of 11 cases. Single and multi agent tie wherever both finish; before tuning, the single agent ran out of budget on 4 of 11 cases versus 0 for multi. Held-out runs are frozen by [FREEZE.json](releases/evidence-v3-20261126/FREEZE.json) and not yet run.
 
 ## Repository layout
 
