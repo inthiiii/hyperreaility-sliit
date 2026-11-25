@@ -132,7 +132,6 @@ def test_streamlit_click_flow_uses_real_simulator(case, monkeypatch):
     monkeypatch.setenv('RELINK_STATIC_TEST_ROOT', str(root))
     script = "import os\nfrom project.ui.app import render_app\nrender_app(os.environ['RELINK_STATIC_TEST_ROOT'])"
     at = AppTest.from_string(script, default_timeout=30).run()
-    at.text_input(key='operator_label').set_value('Operator')
     at.radio(key='workspace_page').set_value('Planning').run()
     assert not at.exception
     # The template mode is the default and makes no model calls.

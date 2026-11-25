@@ -1,6 +1,9 @@
 """Explicit, auditable human clarification. Rendering never changes evidence."""
 import streamlit as st
 
+from project.auth import PermissionDenied, can
+from project.ui.auth_view import current_user, needs_role
+
 from project.ui.confirmation_service import confirm_fact, confirmation_binding, fact_options
 from project.ui.review_service import ReviewBlocked
 
@@ -14,11 +17,11 @@ def _submit(session,choice,root,binding,options):
         status=confirm_fact(session,choice,binding,*target,
             VALUES[st.session_state['confirmation_value']],st.session_state.get('operator_label',''),
             st.session_state['confirmation_source'],st.session_state['confirmation_note'],
-            st.session_state['confirmation_ack'],root)
+            st.session_state['confirmation_ack'],root,user=current_user())
         session.confirmation_feedback={'ok':True,'message':
             'Confirmation already recorded; no duplicate update created.' if status=='duplicate' else
             'Confirmation recorded. The earlier plan and approval were cleared. Generate a new plan and review it again.'}
-    except ReviewBlocked as error:
+    except (ReviewBlocked,PermissionDenied) as error:
         session.confirmation_feedback={'ok':False,'message':str(error)}
     except Exception:
         session.confirmation_feedback={'ok':False,'message':
@@ -28,7 +31,7 @@ def _submit(session,choice,root,binding,options):
 def render_confirmation(choice,session,root):
     with st.expander('Record operator clarification'):
         st.caption('Use verified operational evidence to resolve missing or contradictory facts. '
-                   'This records your assertion; the app does not independently verify it or authenticate your operator label. '
+                   'This records your assertion under your signed-in identity; the app does not independently verify it. '
                    'Confirmation never approves or executes a plan.')
         if session.confirmation_feedback:
             feedback=session.confirmation_feedback
@@ -55,4 +58,6 @@ def render_confirmation(choice,session,root):
             st.text_area('Verification reason and details',key='confirmation_note',max_chars=2000)
             st.checkbox('I verified this fact using the source stated above',key='confirmation_ack')
             st.form_submit_button('Record confirmation and invalidate plan',
-                disabled=session.busy,on_click=_submit,args=(session,choice,root,binding,options))
+                disabled=session.busy or not can(current_user(),'confirm_fact'),on_click=_submit,args=(session,choice,root,binding,options))
+        if not can(current_user(),'confirm_fact'):
+            st.caption('Your role cannot record clarifications. '+needs_role('confirm_fact')+'.')

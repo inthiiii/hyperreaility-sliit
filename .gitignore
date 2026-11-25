@@ -25,3 +25,6 @@ htmlcov/
 # Synthetic incident run records and local benchmark outputs
 results/local_runs/
 results/local_benchmarks/
+
+# Local sign-in store (salted password hashes)
+.relink/

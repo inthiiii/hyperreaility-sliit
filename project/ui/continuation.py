@@ -1,4 +1,5 @@
 """Accept only the safe visible checkpoint from a successfully recorded episode."""
+from project.auth import require
 from project.core.schemas import ScenarioInput
 from project.core.state import digest
 from project.ui.catalog import ScenarioChoice
@@ -7,7 +8,9 @@ from project.ui.planning_service import begin_new_attempt
 from project.ui.review_service import ReviewBlocked, ensure_current_source
 
 
-def accept_checkpoint(session, choice, root):
+def accept_checkpoint(session, choice, root, *, user=None):
+    if user is not None:
+        require(user, 'continue_incident')
     result, issue = current_outcome(session)
     if issue or result is None or not result.run_metadata.get('replan_required'):
         raise ReviewBlocked('A matching recorded paused episode is required')

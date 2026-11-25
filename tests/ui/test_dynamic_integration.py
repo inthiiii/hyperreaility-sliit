@@ -66,7 +66,6 @@ def test_dynamic_ui_service_preserves_source_binding_and_episode(root):
 def test_browser_two_approvals_finish_one_incident(root,monkeypatch):
     monkeypatch.setenv('RELINK_DYNAMIC_ROOT',str(root))
     at=AppTest.from_string("import os\nfrom project.ui.app import render_app\nrender_app(os.environ['RELINK_DYNAMIC_ROOT'])",default_timeout=30).run()
-    at.text_input(key='operator_label').set_value('Operator')
     at.radio(key='workspace_page').set_value('Planning').run()
     at.button(key='generate_plan').click().run();at.button(key='approve_plan').click().run()
     at.button(key='simulate_plan').click().run()

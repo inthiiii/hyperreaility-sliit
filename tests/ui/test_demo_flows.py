@@ -104,7 +104,6 @@ def app(root, monkeypatch):
 
 def test_ui_reject_retry_approve_and_scenario_change(demo_root, monkeypatch):
     at = app(demo_root, monkeypatch)
-    at.text_input(key='operator_label').set_value('Operator')
     at.radio(key='workspace_page').set_value('Planning').run()
     at.button(key='generate_plan').click().run()
     at.text_area(key='review_note').input('Old rejection note').run()
@@ -138,7 +137,6 @@ def test_ui_reject_retry_approve_and_scenario_change(demo_root, monkeypatch):
 
 def test_ui_unsupported_result_is_explained_on_planning_and_results(demo_root, monkeypatch):
     at = app(demo_root, monkeypatch)
-    at.text_input(key='operator_label').set_value('Operator')
     at.radio(key='workspace_page').set_value('Planning').run()
     at.button(key='generate_plan').click().run()
     session = at.session_state[SESSION_KEY]

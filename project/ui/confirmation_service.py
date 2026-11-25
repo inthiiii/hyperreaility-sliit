@@ -1,4 +1,5 @@
 """Explicit operator evidence; never reads evaluator answers or mutates dataset files."""
+from project.auth import require
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -36,6 +37,8 @@ class ConfirmationRecord(Contract):
     updated_state: VerifiedState
     recorded_at_utc: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     authenticated: bool = False
+    username: str | None = None
+    role: str | None = None
 
 
 def fact_options(scenario):
@@ -61,7 +64,9 @@ def confirmation_binding(session, choice):
 
 
 def confirm_fact(session, choice, expected_binding, target_type, target_id, attribute, value,
-                 operator_id, verification_source, note, acknowledged, root):
+                 operator_id, verification_source, note, acknowledged, root, *, user=None):
+    if user is not None:
+        require(user, 'confirm_fact')
     if type(value) is not bool or acknowledged is not True:
         raise ReviewBlocked('Choose a boolean value and explicitly acknowledge verification.')
     if not isinstance(operator_id,str) or not 1<=len(operator_id.strip())<=120:
@@ -99,6 +104,7 @@ def confirm_fact(session, choice, expected_binding, target_type, target_id, attr
         input_hash_before=choice.content_hash,input_hash_after=digest(scenario),
         source_hash=session.source_hash or choice.content_hash,request_hash=request_hash,
         operator_id=operator_id.strip(),verification_source=verification_source.strip(),note=note.strip(),
+        authenticated=user is not None,username=user.username if user else None,role=user.role if user else None,
         report=report,updated_state=updated)
     # Fail closed: a persistence failure must not leave the earlier approval active.
     session.core.approval=None
