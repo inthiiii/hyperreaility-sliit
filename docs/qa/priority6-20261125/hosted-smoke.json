@@ -1,0 +1,140 @@
+{
+  "run_id": "4b3f3248-2a93-4bfd-9b33-0e9f96ea9664",
+  "status": "escalated",
+  "source_checksum": "bab9b54151d9dd4649d235e02f31b5a2a7e0bbcddddc6e01b51359bbb3f1dcba",
+  "checksum_verified": true,
+  "reasons": [
+    "Specialist requires operator clarification"
+  ],
+  "messages": [
+    {
+      "sender": "network_investigator",
+      "recipient": "coordinator",
+      "incident_id": "DEMO-005",
+      "state_version": 3,
+      "finding": {
+        "facts": [
+          {
+            "target_type": "site",
+            "target_id": "S01",
+            "attribute": "grid_power_ok",
+            "value": false,
+            "evidence_ids": [
+              "REP-001"
+            ],
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "status": "verified",
+            "reason": "Authoritative snapshot reports grid power unavailable."
+          },
+          {
+            "target_type": "site",
+            "target_id": "S02",
+            "attribute": "grid_power_ok",
+            "value": false,
+            "evidence_ids": [
+              "REP-002"
+            ],
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "status": "verified",
+            "reason": "Authoritative snapshot reports grid power unavailable."
+          },
+          {
+            "target_type": "link",
+            "target_id": "L01",
+            "attribute": "backhaul_ok",
+            "value": false,
+            "evidence_ids": [
+              "REP-003"
+            ],
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "status": "verified",
+            "reason": "Authoritative snapshot reports the backhaul link has failed."
+          }
+        ]
+      }
+    },
+    {
+      "sender": "field_resource_planner",
+      "recipient": "coordinator",
+      "incident_id": "DEMO-005",
+      "state_version": 3,
+      "finding": {
+        "clarification_required": false,
+        "requests": [],
+        "evidence_ids": [
+          "POLICY-001",
+          "REP-001",
+          "REP-002",
+          "REP-003"
+        ],
+        "finding": "No confirmed missing permits or operational holds are supplied, so no defer requests are warranted. S01 and S02 have equipment and upstream links available but no grid power; G1 could provide temporary power at one site. L01 is failed, interrupting S01\u2019s path from CORE. Other supplied site, link, and road states default to available; no equipment repairs are indicated. Action selection and scheduling remain for review and simulation."
+      }
+    },
+    {
+      "sender": "service_priority_assessor",
+      "recipient": "coordinator",
+      "incident_id": "DEMO-005",
+      "state_version": 3,
+      "finding": {
+        "clarification_required": true,
+        "requests": [
+          {
+            "kind": "defer_action",
+            "action_ids": [
+              "GEN-G1-S01",
+              "GEN-G1-S02"
+            ],
+            "evidence_ids": [
+              "POLICY-001",
+              "REP-001",
+              "REP-002"
+            ],
+            "reason": "G1 can serve only one site, and the supplied objective prioritizes weighted service-minutes. The reports establish power loss at both S01 and S02, but choosing which site receives the generator requires a trade-off between service duration and setup/travel timing; defer both candidate deployments for human selection."
+          }
+        ],
+        "evidence_ids": [
+          "POLICY-001",
+          "REP-001",
+          "REP-002",
+          "REP-003"
+        ],
+        "finding": "S01 and S02 have working equipment but no grid power; L01 is failed, so S01 also lacks its upstream path. S02 has the critical service (weight 5), while S01 has weight 1. G1 is available for one temporary deployment. The objective and timing data permit comparing options; no missing critical facts or policy conflict require clarification."
+      }
+    }
+  ],
+  "usage": [
+    {
+      "role": "network_investigator",
+      "model": "gpt-6-luna",
+      "returned_model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "status": "ok",
+      "input_tokens": 1612,
+      "output_tokens": 190
+    },
+    {
+      "role": "field_resource_planner",
+      "model": "gpt-6-luna",
+      "returned_model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "status": "ok",
+      "input_tokens": 1531,
+      "output_tokens": 128
+    },
+    {
+      "role": "service_priority_assessor",
+      "model": "gpt-6-luna",
+      "returned_model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "status": "ok",
+      "input_tokens": 1642,
+      "output_tokens": 220
+    }
+  ],
+  "total_input_tokens": 4785,
+  "total_output_tokens": 538,
+  "provenance": "Single browser-initiated synthetic demo request; no automatic retry. Excerpt, not the original signed or complete audit."
+}

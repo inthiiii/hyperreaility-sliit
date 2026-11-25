@@ -1,0 +1,128 @@
+{
+  "observations": [
+    {
+      "check": "QA-SETTINGS",
+      "evidence": "Browser tab: 2, Title: \"RE:L!NK \u00b7 Recovery workspace\", URL: \"http://127.0.0.1:8520/\".\nThe following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.\nRemoved element IDs: 51, 55, 57-59, 62, 64-70, 72-104\n+\t\t\t\t\t55 button (expanded) Description: Collapse sidebar, Secondary Actions: Collapse\n~\t\t\t\t\t\t\t22 radio button (settable, integer) Description: Overview, Value: 0\n~\t\t\t\t\t\t\t37 radio button (settable, integer) Description: Settings, Value: 1\n~\t\t\t\t56 text SETTINGS\n+\t\t\t\t52 heading Know what is ready., Value: 1, ID: know-what-is-ready\n+\t\t\t\t\t53 text Know what is ready.\n+\t\t\t\t\t54 link (opacity: 0) Description: Link to heading, Value: 127.0.0.1:8520/#know-what-is-ready\n+\t\t\t\t57 heading Hosted model, Value: 3, ID: hosted-model\n+\t\t\t\t\t58 text Hosted model\n+\t\t\t\t\t59 link (opacity: 0) Description: Link to heading, Value: 127.0.0.1:8520/#hosted-model\n~\t\t\t\t60 text Provider: openai\n~\t\t\t\t61 text Model: gpt-6-luna\n+\t\t\t\t62 text Reasoning effort: none\n~\t\t\t\t63 text API credential: Present\n+\t\t\t\t64 text Configuration present; live connectivity remains unverified.\n+\t\t\t\t65 text No API request is made by this check. Set configuration locally and restart the app to apply changes.\n+\t\t\t\t66 heading Workspace session, Value: 3, ID: workspace-session\n+\t\t\t\t\t67 text Workspace session\n+\t\t\t\t\t68 link (opacity: 0) Description: Link to heading, Value: 127.0.0.1:8520/#workspace-session\n+\t\t\t\t69 text Session: 12659c3c\n+\t\t\t\t70 text Selection revision: 1\n~\t\t\t\t71 text Scenario: DEMO-005\n+\t\t\t\t72 text Approval: Not approved\n+\t\t\t\t73 text Navigation reruns preserve this browser session. Reloading or reconnecting may start a new session. An operator label does not authenticate a user.\n+\t\t\t\t74 button (collapsed) Data source and implementation status, Secondary Actions: Expand\n+\t\t\t\t\t75 text Data source and implementation status\n+\t\t\t\t76 text HyperReAIlity \u00b7 SLIIT \u00a0 / \u00a0 AI Catalyst 2026 \u00a0 / \u00a0 Synthetic decision-support workspace\nThe focused UI element is 37 radio button (settable, integer) Description: Settings, Value: 1"
+    },
+    {
+      "check": "QA-EMPTY-OPERATOR",
+      "approve_disabled": true,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-04-rejection",
+      "approve_disabled": true,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-RETRY-NOTE",
+      "observed_note": "QA rejection flow: synthetic test plan.",
+      "expected": "blank after explicit new attempt"
+    },
+    {
+      "check": "QA-CATALOG",
+      "options": [
+        "DEMO-005 \u00b7 5 sites",
+        "DEV-001 \u00b7 16 sites",
+        "DEV-002 \u00b7 17 sites",
+        "DEV-003 \u00b7 18 sites",
+        "DEV-004 \u00b7 19 sites",
+        "DEV-005 \u00b7 20 sites",
+        "DEV-006 \u00b7 15 sites",
+        "DEV-007 \u00b7 16 sites",
+        "DEV-008 \u00b7 17 sites",
+        "DEV-009 \u00b7 18 sites",
+        "DEV-010 \u00b7 19 sites"
+      ]
+    },
+    {
+      "check": "QA-05-scenario-change",
+      "approve_disabled": true,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-02-conflict",
+      "status": "Clarification required",
+      "approve_disabled": true,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-03-missing",
+      "unknown": "site:S01:equipment_ok",
+      "approve_disabled": true,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-CLARIFICATION-VALIDATION",
+      "empty_submission_blocked": true
+    },
+    {
+      "check": "QA-CLARIFICATION-APPLY",
+      "prior_plan_cleared": true,
+      "approval_disabled": true
+    },
+    {
+      "check": "QA-CLARIFICATION-FRESH-PLAN",
+      "run_id": "5eb8f3c8-091f-4d4a-a9cd-bc2aa327cc6c",
+      "state_version": 3,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-08-prefix",
+      "evidence": "- log\n- log\n- link \"Skip to main content\":\n  - /url: \"#stMain\"\n- region \"Sidebar\":\n  - button \"Collapse sidebar\" [expanded]:\n    - generic: keyboard_double_arrow_left\n  - generic: RE:L!NK\n  - text: Restore connectivity.\n  - text: Coordinate recovery.\n  - paragraph: WORKSPACE\n  - radiogroup \"Workspace navigation\":\n    - radio \"Overview\"\n    - paragraph: Overview\n    - radio \"Incident\"\n    - paragraph: Incident\n    - radio \"Planning\"\n    - paragraph: Planning\n    - radio \"Results\" [checked] [active]\n    - paragraph: Results\n    - radio \"History\"\n    - paragraph: History\n    - radio \"Settings\"\n    - paragraph: Settings\n  - separator\n  - paragraph: ACTIVE SCENARIO\n  - combobox \"Scenario\": DEV-010 \u00b7 19 sites\n  - button \"Open\":\n  - paragraph: Processed demo/development input\n  - paragraph: Operator label\n  - button \"Help for Operator label\":\n  - textbox \"Operator label\":\n    - /placeholder: Your name\n    - text: RELINK QA rehearsal\n  - separator\n  - generic: Synthetic workspace\n  - paragraph: \"Hosted model: configured, unverified\"\n  - paragraph: Browsing makes no model requests.\n- banner:\n  - button \"Deploy\":\n    - generic: Deploy\n  - button \"Main menu\":\n- main:\n  - generic: Results\n  - heading \"Evidence of recovery.\" [level=1]:\n    - text: Evidence of recovery.\n    - link \"Link to heading\":\n      - /url: \"#evidence-of-recovery\"\n  - heading \"Replanning required\" [level=3]:\n    - text: Replanning required\n    - link \"Link to heading\":\n      - /url: \"#replanning-required\"\n  - alert:\n    - paragraph: The evaluator reported a change requiring a new reviewed plan.\n  - paragraph: \"Next: Retain this result as history. Accept the event update on Planning, generate a new plan and obtain fresh approval before continuing.\"\n  - alert:\n    - paragraph: PARTIAL EPISODE \u00b7 Measurements cover only minute 0 to 60. The incident must be resumed before reporting full-horizon outcomes.\n  - status:\n    - paragraph: Evaluator result recorded for the current plan.\n  - generic: DEV-010 \u00b7 Plan 95700e8b-5043-4772-a577-3cd9460bd2c7 \u00b7 State 1\n  - paragraph: Evaluator-reported outputs are shown as returned. Interface checks do not validate the physical model or metric accuracy. No baseline improvement or financial saving is inferred.\n  - heading \"Reported metrics\" [level=3]:\n    - text: Reported metrics\n    - link \"Link to heading\":\n      - /url: \"#reported-metrics\"\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - button \"Download metrics CSV\":\n    - paragraph: Download metrics CSV\n  - heading \"Measured service availability\" [level=3]:\n    - text: Measured service availability\n    - link \"Link to heading\":\n      - /url: \"#measured-service-availability\"\n  - paragraph: Bars show the evaluator\u2019s half-open availability intervals [start, end), in incident minutes.\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - button \"Show data\":\n  - button \"Download as PNG\":\n  - button \"Copy Vega-Lite spec\":\n  - button \"Fullscreen\":\n  - generic \"Vega visualization\":\n  - alert:\n    - paragraph: Replanning required. Accept the event update on Planning and approve a new plan to continue the same incident.\n  - heading \"Action outcomes\" [level=3]:\n    - text: Action outcomes\n    - link \"Link to heading\":\n      - /url: \"#action-outcomes\"\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - heading \"Restoration trajectory\" [level=3]:\n    - text: Restoration trajectory\n    - link \"Link to heading\":\n      - /url: \"#restoration-trajectory\"\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - paragraph: Trajectory time field\n  - combobox \"Trajectory time field\": Choose a field\n  - button \"Open\":\n  - paragraph: Trajectory numeric series\n  - combobox \"Trajectory numeric series\"\n  - button \"Open\":\n  - paragraph: Field names are evaluator-defined. Choose the documented time/series fields; units and meaning are not guessed. Optional trajectory_plot metadata can supply defaults.\n  - button \"Download trajectory CSV\":\n    - paragraph: Download trajectory CSV\n  - generic \"Completed actions, unmet needs and provenance\":\n    - generic: keyboard_arrow_right\n    - paragraph: Completed actions, unmet needs and provenance\n  - button \"Download result JSON\":\n    - paragraph: Download result JSON\n  - generic: HyperReAIlity \u00b7 SLIIT / AI Catalyst 2026 / Synthetic decision-support workspace\n- status:\n  - generic: auto_awesome\n  - generic: Help agents write better apps\n  - generic: Install the official Streamlit skills so AI coding agents can build and debug your apps.\n  - button \"Install\"\n  - button \"Don't show again\"\n  - button \"Close\":\n    - generic: close"
+    },
+    {
+      "check": "QA-08-event-accepted",
+      "fresh_approval_required": true,
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-08-before-second-approval",
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-08-dynamic-complete",
+      "evidence": "- log\n- log\n- link \"Skip to main content\":\n  - /url: \"#stMain\"\n- region \"Sidebar\":\n  - button \"Collapse sidebar\" [expanded]:\n    - generic: keyboard_double_arrow_left\n  - generic: RE:L!NK\n  - text: Restore connectivity.\n  - text: Coordinate recovery.\n  - paragraph: WORKSPACE\n  - radiogroup \"Workspace navigation\":\n    - radio \"Overview\"\n    - paragraph: Overview\n    - radio \"Incident\"\n    - paragraph: Incident\n    - radio \"Planning\"\n    - paragraph: Planning\n    - radio \"Results\" [checked] [active]\n    - paragraph: Results\n    - radio \"History\"\n    - paragraph: History\n    - radio \"Settings\"\n    - paragraph: Settings\n  - separator\n  - paragraph: ACTIVE SCENARIO\n  - combobox \"Scenario\": DEV-010 \u00b7 19 sites\n  - button \"Open\":\n  - paragraph: Processed demo/development input\n  - paragraph: Operator label\n  - button \"Help for Operator label\":\n  - textbox \"Operator label\":\n    - /placeholder: Your name\n    - text: RELINK QA rehearsal\n  - separator\n  - generic: Synthetic workspace\n  - paragraph: \"Hosted model: configured, unverified\"\n  - paragraph: Browsing makes no model requests.\n- banner:\n  - button \"Deploy\":\n    - generic: Deploy\n  - button \"Main menu\":\n- main:\n  - generic: Results\n  - heading \"Evidence of recovery.\" [level=1]:\n    - text: Evidence of recovery.\n    - link \"Link to heading\":\n      - /url: \"#evidence-of-recovery\"\n  - heading \"Simulation recorded\" [level=3]:\n    - text: Simulation recorded\n    - link \"Link to heading\":\n      - /url: \"#simulation-recorded\"\n  - status:\n    - paragraph: The current plan has a matching evaluator result.\n  - paragraph: \"Next: Open Results to inspect service intervals and measurements, or History to export the recorded run.\"\n  - status:\n    - paragraph: Evaluator result recorded for the current plan.\n  - generic: DEV-010 \u00b7 Plan e63f87f2-b808-4d14-955b-8a5d266ecfdf \u00b7 State 2\n  - paragraph: Evaluator-reported outputs are shown as returned. Interface checks do not validate the physical model or metric accuracy. No baseline improvement or financial saving is inferred.\n  - heading \"Reported metrics\" [level=3]:\n    - text: Reported metrics\n    - link \"Link to heading\":\n      - /url: \"#reported-metrics\"\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - button \"Download metrics CSV\":\n    - paragraph: Download metrics CSV\n  - heading \"Measured service availability\" [level=3]:\n    - text: Measured service availability\n    - link \"Link to heading\":\n      - /url: \"#measured-service-availability\"\n  - paragraph: Bars show the evaluator\u2019s half-open availability intervals [start, end), in incident minutes.\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - button \"Show data\":\n  - button \"Download as PNG\":\n  - button \"Copy Vega-Lite spec\":\n  - button \"Fullscreen\":\n  - generic \"Vega visualization\":\n  - heading \"Action outcomes\" [level=3]:\n    - text: Action outcomes\n    - link \"Link to heading\":\n      - /url: \"#action-outcomes\"\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - heading \"Restoration trajectory\" [level=3]:\n    - text: Restoration trajectory\n    - link \"Link to heading\":\n      - /url: \"#restoration-trajectory\"\n  - button \"Show/hide columns\":\n  - button \"Download as CSV\":\n  - button \"Search\":\n  - button \"Fullscreen\":\n  - paragraph: Trajectory time field\n  - combobox \"Trajectory time field\": Choose a field\n  - button \"Open\":\n  - paragraph: Trajectory numeric series\n  - combobox \"Trajectory numeric series\"\n  - button \"Open\":\n  - paragraph: Field names are evaluator-defined. Choose the documented time/series fields; units and meaning are not guessed. Optional trajectory_plot metadata can supply defaults.\n  - button \"Download trajectory CSV\":\n    - paragraph: Download trajectory CSV\n  - generic \"Completed actions, unmet needs and provenance\":\n    - generic: keyboard_arrow_right\n    - paragraph: Completed actions, unmet needs and provenance\n  - button \"Download result JSON\":\n    - paragraph: Download result JSON\n  - generic: HyperReAIlity \u00b7 SLIIT / AI Catalyst 2026 / Synthetic decision-support workspace\n- status:\n  - generic: auto_awesome\n  - generic: Help agents write better apps\n  - generic: Install the official Streamlit skills so AI coding agents can build and debug your apps.\n  - button \"Install\"\n  - button \"Don't show again\"\n  - button \"Close\":\n    - generic: close"
+    },
+    {
+      "check": "QA-08-dynamic-metrics",
+      "plan_id": "e63f87f2-b808-4d14-955b-8a5d266ecfdf",
+      "horizon": 720,
+      "weighted_available": 7310,
+      "weighted_downtime": 9250
+    },
+    {
+      "check": "QA-08-no-duplicate-simulation",
+      "simulate_disabled": true
+    },
+    {
+      "check": "QA-01-07-static",
+      "plan_id": "d69940c0-5630-4c04-9d49-8ea03c1f99af",
+      "horizon": 720,
+      "weighted_available": 720,
+      "weighted_downtime": 5760
+    },
+    {
+      "check": "QA-HISTORY",
+      "record": "c32ada42-19bc-40b6-a2c0-74c323caef6a",
+      "plan_id": "d69940c0-5630-4c04-9d49-8ea03c1f99af"
+    },
+    {
+      "check": "QA-HISTORY-AFTER-RELOAD",
+      "historical_only": true,
+      "evidence": "- link \"Skip to main content\":\n  - /url: \"#stMain\"\n- region \"Sidebar\":\n  - button \"Collapse sidebar\" [expanded]:\n    - generic: keyboard_double_arrow_left\n  - generic: RE:L!NK\n  - text: Restore connectivity.\n  - text: Coordinate recovery.\n  - paragraph: WORKSPACE\n  - radiogroup \"Workspace navigation\":\n    - radio \"Overview\"\n    - paragraph: Overview\n    - radio \"Incident\"\n    - paragraph: Incident\n    - radio \"Planning\"\n    - paragraph: Planning\n    - radio \"Results\"\n    - paragraph: Results\n    - radio \"History\" [checked] [active]\n    - paragraph: History\n    - radio \"Settings\"\n    - paragraph: Settings\n  - separator\n  - paragraph: ACTIVE SCENARIO\n  - combobox \"Scenario\": DEMO-005 \u00b7 5 sites"
+    },
+    {
+      "check": "QA-RELOAD-NO-AUTHORIZATION",
+      "approve_disabled": true,
+      "simulate_disabled": true
+    }
+  ],
+  "downloads": [
+    {
+      "check": "QA-08-prefix",
+      "path": "downloaded-prefix.json"
+    }
+  ],
+  "export_note": "Download path normalized for portability; observations otherwise unchanged."
+}

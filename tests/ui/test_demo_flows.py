@@ -107,14 +107,17 @@ def test_ui_reject_retry_approve_and_scenario_change(demo_root, monkeypatch):
     at.text_input(key='operator_label').set_value('Operator')
     at.radio(key='workspace_page').set_value('Planning').run()
     at.button(key='generate_plan').click().run()
+    at.text_area(key='review_note').input('Old rejection note').run()
     at.button(key='reject_plan').click().run()
     assert not at.exception
     assert at.button(key='approve_plan').disabled and at.button(key='simulate_plan').disabled
     assert any(e.value == 'Plan rejected' for e in at.subheader)
     at.button(key='new_planning_attempt').click().run()
+    assert at.text_area(key='review_note').value == ''
     at.button(key='generate_plan').click().run()
     at.button(key='approve_plan').click().run()
     assert not at.exception and at.button(key='simulate_plan').disabled
+    assert at.session_state[SESSION_KEY].last_decision.note == ''
     assert any(e.value == 'Approved · awaiting simulator' for e in at.subheader)
     at.radio(key='workspace_page').set_value('Results').run()
     assert not at.exception and any(e.value == 'Approved · awaiting simulator' for e in at.subheader)
