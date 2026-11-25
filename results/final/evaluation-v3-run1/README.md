@@ -45,6 +45,18 @@ Median relative change: âˆ’12.5 % across all cases (ties included), and about âˆ
 | no_feedback | 49/60 | 8 revision requested (by design), 2 truncated Reviewer answers, 1 safety filter (at the Reviewer call) | 4.3 | 11.7k / 1.0k | 15.9 |
 | heuristic, CP-SAT | 60/60 | none | 0 | 0 | < 1 |
 
+**Cost per incident** (USD 2.00 / 1M input and 10.00 / 1M output tokens, `gpt-6-luna` prices supplied by the team on 25 Nov 2026):
+
+| Variant | USD per incident | Per 1,000 incidents |
+|---|---:|---:|
+| multi | 0.039 | 39 |
+| single | 0.032 | 32 |
+| no_reviewer | 0.025 | 25 |
+| no_feedback | 0.033 | 33 |
+| heuristic / CP-SAT | 0 | 0 |
+
+The whole 240-run hosted benchmark (2.67M input, 0.23M output tokens) cost at most USD 7.69. These figures are upper bounds: cached input ($0.10 / 1M) is not separated in the usage records, so all input is priced at the full rate.
+
 **4. The Plan Reviewer did not earn its cost on this set.**
 
 - Downtime: multi vs no_reviewer gives 1 better, 17 ties, 2 worse (95 % CI âˆ’193 to 72).
@@ -70,7 +82,7 @@ Median relative change: âˆ’12.5 % across all cases (ties included), and about âˆ
 
 - 20 synthetic cases from a phrase-bank generator, with no independent human review.
 - One model; 3 repeats.
-- Cost in USD is not included until the team supplies dated per-token prices.
+- Cost is an upper bound because cached input tokens were not recorded separately.
 - Escalated attempts are unscored, so comparisons use only cases where both variants have a median.
 - The human comparison is pending.
 

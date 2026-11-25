@@ -97,6 +97,7 @@ Dependencies are pinned in `project/requirements.txt`.
   - Multi vs single: not significant (2 better, 15 ties, 2 worse; target not met).
   - Multi without the Reviewer was the most reliable (60/60) and cheapest configuration.
   - 0 of 130 injection runs followed.
+  - Cost per incident (upper bound): multi about USD 0.039, single 0.032, no-Reviewer 0.025.
 - **Development evidence (25 Nov):** [tuning passes](../results/development/v14-dev-tuning-20261125/README.md). Agents lower downtime against CP-SAT without AI on 8 of 11 cases. Single and multi tie on every case both completed. Before tuning, the single agent exhausted its budget on 4 of 11 cases versus 0 for multi. Injection reports were flagged and never followed. The EVAL2 configuration is frozen ([FREEZE.json](../releases/evidence-v3-20261126/FREEZE.json)). **No multi-agent downtime advantage is claimed.**
 
 ## 7. Safety, security and reliability
