@@ -1,0 +1,32 @@
+{
+  "comparison": "single versus multi; same four-stage tool-assisted workflow",
+  "eligible_pairs": 2,
+  "scored_comparable_pairs": 2,
+  "excluded_pairs": [],
+  "conditioning": "Downtime differences use complete comparable pairs only; assess failure coverage alongside them.",
+  "difference_unit": "weighted service-minutes; positive favors multi",
+  "mean_single_minus_multi": 0,
+  "median_single_minus_multi": 0.0,
+  "multi_wins": 0,
+  "single_wins": 0,
+  "ties": 2,
+  "paired_bootstrap_95pct_interval": [
+    0,
+    0
+  ],
+  "uncertainty": "Exploratory paired resampling; repeats within a scenario are not independent new scenarios.",
+  "status_counts": {
+    "single": {
+      "completed": 2
+    },
+    "multi": {
+      "completed": 2
+    }
+  },
+  "decision_effect_counts": {
+    "single": 0,
+    "multi": 0
+  },
+  "api_cost": null,
+  "claims_multi_agent_superiority": false
+}

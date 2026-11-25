@@ -1,0 +1,80 @@
+{
+  "format_version": 3,
+  "created_at_utc": "2026-11-25T11:46:01.801015+00:00",
+  "source_sha256": "0aff7214b150d09a38da2d348946fe284cd3a112a6c484a522c7fc214cc8e021",
+  "cases": {
+    "DEV-003": "21a677fe95e99772118e8b4e3ea565b0f8c7b3a5b39cc925aae2c16d84b113f1",
+    "DEV-007": "b9c7d6df68e3b4172db5e3dc34523b298be86380f2bcbca4729ed6659441458a"
+  },
+  "variants": [
+    "single",
+    "multi"
+  ],
+  "repeats": 1,
+  "order_seed": 22,
+  "model_configuration": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "api_mode": "responses",
+    "reasoning_effort": "none",
+    "response_format": "json_schema",
+    "temperature": "provider_default",
+    "sdk_retries": 0,
+    "schema_repair_attempts": 1,
+    "protocol_version": "matched-workflow-v13"
+  },
+  "comparison_protocol": {
+    "version": "matched-workflow-v13",
+    "stages": [
+      "investigate",
+      "resources",
+      "priorities",
+      "review"
+    ],
+    "tasks_sha256": "a5ddf76959175d80882238543cbf9ecf38dbadd5068fdf6eff8d46190df2cfc6",
+    "visible_context": "identical operational fields; no evaluator truth",
+    "tools": [
+      "conservative evidence resolver",
+      "CP-SAT/greedy scheduler",
+      "independent schedule validator"
+    ],
+    "agent_requests": [
+      "evidence-linked conservative defer_action"
+    ],
+    "weights": "human-approved; never model-edited",
+    "max_revision_rounds": 3,
+    "stage_output_limits": {
+      "investigate": 700,
+      "resources": 450,
+      "priorities": 450,
+      "review": 500
+    },
+    "single": "one agent identity across all four stages",
+    "multi": "four distinct role contexts exchanging structured findings",
+    "budget_policy": "same whole-incident caps; actual utilization may differ",
+    "interpretation": "controlled workflow comparison, not proof that agent count alone causes improvement"
+  },
+  "runtime": {
+    "python": "3.11.18",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "packages": {
+    "pydantic": "2.14.4",
+    "ortools": "9.15.6755",
+    "networkx": "3.6.1",
+    "openai": "3.57.0"
+  },
+  "scoring_status": "independent_incident_evaluator_connected",
+  "approval_mode": "automated_benchmark_operator",
+  "whole_incident_limits": {
+    "max_calls": 12,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 4800,
+    "max_seconds": 180
+  },
+  "max_episodes": 10,
+  "evaluation_review": null,
+  "scope": "Matched tool-assisted workflow comparison. Template baselines are not LLM agents. Independent held-out review remains a separate gate; development results do not establish superiority."
+}
