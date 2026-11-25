@@ -1,6 +1,8 @@
-# RE:L!NK
+<p align="center">
+  <img src="docs/assets/branding/relink-logo.png" alt="RE:L!NK — Restore connectivity. Coordinate recovery." width="1000">
+</p>
 
-### Restore connectivity. Coordinate recovery.
+# RE:L!NK
 
 **Multi-agent decision support for telecom network restoration.**
 

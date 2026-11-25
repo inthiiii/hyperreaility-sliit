@@ -241,3 +241,9 @@ escalated after three calls; approval stayed blocked, but hosted happy-path
 readiness remains open. Codex performed the walkthrough in Ihthisham's session;
 Kiruthika and Eyaas receive requested co-author credit, separate from tester
 identity. Priority 7 remains pending.
+
+
+## Brand asset disclosure — 25 November
+
+The README logo was created using ChatGPT built-in image generation. The asset
+and exact prompt are recorded in [branding](assets/branding/README.md).
