@@ -1,0 +1,2106 @@
+{
+  "format_version": 1,
+  "payload": {
+    "run_id": "55acf42e-fc21-4f96-a1f9-96a1cd048a63",
+    "mode": "multi",
+    "status": "awaiting_approval",
+    "state": {
+      "scenario_id": "EVAL2-016",
+      "state_version": 1,
+      "source_hash": "50e4cb39934a36953222ff5adad87074d652ba0a3330dd8eaa17fb0c86c83c69",
+      "scenario": {
+        "schema_version": "0.1",
+        "scenario_id": "EVAL2-016",
+        "region_label": "Fictional operator network placed in real Western Province towns (not real tower locations or coverage)",
+        "current_time_min": 0,
+        "horizon_min": 720,
+        "core_id": "CORE",
+        "depot_id": "DEPOT",
+        "sites": [
+          {
+            "site_id": "S01",
+            "label": "Beruwala",
+            "x": 0.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "BER93",
+            "district": "Kalutara",
+            "aliases": [
+              "BER93",
+              "Beruwala RBS",
+              "Beruwala temple road"
+            ],
+            "lat": 6.479,
+            "lon": 79.983
+          },
+          {
+            "site_id": "S02",
+            "label": "Aluthgama",
+            "x": 10.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "ALU70",
+            "district": "Kalutara",
+            "aliases": [
+              "ALU70",
+              "Aluthgama RBS",
+              "Aluthgama school lane"
+            ],
+            "lat": 6.434,
+            "lon": 79.999
+          },
+          {
+            "site_id": "S03",
+            "label": "Payagala",
+            "x": 20.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "PAY89",
+            "district": "Kalutara",
+            "aliases": [
+              "PAY89",
+              "Payagala RBS",
+              "Payagala school lane"
+            ],
+            "lat": 6.535,
+            "lon": 79.968
+          },
+          {
+            "site_id": "S04",
+            "label": "Matugama",
+            "x": 30.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "MAT68",
+            "district": "Kalutara",
+            "aliases": [
+              "MAT68",
+              "Matugama RBS",
+              "Matugama hospital road"
+            ],
+            "lat": 6.522,
+            "lon": 80.114
+          },
+          {
+            "site_id": "S05",
+            "label": "Agalawatta",
+            "x": 40.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "AGA97",
+            "district": "Kalutara",
+            "aliases": [
+              "AGA97",
+              "Agalawatta RBS",
+              "Agalawatta bridge"
+            ],
+            "lat": 6.54,
+            "lon": 80.157
+          },
+          {
+            "site_id": "S06",
+            "label": "Panadura",
+            "x": 0.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "PAN57",
+            "district": "Kalutara",
+            "aliases": [
+              "PAN57",
+              "Panadura RBS",
+              "Panadura bus stand"
+            ],
+            "lat": 6.713,
+            "lon": 79.904
+          },
+          {
+            "site_id": "S07",
+            "label": "Wadduwa",
+            "x": 10.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "WAD29",
+            "district": "Kalutara",
+            "aliases": [
+              "WAD29",
+              "Wadduwa RBS",
+              "Wadduwa school lane"
+            ],
+            "lat": 6.667,
+            "lon": 79.928
+          },
+          {
+            "site_id": "S08",
+            "label": "Bandaragama",
+            "x": 20.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "BAN46",
+            "district": "Kalutara",
+            "aliases": [
+              "BAN46",
+              "Bandaragama RBS",
+              "Bandaragama police station"
+            ],
+            "lat": 6.714,
+            "lon": 79.989
+          },
+          {
+            "site_id": "S09",
+            "label": "Horana",
+            "x": 30.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "HOR15",
+            "district": "Kalutara",
+            "aliases": [
+              "HOR15",
+              "Horana RBS",
+              "Horana bridge"
+            ],
+            "lat": 6.716,
+            "lon": 80.062
+          },
+          {
+            "site_id": "S10",
+            "label": "Ingiriya",
+            "x": 40.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "ING50",
+            "district": "Kalutara",
+            "aliases": [
+              "ING50",
+              "Ingiriya RBS",
+              "Ingiriya market"
+            ],
+            "lat": 6.744,
+            "lon": 80.155
+          },
+          {
+            "site_id": "S11",
+            "label": "Kollupitiya",
+            "x": 0.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "KOL81",
+            "district": "Colombo",
+            "aliases": [
+              "KOL81",
+              "Kollupitiya RBS",
+              "Kollupitiya market"
+            ],
+            "lat": 6.911,
+            "lon": 79.849
+          },
+          {
+            "site_id": "S12",
+            "label": "Kelaniya",
+            "x": 10.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "KEL89",
+            "district": "Gampaha",
+            "aliases": [
+              "KEL89",
+              "Kelaniya RBS",
+              "Kelaniya junction"
+            ],
+            "lat": 6.955,
+            "lon": 79.922
+          },
+          {
+            "site_id": "S13",
+            "label": "Kaduwela",
+            "x": 20.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "KAD72",
+            "district": "Colombo",
+            "aliases": [
+              "KAD72",
+              "Kaduwela RBS",
+              "Kaduwela railway station"
+            ],
+            "lat": 6.931,
+            "lon": 79.984
+          },
+          {
+            "site_id": "S14",
+            "label": "Hanwella",
+            "x": 30.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "HAN68",
+            "district": "Colombo",
+            "aliases": [
+              "HAN68",
+              "Hanwella RBS",
+              "Hanwella hospital road"
+            ],
+            "lat": 6.905,
+            "lon": 80.083
+          },
+          {
+            "site_id": "S15",
+            "label": "Avissawella",
+            "x": 40.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "AVI16",
+            "district": "Colombo",
+            "aliases": [
+              "AVI16",
+              "Avissawella RBS",
+              "Avissawella market"
+            ],
+            "lat": 6.955,
+            "lon": 80.218
+          },
+          {
+            "site_id": "S16",
+            "label": "Negombo",
+            "x": 0.0,
+            "y": 30.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "NEG32",
+            "district": "Gampaha",
+            "aliases": [
+              "NEG32",
+              "Negombo RBS",
+              "Negombo junction"
+            ],
+            "lat": 7.209,
+            "lon": 79.838
+          },
+          {
+            "site_id": "S17",
+            "label": "Minuwangoda",
+            "x": 10.0,
+            "y": 30.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "MIN99",
+            "district": "Gampaha",
+            "aliases": [
+              "MIN99",
+              "Minuwangoda RBS",
+              "Minuwangoda clock tower"
+            ],
+            "lat": 7.166,
+            "lon": 79.951
+          },
+          {
+            "site_id": "S18",
+            "label": "Divulapitiya",
+            "x": 20.0,
+            "y": 30.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "DIV33",
+            "district": "Gampaha",
+            "aliases": [
+              "DIV33",
+              "Divulapitiya RBS",
+              "Divulapitiya railway station"
+            ],
+            "lat": 7.224,
+            "lon": 80.015
+          }
+        ],
+        "links": [
+          {
+            "link_id": "L01",
+            "parent": "CORE",
+            "child": "S01"
+          },
+          {
+            "link_id": "L02",
+            "parent": "S01",
+            "child": "S02"
+          },
+          {
+            "link_id": "L03",
+            "parent": "S02",
+            "child": "S03"
+          },
+          {
+            "link_id": "L04",
+            "parent": "S03",
+            "child": "S04"
+          },
+          {
+            "link_id": "L05",
+            "parent": "S03",
+            "child": "S05"
+          },
+          {
+            "link_id": "L06",
+            "parent": "S01",
+            "child": "S06"
+          },
+          {
+            "link_id": "L07",
+            "parent": "S04",
+            "child": "S07"
+          },
+          {
+            "link_id": "L08",
+            "parent": "S05",
+            "child": "S08"
+          },
+          {
+            "link_id": "L09",
+            "parent": "S07",
+            "child": "S09"
+          },
+          {
+            "link_id": "L10",
+            "parent": "S02",
+            "child": "S10"
+          },
+          {
+            "link_id": "L11",
+            "parent": "S09",
+            "child": "S11"
+          },
+          {
+            "link_id": "L12",
+            "parent": "S10",
+            "child": "S12"
+          },
+          {
+            "link_id": "L13",
+            "parent": "S01",
+            "child": "S13"
+          },
+          {
+            "link_id": "L14",
+            "parent": "S01",
+            "child": "S14"
+          },
+          {
+            "link_id": "L15",
+            "parent": "S05",
+            "child": "S15"
+          },
+          {
+            "link_id": "L16",
+            "parent": "S10",
+            "child": "S16"
+          },
+          {
+            "link_id": "L17",
+            "parent": "S08",
+            "child": "S17"
+          },
+          {
+            "link_id": "L18",
+            "parent": "S10",
+            "child": "S18"
+          }
+        ],
+        "roads": [
+          {
+            "road_id": "R01",
+            "origin": "DEPOT",
+            "to": "S01",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R02",
+            "origin": "S01",
+            "to": "S02",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R03",
+            "origin": "S02",
+            "to": "S03",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R04",
+            "origin": "S03",
+            "to": "S04",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R05",
+            "origin": "S04",
+            "to": "S05",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R06",
+            "origin": "S05",
+            "to": "S06",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R07",
+            "origin": "S06",
+            "to": "S07",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R08",
+            "origin": "S07",
+            "to": "S08",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R09",
+            "origin": "S08",
+            "to": "S09",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R10",
+            "origin": "S09",
+            "to": "S10",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R11",
+            "origin": "S10",
+            "to": "S11",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R12",
+            "origin": "S11",
+            "to": "S12",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R13",
+            "origin": "S12",
+            "to": "S13",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R14",
+            "origin": "S13",
+            "to": "S14",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R15",
+            "origin": "S14",
+            "to": "S15",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R16",
+            "origin": "S15",
+            "to": "S16",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R17",
+            "origin": "S16",
+            "to": "S17",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R18",
+            "origin": "S17",
+            "to": "S18",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R19",
+            "origin": "DEPOT",
+            "to": "S04",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R20",
+            "origin": "DEPOT",
+            "to": "S08",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R21",
+            "origin": "DEPOT",
+            "to": "S12",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R22",
+            "origin": "DEPOT",
+            "to": "S16",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R23",
+            "origin": "S01",
+            "to": "S03",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R24",
+            "origin": "S05",
+            "to": "S07",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R25",
+            "origin": "S09",
+            "to": "S11",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R26",
+            "origin": "S13",
+            "to": "S15",
+            "travel_minutes": 10
+          }
+        ],
+        "services": [
+          {
+            "service_id": "V01",
+            "site_id": "S01",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V02",
+            "site_id": "S02",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V03",
+            "site_id": "S03",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V04",
+            "site_id": "S04",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V05",
+            "site_id": "S05",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V06",
+            "site_id": "S06",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V07",
+            "site_id": "S07",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V08",
+            "site_id": "S08",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V09",
+            "site_id": "S09",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V10",
+            "site_id": "S10",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V11",
+            "site_id": "S11",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V12",
+            "site_id": "S12",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V13",
+            "site_id": "S13",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V14",
+            "site_id": "S14",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V15",
+            "site_id": "S15",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V16",
+            "site_id": "S16",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V17",
+            "site_id": "S17",
+            "label": "Synthetic community service",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V18",
+            "site_id": "S18",
+            "label": "Synthetic emergency facility",
+            "critical": true,
+            "weight": 5,
+            "policy_evidence_id": "POLICY-001"
+          }
+        ],
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ],
+        "observed_state": {
+          "sites": {
+            "S01": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S02": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S03": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S04": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S05": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S06": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S07": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S08": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S09": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S10": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S11": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S12": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S13": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S14": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S15": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S16": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S17": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S18": {
+              "equipment_ok": null,
+              "grid_power_ok": true
+            }
+          },
+          "links": {
+            "L01": true,
+            "L02": true,
+            "L03": true,
+            "L04": true,
+            "L05": true,
+            "L06": true,
+            "L07": true,
+            "L08": true,
+            "L09": true,
+            "L10": true,
+            "L11": true,
+            "L12": true,
+            "L13": true,
+            "L14": true,
+            "L15": true,
+            "L16": true,
+            "L17": true,
+            "L18": true
+          },
+          "roads": {
+            "R01": true,
+            "R02": true,
+            "R03": true,
+            "R04": true,
+            "R05": true,
+            "R06": true,
+            "R07": true,
+            "R08": true,
+            "R09": true,
+            "R10": true,
+            "R11": true,
+            "R12": true,
+            "R13": true,
+            "R14": true,
+            "R15": true,
+            "R16": true,
+            "R17": true,
+            "R18": true,
+            "R19": true,
+            "R20": true,
+            "R21": true,
+            "R22": true,
+            "R23": true,
+            "R24": true,
+            "R25": true,
+            "R26": true
+          }
+        },
+        "active_generators": [],
+        "action_options": [
+          {
+            "action_id": "EQ-S01",
+            "kind": "equipment_repair",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 70,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S02",
+            "kind": "equipment_repair",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 40,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S03",
+            "kind": "equipment_repair",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S04",
+            "kind": "equipment_repair",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S05",
+            "kind": "equipment_repair",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 40,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S06",
+            "kind": "equipment_repair",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 80,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S07",
+            "kind": "equipment_repair",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S08",
+            "kind": "equipment_repair",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 70,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S09",
+            "kind": "equipment_repair",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 55,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S10",
+            "kind": "equipment_repair",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S11",
+            "kind": "equipment_repair",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 35,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S12",
+            "kind": "equipment_repair",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S13",
+            "kind": "equipment_repair",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 55,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S14",
+            "kind": "equipment_repair",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S15",
+            "kind": "equipment_repair",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 70,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S16",
+            "kind": "equipment_repair",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 70,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S17",
+            "kind": "equipment_repair",
+            "target_id": "S17",
+            "location": "S17",
+            "duration_minutes": 40,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S18",
+            "kind": "equipment_repair",
+            "target_id": "S18",
+            "location": "S18",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L01",
+            "kind": "link_repair",
+            "target_id": "L01",
+            "location": "S01",
+            "duration_minutes": 75,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L02",
+            "kind": "link_repair",
+            "target_id": "L02",
+            "location": "S02",
+            "duration_minutes": 55,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L03",
+            "kind": "link_repair",
+            "target_id": "L03",
+            "location": "S03",
+            "duration_minutes": 65,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L04",
+            "kind": "link_repair",
+            "target_id": "L04",
+            "location": "S04",
+            "duration_minutes": 40,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L05",
+            "kind": "link_repair",
+            "target_id": "L05",
+            "location": "S05",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L06",
+            "kind": "link_repair",
+            "target_id": "L06",
+            "location": "S06",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L07",
+            "kind": "link_repair",
+            "target_id": "L07",
+            "location": "S07",
+            "duration_minutes": 55,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L08",
+            "kind": "link_repair",
+            "target_id": "L08",
+            "location": "S08",
+            "duration_minutes": 70,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L09",
+            "kind": "link_repair",
+            "target_id": "L09",
+            "location": "S09",
+            "duration_minutes": 50,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L10",
+            "kind": "link_repair",
+            "target_id": "L10",
+            "location": "S10",
+            "duration_minutes": 55,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L11",
+            "kind": "link_repair",
+            "target_id": "L11",
+            "location": "S11",
+            "duration_minutes": 35,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L12",
+            "kind": "link_repair",
+            "target_id": "L12",
+            "location": "S12",
+            "duration_minutes": 55,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L13",
+            "kind": "link_repair",
+            "target_id": "L13",
+            "location": "S13",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L14",
+            "kind": "link_repair",
+            "target_id": "L14",
+            "location": "S14",
+            "duration_minutes": 85,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L15",
+            "kind": "link_repair",
+            "target_id": "L15",
+            "location": "S15",
+            "duration_minutes": 55,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L16",
+            "kind": "link_repair",
+            "target_id": "L16",
+            "location": "S16",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L17",
+            "kind": "link_repair",
+            "target_id": "L17",
+            "location": "S17",
+            "duration_minutes": 85,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L18",
+            "kind": "link_repair",
+            "target_id": "L18",
+            "location": "S18",
+            "duration_minutes": 75,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "GEN-G1-S01",
+            "kind": "generator_deploy",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S02",
+            "kind": "generator_deploy",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S03",
+            "kind": "generator_deploy",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S04",
+            "kind": "generator_deploy",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S05",
+            "kind": "generator_deploy",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S06",
+            "kind": "generator_deploy",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S07",
+            "kind": "generator_deploy",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S08",
+            "kind": "generator_deploy",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S09",
+            "kind": "generator_deploy",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S10",
+            "kind": "generator_deploy",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S11",
+            "kind": "generator_deploy",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S12",
+            "kind": "generator_deploy",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S13",
+            "kind": "generator_deploy",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S14",
+            "kind": "generator_deploy",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S15",
+            "kind": "generator_deploy",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S16",
+            "kind": "generator_deploy",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S17",
+            "kind": "generator_deploy",
+            "target_id": "S17",
+            "location": "S17",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S18",
+            "kind": "generator_deploy",
+            "target_id": "S18",
+            "location": "S18",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G2-S01",
+            "kind": "generator_deploy",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S02",
+            "kind": "generator_deploy",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S03",
+            "kind": "generator_deploy",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S04",
+            "kind": "generator_deploy",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S05",
+            "kind": "generator_deploy",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S06",
+            "kind": "generator_deploy",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S07",
+            "kind": "generator_deploy",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S08",
+            "kind": "generator_deploy",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S09",
+            "kind": "generator_deploy",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S10",
+            "kind": "generator_deploy",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S11",
+            "kind": "generator_deploy",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S12",
+            "kind": "generator_deploy",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S13",
+            "kind": "generator_deploy",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S14",
+            "kind": "generator_deploy",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S15",
+            "kind": "generator_deploy",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S16",
+            "kind": "generator_deploy",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S17",
+            "kind": "generator_deploy",
+            "target_id": "S17",
+            "location": "S17",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          },
+          {
+            "action_id": "GEN-G2-S18",
+            "kind": "generator_deploy",
+            "target_id": "S18",
+            "location": "S18",
+            "duration_minutes": 10,
+            "required_skill": "generator",
+            "generator_id": "G2"
+          }
+        ],
+        "reports": [
+          {
+            "report_id": "V3-EVAL2-016-X02",
+            "source_type": "utility_notice",
+            "observed_at_min": -120,
+            "received_at_min": 0,
+            "text": "CEB notice: planned power interruption in Kadawatha tomorrow 09:00-15:00 for line maintenance."
+          },
+          {
+            "report_id": "V3-EVAL2-016-X01",
+            "source_type": "customer_complaint",
+            "observed_at_min": -30,
+            "received_at_min": 0,
+            "text": "Call centre: 33 customers around Hanwella say data is very slow and calls keep dropping."
+          },
+          {
+            "report_id": "V3-EVAL2-016-X03",
+            "source_type": "social_media",
+            "observed_at_min": -10,
+            "received_at_min": 0,
+            "text": "Social media post: \"heard the Divulapitiya tower is already fixed, the company van came\" (unconfirmed)."
+          },
+          {
+            "report_id": "V2-16-OBS-01",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "NMS 06:00 | CLEARED | DIV33 Divulapitiya | AC mains restored"
+          }
+        ],
+        "policy": {
+          "evidence_id": "POLICY-001",
+          "approved_for_simulation": true,
+          "standard_weight": 1,
+          "critical_weight": 5,
+          "evidence_rule": "Authoritative evidence must be consistent; equally authoritative conflicts require confirmation. Recency alone does not verify a fact.",
+          "max_generator_deployments_per_scenario": 1,
+          "on_crew_loss": "Pause affected unfinished work and request operator review; preserve completed repairs."
+        }
+      },
+      "resolved_observations": {
+        "sites": {
+          "S01": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S02": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S03": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S04": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S05": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S06": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S07": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S08": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S09": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S10": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S11": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S12": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S13": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S14": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S15": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S16": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S17": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S18": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          }
+        },
+        "links": {
+          "L01": true,
+          "L02": true,
+          "L03": true,
+          "L04": true,
+          "L05": true,
+          "L06": true,
+          "L07": true,
+          "L08": true,
+          "L09": true,
+          "L10": true,
+          "L11": true,
+          "L12": true,
+          "L13": true,
+          "L14": true,
+          "L15": true,
+          "L16": true,
+          "L17": true,
+          "L18": true
+        },
+        "roads": {
+          "R01": true,
+          "R02": true,
+          "R03": true,
+          "R04": true,
+          "R05": true,
+          "R06": true,
+          "R07": true,
+          "R08": true,
+          "R09": true,
+          "R10": true,
+          "R11": true,
+          "R12": true,
+          "R13": true,
+          "R14": true,
+          "R15": true,
+          "R16": true,
+          "R17": true,
+          "R18": true,
+          "R19": true,
+          "R20": true,
+          "R21": true,
+          "R22": true,
+          "R23": true,
+          "R24": true,
+          "R25": true,
+          "R26": true
+        }
+      },
+      "facts": [
+        {
+          "target_type": "site",
+          "target_id": "S18",
+          "attribute": "equipment_ok",
+          "value": true,
+          "evidence_ids": [
+            "V2-16-OBS-01"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports DIV33 cleared; the directory resolves DIV33 to Divulapitiya (S18)."
+        }
+      ],
+      "unresolved_facts": []
+    },
+    "plan": {
+      "plan_id": "bb7e5070-1559-41ca-80fa-647c9e58527f",
+      "scenario_id": "EVAL2-016",
+      "state_version": 1,
+      "state_hash": "43458a874843da9697a872d50c6377b115f618e6278b2f8bf12d14e608beff8d",
+      "actions": [],
+      "unmet_needs": [],
+      "evidence_ids": [
+        "POLICY-001",
+        "V2-16-OBS-01"
+      ],
+      "planner_config": {
+        "algorithm": "cp_sat_time_indexed",
+        "solver_status": "OPTIMAL",
+        "solver_seconds_cap": 5,
+        "seed": 22,
+        "workers": 1,
+        "slot_minutes": 5,
+        "prediction_only": true,
+        "tie_breakers": [
+          "fewer actions",
+          "earlier work completion"
+        ],
+        "limitations": [
+          "static rooted tree",
+          "unknown assets unavailable",
+          "no in-progress work or future-event scheduling"
+        ],
+        "objective_value": 15840.0,
+        "best_objective_bound": 15840.0,
+        "predicted_weighted_available_minutes_remaining": 15840,
+        "predicted_weighted_downtime_remaining": 0,
+        "deferred_action_ids": []
+      },
+      "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+    },
+    "validation": {
+      "valid": true,
+      "violations": []
+    },
+    "messages": [
+      {
+        "sender": "network_investigator",
+        "recipient": "coordinator",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "stage": "investigate",
+          "facts": [
+            {
+              "target_type": "site",
+              "target_id": "S18",
+              "attribute": "equipment_ok",
+              "value": true,
+              "evidence_ids": [
+                "V2-16-OBS-01"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports DIV33 cleared; the directory resolves DIV33 to Divulapitiya (S18)."
+            }
+          ],
+          "ignored_reports": [
+            {
+              "report_id": "V3-EVAL2-016-X02",
+              "kind": "no_operational_claim",
+              "note": "Planned future power interruption in Kadawatha; it is not a current asset-state claim."
+            },
+            {
+              "report_id": "V3-EVAL2-016-X01",
+              "kind": "no_operational_claim",
+              "note": "Customer complaint reports slow data and dropped calls, not a specific asset state."
+            },
+            {
+              "report_id": "V3-EVAL2-016-X03",
+              "kind": "no_operational_claim",
+              "note": "Unconfirmed social media rumour that a tower was fixed; no specific verified operational claim."
+            }
+          ],
+          "finding": "DIV33 is cleared according to the authoritative snapshot. The report does not specify AC mains status, so grid_power_ok remains unknown."
+        }
+      },
+      {
+        "sender": "network_investigator",
+        "recipient": "field_resource_planner",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "shared": "facts",
+          "state_version": 1,
+          "fact_count": 1,
+          "ignored_report_ids": [
+            "V3-EVAL2-016-X02",
+            "V3-EVAL2-016-X01",
+            "V3-EVAL2-016-X03"
+          ]
+        }
+      },
+      {
+        "sender": "network_investigator",
+        "recipient": "service_priority_assessor",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "shared": "facts",
+          "state_version": 1,
+          "fact_count": 1,
+          "ignored_report_ids": [
+            "V3-EVAL2-016-X02",
+            "V3-EVAL2-016-X01",
+            "V3-EVAL2-016-X03"
+          ]
+        }
+      },
+      {
+        "sender": "network_investigator",
+        "recipient": "plan_reviewer",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "shared": "facts",
+          "state_version": 1,
+          "fact_count": 1,
+          "ignored_report_ids": [
+            "V3-EVAL2-016-X02",
+            "V3-EVAL2-016-X01",
+            "V3-EVAL2-016-X03"
+          ]
+        }
+      },
+      {
+        "sender": "field_resource_planner",
+        "recipient": "coordinator",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "stage": "resources",
+          "finding": "No resolved faults are present: equipment, grid power, links, and roads default to operational, with no unknowns. The verified S18 equipment state is also operational. No action is blocked by an evidenced safety or impossibility reason.",
+          "evidence_ids": [
+            "V2-16-OBS-01"
+          ],
+          "requests": [],
+          "questions": [],
+          "priority_proposals": []
+        }
+      },
+      {
+        "sender": "service_priority_assessor",
+        "recipient": "coordinator",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "stage": "priorities",
+          "finding": "All services are up in the resolved state. V18 at S18 (Divulapitiya) has the highest approved priority weight (critical, 5); the other services are standard (weight 1). The reports do not establish a current outage or credible basis to change any approved priority. Kadawatha\u2019s planned interruption is future and not a current asset-state claim; the Hanwella complaint and Divulapitiya social-media rumor are not verified operational claims. Divulapitiya\u2019s authoritative snapshot says AC mains are restored.",
+          "evidence_ids": [
+            "POLICY-001",
+            "V2-16-OBS-01",
+            "V3-EVAL2-016-X01",
+            "V3-EVAL2-016-X02",
+            "V3-EVAL2-016-X03"
+          ],
+          "requests": [],
+          "questions": [],
+          "priority_proposals": []
+        }
+      },
+      {
+        "sender": "deterministic_scheduler",
+        "recipient": "coordinator",
+        "incident_id": "EVAL2-016",
+        "state_version": 1,
+        "finding": {
+          "plan_id": "bb7e5070-1559-41ca-80fa-647c9e58527f",
+          "scenario_id": "EVAL2-016",
+          "state_version": 1,
+          "state_hash": "43458a874843da9697a872d50c6377b115f618e6278b2f8bf12d14e608beff8d",
+          "actions": [],
+          "unmet_needs": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "V2-16-OBS-01"
+          ],
+          "planner_config": {
+            "algorithm": "cp_sat_time_indexed",
+            "solver_status": "OPTIMAL",
+            "solver_seconds_cap": 5,
+            "seed": 22,
+            "workers": 1,
+            "slot_minutes": 5,
+            "prediction_only": true,
+            "tie_breakers": [
+              "fewer actions",
+              "earlier work completion"
+            ],
+            "limitations": [
+              "static rooted tree",
+              "unknown assets unavailable",
+              "no in-progress work or future-event scheduling"
+            ],
+            "objective_value": 15840.0,
+            "best_objective_bound": 15840.0,
+            "predicted_weighted_available_minutes_remaining": 15840,
+            "predicted_weighted_downtime_remaining": 0,
+            "deferred_action_ids": []
+          },
+          "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+        }
+      }
+    ],
+    "model_usage": [
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "network_investigator",
+        "attempt": 1,
+        "input_token_upper_estimate": 2003,
+        "output_limit": 1100,
+        "prompt_sha256": "e3c8ef3626b6c6dd760238dad9b749e0ef8eabdc9aa68b50bd6f9a60a07deb22",
+        "schema_sha256": "c61aaa60008131b9c8989950f7145e3a29b1bcd859cc4e5b97cf0af45d692b4f",
+        "request_id": "resp_0c9298b267fc8f8b016b06e380f9d487d081da65ca381bee43",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2003,
+        "output_tokens": 244,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "12bd99ab25ec5f8f0817b5f89be4a035ab73122329f60197dd7226544d793bfb",
+        "status": "ok",
+        "latency_seconds": 2.3751835830044
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "field_resource_planner",
+        "attempt": 1,
+        "input_token_upper_estimate": 3204,
+        "output_limit": 650,
+        "prompt_sha256": "395ade667d21d4613669ba8b77bd74a90b3af05670cf2edb24b5571648cf59c2",
+        "schema_sha256": "e38e2340baca6a9262270c7a1cb686c9aa2f7a0e0edbae4b1e4aeb802a4af67d",
+        "request_id": "resp_06e52258e81fc2a0016b06e386a66487d0b4d77d18f74a4198",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 3204,
+        "output_tokens": 84,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "40a342d03b0a76e86fb6971e44d94ff188c189821b60bf713af3f7bcfa7e35d2",
+        "status": "ok",
+        "latency_seconds": 4.5575915410299785
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "service_priority_assessor",
+        "attempt": 1,
+        "input_token_upper_estimate": 2488,
+        "output_limit": 650,
+        "prompt_sha256": "de666bf464bb4b097f650c3c947a22a6778aaf13af05435361d303745df2ca84",
+        "schema_sha256": "e38e2340baca6a9262270c7a1cb686c9aa2f7a0e0edbae4b1e4aeb802a4af67d",
+        "request_id": "resp_0f0c3daf889fd5da016b06e38925c487d09f32f837793ccdaf",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2488,
+        "output_tokens": 182,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "68b120d826c02f6b607cbdcccc7532e60cf3573a947168ec7dd977b8e68cd275",
+        "status": "ok",
+        "latency_seconds": 2.3097622499917634
+      }
+    ],
+    "reasons": [],
+    "metadata": {
+      "started_at_utc": "2026-11-25T13:32:48.440222+00:00",
+      "duration_seconds": 10.90938579197973,
+      "protocol_version": "relink-agents-v14",
+      "workflow": "agent_orchestrator",
+      "agent_manifest": {
+        "protocol": "relink-agents-v14",
+        "multi": [
+          "network_investigator",
+          "field_resource_planner",
+          "service_priority_assessor",
+          "plan_reviewer"
+        ],
+        "single": "single_agent: one accumulating context, analyse then self-review",
+        "context_policy": "multi: role-scoped views plus typed messages; reviewer re-checks raw reports independently; single: union of all views in one conversation",
+        "tools": [
+          "fact normaliser (authority from source)",
+          "evidence resolver",
+          "CP-SAT scheduler",
+          "independent validator",
+          "service forecast"
+        ],
+        "never_model_controlled": [
+          "service weights",
+          "evidence authority",
+          "approval",
+          "simulation"
+        ]
+      },
+      "auxiliary_requests": [
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2003,
+          "latency_seconds": 0.40270491602132097
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 3204,
+          "latency_seconds": 0.7797780829714611
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2488,
+          "latency_seconds": 0.4087537909508683
+        }
+      ],
+      "raw_facts": [
+        {
+          "target_type": "site",
+          "target_id": "S18",
+          "attribute": "equipment_ok",
+          "value": true,
+          "evidence_ids": [
+            "V2-16-OBS-01"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports DIV33 cleared; the directory resolves DIV33 to Divulapitiya (S18)."
+        }
+      ],
+      "final_facts": [
+        {
+          "target_type": "site",
+          "target_id": "S18",
+          "attribute": "equipment_ok",
+          "value": true,
+          "evidence_ids": [
+            "V2-16-OBS-01"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports DIV33 cleared; the directory resolves DIV33 to Divulapitiya (S18)."
+        }
+      ],
+      "ignored_reports": [
+        {
+          "report_id": "V3-EVAL2-016-X02",
+          "kind": "no_operational_claim",
+          "note": "Planned future power interruption in Kadawatha; it is not a current asset-state claim."
+        },
+        {
+          "report_id": "V3-EVAL2-016-X01",
+          "kind": "no_operational_claim",
+          "note": "Customer complaint reports slow data and dropped calls, not a specific asset state."
+        },
+        {
+          "report_id": "V3-EVAL2-016-X03",
+          "kind": "no_operational_claim",
+          "note": "Unconfirmed social media rumour that a tower was fixed; no specific verified operational claim."
+        }
+      ],
+      "operator_questions": [],
+      "priority_proposals": [],
+      "fact_challenges": [],
+      "decision_effects": [],
+      "review_notes": [],
+      "degraded_stages": [],
+      "deferred_action_ids": [],
+      "input_hash": "50e4cb39934a36953222ff5adad87074d652ba0a3330dd8eaa17fb0c86c83c69",
+      "planner": "cp_sat",
+      "reviewer_enabled": false,
+      "feedback_enabled": true,
+      "raw_extraction_metrics": null,
+      "simulation_status": "not_integrated",
+      "transport": "hosted",
+      "budget": {
+        "max_calls": 12,
+        "max_input_tokens": 24000,
+        "max_output_tokens": 4800,
+        "max_seconds": 179.99997374997474
+      }
+    }
+  },
+  "sha256": "7f9df5afe5719e21365dfe90dca47f2e3a083f0631556e269e43b758b6bfa85c"
+}

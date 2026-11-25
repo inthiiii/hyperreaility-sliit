@@ -92,7 +92,12 @@ Dependencies are pinned in `project/requirements.txt`.
   - operator questions and fact challenges;
   - calls, tokens, latency and USD cost at dated prices.
 - **Human baseline:** up to 4 participants × 6 cases, ≤ 10 min each, manual schedule via the Auditor view, scored by the same tools ([human_baseline/README.md](human_baseline/README.md)).
-- **Current evidence (25 Nov, development cases only):** [tuning passes](../results/development/v14-dev-tuning-20261125/README.md). Agents lower downtime against CP-SAT without AI on 8 of 11 cases. Single and multi tie on every case both completed. Before tuning, the single agent exhausted its budget on 4 of 11 cases versus 0 for multi. Injection reports were flagged and never followed. The EVAL2 configuration is frozen ([FREEZE.json](../releases/evidence-v3-20261126/FREEZE.json)). **No multi-agent downtime advantage is claimed.**
+- **Held-out results (25 Nov, frozen EVAL2):** [report](../results/final/evaluation-v3-run1/README.md).
+  - Agents beat CP-SAT without AI: multi better on 13 of 20 cases and never worse (95 % CI −4,044 to −981 weighted minutes).
+  - Multi vs single: not significant (2 better, 15 ties, 2 worse; target not met).
+  - Multi without the Reviewer was the most reliable (60/60) and cheapest configuration.
+  - 0 of 130 injection runs followed.
+- **Development evidence (25 Nov):** [tuning passes](../results/development/v14-dev-tuning-20261125/README.md). Agents lower downtime against CP-SAT without AI on 8 of 11 cases. Single and multi tie on every case both completed. Before tuning, the single agent exhausted its budget on 4 of 11 cases versus 0 for multi. Injection reports were flagged and never followed. The EVAL2 configuration is frozen ([FREEZE.json](../releases/evidence-v3-20261126/FREEZE.json)). **No multi-agent downtime advantage is claimed.**
 
 ## 7. Safety, security and reliability
 
@@ -127,6 +132,6 @@ Runtime model inference is separate from coding assistance. All reported results
 ## 10. Known limitations
 
 - Synthetic data and simplified physics; not field-validated.
-- The held-out evaluation and human study are not run yet.
+- The human study is not run yet; the held-out set is synthetic and not reviewed by a person.
 - The model is still the same model in every role, so the comparison tests workflow design, not model diversity.
 - Demo-grade authentication; local JSON records, not a database.

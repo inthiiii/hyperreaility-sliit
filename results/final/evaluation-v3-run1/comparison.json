@@ -1,0 +1,126 @@
+{
+  "comparison": "single versus multi; same four-stage tool-assisted workflow",
+  "eligible_pairs": 60,
+  "scored_comparable_pairs": 47,
+  "excluded_pairs": [
+    {
+      "case": [
+        "EVAL2-003",
+        2
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-004",
+        0
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-009",
+        1
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-011",
+        0
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-013",
+        1
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-013",
+        2
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-017",
+        2
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-019",
+        0
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-019",
+        1
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-019",
+        2
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-020",
+        0
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-020",
+        1
+      ],
+      "reason": "unscored_pair"
+    },
+    {
+      "case": [
+        "EVAL2-020",
+        2
+      ],
+      "reason": "unscored_pair"
+    }
+  ],
+  "conditioning": "Downtime differences use complete comparable pairs only; assess failure coverage alongside them.",
+  "difference_unit": "weighted service-minutes; positive favors multi",
+  "mean_single_minus_multi": 106.17021276595744,
+  "median_single_minus_multi": 0,
+  "multi_wins": 2,
+  "single_wins": 2,
+  "ties": 43,
+  "paired_bootstrap_95pct_interval": [
+    -45.95744680851064,
+    332.4468085106383
+  ],
+  "uncertainty": "Exploratory paired resampling; repeats within a scenario are not independent new scenarios.",
+  "status_counts": {
+    "single": {
+      "completed": 53,
+      "escalated": 7
+    },
+    "multi": {
+      "completed": 54,
+      "escalated": 6
+    }
+  },
+  "decision_effect_counts": {
+    "single": 11,
+    "multi": 1
+  },
+  "api_cost": null,
+  "claims_multi_agent_superiority": false
+}

@@ -10,7 +10,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project plan](docs/PROJECT_PLAN.md) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Quick start](#quick-start) · [Evaluation](#evaluation)
 
-> **Status (25 Nov 2026):** end-to-end synthetic MVP. Sign-in with roles → four AI specialists read messy incident reports → CP-SAT schedule → independent validation → reviewer challenge loop → hash-bound human approval → independent simulation with mid-incident replanning. A real single-agent baseline and a human-baseline scorer are implemented. The frozen held-out benchmark and human sessions are still pending, and **no multi-agent advantage is claimed yet.**
+> **Status (25 Nov 2026):** end-to-end synthetic MVP. Sign-in with roles → four AI specialists read messy incident reports → CP-SAT schedule → independent validation → reviewer challenge loop → hash-bound human approval → independent simulation with mid-incident replanning. A real single-agent baseline and a human-baseline scorer are implemented. The frozen held-out benchmark is complete (results below). The human sessions are pending.
 
 ## The problem
 
@@ -117,7 +117,14 @@ python -m project.evaluation.runner \
   --output results/final/development
 ```
 
-Results so far (development cases only): [tuning passes](results/development/v14-dev-tuning-20261125/README.md). Reading the reports lowers downtime against CP-SAT without AI on 8 of 11 cases. Single and multi agent tie wherever both finish; before tuning, the single agent ran out of budget on 4 of 11 cases versus 0 for multi. Held-out runs are frozen by [FREEZE.json](releases/evidence-v3-20261126/FREEZE.json) and not yet run.
+**Held-out results** ([full report](results/final/evaluation-v3-run1/README.md): 20 frozen EVAL2 cases × 6 variants × 3 repeats = 360 attempts, 0 failures):
+
+- Agents reading the reports reduce weighted downtime against CP-SAT without AI. Multi-agent is better on 13 of 20 cases and never worse (mean −2,378 weighted minutes, 95 % CI −4,044 to −981). The single agent is better on 11 of 19.
+- **Multi vs single: no significant difference** (2 better, 15 ties, 2 worse; CI includes zero). The proposal's 10 % target is not met, and no superiority is claimed.
+- Most reliable and cheapest agent configuration: multi-agent **without** the Reviewer, 60/60 completed and about 35 % fewer tokens than full multi. The Reviewer did not improve outcomes on this set.
+- Prompt injection was followed in 0 of 130 runs that contained it.
+
+Development tuning is recorded in [v14-dev-tuning](results/development/v14-dev-tuning-20261125/README.md).
 
 ## Repository layout
 
