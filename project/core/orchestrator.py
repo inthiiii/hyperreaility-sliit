@@ -215,17 +215,20 @@ class AgentOrchestrator:
             except Exception:  # noqa: BLE001 - a display failure must never change the run
                 pass
 
+    def working(self, sender, stage):
+        """Display-only 'started' notice for the live view; never recorded in the run."""
+        if self.on_message is not None:
+            try:
+                self.on_message({'sender': sender, 'recipient': 'working', 'stage': stage, 'finding': None})
+            except Exception:  # noqa: BLE001
+                pass
+
     def allowed_evidence(self):
         return {r.report_id for r in self.scenario.reports} | {self.scenario.policy.evidence_id}
 
     def call(self, spec_role, stage, task, view, output, max_output, *, keep_history=False):
         self.budget.check_time()
-        if self.on_message is not None:
-            try:
-                self.on_message({'sender': 'single_agent' if self.mode == 'single' else spec_role,
-                                 'recipient': 'working', 'stage': stage, 'finding': None})
-            except Exception:  # noqa: BLE001
-                pass
+        self.working('single_agent' if self.mode == 'single' else spec_role, stage)
         payload = {'stage': stage, 'task': task, 'state_version': self.version, 'context': view}
         role = 'single_agent' if self.mode == 'single' else spec_role
         result = self.adapter.complete(role, payload, output, max_output=max_output,
@@ -351,6 +354,7 @@ class AgentOrchestrator:
         for revision in range(MAX_REVISIONS + 1):
             self.budget.check_time()
             if dirty:
+                self.working('deterministic_scheduler', 'schedule')
                 candidate = self._schedule()
                 validation = validate(candidate, self.state)
                 self.message('deterministic_scheduler', 'coordinator', candidate.model_dump())

@@ -11,7 +11,8 @@ from project.llm.health import preflight
 from project.ui.review import render_review
 from project.ui.confirmation import render_confirmation
 from project.ui.workflow import render_workflow
-from project.ui.agent_view import LiveFeed, collaboration_counts, conversation_rows, gantt_rows, inbox
+from project.ui.agent_flow import LiveFlow, final_state, replay
+from project.ui.agent_view import collaboration_counts, conversation_rows, gantt_rows, inbox
 from project.ui.review_service import active_approval
 from project.ui.priority_service import proposal_key, record_priority_decision
 from project.ui.planning_service import (
@@ -92,6 +93,13 @@ def _activity(result):
     if not result.messages:
         st.caption('No coordinator messages were recorded.')
         return
+    st.markdown('**Agent workflow**')
+    slot = st.empty()
+    if st.button('▶ Replay the agent run', key='replay_agents',
+                 help='Steps through the recorded messages again. No model is called.'):
+        replay(slot, result)
+    else:
+        slot.html(final_state(result).html())
     counts = collaboration_counts(result)
     for column, label in zip(st.columns(5), ('agents', 'messages', 'challenges', 'holds', 'schedules')):
         column.metric(label.title(), counts[label])
@@ -310,10 +318,11 @@ def _generate_step(choice, session, root, user):
                 st.session_state['review_note'] = ''
                 st.rerun()
     if generate:
-        with st.status('Agents are working on the incident…', expanded=True) as status:
-            feed = LiveFeed(status)
-            prepare_plan(session, choice, mode, planner, root, user=user, progress=feed)
-            status.update(label=f'Planning finished · {feed.count} recorded steps', state='complete', expanded=False)
+        st.markdown('**Live agent workflow**')
+        flow = LiveFlow(st.empty(), mode, len(choice.scenario.reports))
+        with st.spinner('Agents are working on the incident…'):
+            prepare_plan(session, choice, mode, planner, root, user=user, progress=flow)
+        flow.finish(session.core.current)
         st.rerun()
     if attempted:
         st.caption('This request has already been attempted. Use Start a new attempt for an explicit retry; this clears the old plan, approval and results.')
@@ -331,6 +340,9 @@ def _generate_step(choice, session, root, user):
                 st.json(redact(attempt))
     if session.core.current is not None:
         st.success('A plan is ready. Open ② Inspect plan, then ③ Review & approve.')
+        if session.core.current.state.source_hash == choice.content_hash:
+            st.markdown('**How this plan was made**')
+            st.html(final_state(session.core.current).html())
 
 
 def _inspect_step(choice, session):
