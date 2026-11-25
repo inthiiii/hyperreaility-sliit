@@ -24,7 +24,7 @@ The full generated tables are in [REPORT.md](REPORT.md), with per-case values in
 | Multi-agent vs CP-SAT without AI | 13 | 7 | 0 | −2,378 | −4,044 to −981 |
 | Single agent vs CP-SAT without AI | 11 | 8 | 0 | −1,811 | −3,334 to −636 |
 
-The median relative reduction on affected cases is about 12 %. Without agents, CP-SAT cannot use free-text alarms and messages, so faults that only reports reveal stay unrepaired.
+Median relative change: −12.5 % across all cases (ties included), and about −17 % on the 14 cases where the plans differ. Without agents, CP-SAT cannot use free-text alarms and messages, so faults that only reports reveal stay unrepaired.
 
 **2. Multi-agent vs single agent: no significant difference in downtime.**
 
@@ -39,26 +39,26 @@ The median relative reduction on affected cases is about 12 %. Without agents, C
 
 | Variant | Completed | Escalation causes | Calls | Input / output tokens | Seconds |
 |---|---:|---|---:|---|---:|
-| multi | 54/60 | 4 truncated answers, 1 provider safety filter, 1 budget | 4.9 | 13.3k / 1.2k | 17.8 |
-| single | 53/60 | 5 budget (growing single context), 2 truncated | 2.3 | 11.3k / 1.0k | 11.9 |
+| multi | 54/60 | 4 truncated Reviewer answers, 1 provider safety filter (at the Reviewer call), 1 budget | 4.9 | 13.3k / 1.2k | 17.8 |
+| single | 53/60 | 5 budget (growing single context), 2 truncated first analyses | 2.3 | 11.3k / 1.0k | 11.9 |
 | no_reviewer | **60/60** | none | 3.3 | 8.7k / 0.8k | 12.3 |
-| no_feedback | 49/60 | 8 revision requested (by design), 2 truncated, 1 safety filter | 4.3 | 11.7k / 1.0k | 15.9 |
+| no_feedback | 49/60 | 8 revision requested (by design), 2 truncated Reviewer answers, 1 safety filter (at the Reviewer call) | 4.3 | 11.7k / 1.0k | 15.9 |
 | heuristic, CP-SAT | 60/60 | none | 0 | 0 | < 1 |
 
 **4. The Plan Reviewer did not earn its cost on this set.**
 
 - Downtime: multi vs no_reviewer gives 1 better, 17 ties, 2 worse (95 % CI −193 to 72).
 - Reviewer fact challenges happened in 11 runs: they improved extraction in 3 and made it worse in 3.
-- The Reviewer adds about 50 % more tokens and causes most of the extra escalations.
+- The Reviewer adds about 50 % more tokens. 5 of the 6 multi-agent escalations happened at the Reviewer's call (4 truncated answers and 1 safety-filter rejection).
 - The most reliable and cheapest agent configuration was **multi-agent without the Reviewer**.
 
 **5. Safety**
 
 - Prompt-injection reports were never followed: 0 of 130 runs that contained one.
 - Claims citing distractor reports were near zero (≤ 0.04 per run).
-- In 2 runs OpenAI's safety filter rejected the request, most likely because of the planted injection text. A production system must handle that gracefully.
+- In 2 runs OpenAI's safety filter rejected the request (HTTP 400). The cause is not known: one of the two cases contained the planted injection message and the other did not. A production system must handle such rejections gracefully.
 
-**6. Extraction quality:** initial fact F1 was 0.88–0.96 across agent variants. Misses concentrate in a few cases (EVAL2-004, -006, -016, -017, -019).
+**6. Extraction quality:** initial fact F1 was 0.88–0.96 across agent variants. Runs with F1 below 0.8 concentrate in EVAL2-006, -016 and -019 (16 of 28 such runs).
 
 ## Honest interpretation
 

@@ -142,7 +142,7 @@ def write(folder, prices=None):
     if prices:
         lines += ['', f'Prices: USD {prices["in"]} / 1M input and {prices["out"]} / 1M output tokens, as of {prices["date"]} (supplied by the team).']
     lines += ['', '## Paired downtime comparisons (per-case medians)', '',
-              '| A vs B | Cases | A better | Tie | B better | Mean A−B | 95 % CI (bootstrap over cases) | Median relative change |',
+              '| A vs B | Cases | A better | Tie | B better | Mean A−B | 95 % CI (bootstrap over cases) | Median relative change (all cases with B > 0, ties included) |',
               '|---|---:|---:|---:|---:|---:|---|---:|']
     for p in summary['paired']:
         ci = p['ci95_mean_diff']

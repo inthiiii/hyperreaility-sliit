@@ -17,7 +17,7 @@ Synthetic, script-generated cases (evidence v3); not independently human-reviewe
 
 ## Paired downtime comparisons (per-case medians)
 
-| A vs B | Cases | A better | Tie | B better | Mean A−B | 95 % CI (bootstrap over cases) | Median relative change |
+| A vs B | Cases | A better | Tie | B better | Mean A−B | 95 % CI (bootstrap over cases) | Median relative change (all cases with B > 0, ties included) |
 |---|---:|---:|---:|---:|---:|---|---:|
 | multi vs single | 19 | 2 | 15 | 2 | -198.9 | -596.3 to 56.8 | 0.0 % |
 | multi vs optimizer | 20 | 13 | 7 | 0 | -2,377.8 | -4,044.0 to -981.2 | -12.5 % |
