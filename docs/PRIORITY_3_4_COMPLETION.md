@@ -2,6 +2,10 @@
 
 **25 November 2026 · RE:L!NK · HyperReAIlity**
 
+> Historical PR #11 checkpoint. Results and source fingerprints refer to that
+> implementation. The later [Priority 5 review tooling](PRIORITY_5_REVIEW.md) changes
+> repository source fingerprints and does not imply a new live comparison.
+
 ## Delivered scope
 
 **Step 3 — hosted execution:** OpenAI `gpt-6-luna`, reasoning `none`, Responses

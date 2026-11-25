@@ -16,7 +16,7 @@ from project.data.evaluator import EvaluatorLoader
 from project.simulation.engine import _check_truth
 
 
-def audit(root):
+def audit(root, *, allow_unparsed_labels=False):
     root=Path(root).resolve()
     cases=CaseLoader(root/'data/processed/agent_inputs')
     truths=EvaluatorLoader(root/'data/evaluation/ground_truth')
@@ -32,9 +32,24 @@ def audit(root):
         normalized.sort(key=lambda r:(r['received_at_min'],r['observed_at_min'],r['report_id']))
         if [r.model_dump() for r in scenario.reports] != normalized:
             raise ValueError(sid+': source evidence changed')
+        normalized_source={**raw['agent_input'],'reports':normalized}
+        if digest(scenario)!=digest(type(scenario).model_validate(normalized_source)):
+            raise ValueError(sid+': processed input disagrees with normalized raw source')
+        if digest(truth)!=digest(type(truth).model_validate(raw['evaluation_truth'])):
+            raise ValueError(sid+': processed truth disagrees with raw source')
         facts={f.evidence_ids[0]:f for f in template_facts(scenario)}
+        unparsed=[]
+        reports={r.report_id:r for r in scenario.reports}
+        valid_targets={'site':(scenario.observed_state.sites,{'equipment_ok','grid_power_ok'}),
+                       'link':(scenario.observed_state.links,{'backhaul_ok'}),
+                       'road':(scenario.observed_state.roads,{'open'})}
         for label in truth.expected_report_facts:
+            target=valid_targets.get(label.get('target_type'))
+            if not target or label.get('target_id') not in target[0] or label.get('attribute') not in target[1] or type(label.get('reported_value')) is not bool or label.get('report_id') not in reports:
+                raise ValueError(sid+': invalid report fact label reference/type')
             fact=facts.get(label['report_id'])
+            if fact is None and allow_unparsed_labels:
+                unparsed.append(label['report_id']);continue
             if fact is None or (fact.target_type,fact.target_id,fact.attribute,fact.value)!=(
                     label['target_type'],label['target_id'],label['attribute'],label['reported_value']):
                 raise ValueError(sid+': report fact label disagrees with literal report')
@@ -52,7 +67,8 @@ def audit(root):
             'topology_hash':digest([(l.parent,l.child) for l in scenario.links]),
             'resource_hash':digest({'crews':[c.model_dump() for c in scenario.crews],
                                     'generators':[g.model_dump() for g in scenario.generators]}),
-            'future_event_count':len(truth.future_events),'report_labels_checked':len(truth.expected_report_facts)})
+            'future_event_count':len(truth.future_events),'report_labels_checked':len(truth.expected_report_facts)-len(unparsed),
+            **({'unparsed_label_reports_requiring_human_review':unparsed} if unparsed else {})})
     return {'format_version':1,'audit_kind':'automated_structural_and_literal_label_review',
             'human_review':'PENDING','held_out_validity':'NOT_ESTABLISHED',
             'limitations':['Mechanism fixtures are not real operator incidents.',

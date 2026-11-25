@@ -140,7 +140,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [project/main.py](project/main.py) | Required application entry point | Integrated dashboard, live hosted planning, approval and independent incident simulation |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
-| `tests/` | Verification code and fixtures | 458 automated tests; data, simulation, core, evaluation and UI checks |
+| `tests/` | Verification code and fixtures | 492 automated tests; data, simulation, core, evaluation and UI checks |
 | `results/` | Benchmark outputs and traces | Development aggregate reports published; raw local traces ignored by Git |
 | `project-demo.mp4` | Actual-execution demonstration video | Pending |
 
@@ -326,3 +326,14 @@ fresh review; operator approval remains separate. Full regression: **458 passed*
 See [the completion update](docs/PRIORITY_3_4_COMPLETION.md) for current live
 results, evidence and limits. Earlier benchmark cohorts retain their original
 protocol labels and must not be pooled. Priority 5–7 remain separate milestones.
+
+
+### Priority 5 — evaluation review preparation
+
+A twenty-case evaluator-only review pack and hash-bound human-review gate are
+available in [the Priority 5 instructions](docs/PRIORITY_5_REVIEW.md). Current
+findings: all 20 topology descriptors occur in development, and all 34 report
+texts overlap development. The worksheet remains **0/20 approved**. Candidate
+evaluation runs now require a completed matching human-attestation release;
+development/demo runs retain their existing entry path. Software checks cannot
+certify reviewer independence or held-out validity. Steps 6–7 remain pending.

@@ -1,0 +1,19 @@
+{
+  "scope": "Priority 5 offline workflow verification, not human or benchmark outcomes",
+  "full_regression": {
+    "passed": 492,
+    "seconds": 50.2
+  },
+  "model_calls": 0,
+  "human_reviews_approved": 0,
+  "human_reviews_pending": 20,
+  "candidate_gate": "BLOCKED_BEFORE_OUTPUT_OR_PROVIDER",
+  "check_cli_exit": 2,
+  "frozen_dataset": "UNCHANGED",
+  "manifest_files": 201,
+  "review_readiness": "BLOCKED",
+  "source_sha256": "41bc5db0aba10db666ebe603e458822723b4c039177fbc64b975a4c8a2ae8d62",
+  "human_independence": "PENDING; no automatic teammate signatures",
+  "steps_6_7": "NOT_STARTED",
+  "review_tests_after_format_fix": 34
+}

@@ -9,7 +9,7 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.10 — strict hosted workflow and bounded review completion |
+| Document version | 0.11 — independent case-review preparation and evaluation gate |
 | Last updated | 24 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
@@ -187,3 +187,26 @@ retained failures and reproducible evidence are in
 implemented with ChatGPT/Codex in Ihthisham's session; all four requested co-author
 trailers are included. Runtime Luna is distinct from the coding assistant. No
 independent human study or held-out evaluation was conducted for this checkpoint.
+
+
+## Priority 5 — independent-case review preparation
+
+The evaluator-only case_review tool prepares 20 case cards, exact input/raw/truth
+hashes, source labels and a human worksheet. It exposes template overlap (20/20
+topology descriptors and 34/34 report texts matching development). Actual human
+review is **PENDING**; no reviewer identities or approvals are auto-filled.
+
+Benchmark candidate runs require a hash-bound human-attestation release. Missing
+or stale reviews, incomplete coverage, conflicting author/tuner declarations and
+tuning contamination block the gate before provider access. Existing frozen data
+is preserved. Unparsed natural wording can enter the review workflow as
+semantically UNVERIFIED; the default literal-label audit remains strict. Human
+identity/independence declarations are self-reported, not authenticated by the
+software; a release never automatically establishes held-out validity.
+
+See [PRIORITY_5_REVIEW.md](PRIORITY_5_REVIEW.md) for exact assignments, revision
+workflow, current readiness and checks. This work used ChatGPT/Codex in
+Ihthisham's session, with requested co-author credit for Zahra and Kiruthika.
+No inference API calls or evaluation outcomes were generated for this milestone.
+Steps 6–7 remain separate. Earlier benchmark reports retain the source fingerprints
+of their original commits; this tooling change is not a rerun of those studies.

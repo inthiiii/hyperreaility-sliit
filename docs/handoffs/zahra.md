@@ -162,3 +162,20 @@ that is retained as her report, not independently verified model provenance.
 The 24 November continuation used ChatGPT/Codex, Python, pytest, Streamlit AppTest,
 local browser rehearsal and Git. Runtime OpenAI inference was not exercised.
 The exact coding-assistant model identifier was not recorded in the repository.
+
+
+## Priority 5 — evaluation revision handoff (25 November)
+
+Read [the review instructions](../PRIORITY_5_REVIEW.md). Prepare a new version of
+candidate inputs/truth/raw source; preserve the original frozen 201-file release.
+Current candidates have 20/20 development topology-descriptor overlap and 34/34
+report-text overlap. Diversify topology, routes, resources/windows and natural
+wording; manually check the declared labels and expected physical behavior.
+The review packet accepts structurally valid unparsed report labels as requiring
+human semantic review, not as machine-verified meaning.
+
+A case author or prompt tuner cannot provide its independent sign-off. Route
+revisions to Kiruthika or another genuinely independent reviewer, leave declarations
+truthful, and create a fresh packet for changed hashes. Co-author credit for this
+tooling commit does not certify that review has occurred. No human decisions are
+filled by this update. Steps 6–7 are pending.
