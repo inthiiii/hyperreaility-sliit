@@ -15,9 +15,10 @@ from project.ui.review_service import active_approval
 from project.ui.history import render_history
 from project.ui.outcomes import render_results
 from project.ui.workflow import render_workflow
+from project.ui.map_page import render_field_page, render_map_page
 from project.ui.auth_view import current_user, render_identity, render_login, render_roles_panel
 
-PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'History', 'Settings')
+PAGES = ('Overview', 'Incident', 'Map', 'Planning', 'Field work', 'Results', 'History', 'Settings')
 
 
 def _pill(text, amber=False):
@@ -180,8 +181,12 @@ def render_app(root=None):
         _overview(choice, session)
     elif page == 'Incident':
         render_incident(choice)
+    elif page == 'Map':
+        render_map_page(choice, session)
     elif page == 'Planning':
         render_planning(choice, session, root)
+    elif page == 'Field work':
+        render_field_page(choice, session, root)
     else:
         render_results(session, choice)
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'

@@ -13,10 +13,17 @@ from project.core.state import digest
 
 MAX_BYTES = 2_000_000
 MAX_FILES = 100
-APPROVED_ROOTS = (
+# Evidence v3 (realistic reports) first; the original template data stays as a
+# fallback and is hidden when the same scenario ID exists in v3.
+CURRENT_ROOTS = (
+    'releases/evidence-v3-20261126/data/processed/agent_inputs/demo',
+    'releases/evidence-v3-20261126/data/processed/agent_inputs/development',
+)
+LEGACY_ROOTS = (
     'data/processed/agent_inputs/demo',
     'data/processed/agent_inputs/development',
 )
+APPROVED_ROOTS = CURRENT_ROOTS + LEGACY_ROOTS
 FIXTURE_ROOT = 'tests/core/fixtures'
 
 
@@ -51,7 +58,7 @@ def load_catalog(root: Path) -> ScenarioCatalog:
 
     def scan(relative_roots, source):
         choices = []
-        seen = set()
+        seen = {}
         inspected = 0
         for relative in relative_roots:
             directory = root / relative
@@ -82,9 +89,11 @@ def load_catalog(root: Path) -> ScenarioCatalog:
                     issues.append(f'{key}: could not read a UTF-8 input file.')
                     continue
                 if scenario.scenario_id in seen:
+                    if relative in LEGACY_ROOTS and seen[scenario.scenario_id] in CURRENT_ROOTS:
+                        continue  # superseded by the evidence v3 version of the same case
                     issues.append(f'{key}: duplicate scenario ID; the first valid file is retained.')
                     continue
-                seen.add(scenario.scenario_id)
+                seen[scenario.scenario_id] = relative
                 choices.append(ScenarioChoice(key, source, scenario, digest(scenario)))
         return choices
 

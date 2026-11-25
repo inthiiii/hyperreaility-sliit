@@ -11,6 +11,8 @@ from project.llm.health import preflight
 from project.ui.review import render_review
 from project.ui.confirmation import render_confirmation
 from project.ui.workflow import render_workflow
+from project.ui.agent_view import collaboration_counts, conversation_rows, gantt_rows, inbox
+from project.ui.priority_service import proposal_key, record_priority_decision
 from project.ui.planning_service import (
     begin_new_attempt, fact_rows, prepare_plan, request_key, schedule_rows, timeline_rows,
 )
@@ -37,14 +39,18 @@ def _schedule(result):
     if rows:
         st.dataframe(rows, hide_index=True, width='stretch')
         st.caption('Planned actions, not executed work. Work duration excludes travel; routes and timing were checked by the independent validator.')
-        data = pd.DataFrame(timeline_rows(result))
+        st.subheader('Crew and generator timeline')
+        data = pd.DataFrame(gantt_rows(result))
         chart = alt.Chart(data).mark_bar(cornerRadius=3).encode(
-            x=alt.X('Start:Q', title='Incident minute', scale=alt.Scale(zero=False)),
+            x=alt.X('Start:Q', title='Incident minute', scale=alt.Scale(domain=[result.state.scenario.current_time_min,
+                                                                                result.state.scenario.horizon_min])),
             x2='End:Q', y=alt.Y('Lane:N', title=None, sort=None),
-            color=alt.Color('Stage:N', scale=alt.Scale(domain=['Travel', 'Work'], range=['#74869d', '#69e3c6'])),
-            tooltip=['Action:N', 'Target:N', 'Kind:N', 'Stage:N', 'Start:Q', 'End:Q'],
-        ).properties(height=max(160, len(rows) * 48))
+            color=alt.Color('Stage:N', scale=alt.Scale(domain=['Travel', 'Work', 'Powering site'],
+                                                      range=['#74869d', '#69e3c6', '#f1cb78'])),
+            tooltip=['Lane:N', 'Action:N', 'Stage:N', 'Start:Q', 'End:Q'],
+        ).properties(height=max(140, data['Lane'].nunique() * 56))
         st.altair_chart(chart, width='stretch')
+        st.caption('Planned timing (prediction). Generator bars end when its configured fuel autonomy runs out.')
     else:
         st.info('The core returned an empty schedule. Review the unmet needs and recorded constraints.')
     st.subheader('Unmet needs')
@@ -84,10 +90,26 @@ def _activity(result):
         st.info('This is deterministic template extraction and scheduling, not a live agent demonstration.')
     if not result.messages:
         st.caption('No coordinator messages were recorded.')
+        return
+    counts = collaboration_counts(result)
+    for column, label in zip(st.columns(5), ('agents', 'messages', 'challenges', 'holds', 'schedules')):
+        column.metric(label.title(), counts[label])
+    rows = conversation_rows(result)
+    kinds = sorted({r['Kind'] for r in rows})
+    chosen = st.multiselect('Show', kinds, default=kinds, key='conversation_kinds')
+    st.dataframe([r for r in rows if r['Kind'] in chosen], hide_index=True, width='stretch',
+                 column_config={'Summary': st.column_config.TextColumn(width='large')})
+    st.caption('Summaries of the recorded messages. Challenges from the Plan Reviewer go back to the Network '
+               'Investigator, and every new schedule comes from CP-SAT (software, not an AI agent).')
+    with st.expander('Raw recorded messages'):
+        _raw_messages(result)
+
+
+def _raw_messages(result):
     for index, message in enumerate(result.messages, 1):
         sender = message.get('sender', 'unknown')
-        with st.expander(f'{index:02d} · {sender} → {message.get("recipient", "coordinator")} · state {message.get("state_version", "?")}'):
-            st.json(redact(message))
+        st.caption(f'{index:02d} · {sender} → {message.get("recipient", "coordinator")} · state {message.get("state_version", "?")}')
+        st.json(redact(message), expanded=False)
     st.caption('Messages are the actual recorded exchanges. The deterministic scheduler is a software tool, not an additional AI agent.')
 
 
@@ -135,19 +157,76 @@ def _result(result, attempt):
         (len(result.plan.actions) if result.plan else 0, result.state.state_version,
          len(result.model_usage), f'{result.metadata.get("duration_seconds", 0):.2f} s')):
         column.metric(label, value)
-    schedule, evidence, activity, details = st.tabs(['Schedule', 'Evidence', 'Agent activity', 'Run details'])
+    box = inbox(result)
+    inbox_label = f"Operator inbox ({len(box['questions']) + len(box['proposals'])})"
+    schedule, evidence, activity, operator, details = st.tabs(['Schedule', 'Evidence', 'Agent conversation', inbox_label, 'Run details'])
     with schedule:
         _schedule(result)
     with evidence:
         _evidence(result)
     with activity:
         _activity(result)
+    with operator:
+        _inbox(result, box)
     with details:
         _details(result, attempt)
 
 
+def _decide(session, result, index, decision, root):
+    try:
+        record_priority_decision(session, result, index, decision, st.session_state.get(f'proposal_note_{index}', ''),
+                                 root, user=current_user())
+    except Exception as error:  # noqa: BLE001 - surfaced to the operator
+        st.session_state['priority_feedback'] = f'Not recorded: {error}'
+
+
+def _inbox(result, box):
+    from project.ui.session import get_dashboard_session
+    session = get_dashboard_session(st.session_state)
+    root = st.session_state.get('relink_root')
+    st.subheader('Questions for the operator')
+    if box['questions']:
+        st.dataframe([{'From': q.get('source', '').replace('_', ' '), 'About': q.get('target_id'),
+                       'Question': q.get('question'), 'Evidence': ', '.join(q.get('evidence_ids', []))}
+                      for q in box['questions']], hide_index=True, width='stretch')
+        st.caption('Answer with Record operator clarification below (NOC Coordinator or Field Supervisor). '
+                   'Recording an answer creates new evidence and clears the current plan and approval.')
+    else:
+        st.caption('No open questions. Unknown facts would appear here instead of stopping the run.')
+    st.subheader('Priority proposals')
+    if not box['proposals']:
+        st.caption('No proposals. Agents may only propose priority changes; weights stay as approved.')
+    allowed = can(current_user(), 'decide_priority')
+    for index, proposal in enumerate(box['proposals']):
+        with st.container(border=True):
+            st.markdown(f"**{proposal['service_id']}** → {'critical' if proposal['proposed_critical'] else 'standard'} "
+                        f"· from {proposal.get('source', '').replace('_', ' ')}")
+            st.write(proposal['reason'])
+            st.caption('Evidence: ' + ', '.join(proposal['evidence_ids']))
+            decided = session.priority_decisions.get(proposal_key(result, index))
+            if decided:
+                st.info(f"{decided['decision'].title()}ed by {decided['decided_by']}. {decided['effect']}")
+                continue
+            st.text_input('Note', key=f'proposal_note_{index}', disabled=not allowed)
+            accept, reject = st.columns(2)
+            accept.button('Accept as policy request', key=f'accept_proposal_{index}', disabled=not allowed or root is None,
+                          on_click=_decide, args=(session, result, index, 'accept', root))
+            reject.button('Reject proposal', key=f'reject_proposal_{index}', disabled=not allowed or root is None,
+                          on_click=_decide, args=(session, result, index, 'reject', root))
+            if not allowed:
+                st.caption(needs_role('decide_priority'))
+    if st.session_state.get('priority_feedback'):
+        st.error(st.session_state.pop('priority_feedback'))
+    if box['ignored']:
+        st.subheader('Reports the agents set aside')
+        st.dataframe([{'Report': i['report_id'], 'Why': i['kind'].replace('_', ' '), 'Note': i.get('note', '')}
+                      for i in box['ignored']], hide_index=True, width='stretch')
+        st.caption('Instruction attempts are flagged and never acted on. Check that nothing important was ignored.')
+
+
 def render_planning(choice, session, root):
     user = current_user()
+    st.session_state['relink_root'] = str(root)
     st.html('<div class="relink-eyebrow">Planning workspace</div>')
     st.title('A plan worth reviewing.')
     st.text('Selected incident: ' + choice.scenario.scenario_id)
