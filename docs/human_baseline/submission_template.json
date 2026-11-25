@@ -1,0 +1,17 @@
+{
+  "participant_id": "P1",
+  "expertise": "e.g. 3rd-year IT student, no telecom operations experience",
+  "consent_recorded": true,
+  "cases": [
+    {
+      "scenario_id": "DEV-001",
+      "order_position": 1,
+      "minutes_spent": 0,
+      "assignments": {
+        "C1": [],
+        "C2": []
+      },
+      "notes": "Optional: what you were unsure about"
+    }
+  ]
+}
