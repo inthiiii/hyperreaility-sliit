@@ -1,4 +1,4 @@
-# v14 development tuning (27 Nov 2026)
+# v14 development tuning (25 Nov 2026)
 
 Development cases only (DEMO-005 + DEV-001…010, evidence v3), one repetition, `gpt-6-luna`,
 Responses API, reasoning `none`, whole-run caps of 12 calls / 24k input / 4.8k output tokens / 180 s. Not an evaluation.

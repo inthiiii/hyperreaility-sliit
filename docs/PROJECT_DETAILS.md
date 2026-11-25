@@ -9,7 +9,7 @@
 | Team | HyperReAIlity, SLIIT |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
 | Document version | 1.0 (agent protocol `relink-agents-v14`, evidence v3, role-based access) |
-| Last updated | 26 November 2026 |
+| Last updated | 25 November 2026 |
 | Related | [Proposal.docx](Proposal.docx) · [Workflow.md](Workflow.md) · [PROJECT_PLAN.md](PROJECT_PLAN.md) |
 
 Earlier versions and daily checkpoints are archived in [development_log/](development_log/).
@@ -92,7 +92,7 @@ Dependencies are pinned in `project/requirements.txt`.
   - operator questions and fact challenges;
   - calls, tokens, latency and USD cost at dated prices.
 - **Human baseline:** up to 4 participants × 6 cases, ≤ 10 min each, manual schedule via the Auditor view, scored by the same tools ([human_baseline/README.md](human_baseline/README.md)).
-- **Current evidence (26 Nov):** live development smoke on 2 cases, both modes completed, F1 1.0, downtime tied ([v14 smoke](../results/development/v14-smoke-20261126/README.md)). Earlier v13 results are in `results/development/`. **No multi-agent advantage is claimed yet.**
+- **Current evidence (25 Nov, development cases only):** [tuning passes](../results/development/v14-dev-tuning-20261125/README.md). Agents lower downtime against CP-SAT without AI on 8 of 11 cases. Single and multi tie on every case both completed. Before tuning, the single agent exhausted its budget on 4 of 11 cases versus 0 for multi. Injection reports were flagged and never followed. The EVAL2 configuration is frozen ([FREEZE.json](../releases/evidence-v3-20261126/FREEZE.json)). **No multi-agent downtime advantage is claimed.**
 
 ## 7. Safety, security and reliability
 
@@ -116,7 +116,7 @@ Dependencies are pinned in `project/requirements.txt`.
 | Item | Use |
 |---|---|
 | **ChatGPT / Codex (OpenAI)** | Coding assistant for the proposal, core, simulator integration, dashboard and tests up to 25 Nov (see `development_log/`). Session model IDs were not recorded. |
-| **Claude Code (Anthropic, model Claude Opus 5.5)** | Coding assistant on 25–26 Nov in Ihthisham's session: gap review and plan, evidence v3 generator, v14 orchestrator and agent registry, adapter retries, sign-in and roles, human-trial scorer, documentation. Commits carry a `Co-Authored-By: Claude` trailer. |
+| **Claude Code (Anthropic, model Claude Opus 5.5)** | Coding assistant on 25 Nov in Ihthisham's session: gap review and plan, evidence v3 generator, v14 orchestrator and agent registry, adapter retries, sign-in and roles, human-trial scorer, map / Gantt / conversation / inbox / field pages, development tuning, configuration freeze, documentation. |
 | **OpenAI API, `gpt-6-luna`** | Runtime model for all agent roles and the single-agent baseline (Responses API, reasoning `none`). |
 | Claude-labelled proposal draft | Comparative drafting reference during the proposal stage only. |
 | Libraries | pydantic, ortools, networkx, openai, streamlit, pandas, numpy, python-dotenv, pytest (versions in `project/requirements.txt`; open-source licences). |
