@@ -30,7 +30,7 @@ from project.core.planner import greedy_plan, plan as cp_sat_plan
 from project.core.schemas import EvidenceFact
 from project.core.state import build_verified_state, digest
 from project.core.validator import validate
-from project.llm.client import RunBudget
+from project.llm.client import BudgetExceeded, RunBudget
 
 MAX_REVISIONS = 3
 ATTRIBUTE_TYPES = {'site': ('equipment_ok', 'grid_power_ok'), 'link': ('backhaul_ok',), 'road': ('open',)}
@@ -127,6 +127,7 @@ class AgentOrchestrator:
         self.messages, self.reasons, self.effects = [], [], []
         self.deferred, self.ignored, self.questions, self.proposals = set(), [], [], []
         self.challenges, self.raw_facts, self.history, self.review_notes = [], None, [], []
+        self.degraded = []
         self.state = build_verified_state(scenario, [], state_version=state_version)
         candidate = validation = None
         try:
@@ -156,7 +157,7 @@ class AgentOrchestrator:
                       'ignored_reports': [i.model_dump() for i in self.ignored],
                       'operator_questions': questions, 'priority_proposals': self.proposals,
                       'fact_challenges': self.challenges, 'decision_effects': self.effects,
-                      'review_notes': self.review_notes,
+                      'review_notes': self.review_notes, 'degraded_stages': self.degraded,
                       'deferred_action_ids': sorted(self.deferred), 'input_hash': digest(scenario),
                       'planner': self.planner, 'reviewer_enabled': self.reviewer_enabled,
                       'feedback_enabled': self.feedback_enabled, 'raw_extraction_metrics': None,
@@ -295,7 +296,16 @@ class AgentOrchestrator:
 
     def _specialist(self, spec):
         ctx = {'state': self.state, 'ignored': self.ignored}
-        out = self.call(spec.role, spec.stage, spec.task, spec.view(self.scenario, ctx), spec.output, spec.max_output)
+        try:
+            out = self.call(spec.role, spec.stage, spec.task, spec.view(self.scenario, ctx), spec.output, spec.max_output)
+        except BudgetExceeded:
+            raise
+        except Exception as error:  # noqa: BLE001 - advisory stage degrades, it does not stop the run
+            # Facts, scheduling, validation, review and human approval still guard the plan.
+            self.degraded.append({'role': spec.role, 'error_type': type(error).__name__})
+            self.message('coordinator', 'audit', {'degraded_stage': spec.role, 'error_type': type(error).__name__,
+                                                  'effect': 'continued without this advisory input'})
+            return
         self.collect(out, spec.role)
         self.apply_requests(out.requests, spec.role)
 

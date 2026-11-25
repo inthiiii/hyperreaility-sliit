@@ -227,3 +227,13 @@ def test_no_ai_baseline_plans_around_unreadable_reports():
     result = AgentOrchestrator(planner='cp_sat').run(s, 'template')
     assert result.status == 'awaiting_approval' and result.validation.valid and not result.model_usage
     assert result.state.unresolved_facts and result.metadata['operator_questions']
+
+
+def test_advisory_specialist_failure_degrades_but_budget_failure_escalates():
+    s = case('DEV-003')
+    a = adapter([extraction(perfect_facts('DEV-003')), specialist(), RuntimeError('truncated'), review()])
+    result = AgentOrchestrator(a).run(s, 'multi')
+    assert result.status == 'awaiting_approval'
+    assert result.metadata['degraded_stages'] == [{'role': 'service_priority_assessor', 'error_type': 'RuntimeError'}]
+    b = adapter([extraction(perfect_facts('DEV-003')), specialist()], RunBudget(max_calls=2))
+    assert AgentOrchestrator(b).run(s, 'multi').status == 'escalated'

@@ -1,0 +1,150 @@
+{
+  "job_id": "5c3a7cf2-575a-46e3-bade-0dead0a5c311",
+  "run_id": "63f3db35-69b1-42a1-948e-275f5dcb2459",
+  "approval_mode": "automated_benchmark_operator",
+  "approval": {
+    "plan_id": "3a33138c-2cb2-4dbe-ab1c-0f711169e57e",
+    "plan_hash": "a14e811a660908dafaad213b50ec91c62c64b44e9fca6dd8e1864a0ab4df2995",
+    "state_version": 1,
+    "state_hash": "1fd54fdb32fcfcb8e5097a1ab434e5299ff0910fbacd69d59525d0d08b310c34",
+    "decision": "approve",
+    "operator_id": "Automated benchmark operator",
+    "timestamp": "2026-11-25T12:38:29.206393Z"
+  },
+  "state_hash": "1fd54fdb32fcfcb8e5097a1ab434e5299ff0910fbacd69d59525d0d08b310c34",
+  "result_hash": "daa859609b455afd612eccfb1c4ca3072021dedadb2f6ce8a1043ec440b67e94",
+  "result": {
+    "scenario_id": "DEMO-005",
+    "plan_id": "3a33138c-2cb2-4dbe-ab1c-0f711169e57e",
+    "state_version": 1,
+    "trajectory": [
+      {
+        "t": 0,
+        "type": "action_started",
+        "action_id": "GEN-G1-S02"
+      },
+      {
+        "t": 0,
+        "type": "availability",
+        "available_services": []
+      },
+      {
+        "t": 30,
+        "type": "action_completed",
+        "action_id": "GEN-G1-S02",
+        "kind": "generator_deploy",
+        "target_id": "S02"
+      },
+      {
+        "t": 30,
+        "type": "availability",
+        "available_services": [
+          "V02",
+          "V04"
+        ]
+      },
+      {
+        "t": 150,
+        "type": "generator_expired",
+        "generator_id": "G1"
+      },
+      {
+        "t": 150,
+        "type": "availability",
+        "available_services": []
+      },
+      {
+        "t": 720,
+        "type": "availability",
+        "available_services": []
+      }
+    ],
+    "completed_actions": [
+      "GEN-G1-S02"
+    ],
+    "unmet_needs": [
+      "service:V01",
+      "service:V02",
+      "service:V03",
+      "service:V04",
+      "service:V05"
+    ],
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 5,
+      "total_weighted_horizon_min": 6480,
+      "weighted_available_min": 720,
+      "weighted_downtime_min": 5760,
+      "unweighted_available_min": 240,
+      "unweighted_downtime_min": 3360,
+      "unweighted_availability": 0.06666666666666667,
+      "critical_service_downtime_min": 600,
+      "first_restoration_min": 30,
+      "services_available_at_horizon_end": 0,
+      "unmet_needs_count": 5,
+      "measured_duration_min": 720,
+      "observed_until_min": 720,
+      "incident_horizon_min": 720,
+      "baseline_weighted_downtime_min": 6480,
+      "weighted_downtime_reduction_min": 720,
+      "actions_completed": 1
+    },
+    "run_metadata": {
+      "engine_version": "0.2",
+      "measurement_scope": "complete_incident",
+      "replan_required": false,
+      "observed_until_min": 720,
+      "planner_prediction_used": false,
+      "uses_model_or_network": false,
+      "action_outcomes": {
+        "GEN-G1-S02": {
+          "status": "completed",
+          "reason": ""
+        }
+      },
+      "all_completed_actions": [
+        "GEN-G1-S02"
+      ],
+      "committed_actions": [],
+      "service_availability": {
+        "V01": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V02": {
+          "weight": 5,
+          "critical": true,
+          "intervals": [
+            [
+              30,
+              150
+            ]
+          ]
+        },
+        "V03": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V04": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              30,
+              150
+            ]
+          ]
+        },
+        "V05": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        }
+      },
+      "same_minute_rule": "expiry, completed work, departures, resource observations; intervals are half-open",
+      "continuation_policy": "lost work restarts without partial credit; unaffected departed work completes under prior approval"
+    }
+  }
+}
