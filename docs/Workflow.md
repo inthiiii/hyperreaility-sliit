@@ -2,7 +2,7 @@
 
 **Restore connectivity. Coordinate recovery.**
 
-Team HyperReAIlity, SLIIT · Innodata AI Catalyst 2026, University Track · Version 1.0 (agent protocol `relink-agents-v14`) · Updated 26 November 2026
+Team HyperReAIlity, SLIIT · Innodata AI Catalyst 2026, University Track · Version 1.0 (agent protocol `relink-agents-v14`) · Updated 25 November 2026
 
 This file describes the process **as implemented**. Planned items are labelled as planned. The earlier proposal-stage version is archived at [development_log/Workflow_v0.4.md](development_log/Workflow_v0.4.md).
 
@@ -93,7 +93,11 @@ Checks run in the service layer. The approver can never be the person who genera
 ## 7. Evaluation workflow
 
 1. **Data:** `releases/evidence-v3-20261126` = 1 demo, 10 development and 20 EVAL2 cases with realistic reports and distractors ([README](../releases/evidence-v3-20261126/README.md)).
-2. **Tune** prompts and settings on development cases only; freeze code commit, model ID, settings, prompts and dataset hashes before EVAL2 runs.
+2. **Tune** prompts and settings on development cases only. Then freeze the code commit, model ID, settings, prompts and dataset hashes before any EVAL2 run:
+   ```bash
+   python -m project.evaluation.freeze create --data-root releases/evidence-v3-20261126/data --output releases/evidence-v3-20261126/FREEZE.json
+   ```
+   The runner's `--freeze` option re-verifies everything and stops on any drift.
 3. **Run** `heuristic`, `optimizer`, `single`, `multi`, `no_reviewer`, `no_feedback` (plus `matched_*` controls), 3 repeats per case, interleaved:
    ```bash
    python -m project.evaluation.runner --scenarios releases/evidence-v3-20261126/data/processed/agent_inputs/development/*.json \
@@ -104,4 +108,4 @@ Checks run in the service layer. The approver can never be the person who genera
 5. **Human baseline:** [human_baseline/README.md](human_baseline/README.md), 6 cases × up to 4 participants, scored by `project.evaluation.human_trial` with the same validator and simulator.
 6. **Report** paired case medians, failures and escalations, cost and time. No superiority claim without evidence.
 
-Status on 26 November 2026: steps 1–3 are implemented and smoke-tested ([v14 smoke](../results/development/v14-smoke-20261126/README.md)). The frozen EVAL2 run and the human sessions are pending.
+Status on 25 November 2026: steps 1–3 are implemented. Development tuning is recorded in [v14-dev-tuning](../results/development/v14-dev-tuning-20261125/README.md) and the EVAL2 configuration is frozen. The EVAL2 run and the human sessions are pending.

@@ -1,0 +1,1969 @@
+{
+  "format_version": 1,
+  "payload": {
+    "run_id": "1ef36ed1-dfdc-4cb1-a144-0fb27cd70b61",
+    "mode": "single",
+    "status": "escalated",
+    "state": {
+      "scenario_id": "DEV-007",
+      "state_version": 2,
+      "source_hash": "b9c7d6df68e3b4172db5e3dc34523b298be86380f2bcbca4729ed6659441458a",
+      "scenario": {
+        "schema_version": "0.1",
+        "scenario_id": "DEV-007",
+        "region_label": "Fictional operator network placed in real Western Province towns (not real tower locations or coverage)",
+        "current_time_min": 0,
+        "horizon_min": 720,
+        "core_id": "CORE",
+        "depot_id": "DEPOT",
+        "sites": [
+          {
+            "site_id": "S01",
+            "label": "Beruwala",
+            "x": 0.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "BER22",
+            "district": "Kalutara",
+            "aliases": [
+              "BER22",
+              "Beruwala RBS",
+              "Beruwala junction"
+            ],
+            "lat": 6.479,
+            "lon": 79.983
+          },
+          {
+            "site_id": "S02",
+            "label": "Aluthgama",
+            "x": 10.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "ALU92",
+            "district": "Kalutara",
+            "aliases": [
+              "ALU92",
+              "Aluthgama RBS",
+              "Aluthgama school lane"
+            ],
+            "lat": 6.434,
+            "lon": 79.999
+          },
+          {
+            "site_id": "S03",
+            "label": "Payagala",
+            "x": 20.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "PAY83",
+            "district": "Kalutara",
+            "aliases": [
+              "PAY83",
+              "Payagala RBS",
+              "Payagala bus stand"
+            ],
+            "lat": 6.535,
+            "lon": 79.968
+          },
+          {
+            "site_id": "S04",
+            "label": "Matugama",
+            "x": 30.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "MAT70",
+            "district": "Kalutara",
+            "aliases": [
+              "MAT70",
+              "Matugama RBS",
+              "Matugama police station"
+            ],
+            "lat": 6.522,
+            "lon": 80.114
+          },
+          {
+            "site_id": "S05",
+            "label": "Agalawatta",
+            "x": 40.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "AGA33",
+            "district": "Kalutara",
+            "aliases": [
+              "AGA33",
+              "Agalawatta RBS",
+              "Agalawatta temple road"
+            ],
+            "lat": 6.54,
+            "lon": 80.157
+          },
+          {
+            "site_id": "S06",
+            "label": "Panadura",
+            "x": 0.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "PAN74",
+            "district": "Kalutara",
+            "aliases": [
+              "PAN74",
+              "Panadura RBS",
+              "Panadura market"
+            ],
+            "lat": 6.713,
+            "lon": 79.904
+          },
+          {
+            "site_id": "S07",
+            "label": "Wadduwa",
+            "x": 10.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "WAD80",
+            "district": "Kalutara",
+            "aliases": [
+              "WAD80",
+              "Wadduwa RBS",
+              "Wadduwa clock tower"
+            ],
+            "lat": 6.667,
+            "lon": 79.928
+          },
+          {
+            "site_id": "S08",
+            "label": "Bandaragama",
+            "x": 20.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "BAN36",
+            "district": "Kalutara",
+            "aliases": [
+              "BAN36",
+              "Bandaragama RBS",
+              "Bandaragama temple road"
+            ],
+            "lat": 6.714,
+            "lon": 79.989
+          },
+          {
+            "site_id": "S09",
+            "label": "Horana",
+            "x": 30.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "HOR36",
+            "district": "Kalutara",
+            "aliases": [
+              "HOR36",
+              "Horana RBS",
+              "Horana bridge"
+            ],
+            "lat": 6.716,
+            "lon": 80.062
+          },
+          {
+            "site_id": "S10",
+            "label": "Ingiriya",
+            "x": 40.0,
+            "y": 10.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "ING51",
+            "district": "Kalutara",
+            "aliases": [
+              "ING51",
+              "Ingiriya RBS",
+              "Ingiriya bus stand"
+            ],
+            "lat": 6.744,
+            "lon": 80.155
+          },
+          {
+            "site_id": "S11",
+            "label": "Kollupitiya",
+            "x": 0.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "KOL20",
+            "district": "Colombo",
+            "aliases": [
+              "KOL20",
+              "Kollupitiya RBS",
+              "Kollupitiya junction"
+            ],
+            "lat": 6.911,
+            "lon": 79.849
+          },
+          {
+            "site_id": "S12",
+            "label": "Kelaniya",
+            "x": 10.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "KEL92",
+            "district": "Gampaha",
+            "aliases": [
+              "KEL92",
+              "Kelaniya RBS",
+              "Kelaniya temple road"
+            ],
+            "lat": 6.955,
+            "lon": 79.922
+          },
+          {
+            "site_id": "S13",
+            "label": "Kaduwela",
+            "x": 20.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "KAD59",
+            "district": "Colombo",
+            "aliases": [
+              "KAD59",
+              "Kaduwela RBS",
+              "Kaduwela clock tower"
+            ],
+            "lat": 6.931,
+            "lon": 79.984
+          },
+          {
+            "site_id": "S14",
+            "label": "Hanwella",
+            "x": 30.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "HAN53",
+            "district": "Colombo",
+            "aliases": [
+              "HAN53",
+              "Hanwella RBS",
+              "Hanwella market"
+            ],
+            "lat": 6.905,
+            "lon": 80.083
+          },
+          {
+            "site_id": "S15",
+            "label": "Avissawella",
+            "x": 40.0,
+            "y": 20.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "AVI97",
+            "district": "Colombo",
+            "aliases": [
+              "AVI97",
+              "Avissawella RBS",
+              "Avissawella bridge"
+            ],
+            "lat": 6.955,
+            "lon": 80.218
+          },
+          {
+            "site_id": "S16",
+            "label": "Negombo",
+            "x": 0.0,
+            "y": 30.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "NEG16",
+            "district": "Gampaha",
+            "aliases": [
+              "NEG16",
+              "Negombo RBS",
+              "Negombo bus stand"
+            ],
+            "lat": 7.209,
+            "lon": 79.838
+          }
+        ],
+        "links": [
+          {
+            "link_id": "L01",
+            "parent": "CORE",
+            "child": "S01"
+          },
+          {
+            "link_id": "L02",
+            "parent": "CORE",
+            "child": "S02"
+          },
+          {
+            "link_id": "L03",
+            "parent": "S01",
+            "child": "S03"
+          },
+          {
+            "link_id": "L04",
+            "parent": "S02",
+            "child": "S04"
+          },
+          {
+            "link_id": "L05",
+            "parent": "S01",
+            "child": "S05"
+          },
+          {
+            "link_id": "L06",
+            "parent": "S02",
+            "child": "S06"
+          },
+          {
+            "link_id": "L07",
+            "parent": "S01",
+            "child": "S07"
+          },
+          {
+            "link_id": "L08",
+            "parent": "S02",
+            "child": "S08"
+          },
+          {
+            "link_id": "L09",
+            "parent": "S01",
+            "child": "S09"
+          },
+          {
+            "link_id": "L10",
+            "parent": "S02",
+            "child": "S10"
+          },
+          {
+            "link_id": "L11",
+            "parent": "S01",
+            "child": "S11"
+          },
+          {
+            "link_id": "L12",
+            "parent": "S02",
+            "child": "S12"
+          },
+          {
+            "link_id": "L13",
+            "parent": "S01",
+            "child": "S13"
+          },
+          {
+            "link_id": "L14",
+            "parent": "S02",
+            "child": "S14"
+          },
+          {
+            "link_id": "L15",
+            "parent": "S01",
+            "child": "S15"
+          },
+          {
+            "link_id": "L16",
+            "parent": "S02",
+            "child": "S16"
+          }
+        ],
+        "roads": [
+          {
+            "road_id": "R01",
+            "origin": "DEPOT",
+            "to": "S01",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R02",
+            "origin": "DEPOT",
+            "to": "S02",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R03",
+            "origin": "DEPOT",
+            "to": "S03",
+            "travel_minutes": 25
+          },
+          {
+            "road_id": "R04",
+            "origin": "DEPOT",
+            "to": "S04",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R05",
+            "origin": "DEPOT",
+            "to": "S05",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R06",
+            "origin": "DEPOT",
+            "to": "S06",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R07",
+            "origin": "DEPOT",
+            "to": "S07",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R08",
+            "origin": "DEPOT",
+            "to": "S08",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R09",
+            "origin": "DEPOT",
+            "to": "S09",
+            "travel_minutes": 25
+          },
+          {
+            "road_id": "R10",
+            "origin": "DEPOT",
+            "to": "S10",
+            "travel_minutes": 30
+          },
+          {
+            "road_id": "R11",
+            "origin": "DEPOT",
+            "to": "S11",
+            "travel_minutes": 30
+          },
+          {
+            "road_id": "R12",
+            "origin": "DEPOT",
+            "to": "S12",
+            "travel_minutes": 30
+          },
+          {
+            "road_id": "R13",
+            "origin": "DEPOT",
+            "to": "S13",
+            "travel_minutes": 20
+          },
+          {
+            "road_id": "R14",
+            "origin": "DEPOT",
+            "to": "S14",
+            "travel_minutes": 5
+          },
+          {
+            "road_id": "R15",
+            "origin": "DEPOT",
+            "to": "S15",
+            "travel_minutes": 25
+          },
+          {
+            "road_id": "R16",
+            "origin": "DEPOT",
+            "to": "S16",
+            "travel_minutes": 25
+          }
+        ],
+        "services": [
+          {
+            "service_id": "V01",
+            "site_id": "S01",
+            "label": "Fictional service 01",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V02",
+            "site_id": "S02",
+            "label": "Fictional critical facility",
+            "critical": true,
+            "weight": 5,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V03",
+            "site_id": "S03",
+            "label": "Fictional service 03",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V04",
+            "site_id": "S04",
+            "label": "Fictional service 04",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V05",
+            "site_id": "S05",
+            "label": "Fictional service 05",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V06",
+            "site_id": "S06",
+            "label": "Fictional service 06",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V07",
+            "site_id": "S07",
+            "label": "Fictional service 07",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V08",
+            "site_id": "S08",
+            "label": "Fictional service 08",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V09",
+            "site_id": "S09",
+            "label": "Fictional service 09",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V10",
+            "site_id": "S10",
+            "label": "Fictional service 10",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V11",
+            "site_id": "S11",
+            "label": "Fictional service 11",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V12",
+            "site_id": "S12",
+            "label": "Fictional service 12",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V13",
+            "site_id": "S13",
+            "label": "Fictional service 13",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V14",
+            "site_id": "S14",
+            "label": "Fictional service 14",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V15",
+            "site_id": "S15",
+            "label": "Fictional service 15",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V16",
+            "site_id": "S16",
+            "label": "Fictional service 16",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          }
+        ],
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 300,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ],
+        "observed_state": {
+          "sites": {
+            "S01": {
+              "equipment_ok": null,
+              "grid_power_ok": true
+            },
+            "S02": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S03": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S04": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S05": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S06": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S07": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S08": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S09": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S10": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S11": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S12": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S13": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S14": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S15": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S16": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            }
+          },
+          "links": {
+            "L01": true,
+            "L02": true,
+            "L03": true,
+            "L04": true,
+            "L05": true,
+            "L06": true,
+            "L07": true,
+            "L08": true,
+            "L09": true,
+            "L10": true,
+            "L11": true,
+            "L12": true,
+            "L13": true,
+            "L14": true,
+            "L15": true,
+            "L16": true
+          },
+          "roads": {
+            "R01": true,
+            "R02": true,
+            "R03": true,
+            "R04": true,
+            "R05": true,
+            "R06": true,
+            "R07": true,
+            "R08": true,
+            "R09": true,
+            "R10": true,
+            "R11": true,
+            "R12": true,
+            "R13": true,
+            "R14": true,
+            "R15": true,
+            "R16": true
+          }
+        },
+        "active_generators": [],
+        "action_options": [
+          {
+            "action_id": "EQ-S01",
+            "kind": "equipment_repair",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S02",
+            "kind": "equipment_repair",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 120,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S03",
+            "kind": "equipment_repair",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S04",
+            "kind": "equipment_repair",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S05",
+            "kind": "equipment_repair",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S06",
+            "kind": "equipment_repair",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S07",
+            "kind": "equipment_repair",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S08",
+            "kind": "equipment_repair",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S09",
+            "kind": "equipment_repair",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S10",
+            "kind": "equipment_repair",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S11",
+            "kind": "equipment_repair",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S12",
+            "kind": "equipment_repair",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S13",
+            "kind": "equipment_repair",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S14",
+            "kind": "equipment_repair",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S15",
+            "kind": "equipment_repair",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 30,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S16",
+            "kind": "equipment_repair",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L01",
+            "kind": "link_repair",
+            "target_id": "L01",
+            "location": "S01",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L02",
+            "kind": "link_repair",
+            "target_id": "L02",
+            "location": "S02",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L03",
+            "kind": "link_repair",
+            "target_id": "L03",
+            "location": "S03",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L04",
+            "kind": "link_repair",
+            "target_id": "L04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L05",
+            "kind": "link_repair",
+            "target_id": "L05",
+            "location": "S05",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L06",
+            "kind": "link_repair",
+            "target_id": "L06",
+            "location": "S06",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L07",
+            "kind": "link_repair",
+            "target_id": "L07",
+            "location": "S07",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L08",
+            "kind": "link_repair",
+            "target_id": "L08",
+            "location": "S08",
+            "duration_minutes": 30,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L09",
+            "kind": "link_repair",
+            "target_id": "L09",
+            "location": "S09",
+            "duration_minutes": 30,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L10",
+            "kind": "link_repair",
+            "target_id": "L10",
+            "location": "S10",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L11",
+            "kind": "link_repair",
+            "target_id": "L11",
+            "location": "S11",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L12",
+            "kind": "link_repair",
+            "target_id": "L12",
+            "location": "S12",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L13",
+            "kind": "link_repair",
+            "target_id": "L13",
+            "location": "S13",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L14",
+            "kind": "link_repair",
+            "target_id": "L14",
+            "location": "S14",
+            "duration_minutes": 60,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L15",
+            "kind": "link_repair",
+            "target_id": "L15",
+            "location": "S15",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L16",
+            "kind": "link_repair",
+            "target_id": "L16",
+            "location": "S16",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "GEN-G1-S01",
+            "kind": "generator_deploy",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S02",
+            "kind": "generator_deploy",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S03",
+            "kind": "generator_deploy",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S04",
+            "kind": "generator_deploy",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S05",
+            "kind": "generator_deploy",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S06",
+            "kind": "generator_deploy",
+            "target_id": "S06",
+            "location": "S06",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S07",
+            "kind": "generator_deploy",
+            "target_id": "S07",
+            "location": "S07",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S08",
+            "kind": "generator_deploy",
+            "target_id": "S08",
+            "location": "S08",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S09",
+            "kind": "generator_deploy",
+            "target_id": "S09",
+            "location": "S09",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S10",
+            "kind": "generator_deploy",
+            "target_id": "S10",
+            "location": "S10",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S11",
+            "kind": "generator_deploy",
+            "target_id": "S11",
+            "location": "S11",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S12",
+            "kind": "generator_deploy",
+            "target_id": "S12",
+            "location": "S12",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S13",
+            "kind": "generator_deploy",
+            "target_id": "S13",
+            "location": "S13",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S14",
+            "kind": "generator_deploy",
+            "target_id": "S14",
+            "location": "S14",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S15",
+            "kind": "generator_deploy",
+            "target_id": "S15",
+            "location": "S15",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S16",
+            "kind": "generator_deploy",
+            "target_id": "S16",
+            "location": "S16",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          }
+        ],
+        "reports": [
+          {
+            "report_id": "V3-DEV-007-X02",
+            "source_type": "utility_notice",
+            "observed_at_min": -120,
+            "received_at_min": 0,
+            "text": "CEB notice: planned power interruption in Dehiwala tomorrow 09:00-15:00 for line maintenance."
+          },
+          {
+            "report_id": "REP-001",
+            "source_type": "unverified_message",
+            "observed_at_min": -60,
+            "received_at_min": 0,
+            "text": "WhatsApp from field staff (05:00): Beruwala site eka dead machan, cabinet lights off, need equipment team"
+          },
+          {
+            "report_id": "V3-DEV-007-X01",
+            "source_type": "customer_complaint",
+            "observed_at_min": -30,
+            "received_at_min": 0,
+            "text": "Call centre: 11 customers around Payagala say data is very slow and calls keep dropping."
+          },
+          {
+            "report_id": "V3-DEV-007-X03",
+            "source_type": "social_media",
+            "observed_at_min": -10,
+            "received_at_min": 0,
+            "text": "Social media post: \"heard the Beruwala tower is already fixed, the company van came\" (unconfirmed)."
+          },
+          {
+            "report_id": "REP-002",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "NMS 06:00 | CLEARED | BER22 Beruwala RBS | all sectors in service"
+          }
+        ],
+        "policy": {
+          "evidence_id": "POLICY-001",
+          "approved_for_simulation": true,
+          "standard_weight": 1,
+          "critical_weight": 5,
+          "evidence_rule": "Authoritative evidence must be consistent; equally authoritative conflicts require confirmation. Recency alone does not verify a fact.",
+          "max_generator_deployments_per_scenario": 1,
+          "on_crew_loss": "Pause affected unfinished work and request operator review; preserve completed repairs."
+        }
+      },
+      "resolved_observations": {
+        "sites": {
+          "S01": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S02": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S03": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S04": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S05": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S06": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S07": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S08": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S09": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S10": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S11": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S12": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S13": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S14": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S15": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S16": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          }
+        },
+        "links": {
+          "L01": true,
+          "L02": true,
+          "L03": true,
+          "L04": true,
+          "L05": true,
+          "L06": true,
+          "L07": true,
+          "L08": true,
+          "L09": true,
+          "L10": true,
+          "L11": true,
+          "L12": true,
+          "L13": true,
+          "L14": true,
+          "L15": true,
+          "L16": true
+        },
+        "roads": {
+          "R01": true,
+          "R02": true,
+          "R03": true,
+          "R04": true,
+          "R05": true,
+          "R06": true,
+          "R07": true,
+          "R08": true,
+          "R09": true,
+          "R10": true,
+          "R11": true,
+          "R12": true,
+          "R13": true,
+          "R14": true,
+          "R15": true,
+          "R16": true
+        }
+      },
+      "facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": -60,
+          "received_at_min": 0,
+          "status": "unverified",
+          "reason": "Unverified field-staff message claims Beruwala (BER22) equipment is down."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": true,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative NMS snapshot reports all sectors at Beruwala (BER22) in service."
+        }
+      ],
+      "unresolved_facts": []
+    },
+    "plan": null,
+    "validation": null,
+    "messages": [
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEV-007",
+        "state_version": 1,
+        "finding": {
+          "stage": "analyse",
+          "facts": [
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "equipment_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-001"
+              ],
+              "observed_at_min": -60,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "Field-staff message claims Beruwala site equipment is down; source is unverified."
+            },
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "equipment_ok",
+              "value": true,
+              "evidence_ids": [
+                "REP-002"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative NMS snapshot reports all Beruwala sectors in service."
+            },
+            {
+              "target_type": "site",
+              "target_id": "S03",
+              "attribute": "equipment_ok",
+              "value": false,
+              "evidence_ids": [
+                "V3-DEV-007-X01"
+              ],
+              "observed_at_min": -30,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "Customer complaint reports slow data and dropped calls around Payagala, but does not establish a specific equipment fault."
+            }
+          ],
+          "ignored_reports": [
+            {
+              "report_id": "V3-DEV-007-X02",
+              "kind": "no_operational_claim",
+              "note": "Planned Dehiwala power interruption is outside the listed site directory and tomorrow's schedule; no listed operational claim."
+            },
+            {
+              "report_id": "V3-DEV-007-X03",
+              "kind": "duplicate_or_echo",
+              "note": "Unconfirmed social-media claim that the Beruwala tower is fixed; the authoritative snapshot independently establishes current service."
+            }
+          ],
+          "requests": [],
+          "questions": [
+            {
+              "target_id": "S03",
+              "question": "Can you confirm whether Payagala (PAY83) has a specific equipment, grid-power, or backhaul fault, or is the reported service degradation due to another cause?",
+              "evidence_ids": [
+                "V3-DEV-007-X01"
+              ]
+            }
+          ],
+          "priority_proposals": [],
+          "finding": "Beruwala (S01) is currently reported in service by an authoritative snapshot, overriding no evidence by recency: REP-001 is unverified and does not justify dispatch. Payagala (S03) has an unverified customer-reported degradation, not a verified fault; no available repair should be presumed necessary. Approved weights remain unchanged: Aluthgama (S02) is critical at weight 5; all other sites, including S01 and S03, are standard weight 1. No credible evidence supports changing a service's priority."
+        }
+      },
+      {
+        "sender": "deterministic_scheduler",
+        "recipient": "coordinator",
+        "incident_id": "DEV-007",
+        "state_version": 1,
+        "finding": {
+          "plan_id": "b9bdf6d1-4fbf-4d42-8545-28920147120d",
+          "scenario_id": "DEV-007",
+          "state_version": 1,
+          "state_hash": "48ac884a68698a209739a4a2837645d5c8a55bf1aeb712b466d43d7ac3c94403",
+          "actions": [],
+          "unmet_needs": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "V3-DEV-007-X01"
+          ],
+          "planner_config": {
+            "algorithm": "cp_sat_time_indexed",
+            "solver_status": "OPTIMAL",
+            "solver_seconds_cap": 5,
+            "seed": 22,
+            "workers": 1,
+            "slot_minutes": 5,
+            "prediction_only": true,
+            "tie_breakers": [
+              "fewer actions",
+              "earlier work completion"
+            ],
+            "limitations": [
+              "static rooted tree",
+              "unknown assets unavailable",
+              "no in-progress work or future-event scheduling"
+            ],
+            "objective_value": 14400.0,
+            "best_objective_bound": 14400.0,
+            "predicted_weighted_available_minutes_remaining": 14400,
+            "predicted_weighted_downtime_remaining": 0,
+            "deferred_action_ids": []
+          },
+          "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEV-007",
+        "state_version": 1,
+        "finding": {
+          "stage": "review",
+          "decision": "revise",
+          "fact_challenges": [
+            {
+              "report_id": "V3-DEV-007-X01",
+              "target_id": "S03",
+              "attribute": "equipment_ok",
+              "problem": "The complaint reports slow data and dropped calls around Payagala (S03), but does not claim equipment is down. The extracted false equipment fact overstates the report; record the reported service degradation without assigning a specific-fu"
+            }
+          ],
+          "requests": [],
+          "findings": [
+            "The Beruwala mapping is correct: REP-001 and REP-002 both refer to Beruwala/BER22, site S01, and make conflicting equipment claims. REP-001 is unverified and REP-002 is an authoritative snapshot reporting all sectors in service; preserve the conflict and its source authority.",
+            "The Payagala mapping is correct: V3-DEV-007-X01 refers to Payagala, site S03. It reports slow data and dropped calls, not a confirmed equipment fault. The plan correctly schedules no repair based on this complaint, but its extracted false equipment fact should be corrected.",
+            "No actions are scheduled, so no crew, route, skill, or action safety issue is present. There are no arithmetic checks required for work or travel timing. The operator question about the cause of Payagala degradation is appropriate for an unknown blocking diagnosis, and approved service weights are unchanged."
+          ],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "V3-DEV-007-X01"
+          ]
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "single_agent",
+        "incident_id": "DEV-007",
+        "state_version": 1,
+        "finding": {
+          "fact_challenges": [
+            {
+              "report_id": "V3-DEV-007-X01",
+              "target_id": "S03",
+              "attribute": "equipment_ok",
+              "problem": "The complaint reports slow data and dropped calls around Payagala (S03), but does not claim equipment is down. The extracted false equipment fact overstates the report; record the reported service degradation without assigning a specific-fu"
+            }
+          ],
+          "routed_by": "coordinator"
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEV-007",
+        "state_version": 2,
+        "finding": {
+          "stage": "reanalyse",
+          "facts": [
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "equipment_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-001"
+              ],
+              "observed_at_min": -60,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "Unverified field-staff message claims Beruwala (BER22) equipment is down."
+            },
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "equipment_ok",
+              "value": true,
+              "evidence_ids": [
+                "REP-002"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative NMS snapshot reports all sectors at Beruwala (BER22) in service."
+            }
+          ],
+          "ignored_reports": [
+            {
+              "report_id": "V3-DEV-007-X02",
+              "kind": "no_operational_claim",
+              "note": "Notice concerns a planned Dehiwala interruption tomorrow. Dehiwala is not a listed site and the notice does not claim a current fault at any listed asset."
+            },
+            {
+              "report_id": "V3-DEV-007-X01",
+              "kind": "no_operational_claim",
+              "note": "Customer complaint reports slow data and dropped calls around Payagala (S03), but does not identify a specific equipment, power, or backhaul fault."
+            },
+            {
+              "report_id": "V3-DEV-007-X03",
+              "kind": "duplicate_or_echo",
+              "note": "Unconfirmed social-media rumour says Beruwala was fixed; it supplies no authoritative operational fact."
+            }
+          ],
+          "requests": [],
+          "questions": [
+            {
+              "target_id": "S03",
+              "question": "Can you confirm the cause of the reported slow data and dropped calls around Payagala (PAY83), and whether a specific equipment, grid-power, or backhaul fault is present?",
+              "evidence_ids": [
+                "V3-DEV-007-X01"
+              ]
+            }
+          ],
+          "priority_proposals": [],
+          "finding": "Beruwala S01 has conflicting equipment claims: REP-001 is unverified, while the authoritative REP-002 snapshot says all sectors are in service. No repair is justified on these reports. Payagala S03 has a reported service-quality complaint but no identified fault, so no specific repair can be matched; the operator question seeks diagnosis. No available evidence establishes a fault requiring crew dispatch or generator deployment. Approved service weights remain unchanged: Aluthgama S02 is critical (weight 5), all other listed services are standard (weight 1); no credible evidence supports a new,"
+        }
+      },
+      {
+        "sender": "deterministic_scheduler",
+        "recipient": "coordinator",
+        "incident_id": "DEV-007",
+        "state_version": 2,
+        "finding": {
+          "plan_id": "e974461d-5c43-4b8f-8362-51778e17b348",
+          "scenario_id": "DEV-007",
+          "state_version": 2,
+          "state_hash": "deca1d97c5f990b7387b2003610549541c0e92d4124851a5846a629f01e66775",
+          "actions": [],
+          "unmet_needs": [],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002"
+          ],
+          "planner_config": {
+            "algorithm": "cp_sat_time_indexed",
+            "solver_status": "OPTIMAL",
+            "solver_seconds_cap": 5,
+            "seed": 22,
+            "workers": 1,
+            "slot_minutes": 5,
+            "prediction_only": true,
+            "tie_breakers": [
+              "fewer actions",
+              "earlier work completion"
+            ],
+            "limitations": [
+              "static rooted tree",
+              "unknown assets unavailable",
+              "no in-progress work or future-event scheduling"
+            ],
+            "objective_value": 14400.0,
+            "best_objective_bound": 14400.0,
+            "predicted_weighted_available_minutes_remaining": 14400,
+            "predicted_weighted_downtime_remaining": 0,
+            "deferred_action_ids": []
+          },
+          "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEV-007",
+        "state_version": 2,
+        "finding": {
+          "stage": "review",
+          "decision": "revise",
+          "fact_challenges": [
+            {
+              "report_id": "V3-DEV-007-X01",
+              "target_id": "S03",
+              "attribute": "open",
+              "problem": "Missed operational claim: the complaint reports slow data and dropped calls around Payagala (S03). It does not establish a specific equipment, power, or backhaul fault, so do not encode a false equipment_ok fact; retain the service-quality/"
+            }
+          ],
+          "requests": [],
+          "findings": [
+            "REP-001 maps to Beruwala (BER22), S01, and claims equipment is not working; it is unverified. REP-002 maps to the same site and reports all sectors in service; it is authoritative. Preserve both claims with their respective source status.",
+            "V3-DEV-007-X01 maps to Payagala (PAY83), S03. The complaint is a specific claim of service degradation (slow data and dropped calls), even though its cause is unknown. Listing it as no operational claim loses that evidence; no specific asset fault should be inferred.",
+            "The planned Dehiwala notice is not a current claim about a listed site. The Beruwala social-media post is an unconfirmed rumour, not an authoritative repair fact. No actions are scheduled, so no crew, road, generator, or action-catalogue safety issue arises. No work timing arithmetic applies. The operator question about Payagala's cause is appropriate; approved weights remain unchanged, with Aluthgama S02 at weight 5 and other services at weight 1."
+          ],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "V3-DEV-007-X01"
+          ]
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "single_agent",
+        "incident_id": "DEV-007",
+        "state_version": 2,
+        "finding": {
+          "fact_challenges": [
+            {
+              "report_id": "V3-DEV-007-X01",
+              "target_id": "S03",
+              "attribute": "open",
+              "problem": "Missed operational claim: the complaint reports slow data and dropped calls around Payagala (S03). It does not establish a specific equipment, power, or backhaul fault, so do not encode a false equipment_ok fact; retain the service-quality/"
+            }
+          ],
+          "routed_by": "coordinator"
+        }
+      },
+      {
+        "sender": "coordinator",
+        "recipient": "audit",
+        "incident_id": "DEV-007",
+        "state_version": 3,
+        "finding": {
+          "error_type": "BudgetExceeded",
+          "detail": "Whole-run call/token reservation exhausted"
+        }
+      }
+    ],
+    "model_usage": [
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 3382,
+        "output_limit": 1600,
+        "prompt_sha256": "5dce3d1d9951c2a2d7cc99e6fdf1ebfe8c34132f7e9e0763c457be959bfd6cb9",
+        "schema_sha256": "0482667c0328202ae560af1a6a7473c1c1aeceab2f6027493d02639d20f18460",
+        "request_id": "resp_08cf155ce2105726016b06d5d38d9487d0a49e8ccc1f61be13",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 3382,
+        "output_tokens": 498,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "f900188e35a2158ed16e8cba6be2c3206653800802a618108ebfae3419373ce1",
+        "status": "ok",
+        "latency_seconds": 4.169425041996874
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 4388,
+        "output_limit": 600,
+        "prompt_sha256": "1f79c922311d39a277e0791dda32aca5af5adf45ef5eda0d55e02d4b217e2214",
+        "schema_sha256": "996eee6813f1673f2535d66c3ab585c850bcbb2e25b37a96cd55f55a363acea4",
+        "request_id": "resp_071f0a54a3340d9f016b06d5d8107087d0b2e4bb7f9f8ac995",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 4388,
+        "output_tokens": 303,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "bbcaf319950eac51e027df599bb4470b8b5c48af0bd161f3a8c0ccd0628166f5",
+        "status": "ok",
+        "latency_seconds": 3.584470833011437
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 5349,
+        "output_limit": 1600,
+        "prompt_sha256": "19033011bb9bc742f3f75f38b8bfd588d0a827b71c0c17b2daaf99d897fde93e",
+        "schema_sha256": "0482667c0328202ae560af1a6a7473c1c1aeceab2f6027493d02639d20f18460",
+        "request_id": "resp_051aa705118d49d1016b06d5dc0dd087d08b83dc71608e17a9",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 5349,
+        "output_tokens": 495,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "74b0283bf1048d4e0c767f483d797562b3b14b6899ecc4c23c6dca3209a3f1c3",
+        "status": "ok",
+        "latency_seconds": 4.148463124991395
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 6370,
+        "output_limit": 600,
+        "prompt_sha256": "1a2390d1746b090ee1b0309a1e11dc01977d763326a714dfa910fecf76898733",
+        "schema_sha256": "996eee6813f1673f2535d66c3ab585c850bcbb2e25b37a96cd55f55a363acea4",
+        "request_id": "resp_0df5af42b63ee2be016b06d5e08d5c87d0af57423768df7abf",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 6370,
+        "output_tokens": 343,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "2708aa73d77e205f9d7ed7e5dd7571b86f75cc29089202b8d920989fa15d5e31",
+        "status": "ok",
+        "latency_seconds": 3.712447499972768
+      }
+    ],
+    "reasons": [
+      "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+    ],
+    "metadata": {
+      "started_at_utc": "2026-11-25T12:34:26.791860+00:00",
+      "duration_seconds": 17.65618504199665,
+      "protocol_version": "relink-agents-v14",
+      "workflow": "agent_orchestrator",
+      "agent_manifest": {
+        "protocol": "relink-agents-v14",
+        "multi": [
+          "network_investigator",
+          "field_resource_planner",
+          "service_priority_assessor",
+          "plan_reviewer"
+        ],
+        "single": "single_agent: one accumulating context, analyse then self-review",
+        "context_policy": "multi: role-scoped views plus typed messages; reviewer re-checks raw reports independently; single: union of all views in one conversation",
+        "tools": [
+          "fact normaliser (authority from source)",
+          "evidence resolver",
+          "CP-SAT scheduler",
+          "independent validator",
+          "service forecast"
+        ],
+        "never_model_controlled": [
+          "service weights",
+          "evidence authority",
+          "approval",
+          "simulation"
+        ]
+      },
+      "auxiliary_requests": [
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 3382,
+          "latency_seconds": 0.5593224170152098
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 4388,
+          "latency_seconds": 0.32245749997673556
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 5349,
+          "latency_seconds": 0.3082022500457242
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 6370,
+          "latency_seconds": 0.33766208396991715
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 7376,
+          "latency_seconds": 0.38521112501621246
+        }
+      ],
+      "raw_facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": -60,
+          "received_at_min": 0,
+          "status": "unverified",
+          "reason": "Field-staff message claims Beruwala site equipment is down; source is unverified."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": true,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative NMS snapshot reports all Beruwala sectors in service."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S03",
+          "attribute": "equipment_ok",
+          "value": false,
+          "evidence_ids": [
+            "V3-DEV-007-X01"
+          ],
+          "observed_at_min": -30,
+          "received_at_min": 0,
+          "status": "unverified",
+          "reason": "Customer complaint reports slow data and dropped calls around Payagala, but does not establish a specific equipment fault."
+        }
+      ],
+      "final_facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": -60,
+          "received_at_min": 0,
+          "status": "unverified",
+          "reason": "Unverified field-staff message claims Beruwala (BER22) equipment is down."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "equipment_ok",
+          "value": true,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative NMS snapshot reports all sectors at Beruwala (BER22) in service."
+        }
+      ],
+      "ignored_reports": [
+        {
+          "report_id": "V3-DEV-007-X02",
+          "kind": "no_operational_claim",
+          "note": "Notice concerns a planned Dehiwala interruption tomorrow. Dehiwala is not a listed site and the notice does not claim a current fault at any listed asset."
+        },
+        {
+          "report_id": "V3-DEV-007-X01",
+          "kind": "no_operational_claim",
+          "note": "Customer complaint reports slow data and dropped calls around Payagala (S03), but does not identify a specific equipment, power, or backhaul fault."
+        },
+        {
+          "report_id": "V3-DEV-007-X03",
+          "kind": "duplicate_or_echo",
+          "note": "Unconfirmed social-media rumour says Beruwala was fixed; it supplies no authoritative operational fact."
+        }
+      ],
+      "operator_questions": [
+        {
+          "source": "single_agent",
+          "target_id": "S03",
+          "question": "Can you confirm whether Payagala (PAY83) has a specific equipment, grid-power, or backhaul fault, or is the reported service degradation due to another cause?",
+          "evidence_ids": [
+            "V3-DEV-007-X01"
+          ]
+        }
+      ],
+      "priority_proposals": [],
+      "fact_challenges": [
+        {
+          "round": 1,
+          "report_id": "V3-DEV-007-X01",
+          "target_id": "S03",
+          "attribute": "equipment_ok",
+          "problem": "The complaint reports slow data and dropped calls around Payagala (S03), but does not claim equipment is down. The extracted false equipment fact overstates the report; record the reported service degradation without assigning a specific-fu"
+        },
+        {
+          "round": 2,
+          "report_id": "V3-DEV-007-X01",
+          "target_id": "S03",
+          "attribute": "open",
+          "problem": "Missed operational claim: the complaint reports slow data and dropped calls around Payagala (S03). It does not establish a specific equipment, power, or backhaul fault, so do not encode a false equipment_ok fact; retain the service-quality/"
+        }
+      ],
+      "decision_effects": [],
+      "deferred_action_ids": [],
+      "input_hash": "b9c7d6df68e3b4172db5e3dc34523b298be86380f2bcbca4729ed6659441458a",
+      "planner": "cp_sat",
+      "reviewer_enabled": true,
+      "feedback_enabled": true,
+      "raw_extraction_metrics": null,
+      "simulation_status": "not_integrated",
+      "transport": "hosted",
+      "budget": {
+        "max_calls": 12,
+        "max_input_tokens": 24000,
+        "max_output_tokens": 4800,
+        "max_seconds": 179.99998870899435
+      }
+    }
+  },
+  "sha256": "805d17046ae7ba1361bae9b52b558a3657e67a83a4658faf2116c4c897e4229c"
+}

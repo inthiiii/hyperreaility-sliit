@@ -1,0 +1,270 @@
+{
+  "job_id": "75dbb370-2d87-4162-9c49-edd5cc933f54",
+  "run_id": "c6277716-f792-4da8-9872-d1afff26de53",
+  "approval_mode": "automated_benchmark_operator",
+  "approval": {
+    "plan_id": "4dcd966c-f7ca-4515-835b-9df99cb26aee",
+    "plan_hash": "16faf31eaa498c7c71ded60c6adacdba9f61033ac807a8d9b89430866d228fa6",
+    "state_version": 1,
+    "state_hash": "73f6c5762d9530f401f660098b7c4b6a9cd7424980f73967ccef84fea21dfee7",
+    "decision": "approve",
+    "operator_id": "Automated benchmark operator",
+    "timestamp": "2026-11-25T12:41:42.449624Z"
+  },
+  "state_hash": "73f6c5762d9530f401f660098b7c4b6a9cd7424980f73967ccef84fea21dfee7",
+  "result_hash": "8487f9062cf50734e035ff8056cbcc1b97fbd141f6fb601ed22574130476ae08",
+  "result": {
+    "scenario_id": "DEV-003",
+    "plan_id": "4dcd966c-f7ca-4515-835b-9df99cb26aee",
+    "state_version": 1,
+    "trajectory": [
+      {
+        "t": 0,
+        "type": "action_started",
+        "action_id": "GEN-G1-S02"
+      },
+      {
+        "t": 0,
+        "type": "availability",
+        "available_services": []
+      },
+      {
+        "t": 40,
+        "type": "action_completed",
+        "action_id": "GEN-G1-S02",
+        "kind": "generator_deploy",
+        "target_id": "S02"
+      },
+      {
+        "t": 40,
+        "type": "availability",
+        "available_services": [
+          "V02",
+          "V04",
+          "V06",
+          "V08",
+          "V10",
+          "V12",
+          "V14",
+          "V16",
+          "V18"
+        ]
+      },
+      {
+        "t": 280,
+        "type": "generator_expired",
+        "generator_id": "G1"
+      },
+      {
+        "t": 280,
+        "type": "availability",
+        "available_services": []
+      },
+      {
+        "t": 720,
+        "type": "availability",
+        "available_services": []
+      }
+    ],
+    "completed_actions": [
+      "GEN-G1-S02"
+    ],
+    "unmet_needs": [
+      "service:V01",
+      "service:V02",
+      "service:V03",
+      "service:V04",
+      "service:V05",
+      "service:V06",
+      "service:V07",
+      "service:V08",
+      "service:V09",
+      "service:V10",
+      "service:V11",
+      "service:V12",
+      "service:V13",
+      "service:V14",
+      "service:V15",
+      "service:V16",
+      "service:V17",
+      "service:V18"
+    ],
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 18,
+      "total_weighted_horizon_min": 15840,
+      "weighted_available_min": 3120,
+      "weighted_downtime_min": 12720,
+      "unweighted_available_min": 2160,
+      "unweighted_downtime_min": 10800,
+      "unweighted_availability": 0.16666666666666666,
+      "critical_service_downtime_min": 480,
+      "first_restoration_min": 40,
+      "services_available_at_horizon_end": 0,
+      "unmet_needs_count": 18,
+      "measured_duration_min": 720,
+      "observed_until_min": 720,
+      "incident_horizon_min": 720,
+      "baseline_weighted_downtime_min": 15840,
+      "weighted_downtime_reduction_min": 3120,
+      "actions_completed": 1
+    },
+    "run_metadata": {
+      "engine_version": "0.2",
+      "measurement_scope": "complete_incident",
+      "replan_required": false,
+      "observed_until_min": 720,
+      "planner_prediction_used": false,
+      "uses_model_or_network": false,
+      "action_outcomes": {
+        "GEN-G1-S02": {
+          "status": "completed",
+          "reason": ""
+        }
+      },
+      "all_completed_actions": [
+        "GEN-G1-S02"
+      ],
+      "committed_actions": [],
+      "service_availability": {
+        "V01": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V02": {
+          "weight": 5,
+          "critical": true,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V03": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V04": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V05": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V06": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V07": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V08": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V09": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V10": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V11": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V12": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V13": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V14": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V15": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V16": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        },
+        "V17": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V18": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              40,
+              280
+            ]
+          ]
+        }
+      },
+      "same_minute_rule": "expiry, completed work, departures, resource observations; intervals are half-open",
+      "continuation_policy": "lost work restarts without partial credit; unaffected departed work completes under prior approval"
+    }
+  }
+}

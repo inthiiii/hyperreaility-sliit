@@ -48,14 +48,16 @@ def connect_static_backend(session, choice, root):
 
     episode = None
     root_hash = choice.content_hash
+    # <data>/processed/agent_inputs/<split>/<case>.json -> <data>; works for data/ and releases/*/data.
+    data_root = (root / choice.key).parents[3]
 
     def callback(state, plan):
         nonlocal episode
-        visible = loader.CaseLoader(root / 'data/processed/agent_inputs').load_case(root / choice.key)
+        visible = loader.CaseLoader(data_root / 'processed/agent_inputs').load_case(root / choice.key)
         if digest(visible) != root_hash:
             raise ValueError('Selected source changed before simulation')
         if episode is None:
-            truth = evaluator.EvaluatorLoader(root / 'data/evaluation/ground_truth').load(state.scenario_id)
+            truth = evaluator.EvaluatorLoader(data_root / 'evaluation/ground_truth').load(state.scenario_id)
             episode = episodes.IncidentEpisode(visible, truth)
         # Only appended, audited operator reports may rebind the visible input.
         # The engine checks all other fields and never changes its private truth.

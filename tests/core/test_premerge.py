@@ -149,6 +149,8 @@ def test_benchmark_failure_retained(tmp_path,monkeypatch):
     source=Path(__file__).parent/'fixtures'/'DEMO-005.json'
     def fail(*args,**kwargs):raise RuntimeError('private exception')
     monkeypatch.setattr(Coordinator,'run',fail)
+    from project.core.orchestrator import AgentOrchestrator
+    monkeypatch.setattr(AgentOrchestrator,'run',fail)
     rows=run_benchmark([source],tmp_path/'failed',repeats=1)
     assert len(rows)==2 and all(x['status']=='failed' for x in rows)
     assert 'private exception' not in (tmp_path/'failed'/'attempts.jsonl').read_text()

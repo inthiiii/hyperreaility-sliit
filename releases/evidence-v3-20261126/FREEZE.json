@@ -1,0 +1,95 @@
+{
+  "created_at_utc": "2026-11-25T12:47:32.469598+00:00",
+  "dataset": "releases/evidence-v3-20261126/data",
+  "files": {
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-001.json": "dc54c6bb152d5fcab8a66c49db30b9e06210c0dec7920265c0c405407956237a",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-002.json": "9a7ffdccc74a9c5502f171b8f12db4a28f97325475c79fb0189a1d4e29820cb8",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-003.json": "13d50e416f72ddc679229ebd2b38b4fd72a71db9ee584f6d1756d9616bb635f8",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-004.json": "30380d7d7e3be2b58f7861568877dffe1353d15c7ec2e48e9e7bfeb82b1ffa63",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-005.json": "8aace233ea22c74f6ab33c6d86f07eb596417a079cc109f1bd6aa5aa277a4935",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-006.json": "8e2ee7d123af87c3708b2244da9562ee0bd8a08ef2cbf4b39ed4f74c4f9b041b",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-007.json": "f9bb2b6f0eee7a5a8ef575e213e3d2445943cdb286364682539cd1323a67e496",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-008.json": "9a10db4d50a75590e20a59f169fc9ad2109553b10f383f6e327b87402c566f07",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-009.json": "ee39cd1497ab3c2b7409b3f1d2cd0710f10eb64d7b35f6f24f6a11de8f53ab8b",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-010.json": "41af6ad5509392c8b939cd878061242afcfd0ba7eedbc09a37fda10300350733",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-011.json": "027f038ccba55c0787a44152025c7d91741ac94fbdab48df783812ef032255e8",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-012.json": "7ab80842f494a00493eb7fa3efab8cfa115062e4e7e96ed717b40a71bbdf66ab",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-013.json": "7766b9725a419e231e266bd797dc8edc9188e59de131fabb19ed6b692d0c1560",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-014.json": "2dfeb3049de51afa788374cf3229e8958a8c9bff5d38e6db6715ea6382583487",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-015.json": "51563f7dc4c5744d34c30d53339614ed8dcdbfbd94a9a634840f67773cc92a7c",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-016.json": "bce7e439640a3c08ce288955eb268c4d7fed2fdd1e36d9e3ec67f70955c41219",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-017.json": "e596deb9eaaed4c1bb177ca54d6e3c40822961aad3b3e2ded714485ed3a770fe",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-018.json": "eab0b606c262f84033f5a4093de066578f39f709c545b722b232cff84324e601",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-019.json": "389122367db39a02f23c9cb1577b4bc6342a0c67e58cdf7c7ebae4c365d4c6b6",
+    "evaluation/ground_truth/candidate_evaluation/EVAL2-020.json": "0483779f0421bb6c5b72d7971af997a2aceb1c94c960c02b84b8209f4770d19b",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-001.json": "6378a775850374bf8338b9a3be069f3500de8f287412805224b3c7d81bc8c4f5",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-002.json": "cc7b5929c362b123299c1a042fa2e971873e2757cda2476f41d5459368a8bad7",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-003.json": "25f2a66ecc4d20f117abb80dd9864baf75007df675742269e027825aa257e669",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-004.json": "891e9bfab5e611e13f4ffe05cfcba0d7abe1035c6af554b07832b5d696e4fbd7",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-005.json": "638b58de605ed05421a2f47020cb1b3de4cc03390829cf686beaad437deb6ed9",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-006.json": "ee44d6a241d4d89c7036dbcbda17571d53a559028e96e950c31014dec6e46ba7",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-007.json": "0b00e2b685b7fd98a0b68288a246e46d7e0fc96e13b10bb0a6ad3b3b0d20be2d",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-008.json": "bc72824eb3d3249609d5358cfff26ecbb7ecabec8c1ad77d0d9eeac8cd57e67f",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-009.json": "ba746a0656e94ea55763132c9ecae0d90683d2d78180978b051682a7aaf1d09a",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-010.json": "24141987b13e589bccf059f5908fa7d61579b90940ca9c3864500d75cac5348c",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-011.json": "ad4b1e2ec602b7a1e006d4a56b1489678d6d0a6f53783c49b64446251bf5e23b",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-012.json": "0efedcec39c25c1f6b514ce89d4142763fd6cff37434612c13c822d369acf2d3",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-013.json": "ff1abe399a21d68dc6e342e31d2191fb5da7f7cfc9e0a03050d61c152ed78cba",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-014.json": "79bf69a59f72c336be5177595cc0bced9b01270a12e7f63552f302d1b7a8dbea",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-015.json": "a8ab8e46a647bb88d696ea63331abd79e21e60f1e19f7bee7a615001bcaa2807",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-016.json": "ae3f8ee6626388a2a5895715ee75d8677e3241b0dfa5bb9fc274ce62efbcd53f",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-017.json": "8e0101d6f3346789394e7d33ed99471612706ccca2a23b82a1c542548a390027",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-018.json": "dc0941963e8c258febd8e4508f4f75c414d55e9b90ab626e7e473f9f7b7c6c32",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-019.json": "d4f2b9ebb1cff1820a3d005fddbba265bb0d93ec6cb8cb0aa9df6c4e4637f55c",
+    "processed/agent_inputs/candidate_evaluation/EVAL2-020.json": "71656ada26a12aad93c05816a5575e8ffbe650349eceaff8c2de8228148d7387"
+  },
+  "format": 1,
+  "git_commit": "524945f1324dc3c639b6c2c69e0fd0165695842c",
+  "limits": {
+    "max_calls": 12,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 4800,
+    "max_seconds": 180
+  },
+  "model": {
+    "api_mode": "responses",
+    "base_url_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "model": "gpt-6-luna",
+    "provider": "openai",
+    "reasoning_effort": "none"
+  },
+  "protocol": {
+    "agents": {
+      "field_resource_planner": {
+        "max_output": 650,
+        "schema_sha256": "88875e8e387984df81bf5972c1f5758f0007eedea58e2563b585d0e32fe23dc9",
+        "stage": "resources",
+        "task_sha256": "11e2610d6fe66fb1346f51501b2e9c714561487c6b5394ea952f21ae3d898e55"
+      },
+      "network_investigator": {
+        "max_output": 1100,
+        "schema_sha256": "c1cf7ea476a6c89164242e0e8c71ec5e3b27afa8f28c773d53a603efd2e16b08",
+        "stage": "investigate",
+        "task_sha256": "6627bed03546f304c370362040e4bcc5c4945140c7f836a19384c1472b24261b"
+      },
+      "plan_reviewer": {
+        "max_output": 600,
+        "schema_sha256": "a0ecf46e0ad91485b0cd911b4adb57157ad74e8b5cce1c3bc730e0a1ee37a22e",
+        "stage": "review",
+        "task_sha256": "143a4a70a6c4bf5d3c1efee22007a8698d52e67908ad3f43973fd2152f83f9f0"
+      },
+      "service_priority_assessor": {
+        "max_output": 650,
+        "schema_sha256": "88875e8e387984df81bf5972c1f5758f0007eedea58e2563b585d0e32fe23dc9",
+        "stage": "priorities",
+        "task_sha256": "984f0034f85c37b0133e10dc3e02b83695b5da1ec0360f049064db869e3465b8"
+      }
+    },
+    "protocol": "relink-agents-v14",
+    "rules_sha256": "3afa5fe57a9cdf1ede42388b9cdf504475e024f66094583dbae1acd32b1d6437",
+    "single_max_output": 1600,
+    "single_task_sha256": "4b896de7e5a1b7a38d4d624ef33d6576ca810d3415c3d4275f9670f9fde85353"
+  },
+  "scope": "Script-generated synthetic EVAL2 cases (evidence v3); not independently human-reviewed. Frozen so held-out results cannot feed back into prompts or settings.",
+  "tree_clean": true
+}

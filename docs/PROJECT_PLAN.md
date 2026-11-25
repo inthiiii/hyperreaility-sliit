@@ -1,6 +1,6 @@
 # RE:L!NK — Complete Project Plan
 
-Innodata AI Catalyst 2026 · University Track · Team HyperReAIlity (SLIIT) · 26 November 2026
+Innodata AI Catalyst 2026 · University Track · Team HyperReAIlity (SLIIT) · 25 November 2026
 
 This plan covers the architecture, agent design, benchmarking and evaluation, milestones and risk analysis. Behaviour details are in [Workflow.md](Workflow.md) and technology and disclosures in [PROJECT_DETAILS.md](PROJECT_DETAILS.md).
 
@@ -99,8 +99,8 @@ Unmet targets will be reported as such.
 | 20 Nov | Proposal submitted | All | Done |
 | 21–24 Nov | Core contracts, CP-SAT, validator, simulator, dashboard, approval, continuation | I, Z, E | Done |
 | 25 Nov | v2 evaluation freeze, QA rehearsal, gap review | I, K | Done |
-| **26 Nov** | Evidence v3, v14 orchestrator, real single agent, sign-in and roles, human scorer, docs | Z, I, E, K | Done (PRs #17–#20) |
-| 27 Nov | Map, agent timeline, Gantt, question/proposal inbox; dev tuning; **config freeze 18:00**; human sessions; overnight benchmark | E, I, Z, K | Planned |
+| **25 Nov (plan days 1–2)** | Evidence v3, v14 orchestrator, real single agent, sign-in and roles, human scorer; map, agent conversation, crew Gantt, operator inbox, field work; development tuning; EVAL2 configuration freeze | Z, I, E, K | Done |
+| 26–27 Nov | Human sessions; full held-out benchmark (after API quota check); results analysis | K, E, I, Z | Planned |
 | 28 Nov | Results analysis, Benchmark page, cost table, final docs, fresh-clone test; **internal freeze 18:00** | All | Planned |
 | 29 Nov | Demo video, release tag, submission before 23:59 | All | Planned |
 | 30 Nov – 6 Dec | Final-day feature drills, 10 slides, 15-minute demo rehearsal | All | Planned |
@@ -114,7 +114,7 @@ Unmet targets will be reported as such.
 | Hosted API outage, rate limit or quota | Medium | High | Bounded retries; budgets; template mode for offline demo; check quota before the benchmark | I |
 | Excessive escalation | Medium | Medium | Partial plans and questions instead of escalation; tuning on development cases only | I |
 | Over-tuning to evaluation cases | Low | High | EVAL2 frozen by hash; tuning restricted to development | Z |
-| Human participants unavailable | Medium | Medium | Book 4 people on 27 Nov; report a smaller sample honestly | K |
+| Human participants unavailable | Medium | Medium | Book 4 people for 26–27 Nov; report a smaller sample honestly | K |
 | Synthetic-to-real gap | High | Medium | State limits; propose an authorised historical replay and read-only pilot | All |
 | Prompt injection via reports | Medium | Medium | Untrusted-text rule; no model-controlled authority or weights; measured | I |
 | Credential leakage | Low | High | `.env` and `.relink/` git-ignored; hashed passwords; no secrets in traces | E |

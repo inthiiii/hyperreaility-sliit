@@ -1,0 +1,302 @@
+{
+  "job_id": "64591bda-a00a-4b98-9624-0efd10e3f7a0",
+  "run_id": "5187390e-9e60-46b4-9201-ff5ae1d852ee",
+  "approval_mode": "automated_benchmark_operator",
+  "approval": {
+    "plan_id": "d54b2efe-d8a0-4617-830e-6d22947165cf",
+    "plan_hash": "2ce1bd101a3564cde3f63a0a5986f0f6e7ea3621c50c9e4578aa762870a2d185",
+    "state_version": 1,
+    "state_hash": "23043d3a27e83915a43c144a899bc0fc39ea0f59bbd168e4545fe5578e025cdf",
+    "decision": "approve",
+    "operator_id": "Automated benchmark operator",
+    "timestamp": "2026-11-25T12:35:35.106580Z"
+  },
+  "state_hash": "23043d3a27e83915a43c144a899bc0fc39ea0f59bbd168e4545fe5578e025cdf",
+  "result_hash": "f7a33f4f9624dc0cbbdcccdeb4b3975da3f6cc093cb0abd70e299b140723197f",
+  "result": {
+    "scenario_id": "DEV-010",
+    "plan_id": "d54b2efe-d8a0-4617-830e-6d22947165cf",
+    "state_version": 1,
+    "trajectory": [
+      {
+        "t": 0,
+        "type": "action_started",
+        "action_id": "EQ-S01"
+      },
+      {
+        "t": 0,
+        "type": "action_started",
+        "action_id": "GEN-G1-S02"
+      },
+      {
+        "t": 0,
+        "type": "availability",
+        "available_services": []
+      },
+      {
+        "t": 25,
+        "type": "action_completed",
+        "action_id": "GEN-G1-S02",
+        "kind": "generator_deploy",
+        "target_id": "S02"
+      },
+      {
+        "t": 25,
+        "type": "availability",
+        "available_services": [
+          "V02",
+          "V04",
+          "V06",
+          "V08",
+          "V10",
+          "V12",
+          "V14",
+          "V16",
+          "V18"
+        ]
+      },
+      {
+        "t": 60,
+        "type": "observation",
+        "report_id": "EVENT-REP-001",
+        "text": "Crew C2 is unavailable for the rest of the incident.",
+        "replan_required": true
+      },
+      {
+        "t": 60,
+        "type": "availability",
+        "available_services": [
+          "V02",
+          "V04",
+          "V06",
+          "V08",
+          "V10",
+          "V12",
+          "V14",
+          "V16",
+          "V18"
+        ]
+      }
+    ],
+    "completed_actions": [
+      "GEN-G1-S02"
+    ],
+    "unmet_needs": [
+      "service:V01",
+      "service:V03",
+      "service:V05",
+      "service:V07",
+      "service:V09",
+      "service:V11",
+      "service:V13",
+      "service:V15",
+      "service:V17",
+      "service:V19"
+    ],
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 19,
+      "total_weighted_horizon_min": 16560,
+      "weighted_available_min": null,
+      "weighted_downtime_min": null,
+      "unweighted_available_min": null,
+      "unweighted_downtime_min": null,
+      "unweighted_availability": null,
+      "critical_service_downtime_min": null,
+      "first_restoration_min": 25,
+      "services_available_at_horizon_end": null,
+      "unmet_needs_count": 10,
+      "measured_duration_min": 60,
+      "observed_until_min": 60,
+      "incident_horizon_min": 720,
+      "weighted_available_so_far_min": 455,
+      "weighted_downtime_so_far_min": 925,
+      "unweighted_available_so_far_min": 315,
+      "unweighted_downtime_so_far_min": 825,
+      "critical_service_downtime_so_far_min": 25,
+      "unweighted_availability_so_far": 0.27631578947368424,
+      "actions_completed": 1
+    },
+    "run_metadata": {
+      "engine_version": "0.2",
+      "measurement_scope": "elapsed_prefix",
+      "replan_required": true,
+      "observed_until_min": 60,
+      "planner_prediction_used": false,
+      "uses_model_or_network": false,
+      "action_outcomes": {
+        "EQ-S01": {
+          "status": "in_progress",
+          "reason": ""
+        },
+        "GEN-G1-S02": {
+          "status": "completed",
+          "reason": ""
+        }
+      },
+      "all_completed_actions": [
+        "GEN-G1-S02"
+      ],
+      "committed_actions": [
+        {
+          "action_id": "EQ-S01",
+          "kind": "equipment_repair",
+          "target_id": "S01",
+          "crew_id": "C1",
+          "generator_id": null,
+          "departure_min": 0,
+          "travel_route": [
+            "DEPOT",
+            "S01"
+          ],
+          "work_start_min": 25,
+          "work_end_min": 145
+        }
+      ],
+      "service_availability": {
+        "V01": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V02": {
+          "weight": 5,
+          "critical": true,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V03": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V04": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V05": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V06": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V07": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V08": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V09": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V10": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V11": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V12": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V13": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V14": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V15": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V16": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V17": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V18": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              25,
+              60
+            ]
+          ]
+        },
+        "V19": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        }
+      },
+      "same_minute_rule": "expiry, completed work, departures, resource observations; intervals are half-open",
+      "continuation_policy": "lost work restarts without partial credit; unaffected departed work completes under prior approval"
+    }
+  }
+}

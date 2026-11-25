@@ -1,4 +1,4 @@
-# v14 agent workflow: live development smoke (26 Nov 2026)
+# v14 agent workflow: live development smoke (25 Nov 2026)
 
 Development observation only, not an evaluation. Two v3 development cases, one repetition,
 `gpt-6-luna`, Responses API, reasoning `none`, whole-run caps of 12 calls / 24k input / 4.8k output tokens / 180 s.

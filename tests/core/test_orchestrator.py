@@ -210,3 +210,30 @@ def test_budget_exhaustion_escalates():
     a = adapter([extraction(perfect_facts('DEV-003')), specialist()], RunBudget(max_calls=2))
     result = AgentOrchestrator(a).run(s, 'multi')
     assert result.status == 'escalated' and 'BudgetExceeded' in result.reasons[0]
+
+
+def test_revise_without_actionable_change_becomes_notes_not_a_round():
+    s = case('DEV-003')
+    a = adapter([extraction(perfect_facts('DEV-003')), specialist(), specialist(),
+                 json.dumps({'decision': 'revise', 'fact_challenges': [], 'requests': [],
+                             'findings': ['Forecast looks pessimistic for downstream sites'], 'evidence_ids': []})])
+    result = AgentOrchestrator(a).run(s, 'multi')
+    assert result.status == 'awaiting_approval' and len(a.client.requests) == 4
+    assert result.metadata['review_notes'] == ['Forecast looks pessimistic for downstream sites']
+
+
+def test_no_ai_baseline_plans_around_unreadable_reports():
+    s = case('DEV-003')
+    result = AgentOrchestrator(planner='cp_sat').run(s, 'template')
+    assert result.status == 'awaiting_approval' and result.validation.valid and not result.model_usage
+    assert result.state.unresolved_facts and result.metadata['operator_questions']
+
+
+def test_advisory_specialist_failure_degrades_but_budget_failure_escalates():
+    s = case('DEV-003')
+    a = adapter([extraction(perfect_facts('DEV-003')), specialist(), RuntimeError('truncated'), review()])
+    result = AgentOrchestrator(a).run(s, 'multi')
+    assert result.status == 'awaiting_approval'
+    assert result.metadata['degraded_stages'] == [{'role': 'service_priority_assessor', 'error_type': 'RuntimeError'}]
+    b = adapter([extraction(perfect_facts('DEV-003')), specialist()], RunBudget(max_calls=2))
+    assert AgentOrchestrator(b).run(s, 'multi').status == 'escalated'
