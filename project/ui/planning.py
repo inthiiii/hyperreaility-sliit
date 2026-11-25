@@ -11,7 +11,8 @@ from project.llm.health import preflight
 from project.ui.review import render_review
 from project.ui.confirmation import render_confirmation
 from project.ui.workflow import render_workflow
-from project.ui.agent_view import collaboration_counts, conversation_rows, gantt_rows, inbox
+from project.ui.agent_view import LiveFeed, collaboration_counts, conversation_rows, gantt_rows, inbox
+from project.ui.review_service import active_approval
 from project.ui.priority_service import proposal_key, record_priority_decision
 from project.ui.planning_service import (
     begin_new_attempt, fact_rows, prepare_plan, request_key, schedule_rows, timeline_rows,
@@ -240,7 +241,31 @@ def render_planning(choice, session, root):
         if choice.scenario.active_generators:
             st.caption('Running generators: expected expiry comes from the visible inventory specification; fuel is not reset by replanning.')
             st.dataframe([g.model_dump() for g in choice.scenario.active_generators], hide_index=True, width='stretch')
-    st.write('Prepare a schedule, inspect its evidence and review the independent checks.')
+    st.write('Prepare a schedule, inspect its evidence, approve it and measure the outcome.')
+    render_workflow(session, choice)
+    labels = ['① Generate', '② Inspect plan', '③ Review & approve', '④ Simulate']
+    step_generate, step_inspect, step_review, step_simulate = st.tabs(labels, default=labels[_current_step(session, choice)])
+    with step_generate:
+        _generate_step(choice, session, root, user)
+    with step_inspect:
+        _inspect_step(choice, session)
+    with step_review:
+        render_confirmation(choice, session, root)
+        render_review(choice, session, root, part='decision')
+    with step_simulate:
+        render_review(choice, session, root, part='simulation')
+
+
+def _current_step(session, choice):
+    result = session.core.current
+    if result is None or result.state.source_hash != choice.content_hash:
+        return 0
+    if session.simulation_result is not None or active_approval(session, choice):
+        return 3
+    return 2 if result.status == 'awaiting_approval' else 1
+
+
+def _generate_step(choice, session, root, user):
     # Widget keys are removed when their page is not rendered; retain preferences
     # separately so returning from another view never changes the selected mode.
     if 'planning_mode' not in st.session_state:
@@ -285,8 +310,10 @@ def render_planning(choice, session, root):
                 st.session_state['review_note'] = ''
                 st.rerun()
     if generate:
-        with st.spinner('Preparing and independently checking the plan…'):
-            prepare_plan(session, choice, mode, planner, root, user=user)
+        with st.status('Agents are working on the incident…', expanded=True) as status:
+            feed = LiveFeed(status)
+            prepare_plan(session, choice, mode, planner, root, user=user, progress=feed)
+            status.update(label=f'Planning finished · {feed.count} recorded steps', state='complete', expanded=False)
         st.rerun()
     if attempted:
         st.caption('This request has already been attempted. Use Start a new attempt for an explicit retry; this clears the old plan, approval and results.')
@@ -302,13 +329,17 @@ def render_planning(choice, session, root):
                 st.text(reason)
             with st.expander('Attempt metadata and any recorded model usage'):
                 st.json(redact(attempt))
+    if session.core.current is not None:
+        st.success('A plan is ready. Open ② Inspect plan, then ③ Review & approve.')
+
+
+def _inspect_step(choice, session):
+    attempt = session.planning_attempt
     result = session.core.current
+    key = request_key(session, choice, session.planning_mode, session.planning_scheduler)
     if result is not None:
         if attempt and attempt['request_key'] != key:
             st.info('Controls differ from the displayed run. Generate a plan to replace it; no new request has been sent.')
         _result(result, attempt)
     elif not attempt:
-        st.info('No plan generated. Choose a mode and scheduler, then explicitly generate a plan.')
-    render_workflow(session, choice)
-    render_confirmation(choice, session, root)
-    render_review(choice, session, root)
+        st.info('No plan generated yet. Use ① Generate.')

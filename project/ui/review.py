@@ -50,11 +50,13 @@ def _continue_callback(session, choice, root):
         session.review_feedback = {'kind': 'error', 'message': 'Checkpoint could not be accepted. Refresh and inspect the episode record.'}
 
 
-def render_review(choice, session, root):
-    st.divider()
-    st.subheader('Review and approval')
-    st.caption('Approval authorizes simulation only. It never dispatches a crew or controls a real network. '
-               'Decisions are recorded under your signed-in identity and role.')
+def render_review(choice, session, root, part='all'):
+    """part: 'decision' (approve/reject), 'simulation' (run/continue) or 'all'."""
+    show_decision, show_sim = part in ('all', 'decision'), part in ('all', 'simulation')
+    if show_decision:
+        st.subheader('Review and approval')
+        st.caption('Approval authorizes simulation only. It never dispatches a crew or controls a real network. '
+                   'Decisions are recorded under your signed-in identity and role.')
     ready = False;binding = None;reason = None
     try:
         result, binding = review_context(session, choice)
@@ -71,38 +73,41 @@ def render_review(choice, session, root):
     approved = active_approval(session, choice)
     rejected = bool(ready and session.last_decision and session.last_decision.binding == binding
                     and session.last_decision.approval.decision == 'reject')
-    if rejected:
-        st.error('This plan was rejected. Generate a new plan before requesting approval.')
-    elif approved:
-        st.success('Approved for simulation by ' + session.core.approval.operator_id + '.')
-    elif ready:
-        st.info('Awaiting your decision. Inspect the schedule, evidence and validation before approving or rejecting.')
-    elif reason:
-        st.warning(reason)
-    if ready and not operator_valid:
-        st.info('Sign in to record a decision.')
-    if ready and not may_approve:
-        st.info('Your role cannot approve. ' + needs_role('approve_plan') + '. Ask a Restoration Manager to sign in and review this plan.')
-    st.text_area('Review note (optional)', key='review_note', max_chars=2000, disabled=not ready or session.busy,
-                 placeholder='Reason for the decision, constraints or follow-up needed')
-    yes, no = st.columns(2)
-    yes.button('Approve plan', key='approve_plan', type='primary', width='stretch',
-        disabled=not ready or not operator_valid or approved or rejected or session.busy or not may_approve,
-        help=None if may_approve else needs_role('approve_plan'),
-        on_click=_decision_callback, args=(session, choice, root, binding, 'approve'))
-    no.button('Reject plan', key='reject_plan', width='stretch',
-        disabled=not ready or not operator_valid or rejected or session.busy or not may_reject,
-        help='Rejecting an already approved plan revokes its approval.' if may_reject else needs_role('reject_plan'),
-        on_click=_decision_callback, args=(session, choice, root, binding, 'reject'))
-    feedback = session.review_feedback
-    if feedback:
-        (st.success if feedback['kind'] == 'success' else st.error)(feedback['message'])
-    record = session.last_decision
-    if record:
-        with st.expander('Recorded operator decision'):
-            st.json(redact(record.model_dump(mode='json')))
-            st.caption('Record ID: ' + record.decision_id + ' · Stored locally under results/local_runs/decisions/. '
-                       'Changing the plan, state or incident invalidates its approval.')
+    if show_decision:
+        if rejected:
+            st.error('This plan was rejected. Generate a new plan before requesting approval.')
+        elif approved:
+            st.success('Approved for simulation by ' + session.core.approval.operator_id + '.')
+        elif ready:
+            st.info('Awaiting your decision. Inspect the schedule, evidence and validation before approving or rejecting.')
+        elif reason:
+            st.warning(reason)
+        if ready and not operator_valid:
+            st.info('Sign in to record a decision.')
+        if ready and not may_approve:
+            st.info('Your role cannot approve. ' + needs_role('approve_plan') + '. Ask a Restoration Manager to sign in and review this plan.')
+        st.text_area('Review note (optional)', key='review_note', max_chars=2000, disabled=not ready or session.busy,
+                     placeholder='Reason for the decision, constraints or follow-up needed')
+        yes, no = st.columns(2)
+        yes.button('Approve plan', key='approve_plan', type='primary', width='stretch',
+            disabled=not ready or not operator_valid or approved or rejected or session.busy or not may_approve,
+            help=None if may_approve else needs_role('approve_plan'),
+            on_click=_decision_callback, args=(session, choice, root, binding, 'approve'))
+        no.button('Reject plan', key='reject_plan', width='stretch',
+            disabled=not ready or not operator_valid or rejected or session.busy or not may_reject,
+            help='Rejecting an already approved plan revokes its approval.' if may_reject else needs_role('reject_plan'),
+            on_click=_decision_callback, args=(session, choice, root, binding, 'reject'))
+        feedback = session.review_feedback
+        if feedback:
+            (st.success if feedback['kind'] == 'success' else st.error)(feedback['message'])
+        record = session.last_decision
+        if record:
+            with st.expander('Recorded operator decision'):
+                st.json(redact(record.model_dump(mode='json')))
+                st.caption('Record ID: ' + record.decision_id + ' · Stored locally under results/local_runs/decisions/. '
+                           'Changing the plan, state or incident invalidates its approval.')
+    if not show_sim:
+        return
     st.subheader('Approved simulation')
     connected = session.core.simulator is not None
     if not connected:

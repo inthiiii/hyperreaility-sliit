@@ -95,7 +95,7 @@ class AgentOrchestrator:
     """Drop-in replacement for ``Coordinator`` for hosted modes ``single`` and ``multi``."""
 
     def __init__(self, adapter=None, budget=None, planner='cp_sat', *, reviewer_enabled=True,
-                 feedback_enabled=True, trace_dir=None):
+                 feedback_enabled=True, trace_dir=None, on_message=None):
         self.adapter = adapter
         self.budget = budget or (adapter.budget if adapter else RunBudget())
         if adapter and adapter.budget is not self.budget:
@@ -106,6 +106,7 @@ class AgentOrchestrator:
         self.reviewer_enabled = reviewer_enabled
         self.feedback_enabled = feedback_enabled
         self.trace_dir = trace_dir
+        self.on_message = on_message  # optional live-progress observer; display only
         self._used = False
 
     # ------------------------------------------------------------------ run
@@ -208,12 +209,23 @@ class AgentOrchestrator:
     def message(self, sender, recipient, content):
         self.messages.append({'sender': sender, 'recipient': recipient, 'incident_id': self.scenario.scenario_id,
                               'state_version': self.version, 'finding': content})
+        if self.on_message is not None:
+            try:
+                self.on_message(self.messages[-1])
+            except Exception:  # noqa: BLE001 - a display failure must never change the run
+                pass
 
     def allowed_evidence(self):
         return {r.report_id for r in self.scenario.reports} | {self.scenario.policy.evidence_id}
 
     def call(self, spec_role, stage, task, view, output, max_output, *, keep_history=False):
         self.budget.check_time()
+        if self.on_message is not None:
+            try:
+                self.on_message({'sender': 'single_agent' if self.mode == 'single' else spec_role,
+                                 'recipient': 'working', 'stage': stage, 'finding': None})
+            except Exception:  # noqa: BLE001
+                pass
         payload = {'stage': stage, 'task': task, 'state_version': self.version, 'context': view}
         role = 'single_agent' if self.mode == 'single' else spec_role
         result = self.adapter.complete(role, payload, output, max_output=max_output,

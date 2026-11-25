@@ -113,7 +113,27 @@ def layer_rows(scenario, observations=None, trajectory=None, minute=None, plan=N
     hubs = [{'name': 'Core (fictional)', 'lat': CORE_POINT[0], 'lon': CORE_POINT[1], 'label': 'Core switch (fictional)'},
             {'name': 'Depot (fictional)', 'lat': DEPOT_POINT[0], 'lon': DEPOT_POINT[1], 'label': 'Crew depot (fictional)'}]
     crews = crew_positions(scenario, plan, minute) if plan is not None and minute is not None else []
-    return {'sites': sites, 'links': links, 'roads': roads, 'hubs': hubs, 'crews': crews}
+    return {'sites': sites, 'links': links, 'roads': roads, 'hubs': hubs, 'crews': crews,
+            'routes': route_rows(scenario, plan)}
+
+
+CREW_COLORS = [[120, 170, 255], [255, 170, 90], [200, 140, 255], [90, 220, 255]]
+
+
+def route_rows(scenario, plan):
+    """Planned travel of each crew, one path per action, coloured per crew."""
+    if plan is None:
+        return []
+    pos = positions(scenario)
+    crews = sorted({a.crew_id for a in plan.actions})
+    rows = []
+    for a in sorted(plan.actions, key=lambda x: (x.crew_id, x.departure_min)):
+        path = [[pos[n][1], pos[n][0]] for n in a.travel_route if n in pos]
+        if len(path) < 2:
+            continue
+        rows.append({'crew_id': a.crew_id, 'path': path, 'color': CREW_COLORS[crews.index(a.crew_id) % len(CREW_COLORS)],
+                     'label': f'{a.crew_id}: {a.action_id} (leave {a.departure_min}, work {a.work_start_min}–{a.work_end_min})'})
+    return rows
 
 
 @lru_cache(maxsize=1)
@@ -147,6 +167,9 @@ def render_map(scenario, *, observations=None, trajectory=None, minute=None, pla
         pdk.Layer('TextLayer', rows['sites'], get_position='[lon, lat]', get_text='name', get_size=12,
                   get_color=[230, 235, 245], get_pixel_offset=[0, -16]),
     ]
+    if rows['routes']:
+        layers.append(pdk.Layer('PathLayer', rows['routes'], get_path='path', get_color='color', width_min_pixels=4,
+                                pickable=True, opacity=0.8))
     if rows['crews']:
         layers.append(pdk.Layer('ScatterplotLayer', rows['crews'], get_position='[lon, lat]', get_radius=700,
                                 get_fill_color=[120, 170, 255], pickable=True))
