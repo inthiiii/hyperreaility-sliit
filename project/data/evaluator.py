@@ -75,6 +75,9 @@ class EvaluatorTruth(_Truth):
     expected_report_facts: list[dict]
     missing_facts: list
     evaluation_notes: list[str]
+    # Evidence v3: reports that carry no operational claim (complaints, notices,
+    # injection attempts). Facts citing them are false positives.
+    distractor_reports: list[dict] = Field(default_factory=list, exclude_if=lambda value: not value)
 
 
 class EvaluatorLoader:
