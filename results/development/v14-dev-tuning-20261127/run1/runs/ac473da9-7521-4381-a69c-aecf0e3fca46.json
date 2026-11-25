@@ -1,0 +1,1107 @@
+{
+  "format_version": 1,
+  "payload": {
+    "run_id": "ac473da9-7521-4381-a69c-aecf0e3fca46",
+    "mode": "single",
+    "status": "awaiting_approval",
+    "state": {
+      "scenario_id": "DEMO-005",
+      "state_version": 1,
+      "source_hash": "911d12c0e455d97a41444649984009df058b8d56cb0ee9a5f70cbeca521afeb3",
+      "scenario": {
+        "schema_version": "0.1",
+        "scenario_id": "DEMO-005",
+        "region_label": "Fictional operator network placed in real Western Province towns (not real tower locations or coverage)",
+        "current_time_min": 0,
+        "horizon_min": 720,
+        "core_id": "CORE",
+        "depot_id": "DEPOT",
+        "sites": [
+          {
+            "site_id": "S01",
+            "label": "Beruwala",
+            "x": 0.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "BER22",
+            "district": "Kalutara",
+            "aliases": [
+              "BER22",
+              "Beruwala RBS",
+              "Beruwala clock tower"
+            ],
+            "lat": 6.479,
+            "lon": 79.983
+          },
+          {
+            "site_id": "S02",
+            "label": "Aluthgama",
+            "x": 10.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "ALU94",
+            "district": "Kalutara",
+            "aliases": [
+              "ALU94",
+              "Aluthgama RBS",
+              "Aluthgama market"
+            ],
+            "lat": 6.434,
+            "lon": 79.999
+          },
+          {
+            "site_id": "S03",
+            "label": "Payagala",
+            "x": 20.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "PAY76",
+            "district": "Kalutara",
+            "aliases": [
+              "PAY76",
+              "Payagala RBS",
+              "Payagala junction"
+            ],
+            "lat": 6.535,
+            "lon": 79.968
+          },
+          {
+            "site_id": "S04",
+            "label": "Matugama",
+            "x": 30.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "MAT23",
+            "district": "Kalutara",
+            "aliases": [
+              "MAT23",
+              "Matugama RBS",
+              "Matugama bus stand"
+            ],
+            "lat": 6.522,
+            "lon": 80.114
+          },
+          {
+            "site_id": "S05",
+            "label": "Agalawatta",
+            "x": 40.0,
+            "y": 0.0,
+            "coordinate_system": "synthetic_local_grid",
+            "code": "AGA46",
+            "district": "Kalutara",
+            "aliases": [
+              "AGA46",
+              "Agalawatta RBS",
+              "Agalawatta temple road"
+            ],
+            "lat": 6.54,
+            "lon": 80.157
+          }
+        ],
+        "links": [
+          {
+            "link_id": "L01",
+            "parent": "CORE",
+            "child": "S01"
+          },
+          {
+            "link_id": "L02",
+            "parent": "CORE",
+            "child": "S02"
+          },
+          {
+            "link_id": "L03",
+            "parent": "S01",
+            "child": "S03"
+          },
+          {
+            "link_id": "L04",
+            "parent": "S02",
+            "child": "S04"
+          },
+          {
+            "link_id": "L05",
+            "parent": "S01",
+            "child": "S05"
+          }
+        ],
+        "roads": [
+          {
+            "road_id": "R01",
+            "origin": "DEPOT",
+            "to": "S01",
+            "travel_minutes": 25
+          },
+          {
+            "road_id": "R02",
+            "origin": "DEPOT",
+            "to": "S02",
+            "travel_minutes": 15
+          },
+          {
+            "road_id": "R03",
+            "origin": "DEPOT",
+            "to": "S03",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R04",
+            "origin": "DEPOT",
+            "to": "S04",
+            "travel_minutes": 10
+          },
+          {
+            "road_id": "R05",
+            "origin": "DEPOT",
+            "to": "S05",
+            "travel_minutes": 30
+          }
+        ],
+        "services": [
+          {
+            "service_id": "V01",
+            "site_id": "S01",
+            "label": "Fictional service 01",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V02",
+            "site_id": "S02",
+            "label": "Fictional critical facility",
+            "critical": true,
+            "weight": 5,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V03",
+            "site_id": "S03",
+            "label": "Fictional service 03",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V04",
+            "site_id": "S04",
+            "label": "Fictional service 04",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          },
+          {
+            "service_id": "V05",
+            "site_id": "S05",
+            "label": "Fictional service 05",
+            "critical": false,
+            "weight": 1,
+            "policy_evidence_id": "POLICY-001"
+          }
+        ],
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ],
+        "observed_state": {
+          "sites": {
+            "S01": {
+              "equipment_ok": true,
+              "grid_power_ok": null
+            },
+            "S02": {
+              "equipment_ok": true,
+              "grid_power_ok": null
+            },
+            "S03": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S04": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            },
+            "S05": {
+              "equipment_ok": true,
+              "grid_power_ok": true
+            }
+          },
+          "links": {
+            "L01": null,
+            "L02": true,
+            "L03": true,
+            "L04": true,
+            "L05": true
+          },
+          "roads": {
+            "R01": true,
+            "R02": true,
+            "R03": true,
+            "R04": true,
+            "R05": true
+          }
+        },
+        "active_generators": [],
+        "action_options": [
+          {
+            "action_id": "EQ-S01",
+            "kind": "equipment_repair",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 45,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S02",
+            "kind": "equipment_repair",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S03",
+            "kind": "equipment_repair",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 60,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S04",
+            "kind": "equipment_repair",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "EQ-S05",
+            "kind": "equipment_repair",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 120,
+            "required_skill": "equipment",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L01",
+            "kind": "link_repair",
+            "target_id": "L01",
+            "location": "S01",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L02",
+            "kind": "link_repair",
+            "target_id": "L02",
+            "location": "S02",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L03",
+            "kind": "link_repair",
+            "target_id": "L03",
+            "location": "S03",
+            "duration_minutes": 120,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L04",
+            "kind": "link_repair",
+            "target_id": "L04",
+            "location": "S04",
+            "duration_minutes": 90,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "BH-L05",
+            "kind": "link_repair",
+            "target_id": "L05",
+            "location": "S05",
+            "duration_minutes": 45,
+            "required_skill": "backhaul",
+            "generator_id": null
+          },
+          {
+            "action_id": "GEN-G1-S01",
+            "kind": "generator_deploy",
+            "target_id": "S01",
+            "location": "S01",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S02",
+            "kind": "generator_deploy",
+            "target_id": "S02",
+            "location": "S02",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S03",
+            "kind": "generator_deploy",
+            "target_id": "S03",
+            "location": "S03",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S04",
+            "kind": "generator_deploy",
+            "target_id": "S04",
+            "location": "S04",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          },
+          {
+            "action_id": "GEN-G1-S05",
+            "kind": "generator_deploy",
+            "target_id": "S05",
+            "location": "S05",
+            "duration_minutes": 15,
+            "required_skill": "generator",
+            "generator_id": "G1"
+          }
+        ],
+        "reports": [
+          {
+            "report_id": "V3-DEMO-005-X02",
+            "source_type": "utility_notice",
+            "observed_at_min": -120,
+            "received_at_min": 0,
+            "text": "CEB notice: planned power interruption in Piliyandala tomorrow 09:00-15:00 for line maintenance."
+          },
+          {
+            "report_id": "V3-DEMO-005-X01",
+            "source_type": "customer_complaint",
+            "observed_at_min": -30,
+            "received_at_min": 0,
+            "text": "Call centre: 38 customers around Agalawatta say data is very slow and calls keep dropping."
+          },
+          {
+            "report_id": "V3-DEMO-005-X03",
+            "source_type": "social_media",
+            "observed_at_min": -10,
+            "received_at_min": 0,
+            "text": "Social media post: \"heard the Beruwala tower is already fixed, the company van came\" (unconfirmed)."
+          },
+          {
+            "report_id": "REP-001",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "NMS 06:00 | MAJOR | BER22 Beruwala | AC MAINS FAIL, running on battery bank"
+          },
+          {
+            "report_id": "REP-002",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "NMS 06:00 | MAJOR | ALU94 | rectifier input lost (mains), DC on batteries"
+          },
+          {
+            "report_id": "REP-003",
+            "source_type": "authoritative_snapshot",
+            "observed_at_min": 0,
+            "received_at_min": 0,
+            "text": "NMS 06:00 | CRITICAL | MW hop CMB-CORE<->BER22 | LOS, link down"
+          }
+        ],
+        "policy": {
+          "evidence_id": "POLICY-001",
+          "approved_for_simulation": true,
+          "standard_weight": 1,
+          "critical_weight": 5,
+          "evidence_rule": "Authoritative evidence must be consistent; equally authoritative conflicts require confirmation. Recency alone does not verify a fact.",
+          "max_generator_deployments_per_scenario": 1,
+          "on_crew_loss": "Pause affected unfinished work and request operator review; preserve completed repairs."
+        }
+      },
+      "resolved_observations": {
+        "sites": {
+          "S01": {
+            "equipment_ok": true,
+            "grid_power_ok": false
+          },
+          "S02": {
+            "equipment_ok": true,
+            "grid_power_ok": false
+          },
+          "S03": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S04": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          },
+          "S05": {
+            "equipment_ok": true,
+            "grid_power_ok": true
+          }
+        },
+        "links": {
+          "L01": false,
+          "L02": true,
+          "L03": true,
+          "L04": true,
+          "L05": true
+        },
+        "roads": {
+          "R01": true,
+          "R02": true,
+          "R03": true,
+          "R04": true,
+          "R05": true
+        }
+      },
+      "facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports AC mains failure at Beruwala (BER22); battery operation does not mean grid power is present."
+        },
+        {
+          "target_type": "link",
+          "target_id": "L01",
+          "attribute": "backhaul_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-003"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports the CMB-CORE to BER22 microwave hop down; this resolves to link L01 (CORE to S01)."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S02",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports mains/rectifier input lost at ALU94 (Aluthgama); DC battery operation does not mean grid power is present."
+        }
+      ],
+      "unresolved_facts": []
+    },
+    "plan": {
+      "plan_id": "6b64361f-2e74-48a5-9493-957fd9602c77",
+      "scenario_id": "DEMO-005",
+      "state_version": 1,
+      "state_hash": "b443d3a9940a719ec2326d8d798c8821e68b8a378471556f0f242c79252a5cc3",
+      "actions": [
+        {
+          "action_id": "GEN-G1-S02",
+          "kind": "generator_deploy",
+          "target_id": "S02",
+          "crew_id": "C1",
+          "generator_id": "G1",
+          "departure_min": 0,
+          "travel_route": [
+            "DEPOT",
+            "S02"
+          ],
+          "work_start_min": 15,
+          "work_end_min": 30
+        }
+      ],
+      "unmet_needs": [
+        "Grid outage at S01; any generator recovery is temporary and requires simulator evaluation",
+        "Grid outage at S02; any generator recovery is temporary and requires simulator evaluation",
+        "Unscheduled fault option: BH-L01",
+        "Unscheduled fault option: GEN-G1-S01"
+      ],
+      "evidence_ids": [
+        "POLICY-001",
+        "REP-001",
+        "REP-002",
+        "REP-003"
+      ],
+      "planner_config": {
+        "algorithm": "cp_sat_time_indexed",
+        "solver_status": "OPTIMAL",
+        "solver_seconds_cap": 5,
+        "seed": 22,
+        "workers": 1,
+        "slot_minutes": 5,
+        "prediction_only": true,
+        "tie_breakers": [
+          "fewer actions",
+          "earlier work completion"
+        ],
+        "limitations": [
+          "static rooted tree",
+          "unknown assets unavailable",
+          "no in-progress work or future-event scheduling"
+        ],
+        "objective_value": 1246601.0,
+        "best_objective_bound": 1246601.0,
+        "predicted_weighted_available_minutes_remaining": 720,
+        "predicted_weighted_downtime_remaining": 5760,
+        "deferred_action_ids": []
+      },
+      "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+    },
+    "validation": {
+      "valid": true,
+      "violations": []
+    },
+    "messages": [
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "stage": "analyse",
+          "facts": [
+            {
+              "target_type": "site",
+              "target_id": "S01",
+              "attribute": "grid_power_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-001"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports AC mains failure at Beruwala (BER22); battery operation does not mean grid power is present."
+            },
+            {
+              "target_type": "link",
+              "target_id": "L01",
+              "attribute": "backhaul_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-003"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports the CMB-CORE to BER22 microwave hop down; this resolves to link L01 (CORE to S01)."
+            },
+            {
+              "target_type": "site",
+              "target_id": "S02",
+              "attribute": "grid_power_ok",
+              "value": false,
+              "evidence_ids": [
+                "REP-002"
+              ],
+              "observed_at_min": 0,
+              "received_at_min": 0,
+              "status": "verified",
+              "reason": "Authoritative snapshot reports mains/rectifier input lost at ALU94 (Aluthgama); DC battery operation does not mean grid power is present."
+            },
+            {
+              "target_type": "site",
+              "target_id": "S05",
+              "attribute": "equipment_ok",
+              "value": null,
+              "evidence_ids": [
+                "V3-DEMO-005-X01"
+              ],
+              "observed_at_min": -30,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "Customer complaint reports slow data and dropped calls around Agalawatta, but does not establish a specific equipment fault."
+            },
+            {
+              "target_type": "site",
+              "target_id": "site",
+              "attribute": "open",
+              "value": null,
+              "evidence_ids": [
+                "V3-DEMO-005-X02"
+              ],
+              "observed_at_min": -120,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "The notice concerns a planned interruption in Piliyandala, which is not a directory site; it establishes no operational claim about a listed site."
+            }
+          ],
+          "ignored_reports": [
+            {
+              "report_id": "V3-DEMO-005-X01",
+              "kind": "other",
+              "note": "Customer complaint describes degraded service around Agalawatta but does not establish a specific operational attribute."
+            },
+            {
+              "report_id": "V3-DEMO-005-X02",
+              "kind": "no_operational_claim",
+              "note": "Planned interruption is for Piliyandala, outside the supplied site directory and incident scope."
+            },
+            {
+              "report_id": "V3-DEMO-005-X03",
+              "kind": "other",
+              "note": "Unconfirmed social-media claim that Beruwala was fixed; not authoritative evidence and does not verify a repair."
+            }
+          ],
+          "requests": [],
+          "questions": [
+            {
+              "target_id": "S01",
+              "question": "Can you confirm whether Beruwala grid power has returned and whether the reported BER22 link outage has been repaired?",
+              "evidence_ids": [
+                "REP-001",
+                "REP-003",
+                "V3-DEMO-005-X03"
+              ]
+            },
+            {
+              "target_id": "S02",
+              "question": "Can you confirm whether grid power has returned at Aluthgama?",
+              "evidence_ids": [
+                "REP-002"
+              ]
+            },
+            {
+              "target_id": "S05",
+              "question": "Can a field operator confirm the nature and current status of the reported service degradation around Agalawatta?",
+              "evidence_ids": [
+                "V3-DEMO-005-X01"
+              ]
+            }
+          ],
+          "priority_proposals": [],
+          "finding": "Verified outages affect S01 (Beruwala): grid power is absent and link L01 is down. S02 (Aluthgama) has no grid power. The S01 equipment state is otherwise recorded as working; S02 equipment is also recorded as working. S02 hosts approved critical service V02 (weight 5), so its outage has the greatest policy-weighted service impact. S01 hosts standard-weight V01 (weight 1); its down backhaul also interrupts the path for downstream S03 and S05, both standard-weight services. The Agalawatta complaint is not a verified fault, and the social-media repair claim is unconfirmed. No road closures are,;"
+        }
+      },
+      {
+        "sender": "coordinator",
+        "recipient": "single_agent",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "rejected_fact": {
+            "fact": {
+              "target_type": "site",
+              "target_id": "S05",
+              "attribute": "equipment_ok",
+              "value": null,
+              "evidence_ids": [
+                "V3-DEMO-005-X01"
+              ],
+              "observed_at_min": -30,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "Customer complaint reports slow data and dropped calls around Agalawatta, but does not establish a specific equipment fault."
+            },
+            "reason": "a claim needs a true/false value; unknowns stay unknown without a fact"
+          }
+        }
+      },
+      {
+        "sender": "coordinator",
+        "recipient": "single_agent",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "rejected_fact": {
+            "fact": {
+              "target_type": "site",
+              "target_id": "site",
+              "attribute": "open",
+              "value": null,
+              "evidence_ids": [
+                "V3-DEMO-005-X02"
+              ],
+              "observed_at_min": -120,
+              "received_at_min": 0,
+              "status": "unverified",
+              "reason": "The notice concerns a planned interruption in Piliyandala, which is not a directory site; it establishes no operational claim about a listed site."
+            },
+            "reason": "unknown site ID site"
+          }
+        }
+      },
+      {
+        "sender": "deterministic_scheduler",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "plan_id": "6b64361f-2e74-48a5-9493-957fd9602c77",
+          "scenario_id": "DEMO-005",
+          "state_version": 1,
+          "state_hash": "b443d3a9940a719ec2326d8d798c8821e68b8a378471556f0f242c79252a5cc3",
+          "actions": [
+            {
+              "action_id": "GEN-G1-S02",
+              "kind": "generator_deploy",
+              "target_id": "S02",
+              "crew_id": "C1",
+              "generator_id": "G1",
+              "departure_min": 0,
+              "travel_route": [
+                "DEPOT",
+                "S02"
+              ],
+              "work_start_min": 15,
+              "work_end_min": 30
+            }
+          ],
+          "unmet_needs": [
+            "Grid outage at S01; any generator recovery is temporary and requires simulator evaluation",
+            "Grid outage at S02; any generator recovery is temporary and requires simulator evaluation",
+            "Unscheduled fault option: BH-L01",
+            "Unscheduled fault option: GEN-G1-S01"
+          ],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "REP-003"
+          ],
+          "planner_config": {
+            "algorithm": "cp_sat_time_indexed",
+            "solver_status": "OPTIMAL",
+            "solver_seconds_cap": 5,
+            "seed": 22,
+            "workers": 1,
+            "slot_minutes": 5,
+            "prediction_only": true,
+            "tie_breakers": [
+              "fewer actions",
+              "earlier work completion"
+            ],
+            "limitations": [
+              "static rooted tree",
+              "unknown assets unavailable",
+              "no in-progress work or future-event scheduling"
+            ],
+            "objective_value": 1246601.0,
+            "best_objective_bound": 1246601.0,
+            "predicted_weighted_available_minutes_remaining": 720,
+            "predicted_weighted_downtime_remaining": 5760,
+            "deferred_action_ids": []
+          },
+          "explanation": "Prediction from verified evidence; unknown assets are conservatively unavailable. Unmet needs may remain."
+        }
+      },
+      {
+        "sender": "single_agent",
+        "recipient": "coordinator",
+        "incident_id": "DEMO-005",
+        "state_version": 1,
+        "finding": {
+          "stage": "review",
+          "decision": "approve",
+          "fact_challenges": [],
+          "requests": [],
+          "findings": [
+            "The cited authoritative snapshots support the extracted facts: REP-001 identifies BER22 as Beruwala (S01) and reports AC mains failure; REP-003 identifies the CORE\u2013BER22 hop, which maps to L01, and reports LOS/link down; REP-002 identifies ALU94 as Aluthgama (S02) and reports mains input lost.",
+            "The ignored reports are handled appropriately: the Agalawatta complaint does not verify a specific fault, the Piliyandala notice is outside the supplied directory, and the Beruwala social-media repair claim is unconfirmed.",
+            "The scheduled generator deployment targets S02, where the grid outage is verified. C1 has generator skill, G1 is available, and the stated route is DEPOT to S02. Travel precedes work: departure at 0, work starts at 15, and 15 minutes of work ends at 30. This is within the generator's 120-minute autonomy and the one-deployment scenario limit in POLICY-001. No evidence establishes an unsafe action or blocked road; unscheduled options are not actions requiring deferral."
+          ],
+          "evidence_ids": [
+            "POLICY-001",
+            "REP-001",
+            "REP-002",
+            "REP-003"
+          ]
+        }
+      }
+    ],
+    "model_usage": [
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 2374,
+        "output_limit": 1600,
+        "prompt_sha256": "eaef88451c493e77343bcbe03585c4c1a5296900ce23641e629f2dad0663968c",
+        "schema_sha256": "da8011014dac4c9a0ef046217fc2eca38ac94762dab78ca1860399b135306bf2",
+        "request_id": "resp_031d3ed566ed663b016b06d596784887d08a4ab31efda72212",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 2374,
+        "output_tokens": 819,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "48b8e63655dc62388663331a3af478c28ac2dabff11eb0fded0d782753d8bad9",
+        "status": "ok",
+        "latency_seconds": 6.477511124976445
+      },
+      {
+        "response_format": "json_schema",
+        "api_mode": "responses",
+        "input_count_method": "server_exact",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "reasoning_effort": "none",
+        "role": "single_agent",
+        "attempt": 1,
+        "input_token_upper_estimate": 3738,
+        "output_limit": 600,
+        "prompt_sha256": "c2cb63712d8f3b812e634bde2db5d48aca28856c928702f722ff06d83f1fdba2",
+        "schema_sha256": "baf4986ee5911697049b98770cfe4a7a6c1d2e8c5bc3b5d978a9a584d349f8a1",
+        "request_id": "resp_00c20b7750307566016b06d59d7ae887d0b22547732b9114cd",
+        "returned_model": "gpt-6-luna",
+        "input_tokens": 3738,
+        "output_tokens": 272,
+        "response_status": "completed",
+        "finish_reason": "stop",
+        "response_sha256": "895a223797979257249018b7176b6296ffa05b2b4d1f450a296e735d676c10e7",
+        "status": "ok",
+        "latency_seconds": 2.900948458001949
+      }
+    ],
+    "reasons": [],
+    "metadata": {
+      "started_at_utc": "2026-11-25T12:33:25.835183+00:00",
+      "duration_seconds": 10.396144667000044,
+      "protocol_version": "relink-agents-v14",
+      "workflow": "agent_orchestrator",
+      "agent_manifest": {
+        "protocol": "relink-agents-v14",
+        "multi": [
+          "network_investigator",
+          "field_resource_planner",
+          "service_priority_assessor",
+          "plan_reviewer"
+        ],
+        "single": "single_agent: one accumulating context, analyse then self-review",
+        "context_policy": "multi: role-scoped views plus typed messages; reviewer re-checks raw reports independently; single: union of all views in one conversation",
+        "tools": [
+          "fact normaliser (authority from source)",
+          "evidence resolver",
+          "CP-SAT scheduler",
+          "independent validator",
+          "service forecast"
+        ],
+        "never_model_controlled": [
+          "service weights",
+          "evidence authority",
+          "approval",
+          "simulation"
+        ]
+      },
+      "auxiliary_requests": [
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 2374,
+          "latency_seconds": 0.44579937501112
+        },
+        {
+          "kind": "input_token_count",
+          "model": "gpt-6-luna",
+          "status": "ok",
+          "input_tokens": 3738,
+          "latency_seconds": 0.30572966596810147
+        }
+      ],
+      "raw_facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports AC mains failure at Beruwala (BER22); battery operation does not mean grid power is present."
+        },
+        {
+          "target_type": "link",
+          "target_id": "L01",
+          "attribute": "backhaul_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-003"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports the CMB-CORE to BER22 microwave hop down; this resolves to link L01 (CORE to S01)."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S02",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports mains/rectifier input lost at ALU94 (Aluthgama); DC battery operation does not mean grid power is present."
+        }
+      ],
+      "final_facts": [
+        {
+          "target_type": "site",
+          "target_id": "S01",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-001"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports AC mains failure at Beruwala (BER22); battery operation does not mean grid power is present."
+        },
+        {
+          "target_type": "link",
+          "target_id": "L01",
+          "attribute": "backhaul_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-003"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports the CMB-CORE to BER22 microwave hop down; this resolves to link L01 (CORE to S01)."
+        },
+        {
+          "target_type": "site",
+          "target_id": "S02",
+          "attribute": "grid_power_ok",
+          "value": false,
+          "evidence_ids": [
+            "REP-002"
+          ],
+          "observed_at_min": 0,
+          "received_at_min": 0,
+          "status": "verified",
+          "reason": "Authoritative snapshot reports mains/rectifier input lost at ALU94 (Aluthgama); DC battery operation does not mean grid power is present."
+        }
+      ],
+      "ignored_reports": [
+        {
+          "report_id": "V3-DEMO-005-X01",
+          "kind": "other",
+          "note": "Customer complaint describes degraded service around Agalawatta but does not establish a specific operational attribute."
+        },
+        {
+          "report_id": "V3-DEMO-005-X02",
+          "kind": "no_operational_claim",
+          "note": "Planned interruption is for Piliyandala, outside the supplied site directory and incident scope."
+        },
+        {
+          "report_id": "V3-DEMO-005-X03",
+          "kind": "other",
+          "note": "Unconfirmed social-media claim that Beruwala was fixed; not authoritative evidence and does not verify a repair."
+        }
+      ],
+      "operator_questions": [
+        {
+          "source": "single_agent",
+          "target_id": "S01",
+          "question": "Can you confirm whether Beruwala grid power has returned and whether the reported BER22 link outage has been repaired?",
+          "evidence_ids": [
+            "REP-001",
+            "REP-003",
+            "V3-DEMO-005-X03"
+          ]
+        },
+        {
+          "source": "single_agent",
+          "target_id": "S02",
+          "question": "Can you confirm whether grid power has returned at Aluthgama?",
+          "evidence_ids": [
+            "REP-002"
+          ]
+        },
+        {
+          "source": "single_agent",
+          "target_id": "S05",
+          "question": "Can a field operator confirm the nature and current status of the reported service degradation around Agalawatta?",
+          "evidence_ids": [
+            "V3-DEMO-005-X01"
+          ]
+        }
+      ],
+      "priority_proposals": [],
+      "fact_challenges": [],
+      "decision_effects": [],
+      "deferred_action_ids": [],
+      "input_hash": "911d12c0e455d97a41444649984009df058b8d56cb0ee9a5f70cbeca521afeb3",
+      "planner": "cp_sat",
+      "reviewer_enabled": true,
+      "feedback_enabled": true,
+      "raw_extraction_metrics": null,
+      "simulation_status": "not_integrated",
+      "transport": "hosted",
+      "budget": {
+        "max_calls": 12,
+        "max_input_tokens": 24000,
+        "max_output_tokens": 4800,
+        "max_seconds": 179.99995999998646
+      }
+    }
+  },
+  "sha256": "0ec168addee586cc34feabd638a0cdd07545b6e288b4b79b80b4713c55d573cf"
+}

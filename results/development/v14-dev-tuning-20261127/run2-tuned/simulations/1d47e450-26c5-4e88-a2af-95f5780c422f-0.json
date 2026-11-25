@@ -1,0 +1,237 @@
+{
+  "job_id": "1d47e450-26c5-4e88-a2af-95f5780c422f",
+  "run_id": "6124f855-27d9-46c4-81a0-c05b8e7e1633",
+  "approval_mode": "automated_benchmark_operator",
+  "approval": {
+    "plan_id": "d0f790d0-42a9-4bfb-8a06-9145a87cfa1e",
+    "plan_hash": "d7347bfdca96d181cce423cc3c5569d665c7bca85782f481c7ff64274101c8af",
+    "state_version": 2,
+    "state_hash": "09370ceb61f5901defb39631fd685cdf707ffd0aef27cfc666087ca00b2d718d",
+    "decision": "approve",
+    "operator_id": "Automated benchmark operator",
+    "timestamp": "2026-11-25T12:40:52.626099Z"
+  },
+  "state_hash": "09370ceb61f5901defb39631fd685cdf707ffd0aef27cfc666087ca00b2d718d",
+  "result_hash": "d25e27a6bca38051460ea2ffc6be797652586d53ad4687ccccebacf9d8ce4035",
+  "result": {
+    "scenario_id": "DEV-005",
+    "plan_id": "d0f790d0-42a9-4bfb-8a06-9145a87cfa1e",
+    "state_version": 2,
+    "trajectory": [
+      {
+        "t": 720,
+        "type": "availability",
+        "available_services": [
+          "V02",
+          "V04",
+          "V06",
+          "V08",
+          "V10",
+          "V12",
+          "V14",
+          "V16",
+          "V18",
+          "V20"
+        ]
+      }
+    ],
+    "completed_actions": [],
+    "unmet_needs": [
+      "service:V01",
+      "service:V03",
+      "service:V05",
+      "service:V07",
+      "service:V09",
+      "service:V11",
+      "service:V13",
+      "service:V15",
+      "service:V17",
+      "service:V19"
+    ],
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 20,
+      "total_weighted_horizon_min": 17280,
+      "weighted_available_min": 10080,
+      "weighted_downtime_min": 7200,
+      "unweighted_available_min": 7200,
+      "unweighted_downtime_min": 7200,
+      "unweighted_availability": 0.5,
+      "critical_service_downtime_min": 0,
+      "first_restoration_min": null,
+      "services_available_at_horizon_end": 10,
+      "unmet_needs_count": 10,
+      "measured_duration_min": 720,
+      "observed_until_min": 720,
+      "incident_horizon_min": 720,
+      "baseline_weighted_downtime_min": 7200,
+      "weighted_downtime_reduction_min": 0,
+      "actions_completed": 0
+    },
+    "run_metadata": {
+      "engine_version": "0.2",
+      "measurement_scope": "complete_incident",
+      "replan_required": false,
+      "observed_until_min": 720,
+      "planner_prediction_used": false,
+      "uses_model_or_network": false,
+      "action_outcomes": {},
+      "all_completed_actions": [],
+      "committed_actions": [],
+      "service_availability": {
+        "V01": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V02": {
+          "weight": 5,
+          "critical": true,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V03": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V04": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V05": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V06": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V07": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V08": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V09": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V10": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V11": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V12": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V13": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V14": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V15": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V16": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V17": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V18": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V19": {
+          "weight": 1,
+          "critical": false,
+          "intervals": []
+        },
+        "V20": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        }
+      },
+      "same_minute_rule": "expiry, completed work, departures, resource observations; intervals are half-open",
+      "continuation_policy": "lost work restarts without partial credit; unaffected departed work completes under prior approval"
+    }
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "job_id": "f2633250-fb9c-498f-97c3-76fea4ca94e0",
+  "run_id": "e8950b27-c009-42db-ac45-c382ef71879d",
+  "approval_mode": "automated_benchmark_operator",
+  "approval": {
+    "plan_id": "571ab1ac-68a7-4264-83b0-8f240aabbcf5",
+    "plan_hash": "8585af6ef160e06cffe6243d475ef590d78e105ac4f27d81c0a963fa518b66d2",
+    "state_version": 1,
+    "state_hash": "89331b1f384459da9a262b65a9ecfc9b12decf212cda18193e170ddbf248d261",
+    "decision": "approve",
+    "operator_id": "Automated benchmark operator",
+    "timestamp": "2026-11-25T12:39:58.388610Z"
+  },
+  "state_hash": "89331b1f384459da9a262b65a9ecfc9b12decf212cda18193e170ddbf248d261",
+  "result_hash": "90262a6c0adfb7c2f58e35ae888621434601c320d8206d877b46880368439b63",
+  "result": {
+    "scenario_id": "DEV-001",
+    "plan_id": "571ab1ac-68a7-4264-83b0-8f240aabbcf5",
+    "state_version": 1,
+    "trajectory": [
+      {
+        "t": 0,
+        "type": "action_started",
+        "action_id": "EQ-S01"
+      },
+      {
+        "t": 0,
+        "type": "availability",
+        "available_services": [
+          "V02",
+          "V04",
+          "V06",
+          "V08",
+          "V10",
+          "V12",
+          "V14",
+          "V16"
+        ]
+      },
+      {
+        "t": 95,
+        "type": "action_completed",
+        "action_id": "EQ-S01",
+        "kind": "equipment_repair",
+        "target_id": "S01"
+      },
+      {
+        "t": 95,
+        "type": "availability",
+        "available_services": [
+          "V01",
+          "V02",
+          "V03",
+          "V04",
+          "V05",
+          "V06",
+          "V07",
+          "V08",
+          "V09",
+          "V10",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ]
+      },
+      {
+        "t": 720,
+        "type": "availability",
+        "available_services": [
+          "V01",
+          "V02",
+          "V03",
+          "V04",
+          "V05",
+          "V06",
+          "V07",
+          "V08",
+          "V09",
+          "V10",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ]
+      }
+    ],
+    "completed_actions": [
+      "EQ-S01"
+    ],
+    "unmet_needs": [],
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 16,
+      "total_weighted_horizon_min": 14400,
+      "weighted_available_min": 13640,
+      "weighted_downtime_min": 760,
+      "unweighted_available_min": 10760,
+      "unweighted_downtime_min": 760,
+      "unweighted_availability": 0.9340277777777778,
+      "critical_service_downtime_min": 0,
+      "first_restoration_min": 95,
+      "services_available_at_horizon_end": 16,
+      "unmet_needs_count": 0,
+      "measured_duration_min": 720,
+      "observed_until_min": 720,
+      "incident_horizon_min": 720,
+      "baseline_weighted_downtime_min": 5760,
+      "weighted_downtime_reduction_min": 5000,
+      "actions_completed": 1
+    },
+    "run_metadata": {
+      "engine_version": "0.2",
+      "measurement_scope": "complete_incident",
+      "replan_required": false,
+      "observed_until_min": 720,
+      "planner_prediction_used": false,
+      "uses_model_or_network": false,
+      "action_outcomes": {
+        "EQ-S01": {
+          "status": "completed",
+          "reason": ""
+        }
+      },
+      "all_completed_actions": [
+        "EQ-S01"
+      ],
+      "committed_actions": [],
+      "service_availability": {
+        "V01": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V02": {
+          "weight": 5,
+          "critical": true,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V03": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V04": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V05": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V06": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V07": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V08": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V09": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V10": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V11": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V12": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V13": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V14": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        },
+        "V15": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              95,
+              720
+            ]
+          ]
+        },
+        "V16": {
+          "weight": 1,
+          "critical": false,
+          "intervals": [
+            [
+              0,
+              720
+            ]
+          ]
+        }
+      },
+      "same_minute_rule": "expiry, completed work, departures, resource observations; intervals are half-open",
+      "continuation_policy": "lost work restarts without partial credit; unaffected departed work completes under prior approval"
+    }
+  }
+}
