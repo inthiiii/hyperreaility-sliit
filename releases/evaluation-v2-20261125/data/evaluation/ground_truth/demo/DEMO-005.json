@@ -1,0 +1,105 @@
+{
+  "crews": [
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C1",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "generator"
+      ]
+    },
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C2",
+      "location": "DEPOT",
+      "skills": [
+        "backhaul",
+        "equipment",
+        "generator"
+      ]
+    }
+  ],
+  "evaluation_notes": [
+    "Runtime validation uses verified observations only.",
+    "Hidden truth is for evaluation/simulation, never an agent tool.",
+    "No optimal plan or expected improvement is claimed."
+  ],
+  "expected_report_facts": [
+    {
+      "attribute": "grid_power_ok",
+      "expected_resolution": "verified",
+      "report_id": "REP-001",
+      "reported_value": false,
+      "target_id": "S01",
+      "target_type": "site"
+    },
+    {
+      "attribute": "grid_power_ok",
+      "expected_resolution": "verified",
+      "report_id": "REP-002",
+      "reported_value": false,
+      "target_id": "S02",
+      "target_type": "site"
+    },
+    {
+      "attribute": "backhaul_ok",
+      "expected_resolution": "verified",
+      "report_id": "REP-003",
+      "reported_value": false,
+      "target_id": "L01",
+      "target_type": "link"
+    }
+  ],
+  "future_events": [],
+  "generators": [
+    {
+      "autonomy_minutes": 120,
+      "available": true,
+      "deployment_minutes": 15,
+      "generator_id": "G1",
+      "location": "DEPOT",
+      "max_deployments": 1
+    }
+  ],
+  "links": {
+    "L01": false,
+    "L02": true,
+    "L03": true,
+    "L04": true,
+    "L05": true
+  },
+  "missing_facts": [],
+  "roads": {
+    "R01": true,
+    "R02": true,
+    "R03": true,
+    "R04": true,
+    "R05": true
+  },
+  "scenario_id": "DEMO-005",
+  "sites": {
+    "S01": {
+      "equipment_ok": true,
+      "grid_power_ok": false
+    },
+    "S02": {
+      "equipment_ok": true,
+      "grid_power_ok": false
+    },
+    "S03": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S04": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S05": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    }
+  }
+}

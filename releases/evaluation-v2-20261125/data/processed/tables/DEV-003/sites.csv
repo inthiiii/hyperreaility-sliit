@@ -1,0 +1,19 @@
+site_id,label,x,y,coordinate_system
+S01,Fictional site 01,0,0,synthetic_local_grid
+S02,Fictional site 02,10,0,synthetic_local_grid
+S03,Fictional site 03,20,0,synthetic_local_grid
+S04,Fictional site 04,30,0,synthetic_local_grid
+S05,Fictional site 05,40,0,synthetic_local_grid
+S06,Fictional site 06,0,10,synthetic_local_grid
+S07,Fictional site 07,10,10,synthetic_local_grid
+S08,Fictional site 08,20,10,synthetic_local_grid
+S09,Fictional site 09,30,10,synthetic_local_grid
+S10,Fictional site 10,40,10,synthetic_local_grid
+S11,Fictional site 11,0,20,synthetic_local_grid
+S12,Fictional site 12,10,20,synthetic_local_grid
+S13,Fictional site 13,20,20,synthetic_local_grid
+S14,Fictional site 14,30,20,synthetic_local_grid
+S15,Fictional site 15,40,20,synthetic_local_grid
+S16,Fictional site 16,0,30,synthetic_local_grid
+S17,Fictional site 17,10,30,synthetic_local_grid
+S18,Fictional site 18,20,30,synthetic_local_grid

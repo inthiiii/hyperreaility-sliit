@@ -1,0 +1,211 @@
+{
+  "version": 2,
+  "authorship": "ChatGPT/Codex in Ihthisham session",
+  "independent_review": false,
+  "human_review": "PENDING",
+  "used_for_runtime_prompt_tuning": false,
+  "retired_candidates": [
+    "EVAL-001",
+    "EVAL-002",
+    "EVAL-003",
+    "EVAL-004",
+    "EVAL-005",
+    "EVAL-006",
+    "EVAL-007",
+    "EVAL-008",
+    "EVAL-009",
+    "EVAL-010",
+    "EVAL-011",
+    "EVAL-012",
+    "EVAL-013",
+    "EVAL-014",
+    "EVAL-015",
+    "EVAL-016",
+    "EVAL-017",
+    "EVAL-018",
+    "EVAL-019",
+    "EVAL-020"
+  ],
+  "cases": [
+    {
+      "scenario_id": "EVAL2-001",
+      "category": "equipment_only",
+      "variation": 0,
+      "target_site": "S01",
+      "critical_site": "S03",
+      "closed_road": null,
+      "topology_seed": 55001
+    },
+    {
+      "scenario_id": "EVAL2-002",
+      "category": "equipment_only",
+      "variation": 1,
+      "target_site": "S16",
+      "critical_site": "S16",
+      "closed_road": null,
+      "topology_seed": 55002
+    },
+    {
+      "scenario_id": "EVAL2-003",
+      "category": "power_only",
+      "variation": 0,
+      "target_site": "S02",
+      "critical_site": "S05",
+      "closed_road": null,
+      "topology_seed": 55003
+    },
+    {
+      "scenario_id": "EVAL2-004",
+      "category": "power_only",
+      "variation": 1,
+      "target_site": "S18",
+      "critical_site": "S18",
+      "closed_road": null,
+      "topology_seed": 55004
+    },
+    {
+      "scenario_id": "EVAL2-005",
+      "category": "power_and_backhaul",
+      "variation": 0,
+      "target_site": "S03",
+      "critical_site": "S07",
+      "closed_road": null,
+      "topology_seed": 55005
+    },
+    {
+      "scenario_id": "EVAL2-006",
+      "category": "power_and_backhaul",
+      "variation": 1,
+      "target_site": "S20",
+      "critical_site": "S20",
+      "closed_road": null,
+      "topology_seed": 55006
+    },
+    {
+      "scenario_id": "EVAL2-007",
+      "category": "skill_shortage",
+      "variation": 0,
+      "target_site": "S04",
+      "critical_site": "S09",
+      "closed_road": null,
+      "topology_seed": 55007
+    },
+    {
+      "scenario_id": "EVAL2-008",
+      "category": "skill_shortage",
+      "variation": 1,
+      "target_site": "S16",
+      "critical_site": "S16",
+      "closed_road": null,
+      "topology_seed": 55008
+    },
+    {
+      "scenario_id": "EVAL2-009",
+      "category": "route_closure",
+      "variation": 0,
+      "target_site": "S17",
+      "critical_site": "S04",
+      "closed_road": "R17",
+      "topology_seed": 55009
+    },
+    {
+      "scenario_id": "EVAL2-010",
+      "category": "route_closure",
+      "variation": 1,
+      "target_site": "S18",
+      "critical_site": "S18",
+      "closed_road": "R18",
+      "topology_seed": 55010
+    },
+    {
+      "scenario_id": "EVAL2-011",
+      "category": "conflicting_reports",
+      "variation": 0,
+      "target_site": "S03",
+      "critical_site": "S06",
+      "closed_road": null,
+      "topology_seed": 55011
+    },
+    {
+      "scenario_id": "EVAL2-012",
+      "category": "conflicting_reports",
+      "variation": 1,
+      "target_site": "S20",
+      "critical_site": "S20",
+      "closed_road": null,
+      "topology_seed": 55012
+    },
+    {
+      "scenario_id": "EVAL2-013",
+      "category": "stale_reports",
+      "variation": 0,
+      "target_site": "S04",
+      "critical_site": "S08",
+      "closed_road": null,
+      "topology_seed": 55013
+    },
+    {
+      "scenario_id": "EVAL2-014",
+      "category": "stale_reports",
+      "variation": 1,
+      "target_site": "S16",
+      "critical_site": "S16",
+      "closed_road": null,
+      "topology_seed": 55014
+    },
+    {
+      "scenario_id": "EVAL2-015",
+      "category": "missing_critical_evidence",
+      "variation": 0,
+      "target_site": "S01",
+      "critical_site": "S03",
+      "closed_road": null,
+      "topology_seed": 55015
+    },
+    {
+      "scenario_id": "EVAL2-016",
+      "category": "missing_critical_evidence",
+      "variation": 1,
+      "target_site": "S18",
+      "critical_site": "S18",
+      "closed_road": null,
+      "topology_seed": 55016
+    },
+    {
+      "scenario_id": "EVAL2-017",
+      "category": "generator_exhaustion",
+      "variation": 0,
+      "target_site": "S02",
+      "critical_site": "S05",
+      "closed_road": null,
+      "topology_seed": 55017
+    },
+    {
+      "scenario_id": "EVAL2-018",
+      "category": "generator_exhaustion",
+      "variation": 1,
+      "target_site": "S20",
+      "critical_site": "S20",
+      "closed_road": null,
+      "topology_seed": 55018
+    },
+    {
+      "scenario_id": "EVAL2-019",
+      "category": "resource_loss_replanning",
+      "variation": 0,
+      "target_site": "S01",
+      "critical_site": "S07",
+      "closed_road": null,
+      "topology_seed": 55019
+    },
+    {
+      "scenario_id": "EVAL2-020",
+      "category": "resource_loss_replanning",
+      "variation": 1,
+      "target_site": "S01",
+      "critical_site": "S16",
+      "closed_road": null,
+      "topology_seed": 55020
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+crew_id,location,available_from_min,available_until_min,skills
+C1,DEPOT,0,720,"[""equipment"", ""generator""]"
+C2,DEPOT,0,720,"[""backhaul"", ""equipment"", ""generator""]"

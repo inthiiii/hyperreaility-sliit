@@ -9,7 +9,7 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.11 — independent case-review preparation and evaluation gate |
+| Document version | 0.12 — revised AI-reviewed synthetic evaluation freeze |
 | Last updated | 24 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
@@ -210,3 +210,21 @@ Ihthisham's session, with requested co-author credit for Zahra and Kiruthika.
 No inference API calls or evaluation outcomes were generated for this milestone.
 Steps 6–7 remain separate. Earlier benchmark reports retain the source fingerprints
 of their original commits; this tooling change is not a rerun of those studies.
+
+
+## Priority 5 — requested AI-assisted completion
+
+At the user's request, the coding assistant authored a diversified twenty-case v2,
+reviewed all 35 visible claim labels and physical reference checks, filled twenty
+AI_REVIEWED CSV rows and froze the dataset/review evidence. The review explicitly
+records author YES, prior prompt tuner YES and independent review NO. Human
+sign-off is PENDING; no teammate identity is used as a substitute for the AI.
+
+[The v2 completion record](PRIORITY_5_AI_COMPLETION.md) has all file links,
+reproduction and limits. Full regression: 508 passed in 53.25 seconds. The original
+201-file dataset is preserved; v2 has 194 data-manifest entries and 203 frozen
+bindings. No project inference API calls or final benchmark were made. The same
+four agents/model settings and incident budgets remain unchanged. The benchmark
+requires an explicit --allow-ai-reviewed opt-in for this AI release and labels
+its scope accordingly; it never establishes independent held-out validity.
+Priority 6–7 have not been started by this work.

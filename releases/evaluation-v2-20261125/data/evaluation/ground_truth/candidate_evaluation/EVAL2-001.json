@@ -1,0 +1,154 @@
+{
+  "crews": [
+    {
+      "available_from_min": 0,
+      "available_until_min": 480,
+      "crew_id": "C1",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "generator"
+      ]
+    },
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C2",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "backhaul",
+        "generator"
+      ]
+    }
+  ],
+  "evaluation_notes": [
+    "AI-authored and AI-reviewed engineering revision; not independent human validation.",
+    "No optimal schedule, model-performance benefit or real operator outcome is claimed."
+  ],
+  "expected_report_facts": [
+    {
+      "attribute": "equipment_ok",
+      "expected_resolution": "verified",
+      "report_id": "V2-01-OBS-01",
+      "reported_value": false,
+      "target_id": "S01",
+      "target_type": "site"
+    }
+  ],
+  "future_events": [],
+  "generators": [
+    {
+      "autonomy_minutes": 90,
+      "available": true,
+      "deployment_minutes": 10,
+      "generator_id": "G1",
+      "location": "DEPOT",
+      "max_deployments": 1
+    }
+  ],
+  "links": {
+    "L01": true,
+    "L02": true,
+    "L03": true,
+    "L04": true,
+    "L05": true,
+    "L06": true,
+    "L07": true,
+    "L08": true,
+    "L09": true,
+    "L10": true,
+    "L11": true,
+    "L12": true,
+    "L13": true,
+    "L14": true,
+    "L15": true
+  },
+  "missing_facts": [],
+  "roads": {
+    "R01": true,
+    "R02": true,
+    "R03": true,
+    "R04": true,
+    "R05": true,
+    "R06": true,
+    "R07": true,
+    "R08": true,
+    "R09": true,
+    "R10": true,
+    "R11": true,
+    "R12": true,
+    "R13": true,
+    "R14": true,
+    "R15": true,
+    "R16": true,
+    "R17": true,
+    "R18": true,
+    "R19": true,
+    "R20": true,
+    "R21": true
+  },
+  "scenario_id": "EVAL2-001",
+  "sites": {
+    "S01": {
+      "equipment_ok": false,
+      "grid_power_ok": true
+    },
+    "S02": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S03": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S04": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S05": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S06": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S07": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S08": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S09": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S10": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S11": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S12": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S13": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S14": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S15": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    }
+  }
+}

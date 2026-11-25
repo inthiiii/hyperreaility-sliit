@@ -1,0 +1,312 @@
+[
+  {
+    "scenario_id": "DEMO-005",
+    "category": "power_and_backhaul",
+    "seed": 22005,
+    "site_count": 5,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "demo"
+  },
+  {
+    "scenario_id": "DEV-001",
+    "category": "equipment_only",
+    "seed": 22001,
+    "site_count": 16,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-002",
+    "category": "power_only",
+    "seed": 22002,
+    "site_count": 17,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-003",
+    "category": "power_and_backhaul",
+    "seed": 22003,
+    "site_count": 18,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-004",
+    "category": "skill_shortage",
+    "seed": 22004,
+    "site_count": 19,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-005",
+    "category": "route_closure",
+    "seed": 22005,
+    "site_count": 20,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-006",
+    "category": "conflicting_reports",
+    "seed": 22006,
+    "site_count": 15,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-007",
+    "category": "stale_reports",
+    "seed": 22007,
+    "site_count": 16,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-008",
+    "category": "missing_critical_evidence",
+    "seed": 22008,
+    "site_count": 17,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-009",
+    "category": "generator_exhaustion",
+    "seed": 22009,
+    "site_count": 18,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "DEV-010",
+    "category": "resource_loss_replanning",
+    "seed": 22010,
+    "site_count": 19,
+    "origin": "synthetic",
+    "review_status": "UNREVIEWED_DRAFT",
+    "split_status": "candidate_only_not_frozen",
+    "intended_split": "development"
+  },
+  {
+    "scenario_id": "EVAL2-001",
+    "category": "equipment_only",
+    "seed": 55001,
+    "site_count": 15,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-002",
+    "category": "equipment_only",
+    "seed": 55002,
+    "site_count": 16,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-003",
+    "category": "power_only",
+    "seed": 55003,
+    "site_count": 17,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-004",
+    "category": "power_only",
+    "seed": 55004,
+    "site_count": 18,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-005",
+    "category": "power_and_backhaul",
+    "seed": 55005,
+    "site_count": 19,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-006",
+    "category": "power_and_backhaul",
+    "seed": 55006,
+    "site_count": 20,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-007",
+    "category": "skill_shortage",
+    "seed": 55007,
+    "site_count": 15,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-008",
+    "category": "skill_shortage",
+    "seed": 55008,
+    "site_count": 16,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-009",
+    "category": "route_closure",
+    "seed": 55009,
+    "site_count": 17,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-010",
+    "category": "route_closure",
+    "seed": 55010,
+    "site_count": 18,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-011",
+    "category": "conflicting_reports",
+    "seed": 55011,
+    "site_count": 19,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-012",
+    "category": "conflicting_reports",
+    "seed": 55012,
+    "site_count": 20,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-013",
+    "category": "stale_reports",
+    "seed": 55013,
+    "site_count": 15,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-014",
+    "category": "stale_reports",
+    "seed": 55014,
+    "site_count": 16,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-015",
+    "category": "missing_critical_evidence",
+    "seed": 55015,
+    "site_count": 17,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-016",
+    "category": "missing_critical_evidence",
+    "seed": 55016,
+    "site_count": 18,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-017",
+    "category": "generator_exhaustion",
+    "seed": 55017,
+    "site_count": 19,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-018",
+    "category": "generator_exhaustion",
+    "seed": 55018,
+    "site_count": 20,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-019",
+    "category": "resource_loss_replanning",
+    "seed": 55019,
+    "site_count": 15,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  },
+  {
+    "scenario_id": "EVAL2-020",
+    "category": "resource_loss_replanning",
+    "seed": 55020,
+    "site_count": 16,
+    "origin": "synthetic",
+    "review_status": "AI_REVIEW_REQUIRED",
+    "split_status": "AI_AUTHORED_NOT_INDEPENDENTLY_HELD_OUT",
+    "intended_split": "candidate_evaluation"
+  }
+]

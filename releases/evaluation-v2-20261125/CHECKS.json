@@ -1,0 +1,24 @@
+{
+  "scope": "requested AI-authored/self-reviewed engineering completion of Priority 5",
+  "regression": {
+    "passed": 508,
+    "seconds": 53.25
+  },
+  "AI_reviewed_cases": 20,
+  "human_approved_cases": 0,
+  "revision_status": {
+    "status": "AI_REVIEWED_FROZEN",
+    "release_sha256": "62f716a443184e0071542d984699e6ef45d2ba7dc2e989ddf8e2230da9b8cd61",
+    "packet_sha256": "e31e7e1ef9d864c2dc64918ad676613981a156409666faa4c808218c4287f3ad",
+    "selected_case_ids": [],
+    "independent_review": false,
+    "human_review": "PENDING",
+    "held_out_validity": "NOT_ESTABLISHED",
+    "scope": "AI-assisted synthetic engineering evaluation only"
+  },
+  "original_frozen_files_unchanged": 201,
+  "revision_data_manifest_files": 194,
+  "project_source_sha256": "a1b76a6a8bba3b6c324eba5fd461e107685e47ce0aedbd7376368abe396e8e96",
+  "project_inference_API_calls": 0,
+  "steps_6_7": "NOT_STARTED"
+}

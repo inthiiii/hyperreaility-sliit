@@ -1,0 +1,6 @@
+link_id,parent,child
+L01,CORE,S01
+L02,CORE,S02
+L03,S01,S03
+L04,S02,S04
+L05,S01,S05

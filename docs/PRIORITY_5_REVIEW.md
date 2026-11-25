@@ -7,6 +7,11 @@ It does not run their hosted comparison, sign as a teammate, or certify a held-o
 study. Priority 6 (manual application QA/rehearsal) and Priority 7 (final benchmark
 and release) remain separate.
 
+> Follow-up: the user requested an AI review and revised freeze. The completed
+> [AI-assisted v2 review](PRIORITY_5_AI_COMPLETION.md) has 20 AI_REVIEWED rows.
+> The original human-review instructions and PENDING sheets below are preserved;
+> they are not retroactively marked as human-approved.
+
 ## Current findings
 
 The [review packet](evaluation/priority5-20261125/packet.json) audits all twenty

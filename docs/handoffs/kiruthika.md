@@ -21,3 +21,14 @@ Read [PRIORITY_5_REVIEW.md](../PRIORITY_5_REVIEW.md), then the
 This handoff contains no completed human review. Requested co-author credit is
 separate from review sign-off. Prepared with ChatGPT/Codex in Ihthisham's session.
 Priority 6–7 are not started by this update.
+
+
+## Priority 5 — AI-authored/reviewed v2 completion
+
+The user requested the coding assistant perform the revision and review. See
+[the completion record](../PRIORITY_5_AI_COMPLETION.md): twenty new cases,
+twenty completed AI review rows, checked physical/label mechanisms and a frozen
+203-file release. No human signature was entered on your behalf. Independent
+human validation is still unperformed; co-author credit is separate. The original
+frozen data and blank human worksheet are preserved. Full regression: 508 passed;
+zero project inference API calls. Steps 6–7 remain pending.

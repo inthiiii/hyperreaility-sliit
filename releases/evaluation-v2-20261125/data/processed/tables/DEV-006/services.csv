@@ -1,0 +1,16 @@
+service_id,site_id,label,critical,weight,policy_evidence_id
+V01,S01,Fictional service 01,False,1,POLICY-001
+V02,S02,Fictional critical facility,True,5,POLICY-001
+V03,S03,Fictional service 03,False,1,POLICY-001
+V04,S04,Fictional service 04,False,1,POLICY-001
+V05,S05,Fictional service 05,False,1,POLICY-001
+V06,S06,Fictional service 06,False,1,POLICY-001
+V07,S07,Fictional service 07,False,1,POLICY-001
+V08,S08,Fictional service 08,False,1,POLICY-001
+V09,S09,Fictional service 09,False,1,POLICY-001
+V10,S10,Fictional service 10,False,1,POLICY-001
+V11,S11,Fictional service 11,False,1,POLICY-001
+V12,S12,Fictional service 12,False,1,POLICY-001
+V13,S13,Fictional service 13,False,1,POLICY-001
+V14,S14,Fictional service 14,False,1,POLICY-001
+V15,S15,Fictional service 15,False,1,POLICY-001

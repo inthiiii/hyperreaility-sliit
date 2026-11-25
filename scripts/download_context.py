@@ -17,7 +17,7 @@ def read(url):
         return response.read(), response.geturl()
 
 def download():
-    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists():
+    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists() or (ROOT / 'AI_RELEASE.json').exists():
         raise ValueError('Dataset release is frozen. Create a reviewed new version instead of regenerating in place.')
     RAW.mkdir(parents=True, exist_ok=True)
     metadata_bytes, resolved = read(API)
