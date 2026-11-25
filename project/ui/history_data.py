@@ -99,11 +99,15 @@ def _validate(kind, payload, filename):
         statuses = ('starting', 'failed', 'blocked', 'awaiting_approval', 'escalated')
         allowed = {'format_version', 'attempt_id', 'request_key', 'started_at_utc', 'finished_at_utc',
                    'scenario_id', 'input_hash', 'mode', 'planner', 'status', 'model_usage', 'warnings',
-                   'run_id', 'configured_provider', 'configured_model', 'error_code', 'error_type', 'reasons'}
+                   'run_id', 'configured_provider', 'configured_model', 'configured_api_mode',
+                   'configured_reasoning_effort', 'auxiliary_requests', 'error_code', 'error_type', 'reasons'}
         if not set(payload) <= allowed:
             raise ValueError('Unknown UI attempt fields')
     if kind == 'attempt' and (not isinstance(payload.get('model_usage', []), list) or any(not isinstance(item, dict) for item in payload.get('model_usage', []))):
         raise ValueError('Malformed usage records')
+    if kind == 'attempt' and (not isinstance(payload.get('auxiliary_requests', []), list) or
+            any(not isinstance(item, dict) for item in payload.get('auxiliary_requests', []))):
+        raise ValueError('Malformed auxiliary request records')
     if payload.get('status') not in statuses:
         raise ValueError('Unknown attempt status')
     return payload.get('run_id'), payload['scenario_id'], payload['status'], payload.get('started_at_utc')

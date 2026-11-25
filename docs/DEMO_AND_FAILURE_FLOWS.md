@@ -1,70 +1,64 @@
-# Operator walkthrough and failure-flow checkpoint
+# Demo and failure-flow walkthrough
 
-This checkpoint adds read-only workflow guidance to Overview, Planning and Results.
-The panel derives its state from the active run, recorded decision, matching
-simulation outcome and attempt records. It does not generate plans, grant
-approval, run simulations, alter evidence or initialize a hosted model.
+Run from the repository with the existing environment activated:
 
-## Walkthrough on current data-only main
-
-Run `python -m streamlit run project/main.py` from an activated environment.
-Use **Offline template baseline** with **CP-SAT optimizer** for these checks.
-Template extraction is a deterministic baseline, not a hosted multi-agent demo.
-
-| Case | Actions | Expected result |
-|---|---|---|
-| DEMO-005 normal planning | Enter operator label, generate plan, inspect schedule/evidence, approve | Awaiting simulator until the backend merges; no fabricated measured outcome |
-| DEV-006 conflict | Select scenario and generate | Clarification required; reasons and evidence visible; approval/simulation disabled |
-| DEV-008 missing evidence | Select scenario and generate | Uncertainty retained; clarification required; approval/simulation disabled |
-| Rejection | Generate DEMO-005, reject with review note | Rejected plan cannot be approved or simulated; start a new explicit attempt |
-| Explicit retry | Click Start a new attempt, then Generate plan | New run; prior plan/approval/results removed; no automatic retry |
-| Scenario change | Approve DEMO-005, then select DEV-006 | Fresh session state; no carried-over plan, approval or current outcome |
-| Unsupported simulation | Backend reports IntegrationNotReady | Episode support pending; no result published; attempt stored once; no automatic rerun |
-
-Unsupported-path UI tests inject a clearly labeled exception callback. They prove
-UI behavior only, not implementation of dynamic simulation. No test callback is
-available as a selectable production/demo mode.
-
-## Normal measured recovery after backend integration
-
-The preceding static-integration checkpoint supplies real-engine tests and a
-Streamlit click-flow test. Once Zahra's loader/evaluator/engine are merged, use
-DEMO-005: generate, approve, simulate, open Results. Expected: V02 and V04 available
-on [30,150), weighted available minutes 720, weighted downtime 5760 and first
-restoration minute 30. Inspect action outcomes and export the audit record.
-
-While the backend is absent, these tests skip explicitly. Do not describe a
-skipped engine test as a successful simulator run. Dynamic continuation and the
-horizon-boundary fix remain with Zahra. No backend source files change here.
-
-## Verification and manual rehearsal
-
-```bash
-python -m pytest tests/ui/test_demo_flows.py -q
-python -m pytest -q
+```sh
+python -m streamlit run project/main.py
 ```
 
-Seven new tests cover real conflict/missing-data escalation, rejection and retry,
-backend-pending/expired approval, unsupported-attempt deduplication, and two
-Streamlit interaction walkthroughs. Existing static-engine integration coverage
-is retained. Use DEMO_QA_CHECKLIST.csv for manual rehearsal; manual entries begin
-as NOT RUN and must be updated only after someone actually performs the steps.
+The simulator is integrated. Use **Offline template baseline** and **CP-SAT
+optimizer** for repeatable recovery demonstrations; this mode makes no model
+requests. It is a deterministic baseline. The hosted multi-agent mode is separate.
 
-The workflow panel is guidance, not a permission mechanism. The existing review,
-source freshness, validator, approval binding and audit checks remain the
-execution boundary. Hosted inference, independently audited held-out evaluation,
-and production operator authentication are separate work.
+## Static recovery
 
-## Completion update: event-capable backend
+1. Choose DEMO-005. With the operator label blank, generate a plan and observe
+   that approval and simulation are disabled.
+2. Enter a demo operator label; inspect Schedule, Evidence and Agent activity.
+3. Approve the current plan, then click Simulate approved plan once.
+4. Open Results: horizon720, weighted available720, weighted downtime5760,
+   first restoration30. V02 and V04 are available on [30,150).
+5. Open History to inspect/export the record. Reloading never restores approval.
 
-The earlier data-only/backend-pending instructions above describe the previous
-checkpoint. On feature/zahra-completion the real backend is present. DEMO-005 now
-produces measured static results. DEV-010 stops at minute60: inspect its prefix
-result, return to Planning, choose Accept event update and replan, generate a new
-plan and approve it, then simulate to finish the same incident at720. Full-horizon
-metrics stay null at the pause. The completed fixture reports weighted available
-minutes7310 and downtime9250; no new approval is inherited from history.
+## Dynamic recovery
 
-Both static and dynamic browser rehearsals were performed on the completion
-checkout by Codex. These are synthetic local tests, not independent human QA.
-The optional note field now clears on an explicit new attempt/event update.
+1. Choose DEV-010, generate offline, inspect and approve, then simulate.
+2. The incident pauses at minute60. Results cover only the elapsed prefix;
+   full-horizon availability/downtime are null. Inspect or download that result.
+3. Return to Planning; click Accept event update and replan. The old plan and
+   approval clear while committed work and elapsed service are preserved.
+4. Generate a new plan, inspect it, approve again, then simulate to finish.
+5. At minute720, weighted available7310 and downtime9250. Simulation is disabled
+   after completion; rerendering does not repeat execution.
+
+## Failure and review flows
+
+| Case | Action and expected result |
+|---|---|
+| DEV-006 | Generate offline: contradictory equipment evidence escalates; no approval/simulation |
+| DEV-008 | Generate offline: missing equipment fact stays unknown; no approval/simulation |
+| Clarification | An empty submission fails. For synthetic testing only, explicitly label the development fixture as the source; select the confirmed boolean and acknowledge verification. Regenerate before approval. Real use requires real verified evidence. |
+| Rejection | Enter a note and reject DEMO-005. Rejected plan cannot execute. Start a new attempt: note blank, old approval gone; explicitly generate and approve the replacement. |
+| Scenario change | Approve then change incident: previous plan, approval and results clear |
+| History | Opening an old approved plan/result is read-only and cannot grant current authorization |
+| Unsupported backend | Automated injected exception test only; result not published, no automatic retry. No production selector exposes this callback. |
+
+## Hosted demonstration
+
+Settings should show the configured provider/model without displaying the key.
+Select Hosted multi-agent workflow; generation sends synthetic incident data to
+the configured service and may incur charges. Run only an explicitly bounded
+smoke, inspect actual messages, and retain its actual outcome. Approval remains
+required for a valid candidate. No silent offline fallback is permitted.
+
+The 25 November smoke reached gpt-6-luna and escalated after three calls due to
+an unnecessary specialist clarification. It did **not** demonstrate a successful
+hosted restoration. Use the reproducible offline flows for recovery rehearsal
+until that open issue is resolved; keep the hosted outcome visible in evidence.
+
+See [Priority 6 results](PRIORITY_6_QA.md) and [checklist](DEMO_QA_CHECKLIST.csv).
+
+```sh
+python -m pytest -q tests/ui/test_demo_flows.py tests/ui/test_history_results.py tests/ui/test_dynamic_integration.py
+python -m pytest -q
+```

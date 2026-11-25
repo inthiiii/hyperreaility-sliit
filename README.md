@@ -349,3 +349,16 @@ assistant authored/reviewed them; independent human review is still unperformed.
 See [completion evidence](docs/PRIORITY_5_AI_COMPLETION.md). Full regression:
 **508 passed**. The default human gate remains; AI engineering evaluation needs
 explicit opt-in and carries its provenance in the manifest. Steps 6–7 are pending.
+
+
+### Priority 6 — application QA checkpoint (25 November)
+
+The browser walkthrough and regression checks are recorded in
+[PRIORITY_6_QA.md](docs/PRIORITY_6_QA.md). Static and dynamic recovery, conflict/missing
+evidence, rejection/retry, clarification, scenario changes and read-only history
+were exercised. Two UI defects were fixed: stale review notes and valid hosted
+metadata being skipped by History. **509 tests passed**. One hosted smoke
+escalated after three calls; approval stayed blocked, but hosted happy-path
+readiness remains open. Codex performed the walkthrough in Ihthisham's session;
+Kiruthika and Eyaas receive requested co-author credit, separate from tester
+identity. Priority 7 remains pending.

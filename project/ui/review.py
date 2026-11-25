@@ -40,7 +40,7 @@ def _continue_callback(session, choice, root):
     from project.ui.continuation import accept_checkpoint
     try:
         accept_checkpoint(session, choice, root)
-        st.session_state.pop('review_note', None)
+        st.session_state['review_note'] = ''
     except Exception:
         session.review_feedback = {'kind': 'error', 'message': 'Checkpoint could not be accepted. Refresh and inspect the episode record.'}
 
@@ -57,7 +57,7 @@ def render_review(choice, session, root):
     except ReviewBlocked as error:
         reason = str(error)
     if st.session_state.get('review_note_input_hash') != choice.content_hash:
-        st.session_state.pop('review_note', None)
+        st.session_state['review_note'] = ''
         st.session_state['review_note_input_hash'] = choice.content_hash
     operator = st.session_state.get('operator_label', '').strip()
     operator_valid = 1 <= len(operator) <= 120

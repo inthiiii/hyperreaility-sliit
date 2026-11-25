@@ -195,7 +195,7 @@ def render_planning(choice, session, root):
         if attempted:
             if st.button('Start a new attempt', key='new_planning_attempt', disabled=session.busy, width='stretch'):
                 begin_new_attempt(session)
-                st.session_state.pop('review_note', None)
+                st.session_state['review_note'] = ''
                 st.rerun()
     if generate:
         with st.spinner('Preparing and independently checking the plan…'):

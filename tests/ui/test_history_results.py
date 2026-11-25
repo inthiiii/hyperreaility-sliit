@@ -227,3 +227,20 @@ def test_test_outcome_ui_renders_metrics_plot_and_provenance(case, ui_root, monk
     at.selectbox(key='history_kind').select('simulation').run()
     assert not at.exception and at.session_state[SESSION_KEY].core.current.run_id == run_id
     assert any('TEST OUTPUT' in item.value for item in at.warning)
+
+
+def test_hosted_attempt_metadata_remains_visible_and_strict(case, ui_root):
+    path = next((ui_root / 'results/local_runs/ui_attempts').glob('*.json'))
+    payload = json.loads(path.read_text())
+    payload.update(configured_api_mode='responses', configured_reasoning_effort='none',
+                   auxiliary_requests=[{'operation': 'input_count', 'status': 'completed'}])
+    path.write_text(json.dumps(payload))
+    catalog = load_history(ui_root)
+    assert any(e.kind == 'attempt' and e.payload['attempt_id'] == payload['attempt_id'] for e in catalog.entries)
+    payload['auxiliary_requests'] = 'malformed'
+    path.write_text(json.dumps(payload))
+    assert not any(e.kind == 'attempt' for e in load_history(ui_root).entries)
+    payload['auxiliary_requests'] = []
+    payload['unexpected_field'] = True
+    path.write_text(json.dumps(payload))
+    assert not any(e.kind == 'attempt' for e in load_history(ui_root).entries)

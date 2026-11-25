@@ -39,3 +39,16 @@ same-incident continuation metrics. See [operator confirmation](../OPERATOR_CONF
 for workflow, regression coverage and remaining identity/verification limits.
 This checkpoint supersedes earlier statements that operator clarification was absent;
 live hosted-model evaluation remains a later priority.
+
+
+## Priority 6 — application QA checkpoint (25 November)
+
+The browser walkthrough and regression checks are recorded in
+[PRIORITY_6_QA.md](../PRIORITY_6_QA.md). Static and dynamic recovery, conflict/missing
+evidence, rejection/retry, clarification, scenario changes and read-only history
+were exercised. Two UI defects were fixed: stale review notes and valid hosted
+metadata being skipped by History. **509 tests passed**. One hosted smoke
+escalated after three calls; approval stayed blocked, but hosted happy-path
+readiness remains open. Codex performed the walkthrough in Ihthisham's session;
+Kiruthika and Eyaas receive requested co-author credit, separate from tester
+identity. Priority 7 remains pending.
