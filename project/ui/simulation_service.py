@@ -1,4 +1,5 @@
 """Approved, typed simulator boundary. No simulator implementation or truth loader."""
+from project.auth import require
 from datetime import datetime, timezone
 import math
 from pathlib import Path
@@ -22,7 +23,9 @@ def attach_simulator(session, callback, label):
     session.simulator_label = label.strip()
 
 
-def simulate_approved(session, choice, expected_binding, operator_id, root):
+def simulate_approved(session, choice, expected_binding, operator_id, root, *, user=None):
+    if user is not None:
+        require(user, 'simulate')
     result, binding = review_context(session, choice)
     ensure_current_source(session, choice, root)
     if expected_binding != binding or not active_approval(session, choice):

@@ -225,8 +225,9 @@ render_app(os.environ['RELINK_REVIEW_TEST_ROOT'])
 
 def test_ui_records_approval_rejection_and_keeps_missing_simulator_disabled(ui_root, monkeypatch):
     at = review_app(ui_root, monkeypatch)
-    assert not at.exception and at.button(key='approve_plan').disabled
-    at.text_input(key='operator_label').input('Test operator').run()
+    # Signed in with approval permission: the decision is available immediately.
+    assert not at.exception and not at.button(key='approve_plan').disabled
+    at.run()
     at.text_area(key='review_note').input('Checked route and timing').run()
     assert not at.button(key='approve_plan').disabled
     at.button(key='approve_plan').click().run()
@@ -243,7 +244,7 @@ def test_ui_records_approval_rejection_and_keeps_missing_simulator_disabled(ui_r
 
 def test_ui_callback_rejects_a_click_for_a_plan_changed_after_render(ui_root, monkeypatch):
     at = review_app(ui_root, monkeypatch)
-    at.text_input(key='operator_label').input('Test operator').run()
+    at.run()
     at.session_state[SESSION_KEY].core.current.plan.explanation += ' changed between render and click'
     at.button(key='approve_plan').click().run()
     assert not at.exception and at.session_state[SESSION_KEY].core.approval is None
@@ -252,7 +253,7 @@ def test_ui_callback_rejects_a_click_for_a_plan_changed_after_render(ui_root, mo
 
 def test_ui_approved_injected_simulator_executes_once(ui_root, monkeypatch):
     at = review_app(ui_root, monkeypatch)
-    at.text_input(key='operator_label').input('Test operator').run()
+    at.run()
     calls = []
     def callback(state, plan):calls.append(1);return fake_result(state, plan)
     attach_simulator(at.session_state[SESSION_KEY], callback, 'Injected test-only callback')

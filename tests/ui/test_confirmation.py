@@ -181,7 +181,6 @@ def test_confirmation_on_live_checkpoint_does_not_reset_incident_metrics(root):
 def test_browser_confirm_replan_reapprove_and_history(root,monkeypatch):
     monkeypatch.setenv('RELINK_CONFIRM_ROOT',str(root))
     at=AppTest.from_string("import os\nfrom project.ui.app import render_app\nrender_app(os.environ['RELINK_CONFIRM_ROOT'])",default_timeout=30).run()
-    at.text_input(key='operator_label').set_value('Rehearsal operator')
     key=next(c.key for c in load_catalog(root).choices if c.scenario.scenario_id=='DEV-006')
     at.selectbox(key='scenario_picker').set_value(key).run()
     at.radio(key='workspace_page').set_value('Planning').run()
