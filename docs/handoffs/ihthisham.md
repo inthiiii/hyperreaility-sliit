@@ -88,7 +88,7 @@ Eleven comparable single/multi pairs all tied; no restoration superiority claim.
 A separate real permit challenge changed the validated candidate through a typed
 resource hold, but its reviewer escalated, so it was not approved/simulated.
 
-Earlier rounds and failures are retained. See [Luna validation](../LUNA_LIVE_VALIDATION.md)
+Earlier rounds and failures are retained. See [Luna validation](../development_log/LUNA_LIVE_VALIDATION.md)
 for current results, traces, limitations and reproduction. Joint co-author credit
 is requested for all four team members. Independent case review and final
 release/participant evidence remain later priorities.
@@ -101,7 +101,7 @@ context compaction, bounded review clarification, fresh review after every new
 hold, retained rejected-output audit, and visible-state arithmetic/service
 forecast tools. Regression: **458 passed in 43.87 seconds**. Both workflow modes
 retain equal context/tools and unchanged aggregate incident caps. See
-[the completion update](../PRIORITY_3_4_COMPLETION.md) for live outcomes and all
+[the completion update](../development_log/PRIORITY_3_4_COMPLETION.md) for live outcomes and all
 remaining quality limits. Follow-up credit includes Ihthisham, Zahra, Eyaas and
 Kiruthika; work was prepared with ChatGPT/Codex in Ihthisham's session.
 

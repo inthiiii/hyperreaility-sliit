@@ -4,7 +4,7 @@
 
 ## Status and scope
 
-This checkpoint implements the hosted request path and matched single-/multi-agent protocol together. Real OpenAI `gpt-6-luna` execution with reasoning `none` and the Responses API is verified on the demo. Development comparisons, failures and remaining quality limits are recorded in [LUNA_LIVE_VALIDATION.md](LUNA_LIVE_VALIDATION.md). Actual charges and independent held-out performance remain unverified; no superiority claim follows from a successful API check.
+This checkpoint implements the hosted request path and matched single-/multi-agent protocol together. Real OpenAI `gpt-6-luna` execution with reasoning `none` and the Responses API is verified on the demo. Development comparisons, failures and remaining quality limits are recorded in [LUNA_LIVE_VALIDATION.md](development_log/LUNA_LIVE_VALIDATION.md). Actual charges and independent held-out performance remain unverified; no superiority claim follows from a successful API check.
 
 ## Hosted execution
 
@@ -132,5 +132,5 @@ predictions separately from independent simulator measurements. No unseen events
 private labels or evaluator truth enter these tools. Forecasts are reproducible
 from the stored verified state and candidate.
 
-See [the completion update](PRIORITY_3_4_COMPLETION.md) for current measured results,
+See [the completion update](development_log/PRIORITY_3_4_COMPLETION.md) for current measured results,
 including unsuccessful attempts and the remaining quality limits.
