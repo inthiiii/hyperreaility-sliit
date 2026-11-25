@@ -128,7 +128,7 @@ def fake_hosted(monkeypatch):
 
 def test_calls_are_aggregated_across_replans_and_cleanup_failure_does_not_lose_rows(tmp_path,monkeypatch):
     closed=fake_hosted(monkeypatch)
-    row=runner.run_benchmark([input_path('DEV-010')],tmp_path,variants=['single'],repeats=1,allow_live=True)[0]
+    row=runner.run_benchmark([input_path('DEV-010')],tmp_path,variants=['matched_single'],repeats=1,allow_live=True)[0]
     assert row['status']=='completed' and row['model_calls']==8
     assert row['input_tokens']==40 and row['output_tokens']==24
     assert row['usage_complete'] and len(closed)==2 and len(row['cleanup_errors'])==2
@@ -138,7 +138,7 @@ def test_calls_are_aggregated_across_replans_and_cleanup_failure_does_not_lose_r
 def test_whole_incident_budget_cannot_reset_at_replan(tmp_path,monkeypatch):
     fake_hosted(monkeypatch)
     monkeypatch.setattr(runner,'LIMITS',{**runner.LIMITS,'max_calls':4})
-    row=runner.run_benchmark([input_path('DEV-010')],tmp_path,variants=['single'],repeats=1,allow_live=True)[0]
+    row=runner.run_benchmark([input_path('DEV-010')],tmp_path,variants=['matched_single'],repeats=1,allow_live=True)[0]
     assert row['status']=='failed' and row['error_type']=='BudgetExceeded'
     assert row['failure_phase']=='budget' and row['model_calls']==4
     assert row['actual_weighted_downtime'] is None and len(row['episode_artifacts'])==1

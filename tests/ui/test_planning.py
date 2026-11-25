@@ -4,6 +4,14 @@ from pathlib import Path
 from types import SimpleNamespace as NS
 
 import pytest
+from project.core.coordinator import Coordinator as _LegacyCoordinator
+
+
+@pytest.fixture(autouse=True)
+def _legacy_hosted_workflow(monkeypatch):
+    """These tests script v13 replies; they check UI plumbing, not the agent protocol."""
+    monkeypatch.setattr('project.ui.planning_service.HOSTED_WORKFLOW', _LegacyCoordinator)
+
 from streamlit.testing.v1 import AppTest
 
 from project.agents.extraction import template_facts
