@@ -1,0 +1,109 @@
+{
+  "format_version": 3,
+  "created_at_utc": "2026-11-25T12:55:13.445238+00:00",
+  "source_sha256": "5583a267b15a1d88bf78855abd80adcbfe7593059b2bf64056546175811631e8",
+  "cases": {
+    "EVAL2-001": "4f3d83bb8de714b24d846df7e54cb3e21056ccbebdb446aa9474419f0f950376",
+    "EVAL2-002": "180059df4fdb817173cd0c96311b428338585169018e84c82901f89b2ed44aca",
+    "EVAL2-003": "ae04b46e2de1786677e09d8a3428903d047ddcdb3246f06bb03c958cf0d6f7f3",
+    "EVAL2-004": "d5ad2fa8e66482ec36b5b90d5520a9008d692b53f32e5dc33cccd00fe4efde96",
+    "EVAL2-005": "55ec4cc310fdf7ae0909b6c7d9fb8b12a1b0e17990116dd06d5b6f2e46c8294a",
+    "EVAL2-006": "00a05fd155d7aaefb4f5d2609de1544c75b1c45a32b5257c410defb0b2c081a1",
+    "EVAL2-007": "39d9411d062c0384052fa6dcb990dd87e2f969936b11532b9cfa27f0039f35c0",
+    "EVAL2-008": "3f1fd9ed12cd9f0f0257a4711098a1abeecbe5b7d9c13d1ab618f92d79334abc",
+    "EVAL2-009": "b3eb9c8ebe3f692164c798a8adaa0c0b60f4ae98c8c6230961251bf1ab4eef7e",
+    "EVAL2-010": "2c0e7d36b1eda00d982644d7aeaea98b21b571cb31c509745c081a798509c720",
+    "EVAL2-011": "2f8b5a85d83ae30eedc0ba5261ee04d32f5a0d64ea8df5873830bf110ae75fcb",
+    "EVAL2-012": "d585f7ec2ac811a110890bcba4f4e336d12e5845767738030b73afccc8f4a1ee",
+    "EVAL2-013": "588b4992fcf8ea1978ec02c8ea5bc5455269b5cec0d7c47431709d4f7071090e",
+    "EVAL2-014": "0aa007557b88ebb9382a7ab6651f6260e4892056d28b240f98bd34cb8a7a9673",
+    "EVAL2-015": "0c42d37120faaab8b327e9c354e60f221d8d4032001af34feb3e68b91515289f",
+    "EVAL2-016": "50e4cb39934a36953222ff5adad87074d652ba0a3330dd8eaa17fb0c86c83c69",
+    "EVAL2-017": "a20690cd684022192652e9e372289eeec712dc893d11044a4a9b9678f9225da2",
+    "EVAL2-018": "f5f75d3a83665218e6d9590c21c18b79f0794d9784468156c8b3a703684043bb",
+    "EVAL2-019": "b0bf66648666469fcfe1367d5c59d932568890aa82ae58c94363481e1599d145",
+    "EVAL2-020": "75723d5c93b83a15d275b0786233d4800de61aede8f3a43ea5d160885a2ddc9f"
+  },
+  "variants": [
+    "heuristic",
+    "optimizer",
+    "single",
+    "multi",
+    "no_reviewer",
+    "no_feedback"
+  ],
+  "repeats": 3,
+  "order_seed": 22,
+  "model_configuration": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "api_mode": "responses",
+    "reasoning_effort": "none",
+    "response_format": "json_schema",
+    "temperature": "provider_default",
+    "sdk_retries": 0,
+    "schema_repair_attempts": 1,
+    "protocol_version": "matched-workflow-v13"
+  },
+  "comparison_protocol": {
+    "version": "matched-workflow-v13",
+    "stages": [
+      "investigate",
+      "resources",
+      "priorities",
+      "review"
+    ],
+    "tasks_sha256": "a5ddf76959175d80882238543cbf9ecf38dbadd5068fdf6eff8d46190df2cfc6",
+    "visible_context": "identical operational fields; no evaluator truth",
+    "tools": [
+      "conservative evidence resolver",
+      "CP-SAT/greedy scheduler",
+      "independent schedule validator"
+    ],
+    "agent_requests": [
+      "evidence-linked conservative defer_action"
+    ],
+    "weights": "human-approved; never model-edited",
+    "max_revision_rounds": 3,
+    "stage_output_limits": {
+      "investigate": 700,
+      "resources": 450,
+      "priorities": 450,
+      "review": 500
+    },
+    "single": "one agent identity across all four stages",
+    "multi": "four distinct role contexts exchanging structured findings",
+    "budget_policy": "same whole-incident caps; actual utilization may differ",
+    "interpretation": "controlled workflow comparison, not proof that agent count alone causes improvement"
+  },
+  "runtime": {
+    "python": "3.11.18",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "packages": {
+    "pydantic": "2.14.4",
+    "ortools": "9.15.6755",
+    "networkx": "3.6.1",
+    "openai": "3.57.0"
+  },
+  "scoring_status": "independent_incident_evaluator_connected",
+  "approval_mode": "automated_benchmark_operator",
+  "whole_incident_limits": {
+    "max_calls": 12,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 4800,
+    "max_seconds": 180
+  },
+  "max_episodes": 10,
+  "evaluation_review": {
+    "mode": "configuration_freeze",
+    "freeze_sha256": "285783588c26b979dc86dd857ac59ca8bbce251f9a1886afa568f8891ad586b1",
+    "git_commit_at_freeze": "524945f1324dc3c639b6c2c69e0fd0165695842c",
+    "created_at_utc": "2026-11-25T12:47:32.469598+00:00",
+    "scope": "Script-generated synthetic EVAL2 cases (evidence v3); not independently human-reviewed. Frozen so held-out results cannot feed back into prompts or settings.",
+    "eval_files": 40
+  },
+  "scope": "Matched tool-assisted workflow comparison. Template baselines are not LLM agents. Independent held-out review remains a separate gate; development results do not establish superiority."
+}

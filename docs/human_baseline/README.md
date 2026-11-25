@@ -2,6 +2,8 @@
 
 Exploratory comparison required by competition rule 04. It is small, so its results are indicative only.
 
+Printable guide for facilitators and participants, with answer sheets: [RELINK_Human_Comparison_Guide.pdf](RELINK_Human_Comparison_Guide.pdf).
+
 ## Setup
 
 - **Participants:** up to 4 consenting people who did not build the scheduler or agents. Record expertise honestly; no names are needed in the repository (use P1–P4).

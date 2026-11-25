@@ -1,0 +1,240 @@
+{
+  "attempts": 360,
+  "cases": 20,
+  "variants": {
+    "heuristic": {
+      "attempts": 60,
+      "completed": 60,
+      "escalated": 0,
+      "failed": 0,
+      "incomplete": 0,
+      "escalation_reasons": [],
+      "mean_model_calls": 0,
+      "mean_input_tokens": 0,
+      "mean_output_tokens": 0,
+      "mean_seconds": 0.017063646502598808,
+      "extraction_f1_initial": null,
+      "extraction_f1_final": null,
+      "distractor_claims_per_run": null,
+      "injection_runs": 0,
+      "injection_followed": 0,
+      "injection_flagged_rate": null,
+      "mean_fact_challenges": null,
+      "mean_operator_questions": null
+    },
+    "multi": {
+      "attempts": 60,
+      "completed": 54,
+      "escalated": 6,
+      "failed": 0,
+      "incomplete": 0,
+      "escalation_reasons": [
+        "BadRequestError: workflow stopped; inspect structured usage and evidence",
+        "BudgetExceeded: workflow stopped; inspect structured usage and evidence",
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ],
+      "mean_model_calls": 4.866666666666666,
+      "mean_input_tokens": 13322.898305084746,
+      "mean_output_tokens": 1214.3559322033898,
+      "mean_seconds": 17.827691051383347,
+      "extraction_f1_initial": 0.8792207792207792,
+      "extraction_f1_final": 0.8848484848484849,
+      "distractor_claims_per_run": 0.03636363636363636,
+      "injection_runs": 33,
+      "injection_followed": 0,
+      "injection_flagged_rate": 1.0,
+      "mean_fact_challenges": 0.16363636363636364,
+      "mean_operator_questions": 1.7636363636363637
+    },
+    "no_feedback": {
+      "attempts": 60,
+      "completed": 49,
+      "escalated": 11,
+      "failed": 0,
+      "incomplete": 0,
+      "escalation_reasons": [
+        "BadRequestError: workflow stopped; inspect structured usage and evidence",
+        "Review requested revision; feedback disabled for ablation",
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ],
+      "mean_model_calls": 4.333333333333333,
+      "mean_input_tokens": 11691.186440677966,
+      "mean_output_tokens": 991.7457627118644,
+      "mean_seconds": 15.93793387505284,
+      "extraction_f1_initial": 0.9331465919701214,
+      "extraction_f1_final": 0.9331465919701214,
+      "distractor_claims_per_run": 0,
+      "injection_runs": 28,
+      "injection_followed": 0,
+      "injection_flagged_rate": 1.0,
+      "mean_fact_challenges": 0,
+      "mean_operator_questions": 1.4509803921568627
+    },
+    "no_reviewer": {
+      "attempts": 60,
+      "completed": 60,
+      "escalated": 0,
+      "failed": 0,
+      "incomplete": 0,
+      "escalation_reasons": [],
+      "mean_model_calls": 3.3333333333333335,
+      "mean_input_tokens": 8657.35,
+      "mean_output_tokens": 776.85,
+      "mean_seconds": 12.31484509933313,
+      "extraction_f1_initial": 0.9438888888888889,
+      "extraction_f1_final": 0.9438888888888889,
+      "distractor_claims_per_run": 0,
+      "injection_runs": 36,
+      "injection_followed": 0,
+      "injection_flagged_rate": 1.0,
+      "mean_fact_challenges": 0,
+      "mean_operator_questions": 1.2166666666666666
+    },
+    "optimizer": {
+      "attempts": 60,
+      "completed": 60,
+      "escalated": 0,
+      "failed": 0,
+      "incomplete": 0,
+      "escalation_reasons": [],
+      "mean_model_calls": 0,
+      "mean_input_tokens": 0,
+      "mean_output_tokens": 0,
+      "mean_seconds": 0.058995777769208266,
+      "extraction_f1_initial": null,
+      "extraction_f1_final": null,
+      "distractor_claims_per_run": null,
+      "injection_runs": 0,
+      "injection_followed": 0,
+      "injection_flagged_rate": null,
+      "mean_fact_challenges": null,
+      "mean_operator_questions": null
+    },
+    "single": {
+      "attempts": 60,
+      "completed": 53,
+      "escalated": 7,
+      "failed": 0,
+      "incomplete": 0,
+      "escalation_reasons": [
+        "BudgetExceeded: workflow stopped; inspect structured usage and evidence",
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ],
+      "mean_model_calls": 2.3333333333333335,
+      "mean_input_tokens": 11315.883333333333,
+      "mean_output_tokens": 954.2,
+      "mean_seconds": 11.89844188055237,
+      "extraction_f1_initial": 0.9590643274853801,
+      "extraction_f1_final": 0.9532163742690059,
+      "distractor_claims_per_run": 0.017543859649122806,
+      "injection_runs": 33,
+      "injection_followed": 0,
+      "injection_flagged_rate": 1.0,
+      "mean_fact_challenges": 0.07017543859649122,
+      "mean_operator_questions": 1.4210526315789473
+    }
+  },
+  "paired": [
+    {
+      "a": "multi",
+      "b": "single",
+      "cases": 19,
+      "a_better": 2,
+      "ties": 15,
+      "b_better": 2,
+      "mean_diff": -198.94736842105263,
+      "median_diff": 0.0,
+      "ci95_mean_diff": [
+        -596.3157894736842,
+        56.8421052631579
+      ],
+      "median_relative_change_positive_baseline": 0.0
+    },
+    {
+      "a": "multi",
+      "b": "optimizer",
+      "cases": 20,
+      "a_better": 13,
+      "ties": 7,
+      "b_better": 0,
+      "mean_diff": -2377.75,
+      "median_diff": -750.0,
+      "ci95_mean_diff": [
+        -4044.0,
+        -981.25
+      ],
+      "median_relative_change_positive_baseline": -0.125
+    },
+    {
+      "a": "single",
+      "b": "optimizer",
+      "cases": 19,
+      "a_better": 11,
+      "ties": 8,
+      "b_better": 0,
+      "mean_diff": -1810.5263157894738,
+      "median_diff": -450,
+      "ci95_mean_diff": [
+        -3333.684210526316,
+        -636.3157894736842
+      ],
+      "median_relative_change_positive_baseline": -0.12037037037037036
+    },
+    {
+      "a": "multi",
+      "b": "no_reviewer",
+      "cases": 20,
+      "a_better": 1,
+      "ties": 17,
+      "b_better": 2,
+      "mean_diff": -32.75,
+      "median_diff": 0.0,
+      "ci95_mean_diff": [
+        -192.75,
+        72.0
+      ],
+      "median_relative_change_positive_baseline": 0.0
+    },
+    {
+      "a": "multi",
+      "b": "no_feedback",
+      "cases": 19,
+      "a_better": 0,
+      "ties": 17,
+      "b_better": 2,
+      "mean_diff": 33.1578947368421,
+      "median_diff": 0,
+      "ci95_mean_diff": [
+        0.0,
+        90.0
+      ],
+      "median_relative_change_positive_baseline": 0.0
+    },
+    {
+      "a": "optimizer",
+      "b": "heuristic",
+      "cases": 20,
+      "a_better": 0,
+      "ties": 20,
+      "b_better": 0,
+      "mean_diff": 0,
+      "median_diff": 0.0,
+      "ci95_mean_diff": [
+        0,
+        0
+      ],
+      "median_relative_change_positive_baseline": 0.0
+    }
+  ],
+  "prices": null,
+  "freeze": {
+    "mode": "configuration_freeze",
+    "freeze_sha256": "285783588c26b979dc86dd857ac59ca8bbce251f9a1886afa568f8891ad586b1",
+    "git_commit_at_freeze": "524945f1324dc3c639b6c2c69e0fd0165695842c",
+    "created_at_utc": "2026-11-25T12:47:32.469598+00:00",
+    "scope": "Script-generated synthetic EVAL2 cases (evidence v3); not independently human-reviewed. Frozen so held-out results cannot feed back into prompts or settings.",
+    "eval_files": 40
+  },
+  "model": "gpt-6-luna",
+  "claims_multi_agent_superiority": false
+}
