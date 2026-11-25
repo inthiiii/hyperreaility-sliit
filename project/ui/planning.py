@@ -3,6 +3,9 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from project.auth import can
+from project.ui.auth_view import current_user, needs_role
+
 from project.core.tracing import redact
 from project.llm.health import preflight
 from project.ui.review import render_review
@@ -144,6 +147,7 @@ def _result(result, attempt):
 
 
 def render_planning(choice, session, root):
+    user = current_user()
     st.html('<div class="relink-eyebrow">Planning workspace</div>')
     st.title('A plan worth reviewing.')
     st.text('Selected incident: ' + choice.scenario.scenario_id)
@@ -189,8 +193,12 @@ def render_planning(choice, session, root):
     attempted = key in session.planning_requests
     start, repeat = st.columns(2)
     with start:
+        allowed = can(user, 'generate_plan')
         generate = st.button('Generate plan', key='generate_plan', type='primary',
-                             disabled=blocked or session.busy or attempted, width='stretch')
+                             disabled=blocked or session.busy or attempted or not allowed, width='stretch',
+                             help=None if allowed else needs_role('generate_plan'))
+        if not allowed:
+            st.caption('Your role cannot generate plans. ' + needs_role('generate_plan') + '.')
     with repeat:
         if attempted:
             if st.button('Start a new attempt', key='new_planning_attempt', disabled=session.busy, width='stretch'):
@@ -199,7 +207,7 @@ def render_planning(choice, session, root):
                 st.rerun()
     if generate:
         with st.spinner('Preparing and independently checking the plan…'):
-            prepare_plan(session, choice, mode, planner, root)
+            prepare_plan(session, choice, mode, planner, root, user=user)
         st.rerun()
     if attempted:
         st.caption('This request has already been attempted. Use Start a new attempt for an explicit retry; this clears the old plan, approval and results.')

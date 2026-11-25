@@ -69,7 +69,7 @@ def test_config_changes_between_jobs_fail_closed_without_switching_models(tmp_pa
         a.close=lambda:os.environ.__setitem__('LLM_MODEL','changed-model')
         return a
     monkeypatch.setattr(HostedAdapter,'from_env',factory)
-    rows=runner.run_benchmark([path],tmp_path/'out',variants=['single','multi'],repeats=1,allow_live=True)
+    rows=runner.run_benchmark([path],tmp_path/'out',variants=['matched_single','matched_multi'],repeats=1,allow_live=True)
     assert len(clients)==1 and sorted(r['status'] for r in rows)==['completed','failed']
     assert all(r['model_configuration']['model']=='fake-model' for r in rows)
     failed=next(r for r in rows if r['status']=='failed')

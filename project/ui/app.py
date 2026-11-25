@@ -15,6 +15,7 @@ from project.ui.review_service import active_approval
 from project.ui.history import render_history
 from project.ui.outcomes import render_results
 from project.ui.workflow import render_workflow
+from project.ui.auth_view import current_user, render_identity, render_login, render_roles_panel
 
 PAGES = ('Overview', 'Incident', 'Planning', 'Results', 'History', 'Settings')
 
@@ -74,7 +75,7 @@ def _overview(choice, session):
     _steps(session.core.simulator is not None)
 
 
-def _settings(health, session, choice):
+def _settings(health, session, choice, user=None, root=None):
     st.html('<div class="relink-eyebrow">Settings</div>')
     st.title('Know what is ready.')
     left, right = st.columns(2)
@@ -98,15 +99,17 @@ def _settings(health, session, choice):
         st.write('Scenario: ' + (choice.scenario.scenario_id if choice else 'None'))
         status = 'Approved for simulation' if choice and active_approval(session, choice) else 'Rejected' if session.last_decision and session.last_decision.approval.decision == 'reject' else 'Not approved'
         st.write('Approval: ' + status)
+    if user is not None:
+        render_roles_panel(user, root)
         st.caption('Navigation reruns preserve this browser session. Reloading or reconnecting may start a new session. '
-                   'An operator label does not authenticate a user.')
+                   'Decisions are recorded under your signed-in identity (demo-grade local sign-in).')
     with st.expander('Data source and implementation status'):
         if choice:
             st.code(choice.key, language=None)
             st.write('Content hash: ' + choice.content_hash[:16])
         st.write('Available: incident inspection, planning, recorded decisions, approval-gated simulator boundary, read-only history, exports and evaluator-output views.')
         st.write('Simulator: ' + (session.simulator_label or 'Not installed/connected'))
-        st.write('Pending: independent human benchmark audit and authenticated production identity.')
+        st.write('Pending: independent human benchmark audit and production identity (SSO/MFA).')
 
 
 def render_app(root=None):
@@ -115,6 +118,11 @@ def render_app(root=None):
     st.set_page_config(page_title='RE:L!NK · Recovery workspace', page_icon='📡', layout='wide',
                        initial_sidebar_state='expanded')
     st.html('<style>' + Path(__file__).with_name('styles.css').read_text() + '</style>')
+    user = current_user()
+    if user is None:
+        render_login(root)
+        return
+    st.session_state['operator_label'] = user.label
     catalog = load_catalog(root)
     session = get_dashboard_session(st.session_state)
     health = preflight()
@@ -147,8 +155,7 @@ def render_app(root=None):
         else:
             session.clear_selection()
             st.warning('No valid visible scenarios found.')
-        st.text_input('Operator label', key='operator_label', placeholder='Your name',
-                      help='A session label only. This does not authenticate you or approve a plan.')
+        render_identity(user)
         st.divider()
         st.html(_pill('Synthetic workspace'))
         st.caption('Hosted model: ' + ('setup needed' if health['status'] == 'blocked' else 'configured, unverified'))
@@ -161,7 +168,7 @@ def render_app(root=None):
             for issue in catalog.issues:
                 st.warning(issue)
     if page == 'Settings':
-        _settings(health, session, choice)
+        _settings(health, session, choice, user, root)
     elif page == 'History':
         render_history(root, choice)
     elif choice is None:

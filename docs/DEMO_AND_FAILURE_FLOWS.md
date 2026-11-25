@@ -56,7 +56,7 @@ an unnecessary specialist clarification. It did **not** demonstrate a successful
 hosted restoration. Use the reproducible offline flows for recovery rehearsal
 until that open issue is resolved; keep the hosted outcome visible in evidence.
 
-See [Priority 6 results](PRIORITY_6_QA.md) and [checklist](DEMO_QA_CHECKLIST.csv).
+See [Priority 6 results](development_log/PRIORITY_6_QA.md) and [checklist](development_log/DEMO_QA_CHECKLIST.csv).
 
 ```sh
 python -m pytest -q tests/ui/test_demo_flows.py tests/ui/test_history_results.py tests/ui/test_dynamic_integration.py

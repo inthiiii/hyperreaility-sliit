@@ -4,6 +4,14 @@ from pathlib import Path
 from types import SimpleNamespace as NS
 
 import pytest
+from project.core.coordinator import Coordinator as _LegacyCoordinator
+
+
+@pytest.fixture(autouse=True)
+def _legacy_hosted_workflow(monkeypatch):
+    """These tests script v13 replies; they check UI plumbing, not the agent protocol."""
+    monkeypatch.setattr('project.ui.planning_service.HOSTED_WORKFLOW', _LegacyCoordinator)
+
 from streamlit.testing.v1 import AppTest
 
 from project.agents.extraction import template_facts
@@ -324,7 +332,7 @@ def test_ui_shows_model_deferral_before_separate_operator_approval(ui_root,choic
     client.replies=iter([facts,hold,finding,review])
     monkeypatch.setattr(HostedAdapter,'from_env',lambda:adapter)
     at=planning_app(ui_root,monkeypatch)
-    at.text_input(key='operator_label').input('Test operator').run()
+    at.run()
     at.selectbox(key='planning_mode').select('single').run()
     assert not client.requests
     at.button(key='generate_plan').click().run()

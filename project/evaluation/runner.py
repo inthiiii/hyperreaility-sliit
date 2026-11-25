@@ -19,6 +19,8 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 from project.core.coordinator import Coordinator, approve_run
+from project.core.orchestrator import AgentOrchestrator
+from project.evaluation.extraction import truth_extraction_metrics
 from project.core.schemas import ScenarioInput, SimulationResult
 from project.core.state import digest
 from project.data.loader import CaseLoader
@@ -36,7 +38,16 @@ VARIANTS = {
     'multi': ('multi', 'cp_sat', True, True),
     'no_reviewer': ('multi', 'cp_sat', False, True),
     'no_feedback': ('multi', 'cp_sat', True, False),
+    # Legacy v13 matched pipeline (same four stages, role label only): kept as a control.
+    'matched_single': ('single', 'cp_sat', True, True),
+    'matched_multi': ('multi', 'cp_sat', True, True),
 }
+LEGACY_VARIANTS = {'matched_single', 'matched_multi'}
+
+
+def workflow_for(variant):
+    """Hosted variants use the v14 agent orchestrator unless explicitly legacy."""
+    return Coordinator if variant in LEGACY_VARIANTS else AgentOrchestrator
 DATA_ROOT = Path(__file__).resolve().parents[2] / 'data'
 LIMITS = {'max_calls': 12, 'max_input_tokens': 24000, 'max_output_tokens': 4800, 'max_seconds': 180}
 
@@ -137,7 +148,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
                     adapter = HostedAdapter.from_env(budget=budget)
                     if (adapter.provider,adapter.model,getattr(adapter,'reasoning_effort',None),getattr(adapter,'api_mode','chat_completions'))!=(configuration['provider'],configuration['model'],configuration['reasoning_effort'],configuration['api_mode']):
                         raise ValueError('Hosted adapter does not match the frozen model configuration')
-                result = Coordinator(adapter, budget=budget, planner=planner, reviewer_enabled=reviewer,
+                result = workflow_for(variant)(adapter, budget=budget, planner=planner, reviewer_enabled=reviewer,
                     feedback_enabled=feedback, trace_dir=output/'runs').run(scenario, mode, state_version=version)
             finally:
                 # Capture attempts even if client construction, a workflow or cleanup fails.
@@ -171,6 +182,10 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
                     raise ValueError('Benchmark input differs from its registered evaluator case')
                 truth = EvaluatorLoader(data_root/'evaluation/ground_truth').load(case.scenario_id)
                 row['evaluator_truth_hash'] = digest(truth)
+                if episode_number == 0 and result.metadata.get('raw_facts') is not None:
+                    # Scored on the evaluator side; agents never see these labels.
+                    row['extraction'] = truth_extraction_metrics(truth, result.metadata['raw_facts'],
+                                                                 result.metadata.get('final_facts'), result.metadata)
                 episode = IncidentEpisode(case, truth)
             phase = 'simulation'
             raw = episode.advance(scenario, result.plan, approval, state=result.state)

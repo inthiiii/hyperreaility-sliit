@@ -6,12 +6,16 @@ from pathlib import Path
 from uuid import uuid4
 
 from project.core.coordinator import Coordinator
+from project.core.orchestrator import AgentOrchestrator
+from project.auth import require
 from project.core.state import digest
 from project.core.tracing import redact
 from project.llm.client import HostedAdapter
 from project.llm.health import preflight
 
 MODES = ('template', 'single', 'multi')
+# Hosted modes run the v14 agent orchestrator; the v13 matched pipeline stays available as a control.
+HOSTED_WORKFLOW = AgentOrchestrator
 PLANNERS = ('cp_sat', 'greedy')
 
 
@@ -42,8 +46,14 @@ def _save_attempt(attempt, root):
         temporary.unlink(missing_ok=True)
 
 
-def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, coordinator_factory=None):
-    """At most one execution per request key; exceptions never silently retry/fallback."""
+def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, coordinator_factory=None, user=None):
+    """At most one execution per request key; exceptions never silently retry/fallback.
+
+    The dashboard always passes the signed-in ``user``; permission is enforced here,
+    not only by disabling the button.
+    """
+    if user is not None:
+        require(user, 'generate_plan')
     if mode not in MODES or planner not in PLANNERS:
         raise ValueError('Unknown planning mode or scheduler')
     if (session.selected_key, session.scenario_hash) != (choice.key, choice.content_hash):
@@ -85,7 +95,7 @@ def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, 
             phase = 'client_setup'
             adapter = (adapter_factory or HostedAdapter.from_env)()
         phase = 'planning'
-        coordinator = (coordinator_factory or Coordinator)(adapter, planner=planner,
+        coordinator = (coordinator_factory or (Coordinator if mode == 'template' else HOSTED_WORKFLOW))(adapter, planner=planner,
                                  trace_dir=Path(root) / 'results/local_runs')
         result = session.core.prepare(coordinator, choice.scenario.model_copy(deep=True), mode)
         if result.state.source_hash != choice.content_hash or result.state.scenario_id != choice.scenario.scenario_id:

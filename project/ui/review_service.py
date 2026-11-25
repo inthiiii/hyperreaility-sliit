@@ -4,6 +4,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from pydantic import Field
+from project.auth import require
 from project.core.schemas import Approval, Contract
 from project.core.coordinator import approve, approve_run, check_approval
 from project.core.state import digest
@@ -27,6 +28,8 @@ class DecisionRecord(Contract):
     note: str = Field(default='', max_length=2000)
     recorded_at_utc: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     authenticated: bool = False
+    username: str | None = None
+    role: str | None = None
 
 
 def review_context(session, choice):
@@ -76,9 +79,13 @@ def active_approval(session, choice):
         return False
 
 
-def record_decision(session, choice, expected_binding, decision, operator_id, note, root):
+def record_decision(session, choice, expected_binding, decision, operator_id, note, root, *, user=None):
     if decision not in ('approve', 'reject'):
         raise ReviewBlocked('Choose approve or reject.')
+    if user is not None:
+        require(user, 'approve_plan' if decision == 'approve' else 'reject_plan')
+        if operator_id != user.label:
+            raise ReviewBlocked('Decisions are recorded under the signed-in identity only.')
     if not isinstance(operator_id, str) or not 1 <= len(operator_id.strip()) <= 120:
         raise ReviewBlocked('Enter an operator label of 1–120 characters in the sidebar.')
     if not isinstance(note, str) or len(note) > 2000:
@@ -103,7 +110,8 @@ def record_decision(session, choice, expected_binding, decision, operator_id, no
                         plan=result.plan, state=result.state, operator_id=operator_id.strip()))
     record = DecisionRecord(decision_id=str(uuid4()), session_id=session.session_id,
         run_id=result.run_id, scenario_id=result.state.scenario_id, input_hash=choice.content_hash,
-        binding=binding, approval=approval, note=note.strip())
+        binding=binding, approval=approval, note=note.strip(), authenticated=user is not None,
+        username=user.username if user else None, role=user.role if user else None)
     # No active decision unless the audit write succeeds.
     save_record(Path(root) / 'results/local_runs/decisions', record.decision_id, record.model_dump(mode='json'))
     session.core.approval = approval
