@@ -1,0 +1,2077 @@
+{
+  "format_version": 1,
+  "kind": "evaluation_candidate_review_packet",
+  "human_review": "PENDING",
+  "held_out_validity": "NOT_ESTABLISHED",
+  "model_calls": 0,
+  "automated_data_audit_sha256": "417e60629556d29f354021bebbe5cc282674c01035c92600710f7762c05941b8",
+  "category_counts": {
+    "equipment_only": 2,
+    "power_only": 2,
+    "power_and_backhaul": 2,
+    "skill_shortage": 2,
+    "route_closure": 2,
+    "conflicting_reports": 2,
+    "stale_reports": 2,
+    "missing_critical_evidence": 2,
+    "generator_exhaustion": 2,
+    "resource_loss_replanning": 2
+  },
+  "diversity": {
+    "unique_topology_descriptors": 3,
+    "cases_matching_development_topology_descriptor": 20,
+    "reports_matching_development_text": 34,
+    "total_reports": 34
+  },
+  "required_human_work": [
+    "Vary/review topology, routes, windows, skills and resource scarcity beyond seeded numeric changes.",
+    "Check each report meaning, authority, conflict, timestamps and missing evidence against labels.",
+    "Check expected outcomes independently; mechanical eligibility is not an optimal recovery label.",
+    "Declare authorship, prompt tuning and answer exposure; retire contaminated cases or limit claims.",
+    "Revise in a new dataset version; preserve the original frozen release."
+  ],
+  "cases": [
+    {
+      "scenario_id": "EVAL-001",
+      "category": "equipment_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-001.json",
+          "sha256": "804eaea3616ede92367fe9ead138164b9ae140ad680c19c6e56df32e594a3f2d"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-001.json",
+          "sha256": "ddcd88353fa37986baa446c02387caa2ef066b7c94f2034fb6c23a8a9f50b671"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-001.json",
+          "sha256": "b797fb536b56c2da485022a8954f8b979faafd6fb44be96f24a1ae02d354661e"
+        }
+      },
+      "input_content_sha256": "d4fc8e0b645ceeed0214173067f9a5cf5a73f53fe0d82f1fd366aeb647e56fc5",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 1,
+      "exact_report_text_matches_development": 1,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-002",
+      "category": "equipment_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-002.json",
+          "sha256": "bb668c92f2713e074844f63c9f6eb348ef91c024f106da63ef4ff939b23a5302"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-002.json",
+          "sha256": "c9200e3537dbdb9a7a985975c7836833b6806e10356312c65b7cab5c638b6f07"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-002.json",
+          "sha256": "7dec47342a1c1eab1d681f654fbae2bdc61404d707315fa1e04e89a017271d19"
+        }
+      },
+      "input_content_sha256": "347bd873e61f5f50766c0cf6b41c58bf0b395c85977b31b5dd13acbe1bc4a0dc",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 1,
+      "exact_report_text_matches_development": 1,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 240,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-003",
+      "category": "power_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-003.json",
+          "sha256": "724a159dc845ff99fc00e09bbd8f043bca4686ff724e6813de8ef91a20b0c6b3"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-003.json",
+          "sha256": "ed84dd84f657893464142b4966ed809b8f5056bdf41d070c49fa436ab23fcf08"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-003.json",
+          "sha256": "6e978b3dd92e494f28a377da68d4074fe63c36be94753475f6449737fd57ee2a"
+        }
+      },
+      "input_content_sha256": "c83f35ac34e18ac8271cb39cf30979c430d3e935a6b48a18b680f27bfbf3eae0",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 1,
+      "exact_report_text_matches_development": 1,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 300,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-004",
+      "category": "power_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-004.json",
+          "sha256": "1fb7619e840e12c6e1191b3019c39ed49189f6be0eba9bc097ccecf9fd7ebf8f"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-004.json",
+          "sha256": "4bbf608619f1f45b143ea3eb37b3938b320a976ff7ce0fa5d47300c56e59a125"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-004.json",
+          "sha256": "745ceb55a1af23215521b32168261de57aca534cb268f2620d2d83894c407f6b"
+        }
+      },
+      "input_content_sha256": "6fd0448dcd14e0f178342d2b70ab36e1aa100a3d19ec51484b99fd0b1353a22c",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 18
+        },
+        "non_root_branch_degrees": [
+          9,
+          9
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 1,
+      "exact_report_text_matches_development": 1,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-005",
+      "category": "power_and_backhaul",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-005.json",
+          "sha256": "f351863e5279cda7e99dd5b6c0e34a638f8f6d7ea435149af57472654fa7be5f"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-005.json",
+          "sha256": "d64b7909f7b329d21e2ec4aaa9705fa6114fced5946538d804613375d6931dc7"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-005.json",
+          "sha256": "88b7ae7b00376f64e37611f7717d1816393d24e247048d63bf03dec232359906"
+        }
+      },
+      "input_content_sha256": "eb72154822e2d93958311bc0b87554e30061e39bb8f2bc4fd72694db21eec63a",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 18
+        },
+        "non_root_branch_degrees": [
+          9,
+          9
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 3,
+      "exact_report_text_matches_development": 3,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: grid power is unavailable."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-003",
+          "reported_value": false,
+          "target_id": "L01",
+          "target_type": "link",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "L01: backhaul link has failed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-006",
+      "category": "power_and_backhaul",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-006.json",
+          "sha256": "0c3195446b7168364de73ebbc432c61e7b73d25f95bbb03ace4bc9665b6a65fd"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-006.json",
+          "sha256": "58331547f5add4a361f4ce60b89e34e10080e24595b51a63626b312cf16851ea"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-006.json",
+          "sha256": "e2273b97d49c2597b86d8494be69f040a11d39bfa98fc9d5d0d77104ad948d0f"
+        }
+      },
+      "input_content_sha256": "91bc262613861bcaa3d1701df0558d3d51e379011ce3c7d2eb221f03e5ec4f0c",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 3,
+      "exact_report_text_matches_development": 3,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: grid power is unavailable."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-003",
+          "reported_value": false,
+          "target_id": "L01",
+          "target_type": "link",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "L01: backhaul link has failed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-007",
+      "category": "skill_shortage",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-007.json",
+          "sha256": "154eb16947197d18d9647a58f89881939cb51a1be06fa9fcf989517f549af989"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-007.json",
+          "sha256": "e604f6749bec511a51cde95243b7489e4100f38cc4b8e1754ba94fb9df67ae1b"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-007.json",
+          "sha256": "18ba02e675f24987d8abfdc99a7a8c552cc366197980a347f78ca4d5f75ad7ce"
+        }
+      },
+      "input_content_sha256": "32f59e0fae949a9154a540189650a5a2fa48796cb3258cc6d794f1f2285f0740",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 3,
+      "exact_report_text_matches_development": 3,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 300,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: grid power is unavailable."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-003",
+          "reported_value": false,
+          "target_id": "L01",
+          "target_type": "link",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "L01: backhaul link has failed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-008",
+      "category": "skill_shortage",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-008.json",
+          "sha256": "b4a86d628747b8dc9dbf9b193d35cd5ad571df2e375430c834ff8d5a110e3bfd"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-008.json",
+          "sha256": "cf9262cea61f0c9bf6bf86e51cc20e4839f5157a79933aacc6ad3243951763d8"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-008.json",
+          "sha256": "23969c30775e4cae06836f8cb081cb9c54bba14cedc27cb8ded1a70cf944c509"
+        }
+      },
+      "input_content_sha256": "a49cb1cc054a288cf4432855a162d2a95ae3c9fa17a6e241384e6ecf7a65f583",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 3,
+      "exact_report_text_matches_development": 3,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 240,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: grid power is unavailable."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-003",
+          "reported_value": false,
+          "target_id": "L01",
+          "target_type": "link",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "L01: backhaul link has failed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-009",
+      "category": "route_closure",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-009.json",
+          "sha256": "16bc2cfe7c8c3a2a1a84cd5cdd6dff3fb7db76e50ff94d32b350989631fb6fc7"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-009.json",
+          "sha256": "c8188c65aacc44414c5510d5b3d81fa004dc45e71ad58f917cef996cbaf9e76a"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-009.json",
+          "sha256": "3e2bdcc65666a7cf5a2cfe6115fdb81d89907f429510457f204c5208c896550b"
+        }
+      },
+      "input_content_sha256": "19fd4a3dfb4c6da94aefc53f6796bd5b109f730eb0effd5b109f79f3f609ff5b",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "open",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "R01",
+          "target_type": "road",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "R01: access road is closed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-010",
+      "category": "route_closure",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-010.json",
+          "sha256": "f0ef8499a4f8275d670a9fa3a887b685eb5f21adbcfc2de8d7f003627f39f4a7"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-010.json",
+          "sha256": "e78b44aa8dc21be251732046bb69f8850a97b92f8b976bb49969884ea5615b44"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-010.json",
+          "sha256": "e0ce7294f87ff01c42effea0c083dacbcb33eec2520ca2687918b39d6b41c745"
+        }
+      },
+      "input_content_sha256": "b803f5f8f471f11d6987c9263aa403a71c418804225f21363f83bbee33bffa55",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 18
+        },
+        "non_root_branch_degrees": [
+          9,
+          9
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "open",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "R01",
+          "target_type": "road",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "R01: access road is closed."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-011",
+      "category": "conflicting_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-011.json",
+          "sha256": "6bdb65aea418b64e5f3a7077ffffd7ca0262025a75482bb0dad469f8a6d670ea"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-011.json",
+          "sha256": "5dcefb8544d11e2557db3e6ac79424ed95ffb49727819888478a4303b9ce8052"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-011.json",
+          "sha256": "ec4df9c056313b827c78b380a13d138b96c29008afee1db823c5f166174549b5"
+        }
+      },
+      "input_content_sha256": "30fe6b19cf40e75794d8e935197348131f20ead51bd4d93306702f7391fb0dae",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 18
+        },
+        "non_root_branch_degrees": [
+          9,
+          9
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "REP-002",
+          "reported_value": true,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment is operational."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-012",
+      "category": "conflicting_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-012.json",
+          "sha256": "a17ae80c898263cb95031282f77704622fa3a34044527b9cd82390bc9ea23134"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-012.json",
+          "sha256": "dd8ad9c063aea8b02575511bc83d0237c459a5a8665159809259fef09c69b5a4"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-012.json",
+          "sha256": "7685d87a0d213a707ffec3ada1fd44462328ee8115a3db686479f96809c07df5"
+        }
+      },
+      "input_content_sha256": "414e14cdb2c4c5b449a997fd283f5554d81b04640bb652bab8eceede7248f507",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "REP-002",
+          "reported_value": true,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment is operational."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-013",
+      "category": "stale_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-013.json",
+          "sha256": "1637e67a8a9c7daf5713bae3757b2e2187a4160bc6ec719d932549450d23385b"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-013.json",
+          "sha256": "1ff56818ab11383f957a8d650255f015cef350e39bf0034aaaa27f37e2bbd282"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-013.json",
+          "sha256": "eb9328136536ddb21f744e56cd2c6ceb6c61132a57169547db84ef61219eeadf"
+        }
+      },
+      "input_content_sha256": "7a4469109700ff1d95cac728dcafda1d7d335caff80ed18ac40893cae168a266",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "stale_not_authoritative",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "unverified_message",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": true,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment is operational."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-014",
+      "category": "stale_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-014.json",
+          "sha256": "b6da70a19a59dd59e3774966a17d508536386d51af8ca5914b4f30781dd4f6e3"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-014.json",
+          "sha256": "2415a31563f947e1acbf4570bb7a804927052994138844e8dbbb0f66a4c6be86"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-014.json",
+          "sha256": "66577e762a1d1ee7228d10a9f1be604923fe99093d76d961a320f0f1112981cc"
+        }
+      },
+      "input_content_sha256": "168592772d01948ba61ef30f9f8722fe7b5e19728ccdbf3f9c4a0126ae89f72d",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 300,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "stale_not_authoritative",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "unverified_message",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": true,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment is operational."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-015",
+      "category": "missing_critical_evidence",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-015.json",
+          "sha256": "1eccdd0baebc94bb70b1497942ca119ada2ed9d74dac5bed79f64c73a2f6b127"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-015.json",
+          "sha256": "ebe52c48a27bcf38b0b86a5fb502e0c554cc7ee1af47cda2da106767f0f79b92"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-015.json",
+          "sha256": "62fc0c4ce7d411ec16c862568251e8dc41e01d8af71c6c3965ebc05b270271a9"
+        }
+      },
+      "input_content_sha256": "71660ec2ab01161094f3e4ef267d93ac60b468d66826f11cd2ac2e624985e13f",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 0,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "clarification_required",
+          "target_id": "S01",
+          "target_type": "site"
+        }
+      ],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-016",
+      "category": "missing_critical_evidence",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-016.json",
+          "sha256": "23383895a82322db5d97f0eef889e230c2ba451ebfd44685dbedf61dd5dd31fe"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-016.json",
+          "sha256": "a59b81368e0b5fc573efa4a7f2e4ed07b16953fdf1609b043d64430806ab030f"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-016.json",
+          "sha256": "7721917de3193d89c89889c5ea8179de1f5a2d3827c8abb90ae0c3b99231ace6"
+        }
+      },
+      "input_content_sha256": "a99597f2859fd327b56fd3a16848098dbb58d0de8b71648c055403ed1a7ddf4a",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 18
+        },
+        "non_root_branch_degrees": [
+          9,
+          9
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 0,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 300,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "clarification_required",
+          "target_id": "S01",
+          "target_type": "site"
+        }
+      ],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-017",
+      "category": "generator_exhaustion",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-017.json",
+          "sha256": "e26d0b59dcb359a59eae20160dea8f4734dd2ab307888f8c2a3cef7e1ed21316"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-017.json",
+          "sha256": "8f9fcbe34695f2a680ae60410096bfb6cb2a69bb29d5c28580b92796d2c4071d"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-017.json",
+          "sha256": "5f7334ad0b10006c05cfe283b44f7ccfa7a10f6b33db7ab503af62b086c0301f"
+        }
+      },
+      "input_content_sha256": "0d1c745bed2a65ecce48ebd9da49e97b17ed929804542261a379aa620747aa1e",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 18
+        },
+        "non_root_branch_degrees": [
+          9,
+          9
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 1,
+      "exact_report_text_matches_development": 1,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-018",
+      "category": "generator_exhaustion",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-018.json",
+          "sha256": "c21eaf57997eee91ba47726c8af87c7ccb34d830419c9ae314efd1f3170f4b14"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-018.json",
+          "sha256": "1093a9ff61b8e5de7582d1859c98b3d5954cee94b1b726b27d38bef2f2b85576"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-018.json",
+          "sha256": "7066c885b009f0a9c089b59b2723124116e602591bec87ef0af6352dea791a61"
+        }
+      },
+      "input_content_sha256": "2e0aed5b6f9e22ef960b29434d733e1c0ba1182206f3d358e84499a9ae4763d3",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 1,
+      "exact_report_text_matches_development": 1,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-019",
+      "category": "resource_loss_replanning",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-019.json",
+          "sha256": "9364f65b316f765bd96c988318e3043eb39871733fbbc2d335aaf649225662cb"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-019.json",
+          "sha256": "7a2f3c86b33db31c7fc200297d54f3b7451180d29d7a19c798be73416f1c45b7"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-019.json",
+          "sha256": "668334d42e4139f7e95e2d3532d7f8377054ae614b24f6fec19870075ae8c5cc"
+        }
+      },
+      "input_content_sha256": "3b236e6def41bcc4efe3c91e3933a19472125f22d23ef2cece65a0365c96d95a",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 14
+        },
+        "non_root_branch_degrees": [
+          7,
+          7
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [
+        {
+          "event_id": "EVT-001",
+          "at_min": 60,
+          "operator_report": {
+            "report_id": "EVENT-REP-001",
+            "source_type": "confirmed_field_update",
+            "observed_at_min": 60,
+            "text": "Crew C2 is unavailable for the rest of the incident."
+          },
+          "truth_patch": {
+            "crew_id": "C2",
+            "available_until_min": 60
+          }
+        }
+      ],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL-020",
+      "category": "resource_loss_replanning",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL-020.json",
+          "sha256": "217711792b83d0359f240d37e337da77316e14c7e936eeb9d330ac7f9dc940cf"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL-020.json",
+          "sha256": "a28252d2a7b9e0d8f251c6dd5878851e90da9bc3dde2e376b39f519a76efcc18"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL-020.json",
+          "sha256": "2905da04a609b82f4ea502ed16680ac5800a182427b1f02a6bfb9067a2753144"
+        }
+      },
+      "input_content_sha256": "ce49858d8d3b34dbd5206191480acdcbb69c044bcf2cd3508b33e8498cf043ec",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 16
+        },
+        "non_root_branch_degrees": [
+          8,
+          8
+        ],
+        "roads_all_depot_spokes": true
+      },
+      "topology_descriptor_matches_development": true,
+      "report_count": 2,
+      "exact_report_text_matches_development": 2,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "backhaul",
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-001",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S01: equipment has failed."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "REP-002",
+          "reported_value": false,
+          "target_id": "S02",
+          "target_type": "site",
+          "mechanical_label_check": "LITERAL_MATCH",
+          "source_type": "authoritative_snapshot",
+          "text": "S02: grid power is unavailable."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [],
+        "planning_eligible": true
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [
+        {
+          "event_id": "EVT-001",
+          "at_min": 60,
+          "operator_report": {
+            "report_id": "EVENT-REP-001",
+            "source_type": "confirmed_field_update",
+            "observed_at_min": 60,
+            "text": "Crew C2 is unavailable for the rest of the incident."
+          },
+          "truth_patch": {
+            "crew_id": "C2",
+            "available_until_min": 60
+          }
+        }
+      ],
+      "human_review": "PENDING"
+    }
+  ]
+}

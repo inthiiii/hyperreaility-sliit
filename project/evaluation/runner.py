@@ -228,7 +228,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
 
 
 def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3, seed=22,
-                  allow_live=False, *, data_root=None, max_episodes=10):
+                  allow_live=False, *, data_root=None, max_episodes=10, review_release=None):
     if type(repeats) is not int or repeats < 1:
         raise ValueError('Repeats must be positive integers')
     if not variants or any(v not in VARIANTS for v in variants):
@@ -237,13 +237,23 @@ def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3,
         raise ValueError('Duplicate variants')
     if type(max_episodes) is not int or not 1 <= max_episodes <= 100:
         raise ValueError('Episode limit must be an integer in [1,100]')
-    cases = [ScenarioInput.model_validate_json(Path(p).read_text()) for p in paths]
+    paths=list(map(Path,paths))
+    cases = [ScenarioInput.model_validate_json(p.read_text()) for p in paths]
     if not cases or len({c.scenario_id for c in cases}) != len(cases):
         raise ValueError('Provide unique visible scenario IDs')
+    data_root = Path(data_root or DATA_ROOT).resolve()
+    registered_ids={p.stem for p in (data_root/'processed/agent_inputs/candidate_evaluation').glob('*.json')}
+    candidate_cases=[case for case,path in zip(cases,paths) if case.scenario_id in registered_ids
+                     or case.scenario_id.startswith('EVAL-') or path.parent.name=='candidate_evaluation']
+    review_gate=None
+    if candidate_cases:
+        if review_release is None:
+            raise ValueError('Candidate evaluation is blocked until independent human review is recorded; supply --review-release')
+        from project.evaluation.case_review import validate_release
+        review_gate=validate_release(data_root.parent,review_release,candidate_cases)
     hosted = any(VARIANTS[v][0] != 'template' for v in variants)
     if hosted and (not allow_live or preflight()['status'] == 'blocked'):
         raise ValueError('Hosted benchmarks require --allow-live and a configured model/key')
-    data_root = Path(data_root or DATA_ROOT).resolve()
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True,mode=0o700)
     configuration=model_configuration() if hosted else None
@@ -255,7 +265,7 @@ def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3,
         'packages': {name: importlib.metadata.version(name) for name in ('pydantic', 'ortools', 'networkx', 'openai')},
         'scoring_status': 'independent_incident_evaluator_connected',
         'approval_mode': 'automated_benchmark_operator', 'whole_incident_limits': LIMITS,
-        'max_episodes': max_episodes,
+        'max_episodes': max_episodes, 'evaluation_review':review_gate,
         'scope': 'Matched tool-assisted workflow comparison. Template baselines are not LLM agents. Independent held-out review remains a separate gate; development results do not establish superiority.'}
     _save(output/'manifest.json', manifest)
     jobs = [(c, v, n) for c in cases for n in range(repeats) for v in variants]
@@ -292,11 +302,12 @@ def main():
     parser.add_argument('--allow-live', action='store_true')
     parser.add_argument('--data-root', type=Path)
     parser.add_argument('--max-episodes', type=int, default=10)
+    parser.add_argument('--review-release',type=Path,help='Hash-bound completed human review release for evaluation candidates')
     args = parser.parse_args()
     from dotenv import load_dotenv
     load_dotenv(Path(__file__).resolve().parents[2]/'.env')
     rows = run_benchmark(args.scenarios, args.output, args.variants, args.repeats, args.seed, args.allow_live,
-                         data_root=args.data_root, max_episodes=args.max_episodes)
+                         data_root=args.data_root, max_episodes=args.max_episodes,review_release=args.review_release)
     print(json.dumps({'attempts': len(rows), 'scored': sum(r['scoring_status'] == 'scored' for r in rows),
                       'scoring_status': 'independent_incident_evaluator_connected'}, indent=2))
 
