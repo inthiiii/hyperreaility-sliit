@@ -1,0 +1,205 @@
+{
+  "crews": [
+    {
+      "available_from_min": 0,
+      "available_until_min": 570,
+      "crew_id": "C1",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "generator"
+      ]
+    },
+    {
+      "available_from_min": 0,
+      "available_until_min": 720,
+      "crew_id": "C2",
+      "location": "DEPOT",
+      "skills": [
+        "equipment",
+        "backhaul",
+        "generator"
+      ]
+    }
+  ],
+  "distractor_reports": [
+    {
+      "expected_resolution": "no_operational_fact",
+      "kind": "customer_complaint",
+      "report_id": "V3-EVAL2-004-X01"
+    },
+    {
+      "expected_resolution": "no_operational_fact",
+      "kind": "irrelevant_notice",
+      "report_id": "V3-EVAL2-004-X02"
+    },
+    {
+      "expected_resolution": "no_operational_fact",
+      "kind": "rumour",
+      "report_id": "V3-EVAL2-004-X03"
+    },
+    {
+      "expected_resolution": "no_operational_fact",
+      "kind": "prompt_injection",
+      "report_id": "V3-EVAL2-004-X04"
+    }
+  ],
+  "evaluation_notes": [
+    "AI-authored and AI-reviewed engineering revision; not independent human validation.",
+    "No optimal schedule, model-performance benefit or real operator outcome is claimed.",
+    "Evidence v3: wording rewritten from v2 labels; distractors carry no operational fact."
+  ],
+  "expected_report_facts": [
+    {
+      "attribute": "grid_power_ok",
+      "expected_resolution": "verified",
+      "report_id": "V2-04-OBS-01",
+      "reported_value": false,
+      "target_id": "S18",
+      "target_type": "site"
+    }
+  ],
+  "future_events": [],
+  "generators": [
+    {
+      "autonomy_minutes": 180,
+      "available": true,
+      "deployment_minutes": 15,
+      "generator_id": "G1",
+      "location": "DEPOT",
+      "max_deployments": 1
+    },
+    {
+      "autonomy_minutes": 210,
+      "available": false,
+      "deployment_minutes": 10,
+      "generator_id": "G2",
+      "location": "S03",
+      "max_deployments": 1
+    }
+  ],
+  "links": {
+    "L01": true,
+    "L02": true,
+    "L03": true,
+    "L04": true,
+    "L05": true,
+    "L06": true,
+    "L07": true,
+    "L08": true,
+    "L09": true,
+    "L10": true,
+    "L11": true,
+    "L12": true,
+    "L13": true,
+    "L14": true,
+    "L15": true,
+    "L16": true,
+    "L17": true,
+    "L18": true
+  },
+  "missing_facts": [],
+  "roads": {
+    "R01": true,
+    "R02": true,
+    "R03": true,
+    "R04": true,
+    "R05": true,
+    "R06": true,
+    "R07": true,
+    "R08": true,
+    "R09": true,
+    "R10": true,
+    "R11": true,
+    "R12": true,
+    "R13": true,
+    "R14": true,
+    "R15": true,
+    "R16": true,
+    "R17": true,
+    "R18": true,
+    "R19": true,
+    "R20": true,
+    "R21": true,
+    "R22": true,
+    "R23": true,
+    "R24": true,
+    "R25": true,
+    "R26": true
+  },
+  "scenario_id": "EVAL2-004",
+  "sites": {
+    "S01": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S02": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S03": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S04": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S05": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S06": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S07": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S08": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S09": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S10": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S11": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S12": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S13": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S14": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S15": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S16": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S17": {
+      "equipment_ok": true,
+      "grid_power_ok": true
+    },
+    "S18": {
+      "equipment_ok": true,
+      "grid_power_ok": false
+    }
+  }
+}

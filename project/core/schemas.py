@@ -15,6 +15,13 @@ class Site(Contract):
     x: float = Field(allow_inf_nan=False)
     y: float = Field(allow_inf_nan=False)
     coordinate_system: Literal['synthetic_local_grid']
+    # Optional site directory fields (evidence v3). Omitted from dumps when empty so
+    # earlier frozen fixtures keep identical content hashes.
+    code: str | None = Field(default=None, exclude_if=lambda value: value is None)
+    district: str | None = Field(default=None, exclude_if=lambda value: value is None)
+    aliases: list[str] = Field(default_factory=list, exclude_if=lambda value: not value)
+    lat: float | None = Field(default=None, allow_inf_nan=False, exclude_if=lambda value: value is None)
+    lon: float | None = Field(default=None, allow_inf_nan=False, exclude_if=lambda value: value is None)
 
 class Link(Contract):
     link_id: str
