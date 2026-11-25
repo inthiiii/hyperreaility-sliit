@@ -71,7 +71,7 @@ python -m streamlit run project/main.py
 
 Sign in as `coordinator` to generate a plan and as `manager` to approve and simulate it (same password). Other demo users: `field`, `auditor`, `admin`.
 
-Pages: **Overview**, **Incident** (reports, crews, roads), **Map** (sites in real towns, replay of the simulated restoration), **Planning** (crew Gantt, agent conversation, operator inbox, approval), **Field work** (crew jobs and field updates), **Results**, **History**, **Settings** (roles).
+Pages: **Overview**, **Incident** (reports, crews, roads), **Map** (sites in real towns, planned crew routes, ▶ replay of the simulated restoration), **Planning** in four steps (① Generate with live agent progress · ② Inspect plan: crew Gantt, agent conversation, operator inbox · ③ Review & approve · ④ Simulate), **Field work** (crew jobs and field updates), **Results** (measured outcome + compare with the no-AI baseline), **Benchmark** (held-out results), **History**, **Settings** (roles).
 
 The **Offline template baseline** needs no API key, but it cannot read free-text reports: on evidence v3 cases it can only plan around unknowns. That limitation is deliberate and is the reason the AI agents exist.
 
