@@ -1,0 +1,2669 @@
+{
+  "format_version": 1,
+  "kind": "evaluation_candidate_review_packet",
+  "human_review": "PENDING",
+  "held_out_validity": "NOT_ESTABLISHED",
+  "model_calls": 0,
+  "automated_data_audit_sha256": "4a1cd0bc0f783d0bb4bf2c39dfa1d23a61f222f91ef5fdff76c0b94d4521506f",
+  "category_counts": {
+    "equipment_only": 2,
+    "power_only": 2,
+    "power_and_backhaul": 2,
+    "skill_shortage": 2,
+    "route_closure": 2,
+    "conflicting_reports": 2,
+    "stale_reports": 2,
+    "missing_critical_evidence": 2,
+    "generator_exhaustion": 2,
+    "resource_loss_replanning": 2
+  },
+  "diversity": {
+    "unique_topology_descriptors": 20,
+    "cases_matching_development_topology_descriptor": 0,
+    "reports_matching_development_text": 0,
+    "total_reports": 35
+  },
+  "required_human_work": [
+    "Vary/review topology, routes, windows, skills and resource scarcity beyond seeded numeric changes.",
+    "Check each report meaning, authority, conflict, timestamps and missing evidence against labels.",
+    "Check expected outcomes independently; mechanical eligibility is not an optimal recovery label.",
+    "Declare authorship, prompt tuning and answer exposure; retire contaminated cases or limit claims.",
+    "Revise in a new dataset version; preserve the original frozen release."
+  ],
+  "cases": [
+    {
+      "scenario_id": "EVAL2-001",
+      "category": "equipment_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-001.json",
+          "sha256": "d44a46de7d32411dd72253eaf4243e27054744966517428d923b11c3beda153f"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-001.json",
+          "sha256": "c0d2939557928bd15aef5aa9c4a7154a8a535fea029a34b594cc32aa65c1af4e"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-001.json",
+          "sha256": "a263cf4435542a23cf863571affdde56e898050fcdca05c7aec05b5920534090"
+        }
+      },
+      "input_content_sha256": "11452e844f9f2c24a1bde5d9ece70a19c4d7c0e89286dbbfa2d097a8a10b6dab",
+      "topology": {
+        "sites": 15,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 3,
+          "3": 3,
+          "4": 5,
+          "5": 3
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          2,
+          3,
+          3,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-01-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 01/01 records S01: the site equipment is not functioning and needs repair."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-002",
+      "category": "equipment_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-002.json",
+          "sha256": "7f95d03c9d3937039144bae6b401492a9952b529ff1e3867b03ef81130183e06"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-002.json",
+          "sha256": "f03ae65e71605319c0e176d8780d83281ae22c283d63b55f40617d33fc4669d4"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-002.json",
+          "sha256": "a1b339ab3d63ee2bf78ebacec799c8caa6a1e23b4e6517939e1905f4b1fa3dc0"
+        }
+      },
+      "input_content_sha256": "448fba0b7d1251109130ee8e8ae8f3ece9ab9738a0e1f05f369a07b9e4095fca",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 1,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 1,
+          "7": 2,
+          "8": 3,
+          "9": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 150,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-02-OBS-01",
+          "reported_value": false,
+          "target_id": "S16",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 02/01 records S16: the site equipment is not functioning and needs repair."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S16:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-003",
+      "category": "power_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-003.json",
+          "sha256": "811ccf82d7a531ee00a0605b4479c4b3ea1c90a4b6a7a4e22684a022a1249494"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-003.json",
+          "sha256": "43048df39725c59ea26f2b923f626036d79fcbd772e953227d172d80c732843f"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-003.json",
+          "sha256": "ef819e50af52c29be31aadbcd6edfc4a072ce004e0241d727a294268c58a60d9"
+        }
+      },
+      "input_content_sha256": "6c757195cf0567f112f8e7bb9657f87d7dcaaf26b41cdd4a90535ebe677eecc2",
+      "topology": {
+        "sites": 17,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 3,
+          "3": 4,
+          "4": 3,
+          "5": 2,
+          "6": 2,
+          "7": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C4",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 150,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-03-OBS-01",
+          "reported_value": false,
+          "target_id": "S05",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 03/01 records S05: the mains supply is absent at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S05:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-004",
+      "category": "power_only",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-004.json",
+          "sha256": "7fbf0e01686d145c06756db686602b72e79b56e05995d72e0e7aa026c7324e69"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-004.json",
+          "sha256": "c3b4aba50d12595fd32d6c1b41b038a0f5c4ebd106dd6f3cf9ad6456460b15cb"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-004.json",
+          "sha256": "f0da14adc31000177a21b795369a58e16e4ec2872271a6da188ab4741a4d673a"
+        }
+      },
+      "input_content_sha256": "56bf90066ae96dbdacdd484e6456040ed993d3c20e36c0f922153c34654cf5a8",
+      "topology": {
+        "sites": 18,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 3,
+          "3": 1,
+          "4": 2,
+          "5": 4,
+          "6": 4,
+          "7": 3
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          3,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 210,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-04-OBS-01",
+          "reported_value": false,
+          "target_id": "S18",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 04/01 records S18: the mains supply is absent at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S18:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-005",
+      "category": "power_and_backhaul",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-005.json",
+          "sha256": "9037dea830efb5e826051077d5c5898f2bd2854949d2986f0861867ed2cb72a4"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-005.json",
+          "sha256": "733ea801dd1513d6dc67eb110bd7f7b4f7ffc35dad054fe3adcd585e3204c65d"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-005.json",
+          "sha256": "0914af87a4db0c57f0356900d19fdfefe590df793bea44632c491529b9b4d2d3"
+        }
+      },
+      "input_content_sha256": "b0090789fdca8ef505c2b6e3d92bb8f1c0973a67fe2a87c898d96d6fae0d637e",
+      "topology": {
+        "sites": 19,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 2,
+          "3": 2,
+          "4": 1,
+          "5": 2,
+          "6": 5,
+          "7": 3,
+          "8": 2,
+          "9": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          3,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 3,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 210,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-05-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 05/01 records S01: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-05-OBS-02",
+          "reported_value": false,
+          "target_id": "S07",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 05/02 records S07: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-05-OBS-03",
+          "reported_value": false,
+          "target_id": "L07",
+          "target_type": "link",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 05/03 records L07: the backhaul circuit is broken."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "link:L07",
+          "site:S01:grid_power_ok",
+          "site:S07:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-006",
+      "category": "power_and_backhaul",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-006.json",
+          "sha256": "ff7dcf81244df3daafc7cd9ce9b19781e82d564b11162ff0727a3a429c4e25dc"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-006.json",
+          "sha256": "fb850f722b820799263305a6c0fda324f1b764fc2b8029d3ee97a3b1de42120a"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-006.json",
+          "sha256": "cb32488820627f0881e093093d24ab00f22e6e80d96164f6078110ebc1d2d749"
+        }
+      },
+      "input_content_sha256": "250abfc57e8cc2c8239e554296ed85d523b5f2a47b1384ece7b4faf85aa18ba0",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 3,
+          "3": 1,
+          "4": 3,
+          "5": 4,
+          "6": 2,
+          "7": 2,
+          "8": 3
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 3,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C4",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-06-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 06/01 records S01: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-06-OBS-02",
+          "reported_value": false,
+          "target_id": "S20",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 06/02 records S20: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-06-OBS-03",
+          "reported_value": false,
+          "target_id": "L20",
+          "target_type": "link",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 06/03 records L20: the backhaul circuit is broken."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "link:L20",
+          "site:S01:grid_power_ok",
+          "site:S20:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-007",
+      "category": "skill_shortage",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-007.json",
+          "sha256": "9d2931ae2ac99685428ad514200bf343e5e25cbe04d37bbdafe98e71089a9bc3"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-007.json",
+          "sha256": "66dda5e685dcf8882cf5ff32d29f83497c38c7fb1f4304213a302db3817981be"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-007.json",
+          "sha256": "a765ad50e4ca8e5b03eb7470e03723beac34fa969441c07065ad7658eaed4ba2"
+        }
+      },
+      "input_content_sha256": "4d251e2e9befcd9cc211a1bbe3c79f9c867c1be1193f8e203e27881ed9e4bad8",
+      "topology": {
+        "sites": 15,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 2,
+          "3": 1,
+          "4": 1,
+          "5": 2,
+          "6": 3,
+          "7": 1,
+          "8": 1,
+          "9": 2
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 3,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-07-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 07/01 records S01: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-07-OBS-02",
+          "reported_value": false,
+          "target_id": "S09",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 07/02 records S09: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-07-OBS-03",
+          "reported_value": false,
+          "target_id": "L09",
+          "target_type": "link",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 07/03 records L09: the backhaul circuit is broken."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "link:L09",
+          "site:S01:grid_power_ok",
+          "site:S09:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-008",
+      "category": "skill_shortage",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-008.json",
+          "sha256": "a07bb92c6b1e2fd65d447fcd2e1b1bed86e3eb34161e8162a0ab5ae4ff97f184"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-008.json",
+          "sha256": "e166e9ac03264ef9a94311e8cca30bad7724a0ca111b8cdc06af59e6cc5bfe29"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-008.json",
+          "sha256": "f719d102f431f031e0c5ef60dd57de393d1ee03f4b6d152ee57522a242875e52"
+        }
+      },
+      "input_content_sha256": "29168bddf3711f9c1f128bea13d437ddc9475f55a20e641feb53373ec602ed23",
+      "topology": {
+        "sites": 16,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 2,
+          "3": 7,
+          "4": 4,
+          "5": 1,
+          "6": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          2,
+          3,
+          7
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 3,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 150,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-08-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 08/01 records S01: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-08-OBS-02",
+          "reported_value": false,
+          "target_id": "S16",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 08/02 records S16: the mains supply is absent at this site."
+        },
+        {
+          "attribute": "backhaul_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-08-OBS-03",
+          "reported_value": false,
+          "target_id": "L16",
+          "target_type": "link",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 08/03 records L16: the backhaul circuit is broken."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "link:L16",
+          "site:S01:grid_power_ok",
+          "site:S16:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-009",
+      "category": "route_closure",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-009.json",
+          "sha256": "204c2a09c8c060da4c3c37b5da432253ff7cc03bec888e76d464b2b5faef506b"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-009.json",
+          "sha256": "c93b14ad464dbeec5bde9e8a351364120182cb00546681a5ee5a018c0736f172"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-009.json",
+          "sha256": "7758b142e10f68da55c9039d015cdfd40df9ced606794b28ffb71e6c96efd32b"
+        }
+      },
+      "input_content_sha256": "c6187ac4eeb8cbb1489c18f7b43ae0c088b63113d6c4506d87a23ce8e99a2abb",
+      "topology": {
+        "sites": 17,
+        "root_children": 3,
+        "depth_counts": {
+          "1": 3,
+          "2": 4,
+          "3": 5,
+          "4": 4,
+          "5": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C4",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-09-OBS-01",
+          "reported_value": false,
+          "target_id": "S17",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 09/01 records S17: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "open",
+          "expected_resolution": "verified",
+          "report_id": "V2-09-OBS-02",
+          "reported_value": false,
+          "target_id": "R17",
+          "target_type": "road",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 09/02 records R17: the access connection is blocked to all crews."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "road:R17",
+          "site:S17:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-010",
+      "category": "route_closure",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-010.json",
+          "sha256": "fb205ef30d2c863a3af41a2e479cfa3e39c2de6e2871fd4caf4a2430efeb0e24"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-010.json",
+          "sha256": "5b2adfa8ca416e47a32efdee08517095f499fec887816b1695db002fbb0928c1"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-010.json",
+          "sha256": "10a4c84226443a96c7ff43ab8870b3c19ea3823e7ad99a83f1dd7bfd90859949"
+        }
+      },
+      "input_content_sha256": "3f6eedac3fd237f1466b85b99849579b66bb11ea2755fddf82cac376bfde8013",
+      "topology": {
+        "sites": 18,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 2,
+          "3": 3,
+          "4": 4,
+          "5": 3,
+          "6": 4
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 210,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-10-OBS-01",
+          "reported_value": false,
+          "target_id": "S18",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 10/01 records S18: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "open",
+          "expected_resolution": "verified",
+          "report_id": "V2-10-OBS-02",
+          "reported_value": false,
+          "target_id": "R18",
+          "target_type": "road",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 10/02 records R18: the access connection is blocked to all crews."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "road:R18",
+          "site:S18:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-011",
+      "category": "conflicting_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-011.json",
+          "sha256": "ec52294a04b4da2255d98337fb2eec004bb4b66c7b76cded75b7de42171ff21c"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-011.json",
+          "sha256": "d214cf6eac7cead33b546cbeaa7884505370085f8b0c32b81fc62d8ce25f8fcb"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-011.json",
+          "sha256": "c88aa1bd1ce2d9d3a7848bdcf796bffe1266ba22dd6ef1cb9693c22cb9694a4a"
+        }
+      },
+      "input_content_sha256": "bd8ae852e7f6a73c220c8255c35df1953239c1f1bac1a01e7bad53e07edd0edb",
+      "topology": {
+        "sites": 19,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 2,
+          "3": 4,
+          "4": 5,
+          "5": 5,
+          "6": 1,
+          "7": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "V2-11-OBS-01",
+          "reported_value": false,
+          "target_id": "S03",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 11/01 records S03: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "V2-11-OBS-02",
+          "reported_value": true,
+          "target_id": "S03",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 11/02 records S03: the site equipment is functioning normally."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S03:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-012",
+      "category": "conflicting_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-012.json",
+          "sha256": "a4b0462e99859a15f356b753911b4eeefe6d80f31054a96f974d7c8a6024ed56"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-012.json",
+          "sha256": "38c19262b22d75230ca76457bbb2d3369b108b7240d3519e19bebbde3b710976"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-012.json",
+          "sha256": "62e53aa66c15030ad5a38913cfdaa5b5da81c1e5302a53159eef80b5777e986d"
+        }
+      },
+      "input_content_sha256": "d23435580b1dddd0d684c9ea902009f7ed25bd0abb7568d1baa19178002fdd13",
+      "topology": {
+        "sites": 20,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 4,
+          "3": 4,
+          "4": 3,
+          "5": 1,
+          "6": 3,
+          "7": 2,
+          "8": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C4",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 150,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "V2-12-OBS-01",
+          "reported_value": false,
+          "target_id": "S20",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 12/01 records S20: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "conflict_requires_confirmation",
+          "report_id": "V2-12-OBS-02",
+          "reported_value": true,
+          "target_id": "S20",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 12/02 records S20: the site equipment is functioning normally."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S20:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-013",
+      "category": "stale_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-013.json",
+          "sha256": "6687373d8bb74ba9f352abb53368a24d4ebb16728877317deaf14bc291c1b402"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-013.json",
+          "sha256": "90d4136015fd48fc8533d96cd004e5ff8f7d9b6dbc9b09233f961ee6c132d099"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-013.json",
+          "sha256": "2d0ca03971a3b860ec167ebe8b2f51beec64c8d270cf7110218b13f84a6f5108"
+        }
+      },
+      "input_content_sha256": "de3b9fe330c528af6eefcfbe0a15e4c93cadb03c033bdf059dce9572643cc023",
+      "topology": {
+        "sites": 15,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 2,
+          "3": 1,
+          "4": 2,
+          "5": 1,
+          "6": 2,
+          "7": 2,
+          "8": 2,
+          "9": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 150,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "stale_not_authoritative",
+          "report_id": "V2-13-OBS-01",
+          "reported_value": false,
+          "target_id": "S04",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "unverified_message",
+          "text": "Inspection 13/01 records S04: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-13-OBS-02",
+          "reported_value": true,
+          "target_id": "S04",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 13/02 records S04: the site equipment is functioning normally."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S04:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-014",
+      "category": "stale_reports",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-014.json",
+          "sha256": "5d47d646afcd2bade07bcbef70bfadba4be32800f6c4e331e4d2df67f790bcaa"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-014.json",
+          "sha256": "20f8c311f713b6939288b45581a51f9f457326b8204e0a2c5e5c4b2d62365027"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-014.json",
+          "sha256": "0b631513cc6bc05995e9998cf5c2e3113f2ee322f0d5b4109b4d69f2aff99344"
+        }
+      },
+      "input_content_sha256": "13aa232ff4cd54dccaede344487d6e31faad53a4f84b47a90b5facd191fce760",
+      "topology": {
+        "sites": 16,
+        "root_children": 2,
+        "depth_counts": {
+          "1": 2,
+          "2": 1,
+          "3": 1,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 3,
+          "9": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 210,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "stale_not_authoritative",
+          "report_id": "V2-14-OBS-01",
+          "reported_value": false,
+          "target_id": "S16",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "unverified_message",
+          "text": "Inspection 14/01 records S16: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-14-OBS-02",
+          "reported_value": true,
+          "target_id": "S16",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 14/02 records S16: the site equipment is functioning normally."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S16:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-015",
+      "category": "missing_critical_evidence",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-015.json",
+          "sha256": "7fce22312021e9edb9d3a80e5323e6cf8c44bd8d6d4115a1a14f55aeb6642f56"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-015.json",
+          "sha256": "604809bb35a6069666601bcb550ac2b52daf7cafbd2dbc17203a83d711a86a01"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-015.json",
+          "sha256": "0132fc689a52d789f48ad83c99f14bc970c3424562553d9ed9af694af17d7c23"
+        }
+      },
+      "input_content_sha256": "a6e83d0d044bea5187ae63da330dc4f8e981828887145e71b172fc298f2668ec",
+      "topology": {
+        "sites": 17,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 1,
+          "3": 4,
+          "4": 7,
+          "5": 4
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 0,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 540,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C4",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 210,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "clarification_required",
+          "target_id": "S01",
+          "target_type": "site"
+        }
+      ],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-016",
+      "category": "missing_critical_evidence",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-016.json",
+          "sha256": "16fab58b6b08fd7bbfe097e288aff111e1bf29790eea6ed88c5d002e0f761ffe"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-016.json",
+          "sha256": "5d74decdf0e009397f0593b8e9b0d657826d575964795830a2189baa03052e61"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-016.json",
+          "sha256": "0bbacb4cedd890caacfd231a5c75a4ee10b27d9d4fece23fdc50588a4ed2e834"
+        }
+      },
+      "input_content_sha256": "d878a76ad04648d8ccf8439c92969bb4953b3276f405093ae09341bdaf2a8220",
+      "topology": {
+        "sites": 18,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 4,
+          "3": 2,
+          "4": 5,
+          "5": 3,
+          "6": 2,
+          "7": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 120,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-16-OBS-01",
+          "reported_value": true,
+          "target_id": "S18",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 16/01 records S18: the mains supply is present at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S18:equipment_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "clarification_required",
+          "target_id": "S18",
+          "target_type": "site"
+        }
+      ],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-017",
+      "category": "generator_exhaustion",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-017.json",
+          "sha256": "ccef7697544abed8d3f3515097a18b3469682d038ecff2c9d89ce907badffe0a"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-017.json",
+          "sha256": "c79b2d5dc2ece904a8409dd85e6eccc6b6d33b1840240e80ed9389ff53294faf"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-017.json",
+          "sha256": "3eebb9a465379bef1b5261891ecd83e5ada5c9766d5f31b57ddef3f5f75857b5"
+        }
+      },
+      "input_content_sha256": "21e678cbeecf52157b5b480815cd0cd3cfc65b7a14c9071b6ea073c2013ba046",
+      "topology": {
+        "sites": 19,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 1,
+          "3": 2,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 2,
+          "8": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 480,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 60,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-17-OBS-01",
+          "reported_value": false,
+          "target_id": "S05",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 17/01 records S05: the mains supply is absent at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S05:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-018",
+      "category": "generator_exhaustion",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-018.json",
+          "sha256": "e819463e4bb784e09ce569811f6caa986cdc2fcf14e92f629aadb3116bf096c6"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-018.json",
+          "sha256": "46b8857c3aa346d09ff73eccae28a375d5459826abae2d0c1c93ced1c4499310"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-018.json",
+          "sha256": "0597ee57f842727265d28d73c94daacf2c6b8660f1632036fd7827cc842c6f49"
+        }
+      },
+      "input_content_sha256": "ad70604721622e1cc723f7bc519900933b6e359a27d5430d74d0d10e1be5c189",
+      "topology": {
+        "sites": 20,
+        "root_children": 5,
+        "depth_counts": {
+          "1": 5,
+          "2": 5,
+          "3": 4,
+          "4": 3,
+          "5": 1,
+          "6": 2
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          3,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 1,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 510,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C4",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-18-OBS-01",
+          "reported_value": false,
+          "target_id": "S20",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 18/01 records S20: the mains supply is absent at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S20:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-019",
+      "category": "resource_loss_replanning",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-019.json",
+          "sha256": "39acc40f5ae2a9baf945feaa67be06a038f5a181856471bc31b0ac133e41f711"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-019.json",
+          "sha256": "0f77beea81f768acc2f517af1f24f799de5e54a8c876c2a13aa51a5aea69245f"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-019.json",
+          "sha256": "046492ea69e2a2921fafd7c2aee7e86f22e23bc69bbc6564aefedcfa241f6dbd"
+        }
+      },
+      "input_content_sha256": "cf077a6816ea707e2d9243541d54e11b38903a57004c291070a33d2cbe5c8cb7",
+      "topology": {
+        "sites": 15,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 2,
+          "3": 3,
+          "4": 1,
+          "5": 1,
+          "6": 4,
+          "7": 2,
+          "8": 1
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          4
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 180,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-19-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 19/01 records S01: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-19-OBS-02",
+          "reported_value": false,
+          "target_id": "S07",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 19/02 records S07: the mains supply is absent at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok",
+          "site:S07:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [
+        {
+          "event_id": "V2-LOSS-19",
+          "at_min": 45,
+          "operator_report": {
+            "report_id": "V2-LOSS-OBS-19",
+            "source_type": "confirmed_field_update",
+            "observed_at_min": 45,
+            "text": "Crew C2 is unavailable for the rest of the incident from minute 45."
+          },
+          "truth_patch": {
+            "crew_id": "C2",
+            "available_until_min": 45
+          }
+        }
+      ],
+      "human_review": "PENDING"
+    },
+    {
+      "scenario_id": "EVAL2-020",
+      "category": "resource_loss_replanning",
+      "files": {
+        "input": {
+          "path": "data/processed/agent_inputs/candidate_evaluation/EVAL2-020.json",
+          "sha256": "5ff09be5b5ea453727d517e61cdfdf3e58d549a41284a3b25bf6c706c65633ff"
+        },
+        "truth": {
+          "path": "data/evaluation/ground_truth/candidate_evaluation/EVAL2-020.json",
+          "sha256": "8190b026c1f40f475835a435b10b5bae54b6cb05ede6a2675e3907ad047e3943"
+        },
+        "raw": {
+          "path": "data/raw/synthetic/candidate_evaluation/EVAL2-020.json",
+          "sha256": "01831ba4da162e132a9043aa6642f599d9551c51031b716c8ea57fe6e982b29a"
+        }
+      },
+      "input_content_sha256": "0a03b56819d9ef79c04eb6230dd166fe57aa8b0185abe58e66f3309016757257",
+      "topology": {
+        "sites": 16,
+        "root_children": 1,
+        "depth_counts": {
+          "1": 1,
+          "2": 1,
+          "3": 3,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 2,
+          "8": 2,
+          "9": 2,
+          "10": 2
+        },
+        "non_root_branch_degrees": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3
+        ],
+        "roads_all_depot_spokes": false
+      },
+      "topology_descriptor_matches_development": false,
+      "report_count": 2,
+      "exact_report_text_matches_development": 0,
+      "resources": {
+        "crews": [
+          {
+            "crew_id": "C1",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C2",
+            "location": "DEPOT",
+            "available_from_min": 0,
+            "available_until_min": 720,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          },
+          {
+            "crew_id": "C3",
+            "location": "S03",
+            "available_from_min": 15,
+            "available_until_min": 570,
+            "skills": [
+              "equipment",
+              "backhaul",
+              "generator"
+            ]
+          }
+        ],
+        "generators": [
+          {
+            "generator_id": "G1",
+            "location": "DEPOT",
+            "available": true,
+            "autonomy_minutes": 210,
+            "deployment_minutes": 15,
+            "max_deployments": 1
+          },
+          {
+            "generator_id": "G2",
+            "location": "S03",
+            "available": false,
+            "autonomy_minutes": 90,
+            "deployment_minutes": 10,
+            "max_deployments": 1
+          }
+        ]
+      },
+      "report_labels_for_human_check": [
+        {
+          "attribute": "equipment_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-20-OBS-01",
+          "reported_value": false,
+          "target_id": "S01",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 20/01 records S01: the site equipment is not functioning and needs repair."
+        },
+        {
+          "attribute": "grid_power_ok",
+          "expected_resolution": "verified",
+          "report_id": "V2-20-OBS-02",
+          "reported_value": false,
+          "target_id": "S16",
+          "target_type": "site",
+          "mechanical_label_check": "UNPARSED_HUMAN_REVIEW_REQUIRED",
+          "source_type": "authoritative_snapshot",
+          "text": "Inspection 20/02 records S16: the mains supply is absent at this site."
+        }
+      ],
+      "unlabelled_report_ids": [],
+      "expected_fixture_behavior": {
+        "basis": "narrow public-template parser and conservative resolver, not independent gold",
+        "unresolved_fields": [
+          "site:S01:equipment_ok",
+          "site:S16:grid_power_ok"
+        ],
+        "planning_eligible": false
+      },
+      "missing_fact_labels": [],
+      "future_events_for_evaluator_review": [
+        {
+          "event_id": "V2-LOSS-20",
+          "at_min": 65,
+          "operator_report": {
+            "report_id": "V2-LOSS-OBS-20",
+            "source_type": "confirmed_field_update",
+            "observed_at_min": 65,
+            "text": "Crew C2 is unavailable for the rest of the incident from minute 65."
+          },
+          "truth_patch": {
+            "crew_id": "C2",
+            "available_until_min": 65
+          }
+        }
+      ],
+      "human_review": "PENDING"
+    }
+  ]
+}

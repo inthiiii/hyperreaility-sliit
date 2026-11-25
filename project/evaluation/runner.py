@@ -228,7 +228,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
 
 
 def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3, seed=22,
-                  allow_live=False, *, data_root=None, max_episodes=10, review_release=None):
+                  allow_live=False, *, data_root=None, max_episodes=10, review_release=None, allow_ai_reviewed=False):
     if type(repeats) is not int or repeats < 1:
         raise ValueError('Repeats must be positive integers')
     if not variants or any(v not in VARIANTS for v in variants):
@@ -249,7 +249,10 @@ def run_benchmark(paths, output, variants=('heuristic', 'optimizer'), repeats=3,
     if candidate_cases:
         if review_release is None:
             raise ValueError('Candidate evaluation is blocked until independent human review is recorded; supply --review-release')
-        from project.evaluation.case_review import validate_release
+        if allow_ai_reviewed:
+            from project.evaluation.ai_case_review import validate_release
+        else:
+            from project.evaluation.case_review import validate_release
         review_gate=validate_release(data_root.parent,review_release,candidate_cases)
     hosted = any(VARIANTS[v][0] != 'template' for v in variants)
     if hosted and (not allow_live or preflight()['status'] == 'blocked'):
@@ -302,12 +305,13 @@ def main():
     parser.add_argument('--allow-live', action='store_true')
     parser.add_argument('--data-root', type=Path)
     parser.add_argument('--max-episodes', type=int, default=10)
-    parser.add_argument('--review-release',type=Path,help='Hash-bound completed human review release for evaluation candidates')
+    parser.add_argument('--review-release',type=Path,help='Hash-bound completed review release for evaluation candidates')
+    parser.add_argument('--allow-ai-reviewed',action='store_true',help='Explicitly allow AI-self-reviewed synthetic engineering cases; does not establish independent held-out validity')
     args = parser.parse_args()
     from dotenv import load_dotenv
     load_dotenv(Path(__file__).resolve().parents[2]/'.env')
     rows = run_benchmark(args.scenarios, args.output, args.variants, args.repeats, args.seed, args.allow_live,
-                         data_root=args.data_root, max_episodes=args.max_episodes,review_release=args.review_release)
+                         data_root=args.data_root, max_episodes=args.max_episodes,review_release=args.review_release,allow_ai_reviewed=args.allow_ai_reviewed)
     print(json.dumps({'attempts': len(rows), 'scored': sum(r['scoring_status'] == 'scored' for r in rows),
                       'scoring_status': 'independent_incident_evaluator_connected'}, indent=2))
 

@@ -140,7 +140,7 @@ The repository root corresponds to the `university-project/` root in the competi
 | [project/main.py](project/main.py) | Required application entry point | Integrated dashboard, live hosted planning, approval and independent incident simulation |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
-| `tests/` | Verification code and fixtures | 492 automated tests; data, simulation, core, evaluation and UI checks |
+| `tests/` | Verification code and fixtures | 508 automated tests; data, simulation, core, evaluation and UI checks |
 | `results/` | Benchmark outputs and traces | Development aggregate reports published; raw local traces ignored by Git |
 | `project-demo.mp4` | Actual-execution demonstration video | Pending |
 
@@ -337,3 +337,15 @@ texts overlap development. The worksheet remains **0/20 approved**. Candidate
 evaluation runs now require a completed matching human-attestation release;
 development/demo runs retain their existing entry path. Software checks cannot
 certify reviewer independence or held-out validity. Steps 6–7 remain pending.
+
+
+### Priority 5 — revised and AI-reviewed freeze
+
+The requested revision and AI review are complete in
+[evaluation v2](releases/evaluation-v2-20261125/README.md): 20 new cases,
+20 distinct topology descriptors, no exact development report-text overlap,
+20 filled AI review rows and an immutable checked release. The same coding
+assistant authored/reviewed them; independent human review is still unperformed.
+See [completion evidence](docs/PRIORITY_5_AI_COMPLETION.md). Full regression:
+**508 passed**. The default human gate remains; AI engineering evaluation needs
+explicit opt-in and carries its provenance in the manifest. Steps 6–7 are pending.

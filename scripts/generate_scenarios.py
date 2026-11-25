@@ -151,7 +151,7 @@ def case(case_id, category, seed, n=15):
             'agent_input': agent_input, 'evaluation_truth': truth}
 
 def generate():
-    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists():
+    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists() or (ROOT / 'AI_RELEASE.json').exists():
         raise ValueError('Dataset release is frozen. Create a reviewed new version instead of regenerating in place.')
     out = ROOT / 'data/raw/synthetic'
     specs = []

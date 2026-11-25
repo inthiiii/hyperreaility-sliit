@@ -30,7 +30,7 @@ def positions(geometry):
     return list(walk(geometry['coordinates']))
 
 def prepare():
-    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists():
+    if (ROOT / 'docs/evaluation/FROZEN_DATASET.json').exists() or (ROOT / 'AI_RELEASE.json').exists():
         raise ValueError('Dataset release is frozen. Create a reviewed new version instead of regenerating in place.')
     summary = {'context': {}, 'case_count': 0, 'split_counts': {}, 'checks': [], 'warnings': []}
     raw_geo = ROOT / 'data/raw/geoboundaries/lka_adm2_simplified.geojson'

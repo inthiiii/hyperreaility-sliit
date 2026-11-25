@@ -38,7 +38,7 @@ def topology(s):
         return count
     depths=Counter(depth(site.site_id) for site in s.sites)
     return {'sites':len(s.sites),'root_children':children[s.core_id],
-            'depth_counts':dict(sorted(depths.items())),
+            'depth_counts':{str(k):v for k,v in sorted(depths.items())},
             'non_root_branch_degrees':sorted(v for k,v in children.items() if k!=s.core_id),
             'roads_all_depot_spokes':all(r.origin==s.depot_id for r in s.roads)}
 

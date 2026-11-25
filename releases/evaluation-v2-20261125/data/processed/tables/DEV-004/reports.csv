@@ -1,0 +1,4 @@
+report_id,source_type,observed_at_min,received_at_min,text
+REP-001,authoritative_snapshot,0,0,S01: grid power is unavailable.
+REP-002,authoritative_snapshot,0,0,S02: grid power is unavailable.
+REP-003,authoritative_snapshot,0,0,L01: backhaul link has failed.
