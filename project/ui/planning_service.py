@@ -1,4 +1,5 @@
 """Explicit, per-session planning actions. Never invoke from passive rendering."""
+import inspect
 from datetime import datetime, timezone
 import json
 import os
@@ -46,7 +47,8 @@ def _save_attempt(attempt, root):
         temporary.unlink(missing_ok=True)
 
 
-def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, coordinator_factory=None, user=None):
+def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, coordinator_factory=None, user=None,
+                 progress=None):
     """At most one execution per request key; exceptions never silently retry/fallback.
 
     The dashboard always passes the signed-in ``user``; permission is enforced here,
@@ -95,8 +97,11 @@ def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, 
             phase = 'client_setup'
             adapter = (adapter_factory or HostedAdapter.from_env)()
         phase = 'planning'
-        coordinator = (coordinator_factory or (Coordinator if mode == 'template' else HOSTED_WORKFLOW))(adapter, planner=planner,
-                                 trace_dir=Path(root) / 'results/local_runs')
+        factory = coordinator_factory or (Coordinator if mode == 'template' else HOSTED_WORKFLOW)
+        options = {'planner': planner, 'trace_dir': Path(root) / 'results/local_runs'}
+        if progress is not None and 'on_message' in inspect.signature(factory).parameters:
+            options['on_message'] = progress
+        coordinator = factory(adapter, **options)
         result = session.core.prepare(coordinator, choice.scenario.model_copy(deep=True), mode)
         if result.state.source_hash != choice.content_hash or result.state.scenario_id != choice.scenario.scenario_id:
             raise ValueError('Coordinator returned a different scenario')

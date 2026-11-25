@@ -16,9 +16,11 @@ from project.ui.history import render_history
 from project.ui.outcomes import render_results
 from project.ui.workflow import render_workflow
 from project.ui.map_page import render_field_page, render_map_page
+from project.ui.benchmark_page import render_benchmark
+from project.ui.baseline_compare import render_baseline_compare
 from project.ui.auth_view import current_user, render_identity, render_login, render_roles_panel
 
-PAGES = ('Overview', 'Incident', 'Map', 'Planning', 'Field work', 'Results', 'History', 'Settings')
+PAGES = ('Overview', 'Incident', 'Map', 'Planning', 'Field work', 'Results', 'Benchmark', 'History', 'Settings')
 
 
 def _pill(text, amber=False):
@@ -172,6 +174,8 @@ def render_app(root=None):
         _settings(health, session, choice, user, root)
     elif page == 'History':
         render_history(root, choice)
+    elif page == 'Benchmark':
+        render_benchmark(root)
     elif choice is None:
         st.title('Prepare your incident workspace.')
         st.error('No valid scenario can be selected.')
@@ -189,5 +193,7 @@ def render_app(root=None):
         render_field_page(choice, session, root)
     else:
         render_results(session, choice)
+        if choice is not None and choice.source != 'development_fixture':
+            render_baseline_compare(session, choice, root)
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
             ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')

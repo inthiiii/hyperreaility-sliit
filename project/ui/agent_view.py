@@ -114,3 +114,35 @@ def inbox(result):
     return {'questions': list(meta.get('operator_questions', [])),
             'proposals': list(meta.get('priority_proposals', [])),
             'ignored': list(meta.get('ignored_reports', []))}
+
+
+STAGE_TEXT = {'investigate': 'reading the incident reports', 'reinvestigate': 're-checking challenged facts',
+              'resources': 'checking crews, roads and the generator', 'priorities': 'weighing service priorities',
+              'review': 'independently reviewing the plan', 'analyse': 'analysing everything in one context',
+              'reanalyse': 're-analysing after its self-review'}
+ICONS = {'Extraction': '🔎', 'Shared facts': '📨', 'Specialist finding': '🧭', 'Hold applied': '⏸️',
+         'Schedule': '🗓️', 'Review': '✅', 'Challenge': '⚠️', 'Rejected output': '🚫', 'Other': '•'}
+
+
+class LiveFeed:
+    """Display-only observer: turns live orchestrator messages into short status lines."""
+
+    def __init__(self, status):
+        self.status = status
+        self.count = 0
+
+    def line(self, message):
+        if message.get('recipient') == 'working':
+            who = name(message['sender'])
+            return f'⏳ **{who}** is {STAGE_TEXT.get(message.get("stage"), "working")}…', f'{who} is working…'
+        kind, text = _summary(message)
+        return (f'{ICONS.get(kind, "•")} **{name(message.get("sender", "?"))}** → '
+                f'{name(message.get("recipient", "coordinator"))}: {text}'), None
+
+    def __call__(self, message):
+        text, label = self.line(message)
+        if label:
+            self.status.update(label=label)
+        else:
+            self.count += 1
+        self.status.markdown(text)
