@@ -6,14 +6,16 @@ Synthetic, script-generated cases (evidence v3); not independently human-reviewe
 
 ## Reliability, extraction, safety and usage
 
-| Variant | Completed | Escalated | Failed | Fact F1 (initial → after review) | Distractor claims / run | Injection followed / runs | Calls | Input tok | Output tok | Seconds |
-|---|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|
-| heuristic | 60/60 | 0 | 0 | — | — | 0/0 | 0.0 | 0 | 0 | 0.0 |
-| multi | 54/60 | 6 | 0 | 0.88 → 0.88 | 0.04 | 0/33 | 4.9 | 13,323 | 1,214 | 17.8 |
-| no_feedback | 49/60 | 11 | 0 | 0.93 → 0.93 | 0 | 0/28 | 4.3 | 11,691 | 992 | 15.9 |
-| no_reviewer | 60/60 | 0 | 0 | 0.94 → 0.94 | 0 | 0/36 | 3.3 | 8,657 | 777 | 12.3 |
-| optimizer | 60/60 | 0 | 0 | — | — | 0/0 | 0.0 | 0 | 0 | 0.1 |
-| single | 53/60 | 7 | 0 | 0.96 → 0.95 | 0.02 | 0/33 | 2.3 | 11,316 | 954 | 11.9 |
+| Variant | Completed | Escalated | Failed | Fact F1 (initial → after review) | Distractor claims / run | Injection followed / runs | Calls | Input tok | Output tok | Seconds | USD / run |
+|---|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|
+| heuristic | 60/60 | 0 | 0 | — | — | 0/0 | 0.0 | 0 | 0 | 0.0 | 0.0000 |
+| multi | 54/60 | 6 | 0 | 0.88 → 0.88 | 0.04 | 0/33 | 4.9 | 13,323 | 1,214 | 17.8 | 0.0388 |
+| no_feedback | 49/60 | 11 | 0 | 0.93 → 0.93 | 0 | 0/28 | 4.3 | 11,691 | 992 | 15.9 | 0.0333 |
+| no_reviewer | 60/60 | 0 | 0 | 0.94 → 0.94 | 0 | 0/36 | 3.3 | 8,657 | 777 | 12.3 | 0.0251 |
+| optimizer | 60/60 | 0 | 0 | — | — | 0/0 | 0.0 | 0 | 0 | 0.1 | 0.0000 |
+| single | 53/60 | 7 | 0 | 0.96 → 0.95 | 0.02 | 0/33 | 2.3 | 11,316 | 954 | 11.9 | 0.0322 |
+
+Prices: USD 2.0 / 1M input and 10.0 / 1M output tokens, as of 2026-11-25 (supplied by the team).
 
 ## Paired downtime comparisons (per-case medians)
 

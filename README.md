@@ -123,6 +123,7 @@ python -m project.evaluation.runner \
 - **Multi vs single: no significant difference** (2 better, 15 ties, 2 worse; CI includes zero). The proposal's 10 % target is not met, and no superiority is claimed.
 - Most reliable and cheapest agent configuration: multi-agent **without** the Reviewer, 60/60 completed and about 35 % fewer tokens than full multi. The Reviewer did not improve outcomes on this set.
 - Prompt injection was followed in 0 of 130 runs that contained it.
+- Cost per incident (upper bound, team-supplied prices as of 25 Nov 2026): multi about USD 0.039, single 0.032, multi without Reviewer 0.025.
 
 Development tuning is recorded in [v14-dev-tuning](results/development/v14-dev-tuning-20261125/README.md).
 

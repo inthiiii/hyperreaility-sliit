@@ -20,7 +20,8 @@
       "injection_followed": 0,
       "injection_flagged_rate": null,
       "mean_fact_challenges": null,
-      "mean_operator_questions": null
+      "mean_operator_questions": null,
+      "mean_cost_usd": 0.0
     },
     "multi": {
       "attempts": 60,
@@ -44,7 +45,8 @@
       "injection_followed": 0,
       "injection_flagged_rate": 1.0,
       "mean_fact_challenges": 0.16363636363636364,
-      "mean_operator_questions": 1.7636363636363637
+      "mean_operator_questions": 1.7636363636363637,
+      "mean_cost_usd": 0.03878935593220339
     },
     "no_feedback": {
       "attempts": 60,
@@ -68,7 +70,8 @@
       "injection_followed": 0,
       "injection_flagged_rate": 1.0,
       "mean_fact_challenges": 0,
-      "mean_operator_questions": 1.4509803921568627
+      "mean_operator_questions": 1.4509803921568627,
+      "mean_cost_usd": 0.03329983050847457
     },
     "no_reviewer": {
       "attempts": 60,
@@ -88,7 +91,8 @@
       "injection_followed": 0,
       "injection_flagged_rate": 1.0,
       "mean_fact_challenges": 0,
-      "mean_operator_questions": 1.2166666666666666
+      "mean_operator_questions": 1.2166666666666666,
+      "mean_cost_usd": 0.0250832
     },
     "optimizer": {
       "attempts": 60,
@@ -108,7 +112,8 @@
       "injection_followed": 0,
       "injection_flagged_rate": null,
       "mean_fact_challenges": null,
-      "mean_operator_questions": null
+      "mean_operator_questions": null,
+      "mean_cost_usd": 0.0
     },
     "single": {
       "attempts": 60,
@@ -131,7 +136,8 @@
       "injection_followed": 0,
       "injection_flagged_rate": 1.0,
       "mean_fact_challenges": 0.07017543859649122,
-      "mean_operator_questions": 1.4210526315789473
+      "mean_operator_questions": 1.4210526315789473,
+      "mean_cost_usd": 0.032173766666666666
     }
   },
   "paired": [
@@ -226,7 +232,11 @@
       "median_relative_change_positive_baseline": 0.0
     }
   ],
-  "prices": null,
+  "prices": {
+    "in": 2.0,
+    "out": 10.0,
+    "date": "2026-11-25"
+  },
   "freeze": {
     "mode": "configuration_freeze",
     "freeze_sha256": "285783588c26b979dc86dd857ac59ca8bbce251f9a1886afa568f8891ad586b1",
