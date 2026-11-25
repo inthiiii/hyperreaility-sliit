@@ -106,7 +106,7 @@ class FakeAdapter:
     provider='openai'
     model='injected-test'
     def __init__(self,budget,closed):self.budget=budget;self.closed=closed
-    def complete(self,role,payload,response_model,max_output=700):
+    def complete(self,role,payload,response_model,max_output=700,*,evidence_ids=None):
         self.budget.reserve([{'content':'injected response test'}],max_output)
         self.budget.records.append({'input_tokens':5,'output_tokens':3,'model':'injected-test','role':role,'status':'ok'})
         if response_model.__name__=='FactBatch':

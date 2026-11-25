@@ -1,0 +1,72 @@
+{
+  "protocol": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "api_mode": "responses",
+    "reasoning_effort": "none",
+    "response_format": "json_schema",
+    "temperature": "provider_default",
+    "sdk_retries": 0,
+    "schema_repair_attempts": 1,
+    "protocol_version": "matched-workflow-v13"
+  },
+  "source_sha256": "cb46f2e1b80cef307ba5d0e425f9850dec9f6eceb75b4ce6a4afda06fe1bc6fa",
+  "scope": "selected current-protocol development examples; see complete 40-attempt report for coverage",
+  "examples": [
+    {
+      "case": "DEV-001",
+      "variant": "single",
+      "status": "completed",
+      "scoring_status": "scored",
+      "weighted_downtime": 760,
+      "model_calls": 5,
+      "attempt": "results/development/luna-v13-examples-20261125/DEV-001-single/attempt.json"
+    },
+    {
+      "case": "DEV-001",
+      "variant": "multi",
+      "status": "completed",
+      "scoring_status": "scored",
+      "weighted_downtime": 760,
+      "model_calls": 4,
+      "attempt": "results/development/luna-v13-examples-20261125/DEV-001-multi/attempt.json"
+    },
+    {
+      "case": "DEV-008",
+      "variant": "single",
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "weighted_downtime": null,
+      "model_calls": 1,
+      "attempt": "results/development/luna-v13-examples-20261125/DEV-008-single/attempt.json"
+    },
+    {
+      "case": "DEV-008",
+      "variant": "multi",
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "weighted_downtime": null,
+      "model_calls": 1,
+      "attempt": "results/development/luna-v13-examples-20261125/DEV-008-multi/attempt.json"
+    },
+    {
+      "case": "DEV-010",
+      "variant": "single",
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "weighted_downtime": null,
+      "model_calls": 5,
+      "attempt": "results/development/luna-v13-examples-20261125/DEV-010-single/attempt.json"
+    },
+    {
+      "case": "DEV-010",
+      "variant": "multi",
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "weighted_downtime": null,
+      "model_calls": 3,
+      "attempt": "results/development/luna-v13-examples-20261125/DEV-010-multi/attempt.json"
+    }
+  ]
+}

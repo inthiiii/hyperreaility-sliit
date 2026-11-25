@@ -49,9 +49,9 @@ def test_model_configuration_required():
     with pytest.raises(ValueError):HostedAdapter('openai','','')
 
 def test_single_agent_can_review_and_revise(load_case):
-    s=load_case();a=adapter([batch(s),finding(),finding(),review('revise'),batch(s),finding(),finding(),review()])
+    s=load_case();a=adapter([batch(s),finding(),finding(),review('revise'),review('revise'),batch(s),finding(),finding(),review()])
     r=Coordinator(a).run(s,'single')
-    assert r.status=='awaiting_approval' and len(r.model_usage)==8
+    assert r.status=='awaiting_approval' and len(r.model_usage)==9
     roles={m['sender'] for m in r.messages}
     assert 'single_agent' in roles and 'plan_reviewer' not in roles
 

@@ -1,0 +1,41 @@
+{
+  "scope": "modified demo engineering challenge; not registered/held-out or physical evaluation",
+  "model": "gpt-6-luna",
+  "input_sha256": "6a7fd6c2176e6287cb51954c375204271d52a23bc44dd5f999d0819dcab1b6cf",
+  "status": "awaiting_approval",
+  "run_id": "2764b084-fe51-4c97-a6c5-6b4f4652b774",
+  "unconstrained_actions": [
+    "GEN-G1-S02"
+  ],
+  "agent_candidate_actions": [
+    "GEN-G1-S01",
+    "BH-L01"
+  ],
+  "effects": [
+    {
+      "sender": "field_resource_planner",
+      "state_version": 2,
+      "request": {
+        "kind": "defer_action",
+        "action_ids": [
+          "GEN-G1-S02"
+        ],
+        "evidence_ids": [
+          "PERMIT-S02"
+        ],
+        "reason": "The confirmed field update states the portable-generator placement permit is not issued for S02 during the current planning window."
+      },
+      "applied_action_ids": [
+        "GEN-G1-S02"
+      ],
+      "effect": "excluded_from_candidate_schedule",
+      "operational_fact_verified": false
+    }
+  ],
+  "validated": true,
+  "model_calls": 4,
+  "fresh_approval_possible": true,
+  "schedule_changed": true,
+  "reasons": [],
+  "claims_restoration_improvement": false
+}

@@ -9,7 +9,7 @@
 | Team | HyperReAIlity |
 | University | Sri Lanka Institute of Information Technology (SLIIT) |
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
-| Document version | 0.8 — matched hosted workflow and operator clarification checkpoint |
+| Document version | 0.10 — strict hosted workflow and bounded review completion |
 | Last updated | 24 November 2026 |
 | Proposal | [Proposal.docx](Proposal.docx) |
 | Process description | [Workflow.md](Workflow.md) |
@@ -24,10 +24,9 @@ before resume are connected to the dashboard. Full-horizon measurements remain
 null until a paused incident completes. The data release is checksummed and
 frozen as a candidate snapshot; independent human held-out review remains pending.
 See [Zahra acceptance](ZAHRA_ACCEPTANCE.md) and [handoff](handoffs/zahra.md) for
-actual checks, run commands and scope limits. No live hosted-model evaluation,
-commercial validation, production authentication or real network control is claimed.
+actual checks, run commands and scope limits. See [Luna validation](LUNA_LIVE_VALIDATION.md) for real hosted development observations. Commercial validation, production authentication and real network control remain outside the verified scope.
 
-OpenAI's hosted API is the initial selected LLM provider. Other hosted models will be evaluated during development. The exact runtime model ID, SDK version and supported settings will be recorded when the integration is established and frozen before held-out evaluation. Local LLM execution is outside the current implementation plan.
+The selected runtime model is OpenAI `gpt-6-luna`, with explicit reasoning effort `none` and the Responses API. Real hosted demo execution is verified. Development comparisons freeze the model, settings, protocol and budgets; other models may be evaluated on development cases before independent held-out evaluation. The installed SDK remains recorded in project/requirements.txt. Local LLM execution is outside the current implementation plan.
 
 ## 2. Problem, users and objectives
 
@@ -133,7 +132,7 @@ Required paths are `project/main.py`, `project/requirements.txt`, `README.md`, `
 | Tool, service or material | Use and current status |
 | --- | --- |
 | ChatGPT / Codex — OpenAI | Used for proposal/documentation, core code and tests, and dashboard Pushes 1–5 implementation, verification and handoffs. Exact session model identifiers were not recorded. This coding assistance is separate from runtime model inference; no live API inference was performed for these checkpoints. |
-| OpenAI API | Selected initial runtime provider; API integration and exact model ID/version must be recorded as development proceeds. Do not list an untested model as implemented. |
+| OpenAI API | `gpt-6-luna`, reasoning `none`, Responses API with exact server input counting; live demo and development comparison on 24 November 2026. SDK 3.57.0. All four roles and the single-agent baseline use the same selected model/settings. Usage and actual failure outcomes are recorded; charges remain unmeasured. |
 | Claude-labelled proposal draft supplied by the team | Used as comparative drafting/reference material during proposal review. Originating model/version is not independently verified; team members must record any direct Claude use and its purpose. This is not evidence of a Claude runtime integration. |
 | Other hosted models | Planned development comparison; add actual provider/model/version, dates, settings and purpose when tested. |
 | Python libraries and public datasets | Planned components listed above; record adopted versions, licences, attribution and modifications when used. |
@@ -170,4 +169,21 @@ these coding tools.
 
 The single-agent baseline now traverses the same investigation, resources, priorities and review stages as the four-role workflow. Both receive the same operational context, deterministic tools and whole-incident caps. Agent requests can conservatively defer evidence-linked actions, version the state, and force a new validated schedule; they cannot change approved weights or mutate evaluator truth.
 
-Benchmark manifests freeze the selected provider/model, endpoint fingerprint, supported generation settings, protocol, runtime and source/input hashes. Paired summaries exclude unsuccessful jobs and model-version mismatches from downtime differences while reporting their counts. Raw extraction F1 is computed before deterministic fixture fill-in and reports label coverage. Charges remain unmeasured. Live provider verification is pending an exact model selection; injected-client tests are not provider results. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md).
+Benchmark manifests freeze the selected provider/model, endpoint fingerprint, supported generation settings, protocol, runtime and source/input hashes. Paired summaries exclude unsuccessful jobs and model-version mismatches from downtime differences while reporting their counts. Raw extraction F1 is computed before deterministic fixture fill-in and reports label coverage. Charges remain unmeasured. Real Luna smoke checks and development comparisons are now recorded separately from injected-client tests in LUNA_LIVE_VALIDATION.md. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md).
+
+
+## Priority 3–4 completion — 25 November
+
+Current operational protocol: `matched-workflow-v13`, OpenAI `gpt-6-luna`,
+reasoning `none`, Responses strict JSON Schema. Shared lossless context and
+identical per-stage allowances preserve the matched comparison. Reviewer arithmetic
+and service forecasts use visible state only; measurements still come from the
+independent incident evaluator after separate approval. Unknowns, new holds,
+stale approvals and exhausted budgets remain blocking conditions.
+
+Full repository regression: **458 passed in 43.87 seconds**. Current live outcomes,
+retained failures and reproducible evidence are in
+[PRIORITY_3_4_COMPLETION.md](PRIORITY_3_4_COMPLETION.md). This continuation was
+implemented with ChatGPT/Codex in Ihthisham's session; all four requested co-author
+trailers are included. Runtime Luna is distinct from the coding assistant. No
+independent human study or held-out evaluation was conducted for this checkpoint.

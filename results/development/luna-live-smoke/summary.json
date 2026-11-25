@@ -1,0 +1,63 @@
+{
+  "scope": "real hosted demo only; not held-out evaluation",
+  "results": [
+    {
+      "scenario_id": "DEMO-005",
+      "variant": "multi",
+      "status": "completed",
+      "scoring_status": "scored",
+      "model_calls": 4,
+      "input_tokens": 7247,
+      "output_tokens": 638,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "actual_weighted_downtime": 5760,
+      "actual_weighted_available_minutes": 720,
+      "approved_episodes": 1,
+      "auxiliary_request_count": 4,
+      "model_configuration": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "api_mode": "responses",
+        "reasoning_effort": "none",
+        "response_format": "json_object",
+        "temperature": "provider_default",
+        "sdk_retries": 0,
+        "schema_repair_attempts": 1,
+        "protocol_version": "matched-workflow-v3"
+      }
+    },
+    {
+      "scenario_id": "DEMO-005",
+      "variant": "single",
+      "status": "completed",
+      "scoring_status": "scored",
+      "model_calls": 4,
+      "input_tokens": 7356,
+      "output_tokens": 731,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "actual_weighted_downtime": 5760,
+      "actual_weighted_available_minutes": 720,
+      "approved_episodes": 1,
+      "auxiliary_request_count": 4,
+      "model_configuration": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "api_mode": "responses",
+        "reasoning_effort": "none",
+        "response_format": "json_object",
+        "temperature": "provider_default",
+        "sdk_retries": 0,
+        "schema_repair_attempts": 1,
+        "protocol_version": "matched-workflow-v3"
+      }
+    }
+  ],
+  "api_cost": null,
+  "claims_multi_agent_superiority": false
+}

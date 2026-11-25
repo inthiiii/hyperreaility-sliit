@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from project.evaluation.runner import run_benchmark
-from project.llm.health import preflight
+from project.llm.health import preflight, REASONING_EFFORTS
 
 ROOT=Path(__file__).resolve().parents[2]
 
@@ -17,6 +17,8 @@ ROOT=Path(__file__).resolve().parents[2]
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model',required=True,help='Exact OpenAI model ID selected by the operator')
+    parser.add_argument('--api-mode',choices=('chat_completions','responses'),default=None)
+    parser.add_argument('--reasoning-effort',choices=REASONING_EFFORTS,default=None)
     parser.add_argument('--env-file',type=Path,default=ROOT/'.env')
     parser.add_argument('--output',type=Path,required=True,help='New private results/local_benchmarks directory')
     parser.add_argument('--allow-live',action='store_true',help='Authorize up to two bounded hosted workflow attempts')
@@ -25,6 +27,8 @@ def main():
     if not args.model.strip():parser.error('Exact model ID must not be blank')
     load_dotenv(args.env_file,override=False)
     os.environ['LLM_PROVIDER']='openai';os.environ['LLM_MODEL']=args.model.strip()
+    if args.api_mode is not None:os.environ['LLM_API']=args.api_mode
+    if args.reasoning_effort is not None:os.environ['LLM_REASONING_EFFORT']=args.reasoning_effort
     if preflight()['status']=='blocked':parser.error('OpenAI configuration is incomplete; check the local key without publishing it')
     rows=run_benchmark([ROOT/'data/processed/agent_inputs/demo/DEMO-005.json'],args.output,
                        variants=['single','multi'],repeats=1,allow_live=True)

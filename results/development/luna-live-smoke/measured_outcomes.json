@@ -1,0 +1,58 @@
+[
+  {
+    "variant": "multi",
+    "approval_mode": "automated_benchmark_operator",
+    "scenario_id": "DEMO-005",
+    "plan_id": "fb5e47ea-6383-468a-a0ef-2d3ce0dda1a9",
+    "state_version": 1,
+    "measurement_scope": "complete_incident",
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 5,
+      "total_weighted_horizon_min": 6480,
+      "weighted_available_min": 720,
+      "weighted_downtime_min": 5760,
+      "unweighted_available_min": 240,
+      "unweighted_downtime_min": 3360,
+      "unweighted_availability": 0.06666666666666667,
+      "critical_service_downtime_min": 600,
+      "first_restoration_min": 30,
+      "services_available_at_horizon_end": 0,
+      "unmet_needs_count": 5,
+      "measured_duration_min": 720,
+      "observed_until_min": 720,
+      "incident_horizon_min": 720,
+      "baseline_weighted_downtime_min": 6480,
+      "weighted_downtime_reduction_min": 720,
+      "actions_completed": 1
+    }
+  },
+  {
+    "variant": "single",
+    "approval_mode": "automated_benchmark_operator",
+    "scenario_id": "DEMO-005",
+    "plan_id": "9a31d002-e15f-4120-ba21-0392269fae9b",
+    "state_version": 1,
+    "measurement_scope": "complete_incident",
+    "metrics": {
+      "horizon_min": 720,
+      "services_total": 5,
+      "total_weighted_horizon_min": 6480,
+      "weighted_available_min": 720,
+      "weighted_downtime_min": 5760,
+      "unweighted_available_min": 240,
+      "unweighted_downtime_min": 3360,
+      "unweighted_availability": 0.06666666666666667,
+      "critical_service_downtime_min": 600,
+      "first_restoration_min": 30,
+      "services_available_at_horizon_end": 0,
+      "unmet_needs_count": 5,
+      "measured_duration_min": 720,
+      "observed_until_min": 720,
+      "incident_horizon_min": 720,
+      "baseline_weighted_downtime_min": 6480,
+      "weighted_downtime_reduction_min": 720,
+      "actions_completed": 1
+    }
+  }
+]

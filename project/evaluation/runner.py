@@ -104,7 +104,7 @@ def model_configuration():
     health=preflight()
     return {'provider':health['provider'],'model':health['model'],
             'endpoint_sha256':digest(os.environ.get('LLM_BASE_URL','')),
-            'response_format':'json_object','temperature':'provider_default',
+            'api_mode':health.get('api_mode','chat_completions'),'reasoning_effort':health.get('reasoning_effort'),'response_format':'json_schema' if health.get('api_mode')=='responses' else 'json_object','temperature':'provider_default',
             'sdk_retries':0,'schema_repair_attempts':1,'protocol_version':PROTOCOL_VERSION}
 
 
@@ -113,6 +113,7 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
     started = time.monotonic()
     used = {'calls': 0, 'input': 0, 'output': 0}
     usage = []
+    auxiliary = []
     episode = None
     scenario = case
     version = 1
@@ -134,13 +135,14 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
                 if mode != 'template':
                     if model_configuration()!=configuration:raise ValueError('Hosted configuration changed during the experiment')
                     adapter = HostedAdapter.from_env(budget=budget)
-                    if (adapter.provider,adapter.model)!=(configuration['provider'],configuration['model']):
+                    if (adapter.provider,adapter.model,getattr(adapter,'reasoning_effort',None),getattr(adapter,'api_mode','chat_completions'))!=(configuration['provider'],configuration['model'],configuration['reasoning_effort'],configuration['api_mode']):
                         raise ValueError('Hosted adapter does not match the frozen model configuration')
                 result = Coordinator(adapter, budget=budget, planner=planner, reviewer_enabled=reviewer,
                     feedback_enabled=feedback, trace_dir=output/'runs').run(scenario, mode, state_version=version)
             finally:
                 # Capture attempts even if client construction, a workflow or cleanup fails.
                 usage.extend(dict(item) for item in budget.records)
+                auxiliary.extend(dict(item) for item in budget.auxiliary_records)
                 used['calls'] += budget.calls
                 used['input'] += max(budget.input_reserved, sum(r.get('input_tokens', 0) for r in budget.records))
                 used['output'] += max(budget.output_reserved, sum(r.get('output_tokens', 0) for r in budget.records))
@@ -213,6 +215,8 @@ def _attempt(case, variant, repeat, output, data_root, max_episodes, configurati
     finally:
         row['model_calls'] = used['calls']
         row['model_usage'] = usage
+        row['auxiliary_requests']=auxiliary
+        row['auxiliary_request_count']=len(auxiliary)
         row['returned_models']=sorted({r['returned_model'] for r in usage if r.get('returned_model')})
         row['input_tokens'] = sum(r.get('input_tokens', 0) for r in usage) if used['calls'] == len(usage) and all('input_tokens' in r for r in usage) else None
         row['output_tokens'] = sum(r.get('output_tokens', 0) for r in usage) if used['calls'] == len(usage) and all('output_tokens' in r for r in usage) else None

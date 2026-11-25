@@ -19,7 +19,7 @@ def request_key(session, choice, mode, planner):
     settings = None
     if mode != 'template':
         health = preflight()
-        settings = {'provider': health['provider'], 'model': health['model'],
+        settings = {'provider': health['provider'], 'model': health['model'],'reasoning_effort':health.get('reasoning_effort'),'api_mode':health.get('api_mode','chat_completions'),
                     'endpoint_hash': digest(os.environ.get('LLM_BASE_URL', ''))}
     return digest({'input': choice.content_hash, 'path': choice.key,
                    'mode': mode, 'planner': planner, 'settings': settings,
@@ -80,6 +80,8 @@ def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, 
                 return 'blocked'
             attempt['configured_provider'] = health['provider']
             attempt['configured_model'] = health['model']
+            attempt['configured_api_mode'] = health.get('api_mode','chat_completions')
+            attempt['configured_reasoning_effort'] = health.get('reasoning_effort')
             phase = 'client_setup'
             adapter = (adapter_factory or HostedAdapter.from_env)()
         phase = 'planning'
@@ -99,6 +101,7 @@ def prepare_plan(session, choice, mode, planner, root, *, adapter_factory=None, 
     finally:
         if adapter is not None:
             attempt['model_usage'] = list(adapter.budget.records)
+            attempt['auxiliary_requests'] = list(adapter.budget.auxiliary_records)
             try:
                 adapter.close()
             except Exception as error:

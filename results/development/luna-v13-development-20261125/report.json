@@ -1,0 +1,2942 @@
+{
+  "scope": "development only; not independent held-out evaluation",
+  "model_configuration": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "endpoint_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "api_mode": "responses",
+    "reasoning_effort": "none",
+    "response_format": "json_schema",
+    "temperature": "provider_default",
+    "sdk_retries": 0,
+    "schema_repair_attempts": 1,
+    "protocol_version": "matched-workflow-v13"
+  },
+  "source_sha256": "cb46f2e1b80cef307ba5d0e425f9850dec9f6eceb75b4ce6a4afda06fe1bc6fa",
+  "protocol": {
+    "version": "matched-workflow-v13",
+    "stages": [
+      "investigate",
+      "resources",
+      "priorities",
+      "review"
+    ],
+    "tasks_sha256": "a5ddf76959175d80882238543cbf9ecf38dbadd5068fdf6eff8d46190df2cfc6",
+    "visible_context": "identical operational fields; no evaluator truth",
+    "tools": [
+      "conservative evidence resolver",
+      "CP-SAT/greedy scheduler",
+      "independent schedule validator"
+    ],
+    "agent_requests": [
+      "evidence-linked conservative defer_action"
+    ],
+    "weights": "human-approved; never model-edited",
+    "max_revision_rounds": 3,
+    "stage_output_limits": {
+      "investigate": 700,
+      "resources": 450,
+      "priorities": 450,
+      "review": 500
+    },
+    "single": "one agent identity across all four stages",
+    "multi": "four distinct role contexts exchanging structured findings",
+    "budget_policy": "same whole-incident caps; actual utilization may differ",
+    "interpretation": "controlled workflow comparison, not proof that agent count alone causes improvement"
+  },
+  "whole_incident_limits": {
+    "max_calls": 12,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 4800,
+    "max_seconds": 180
+  },
+  "case_count": 10,
+  "case_hashes": {
+    "DEV-001": "117978261badf81edb6c35a35d0cd344f5a73a356f950d37b730e3a5f5a594f2",
+    "DEV-002": "8a1ec4b2801670882829ced84cad89a614cf9ed4fd6f20de49011ea92b07f627",
+    "DEV-003": "80a41c8e0d29d185cc2aca4c8d064030fb3121a652f7ce18aaca3430c053eab6",
+    "DEV-004": "b2d16cd470d6fd269cd54e4568ab61015ff23e4a941165906c1d7586b721b0b4",
+    "DEV-005": "8a614cf1353876ff6edb3c6a1159f70ae371002209143f96f2d0c3ef2519d7a5",
+    "DEV-006": "4c291c729a21d78a5cafedb1fbe152f3fb2ad3a906f12a0c44bf5dfc747e650b",
+    "DEV-007": "e8f1a5e5650d68815c3561d62cb44c99f90547159d031b1768a2a4481b81c9f5",
+    "DEV-008": "2b7d32bc24108928e1c328c8a005adc5dda223447b2e17d3f01ed5e8c589faa5",
+    "DEV-009": "dbc5b9f21f3b32f1c12cf3fdedbff7c847803ccc919fd093437bb4f54ff0b8cd",
+    "DEV-010": "28adca7c60f3592f6f7e3d380aca638910d5c1fdb5fc5dfe1982bba56b5e82a1"
+  },
+  "attempts": 120,
+  "variants": {
+    "single": {
+      "attempts": 30,
+      "statuses": {
+        "completed": 16,
+        "escalated": 14
+      },
+      "scored": 16,
+      "escalation_categories": {
+        "workflow_exception_or_budget": 3,
+        "unresolved_evidence": 6,
+        "agent_review_or_clarification": 5
+      },
+      "decision_effect_count": 1,
+      "mean_weighted_downtime_scored_only": 7515,
+      "mean_duration_seconds": 16.28577936113191,
+      "model_calls": 110,
+      "auxiliary_request_count": 111,
+      "input_tokens": 310700,
+      "output_tokens": 15350
+    },
+    "multi": {
+      "attempts": 30,
+      "statuses": {
+        "completed": 12,
+        "escalated": 18
+      },
+      "scored": 12,
+      "escalation_categories": {
+        "workflow_exception_or_budget": 5,
+        "agent_review_or_clarification": 7,
+        "unresolved_evidence": 6
+      },
+      "decision_effect_count": 1,
+      "mean_weighted_downtime_scored_only": 6760,
+      "mean_duration_seconds": 14.60574382916481,
+      "model_calls": 102,
+      "auxiliary_request_count": 104,
+      "input_tokens": 283773,
+      "output_tokens": 14140
+    },
+    "no_reviewer": {
+      "attempts": 30,
+      "statuses": {
+        "completed": 17,
+        "escalated": 13
+      },
+      "scored": 17,
+      "escalation_categories": {
+        "workflow_exception_or_budget": 1,
+        "agent_review_or_clarification": 6,
+        "unresolved_evidence": 6
+      },
+      "decision_effect_count": 1,
+      "mean_weighted_downtime_scored_only": 7045.882352941177,
+      "mean_duration_seconds": 11.282340622268384,
+      "model_calls": 84,
+      "auxiliary_request_count": 84,
+      "input_tokens": 213213,
+      "output_tokens": 10536
+    },
+    "no_feedback": {
+      "attempts": 30,
+      "statuses": {
+        "completed": 12,
+        "escalated": 18
+      },
+      "scored": 12,
+      "escalation_categories": {
+        "workflow_exception_or_budget": 2,
+        "agent_review_or_clarification": 10,
+        "unresolved_evidence": 6
+      },
+      "decision_effect_count": 0,
+      "mean_weighted_downtime_scored_only": 7340,
+      "mean_duration_seconds": 13.96894235832927,
+      "model_calls": 100,
+      "auxiliary_request_count": 100,
+      "input_tokens": 263293,
+      "output_tokens": 13231
+    }
+  },
+  "concurrent_batches": 10,
+  "timing_note": "Observed wall time includes concurrent batch contention; not an isolated latency benchmark.",
+  "paired_comparison": {
+    "comparison": "single versus multi; same four-stage tool-assisted workflow",
+    "eligible_pairs": 30,
+    "scored_comparable_pairs": 12,
+    "excluded_pairs": [
+      {
+        "case": [
+          "DEV-002",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-004",
+          0
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-004",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-004",
+          2
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-005",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-005",
+          2
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-006",
+          0
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-006",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-006",
+          2
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-007",
+          0
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-007",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-007",
+          2
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-008",
+          0
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-008",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-008",
+          2
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-010",
+          0
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-010",
+          1
+        ],
+        "reason": "unscored_pair"
+      },
+      {
+        "case": [
+          "DEV-010",
+          2
+        ],
+        "reason": "unscored_pair"
+      }
+    ],
+    "conditioning": "Downtime differences use complete comparable pairs only; assess failure coverage alongside them.",
+    "difference_unit": "weighted service-minutes; positive favors multi",
+    "mean_single_minus_multi": 0,
+    "median_single_minus_multi": 0.0,
+    "multi_wins": 0,
+    "single_wins": 0,
+    "ties": 12,
+    "paired_bootstrap_95pct_interval": [
+      0,
+      0
+    ],
+    "uncertainty": "Exploratory paired resampling; repeats within a scenario are not independent new scenarios.",
+    "status_counts": {
+      "single": {
+        "completed": 16,
+        "escalated": 14
+      },
+      "multi": {
+        "completed": 12,
+        "escalated": 18
+      }
+    },
+    "decision_effect_counts": {
+      "single": 1,
+      "multi": 1
+    },
+    "api_cost": null,
+    "claims_multi_agent_superiority": false
+  },
+  "raw_extraction": {
+    "label_source": "recognized visible fixture sentences before resolver fill-in",
+    "run_records_with_metrics": 129,
+    "run_records_without_metrics": 0,
+    "true_positive": 222,
+    "false_positive": 0,
+    "false_negative": 0,
+    "micro_f1": 1.0,
+    "by_variant": {
+      "single": {
+        "run_records_with_metrics": 32,
+        "true_positive": 55,
+        "false_positive": 0,
+        "false_negative": 0,
+        "micro_f1": 1.0
+      },
+      "multi": {
+        "run_records_with_metrics": 31,
+        "true_positive": 53,
+        "false_positive": 0,
+        "false_negative": 0,
+        "micro_f1": 1.0
+      },
+      "no_reviewer": {
+        "run_records_with_metrics": 33,
+        "true_positive": 57,
+        "false_positive": 0,
+        "false_negative": 0,
+        "micro_f1": 1.0
+      },
+      "no_feedback": {
+        "run_records_with_metrics": 33,
+        "true_positive": 57,
+        "false_positive": 0,
+        "false_negative": 0,
+        "micro_f1": 1.0
+      }
+    },
+    "unlabelled_reports": 9
+  },
+  "request_error_counts": {
+    "ValueError": 7,
+    "unclassified": 5
+  },
+  "auxiliary_request_count": 399,
+  "auxiliary_error_counts": {},
+  "artifacts": [
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-001",
+      "manifest_sha256": "c14f2e90d03bb359cc4098fb3de7754c8d2a97f39d9f391de6a84c01f00addb7",
+      "attempts_sha256": "600e7acc4576490e67e8819ae2d9f54898f228d8a421c8de206ddcca37c804ed"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-002",
+      "manifest_sha256": "aa2cc09473f5c237543648c5f913e28d48e290fef748bf0445ad8da4428beb0f",
+      "attempts_sha256": "174579da64786cecd739e678e9512e1d35b1d592c4824c297ae7ed7da337d00e"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-003",
+      "manifest_sha256": "f74685cad54964ef612a91eb09d2e5cbfacb07a98c27e2d5d701a12c3624d850",
+      "attempts_sha256": "9dd42d0f6dfcf667425e011ed78a52cf71bb2df208480f6c3ab76c8721ec7daf"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-004",
+      "manifest_sha256": "1f6af74aa68c7faeeaa5b33457dc05394872b641841b73d15b8456b3a1c8a4cd",
+      "attempts_sha256": "434bad69bd2f868941cd4ad86ba3bbb8817914caf33edc3f2408a40a84809d2c"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-005",
+      "manifest_sha256": "066bdbae4f62c93a13d1bc69baf866f3aee0ed4f7212606c8b8c8398dc8d628a",
+      "attempts_sha256": "c51b4c7956a23082abeb4e73753d0d29f03d2ab677d8887e39bebd787ee87279"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-006",
+      "manifest_sha256": "1529adf3c3a4bc96aed6157612558aba6537f32a180771f1038bd727a8c7416a",
+      "attempts_sha256": "bada7100941c245e530240e2f217633a52999adcfa9e4f48c93483120dc3662f"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-007",
+      "manifest_sha256": "3edd5b1acc75f7e32517f87c7756d9cb497d80ffe3e5f50fb4cd2f52ab6f7020",
+      "attempts_sha256": "6822ee17bbf29aeef19247a9a7aa7dd62b24c41403a11865359ae919dd00fe3b"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-008",
+      "manifest_sha256": "3bb9550d52f40b59987b198d6e7a69e2bcfe47f7dfc9eab046cd45517becf185",
+      "attempts_sha256": "b9d589c3dda9741cfa6dce7286317d40385ce907b6c24c053995640cd5152bb0"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-009",
+      "manifest_sha256": "72dfacae0cd6e0e132d77156f03c05d6af47efdb9df02b37cc7c16f189ba6ae0",
+      "attempts_sha256": "da5cd8d83e8e1cd27b65e60c3cbdcf8df1fa57bf17fb55bac5a5217f605c7fc2"
+    },
+    {
+      "directory": "results/local_benchmarks/luna-v13-repeated-20261125/DEV-010",
+      "manifest_sha256": "32dcb96e1953309f7b01dff8223160b91e84e6028007718237574fd0ba85c852",
+      "attempts_sha256": "96bad1db875f4291676cd761b48fe9700607f755f130c4ae3f49a7fa7cb41a8f"
+    }
+  ],
+  "api_cost": null,
+  "claims_multi_agent_superiority": false,
+  "jobs": [
+    {
+      "scenario_id": "DEV-001",
+      "variant": "single",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10181,
+      "output_tokens": 403,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10154,
+      "output_tokens": 355,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 6989,
+      "output_tokens": 261,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 6975,
+      "output_tokens": 227,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "single",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10179,
+      "output_tokens": 393,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10177,
+      "output_tokens": 378,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10162,
+      "output_tokens": 373,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 9883,
+      "output_tokens": 401,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 9883,
+      "output_tokens": 400,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "single",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10163,
+      "output_tokens": 403,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 9887,
+      "output_tokens": 377,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-001",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 760,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 6995,
+      "output_tokens": 282,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "single",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10476,
+      "output_tokens": 423,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10498,
+      "output_tokens": 412,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7185,
+      "output_tokens": 258,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7191,
+      "output_tokens": 263,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "single",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10480,
+      "output_tokens": 436,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10533,
+      "output_tokens": 449,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7224,
+      "output_tokens": 650,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10182,
+      "output_tokens": 413,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10179,
+      "output_tokens": 416,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "single",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10522,
+      "output_tokens": 444,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 9772,
+      "output_tokens": 953,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-002",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 5040,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7198,
+      "output_tokens": 266,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "single",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11432,
+      "output_tokens": 674,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11428,
+      "output_tokens": 610,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7793,
+      "output_tokens": 431,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7775,
+      "output_tokens": 383,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "single",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 5,
+      "input_tokens": 15592,
+      "output_tokens": 861,
+      "auxiliary_request_count": 5,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11402,
+      "output_tokens": 596,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11401,
+      "output_tokens": 591,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10997,
+      "output_tokens": 623,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Review requested revision; feedback disabled for ablation"
+      ]
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11001,
+      "output_tokens": 611,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "single",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 5,
+      "input_tokens": 15603,
+      "output_tokens": 863,
+      "auxiliary_request_count": 5,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 12720,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10998,
+      "output_tokens": 614,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-003",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7795,
+      "output_tokens": 765,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "single",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 13440,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11648,
+      "output_tokens": 619,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7981,
+      "output_tokens": 765,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7992,
+      "output_tokens": 561,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7989,
+      "output_tokens": 499,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "single",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 13440,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11617,
+      "output_tokens": 597,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 22064,
+      "output_tokens": 1049,
+      "auxiliary_request_count": 8,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7975,
+      "output_tokens": 553,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11251,
+      "output_tokens": 666,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Review requested revision; feedback disabled for ablation"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 13440,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11255,
+      "output_tokens": 604,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "single",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 5301,
+      "output_tokens": 650,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 13440,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11252,
+      "output_tokens": 589,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-004",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 13440,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7953,
+      "output_tokens": 405,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "single",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7200,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11654,
+      "output_tokens": 556,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7200,
+      "approved_episodes": 1,
+      "decision_effect_count": 1,
+      "model_calls": 5,
+      "input_tokens": 15470,
+      "output_tokens": 720,
+      "auxiliary_request_count": 5,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7200,
+      "approved_episodes": 1,
+      "decision_effect_count": 1,
+      "model_calls": 3,
+      "input_tokens": 8064,
+      "output_tokens": 426,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7200,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 8052,
+      "output_tokens": 360,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "single",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 21844,
+      "output_tokens": 962,
+      "auxiliary_request_count": 8,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 5365,
+      "output_tokens": 300,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 23835,
+      "output_tokens": 1136,
+      "auxiliary_request_count": 7,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "REP-001 and the resolved snapshot confirm S01 equipment failure, matching EQ-S01; the candidate has no action or explicit defer request.",
+        "REP-002 confirms R01 is closed. This rules out that route only and does not establish that S01 is inaccessible by other routes.",
+        "Forecast accounting is consistent: V02 contributes 3,600 weighted minutes and the other 18 available services contribute 6,480, totaling 10,080."
+      ]
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 11253,
+      "output_tokens": 578,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Review requested revision; feedback disabled for ablation"
+      ]
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 5365,
+      "output_tokens": 292,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "single",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7200,
+      "approved_episodes": 1,
+      "decision_effect_count": 1,
+      "model_calls": 7,
+      "input_tokens": 22472,
+      "output_tokens": 1182,
+      "auxiliary_request_count": 7,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7933,
+      "output_tokens": 408,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Agent requested action deferral; feedback disabled for ablation"
+      ]
+    },
+    {
+      "scenario_id": "DEV-005",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7200,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 8090,
+      "output_tokens": 410,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "single",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2369,
+      "output_tokens": 146,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 139,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 141,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 145,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "single",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2369,
+      "output_tokens": 162,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 141,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 141,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 151,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 142,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "single",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2369,
+      "output_tokens": 153,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 141,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-006",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2371,
+      "output_tokens": 135,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "single",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4689,
+      "output_tokens": 320,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 237,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 234,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 231,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "single",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4689,
+      "output_tokens": 294,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 232,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 277,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 223,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 229,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "single",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4689,
+      "output_tokens": 300,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 299,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-007",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 4693,
+      "output_tokens": 235,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "single",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2443,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "single",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2443,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "single",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2443,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-008",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 1,
+      "input_tokens": 2445,
+      "output_tokens": 12,
+      "auxiliary_request_count": 1,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "site:S01:equipment_ok"
+      ]
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "single",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10900,
+      "output_tokens": 454,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10830,
+      "output_tokens": 393,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7456,
+      "output_tokens": 257,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7473,
+      "output_tokens": 264,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "single",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10895,
+      "output_tokens": 470,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10846,
+      "output_tokens": 421,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 5,
+      "input_tokens": 13554,
+      "output_tokens": 685,
+      "auxiliary_request_count": 5,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10552,
+      "output_tokens": 395,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10550,
+      "output_tokens": 381,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "single",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10852,
+      "output_tokens": 407,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 4,
+      "input_tokens": 10547,
+      "output_tokens": 444,
+      "auxiliary_request_count": 4,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-009",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 7800,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 3,
+      "input_tokens": 7466,
+      "output_tokens": 261,
+      "auxiliary_request_count": 3,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "single",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 6,
+      "input_tokens": 18388,
+      "output_tokens": 857,
+      "auxiliary_request_count": 6,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "multi",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 6,
+      "input_tokens": 16835,
+      "output_tokens": 813,
+      "auxiliary_request_count": 6,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "no_reviewer",
+      "repeat": 2,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 9250,
+      "approved_episodes": 2,
+      "decision_effect_count": 0,
+      "model_calls": 6,
+      "input_tokens": 15979,
+      "output_tokens": 827,
+      "auxiliary_request_count": 6,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "no_reviewer",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 5,
+      "input_tokens": 13214,
+      "output_tokens": 776,
+      "auxiliary_request_count": 5,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "single",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 22240,
+      "output_tokens": 1081,
+      "auxiliary_request_count": 7,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "multi",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 2,
+      "input_tokens": 5237,
+      "output_tokens": 585,
+      "auxiliary_request_count": 2,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "multi",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 0,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 22275,
+      "output_tokens": 1103,
+      "auxiliary_request_count": 8,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "BudgetExceeded: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "no_feedback",
+      "repeat": 2,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 19049,
+      "output_tokens": 887,
+      "auxiliary_request_count": 7,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "no_feedback",
+      "repeat": 1,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 6,
+      "input_tokens": 16484,
+      "output_tokens": 1102,
+      "auxiliary_request_count": 6,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "ValueError: workflow stopped; inspect structured usage and evidence"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "single",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 19758,
+      "output_tokens": 1204,
+      "auxiliary_request_count": 7,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "no_feedback",
+      "repeat": 0,
+      "status": "escalated",
+      "scoring_status": "not_scored_escalated",
+      "actual_weighted_downtime": null,
+      "approved_episodes": 1,
+      "decision_effect_count": 0,
+      "model_calls": 6,
+      "input_tokens": 16493,
+      "output_tokens": 856,
+      "auxiliary_request_count": 6,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": [
+        "Specialist requires operator clarification"
+      ]
+    },
+    {
+      "scenario_id": "DEV-010",
+      "variant": "no_reviewer",
+      "repeat": 0,
+      "status": "completed",
+      "scoring_status": "scored",
+      "actual_weighted_downtime": 9250,
+      "approved_episodes": 2,
+      "decision_effect_count": 0,
+      "model_calls": 7,
+      "input_tokens": 19062,
+      "output_tokens": 1197,
+      "auxiliary_request_count": 7,
+      "returned_models": [
+        "gpt-6-luna"
+      ],
+      "failure_phase": null,
+      "error_type": null,
+      "escalation_reasons": null
+    }
+  ]
+}

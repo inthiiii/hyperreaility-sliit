@@ -4,7 +4,7 @@
 
 ## Status and scope
 
-This checkpoint implements the hosted request path and the matched single-/multi-agent protocol together. Offline injected-client and independent-simulator tests verify the engineering boundaries. Real OpenAI verification is pending selection of an exact model ID: the existing local configuration contains a key but leaves `LLM_MODEL` blank. No provider availability, hosted model quality, measured API charge, held-out performance or superiority claim is established by these tests.
+This checkpoint implements the hosted request path and matched single-/multi-agent protocol together. Real OpenAI `gpt-6-luna` execution with reasoning `none` and the Responses API is verified on the demo. Development comparisons, failures and remaining quality limits are recorded in [LUNA_LIVE_VALIDATION.md](LUNA_LIVE_VALIDATION.md). Actual charges and independent held-out performance remain unverified; no superiority claim follows from a successful API check.
 
 ## Hosted execution
 
@@ -12,7 +12,7 @@ Each explicit Planning generation constructs a fresh coordinator and shared run 
 
 Requests record provider, requested/returned model, request ID, role, prompt/schema/response hashes, output cap, actual token usage, finish reason, latency and sanitized error type/HTTP status. Provider exception bodies and credentials are not published. Reports remain untrusted evidence and cannot direct file access or dispatch. Approval remains a separate human action, bound to the plan/state content.
 
-The unchanged whole-incident limits are **12 model calls, 24,000 input tokens, 4,800 output tokens and 180 seconds**, including repairs and event replans. Each solver invocation is capped at five seconds. UTF-8 bytes plus framing conservatively reserve input capacity before a request. When valid usage arrives, actual consumed tokens replace that request's unused reservation; unknown-usage failures retain the reservation. Overspend is recorded and blocks approval, rather than becoming free usage. Conservative reservations can still stop a request before the provider's actual token limit would be reached.
+The unchanged automated benchmark whole-incident limits are **12 model calls, 24,000 input tokens, 4,800 output tokens and 180 seconds**, including repairs and event replans. Each explicit dashboard planning attempt has the same caps; an operator can explicitly start a separate attempt. Each solver invocation is capped at five seconds. The selected Responses path obtains an exact server-side input count for the same payload before generation. Legacy Chat Completions uses conservative UTF-8 bytes plus framing. Token-count requests are recorded as auxiliary requests, not generations; their latency consumes the same deadline. Count failure never silently falls back to an estimate. When valid usage arrives, actual consumed tokens replace that request's unused reservation; unknown-usage failures retain the reservation. Overspend is recorded and blocks approval, rather than becoming free usage. Conservative reservations can still stop a request before the provider's actual token limit would be reached.
 
 ## Matched baseline
 
@@ -25,7 +25,7 @@ The unchanged whole-incident limits are **12 model calls, 24,000 input tokens, 4
 
 The normal successful path contains four calls in both modes. Both can request evidence revision, submit conservative action deferrals, use the same CP-SAT/heuristic tools, and access the same shared findings under the same caps. Single mode uses one agent identity; multi mode uses four role contexts. No hidden physical state or unreached event enters either prompt. Compact tabular encodings omit display coordinates/labels; every operational field used by the scheduling tools is available to both. The operational context hash records input parity.
 
-This is a comparison of two controlled workflow configurations, not an experiment isolating agent count as the sole causal variable. Equal caps do not guarantee equal actual token consumption. Early safety escalations can use fewer stages. Three revision rounds are permitted, but the first exhausted whole-incident cap wins. Model generation temperature remains the provider default, recorded explicitly; no unsupported seed/reasoning parameter is guessed.
+This is a comparison of two controlled workflow configurations, not an experiment isolating agent count as the sole causal variable. Equal caps do not guarantee equal actual token consumption. Early safety escalations can use fewer stages. Three revision rounds are permitted, but the first exhausted whole-incident cap wins. Model generation temperature remains the provider default, recorded explicitly. The selected model uses explicit reasoning effort `none`; no unsupported seed is guessed.
 
 ## Agent influence on decisions
 
@@ -55,11 +55,12 @@ python -m pytest -q
 python -m streamlit run project/main.py
 ```
 
-For real verification, set an exact selected model ID in the command below. Keep the API key in the existing local `.env` file. This command does not edit it or publish its contents:
+For a bounded real verification, use the selected model and API settings below. Keep the API key in the existing local `.env` file. This command does not edit it or publish its contents:
 
 ```sh
 python -m project.evaluation.hosted_check \
-  --model YOUR_EXACT_MODEL_ID \
+  --model gpt-6-luna \
+  --reasoning-effort none --api-mode responses \
   --env-file .env \
   --output results/local_benchmarks/hosted-check-01 \
   --allow-live
@@ -82,7 +83,7 @@ Do not treat development fixtures, injected clients or unreviewed evaluation can
 
 ## Authorship and assistance
 
-Prepared for Ihthisham's core/coordinator workstream with ChatGPT/Codex assistance. No teammate co-author is added to this checkpoint. Eyaas's attribution remains on the separately merged operator-clarification checkpoint.
+The initial matched-protocol commit was prepared for Ihthisham's core/coordinator workstream with ChatGPT/Codex assistance. The later joint Luna verification commit credits Ihthisham, Zahra, Eyaas and Kiruthika at the user's request.
 
 ## Actual verification at this checkpoint
 
@@ -91,4 +92,45 @@ Prepared for Ihthisham's core/coordinator workstream with ChatGPT/Codex assistan
 - Injected-client tests cover equal four-stage access/caps, changed validated schedules from resource/priority/reviewer requests, hallucinated references, disabled-feedback behavior, model drift, mixed returned models, raw-extraction scoring, reservation reconciliation and overspend retention.
 - Streamlit AppTest verifies visible deferral reasons, a fresh unapproved candidate, and simulation blocked until an operator supplies approval.
 - Installed SDK inspection confirms the request parameters used by the adapter exist. This is parameter compatibility checking, not provider verification.
-- Exact OpenAI model ID and live single-/multi-agent smoke results remain pending.
+- The later Luna validation checkpoint supersedes the initial pending-live status; see LUNA_LIVE_VALIDATION.md for provider results.
+
+## Selected-model follow-up
+
+The 24 November joint Luna checkpoint used protocol `matched-workflow-v4`, which makes repair semantics, the weighted-availability objective and the approval-before-simulation boundary explicit in both modes. In particular, equipment repair cannot restore grid power. Input-token counting is exact on the selected Responses path; auxiliary count requests and generations are audited separately. Regression tests disable personal `.env` loading and provider credentials. Team co-author attribution is attached to the joint follow-up commit at the user's request.
+
+
+## Current protocol — 25 November
+
+`matched-workflow-v13` retains equal four-stage access, tools and whole-incident caps.
+Both modes receive lossless action codebooks/CSV and an encoding of the complete
+known snapshot; explicit unknowns remain unknown. This reduces repeated framing,
+not operational information. Tests decode every development fixture back to its
+original action and observation fields, including quoted IDs and null values.
+
+Responses uses provider-enforced strict JSON Schema plus local Pydantic and
+reference validation. Evidence enums contain only supplied report IDs (and policy
+for decision stages); investigators cannot substitute policy for an incident
+report. Rejected semantic outputs are retained as rejected audit records.
+
+Per-call output limits are investigation 700, resources 450, priorities 450 and
+review 500 tokens in both modes. The aggregate 12-generation, 24,000-input,
+4,800-output and 180-second incident caps remain unchanged across replanning.
+Counter requests consume time and are separately audited. There is one bounded
+schema repair, charged to those same limits.
+
+Reviewer clarification reuses an unchanged validated candidate. A new typed hold
+always advances state, regenerates/validates the candidate and requires fresh
+explicit review, even if the original response said approve. Repeating an existing
+hold can acknowledge it without creating a fake revision. Four reviews maximum
+(initial plus three revision/clarification rounds); exhaustion escalates. The
+no-feedback ablation cannot use the clarification loop.
+
+The review receives exact work-end arithmetic and a per-service static forecast
+computed solely from visible state, public generator autonomy and candidate work.
+It includes unaffected/upstream-dependent services and labels remaining-horizon
+predictions separately from independent simulator measurements. No unseen events,
+private labels or evaluator truth enter these tools. Forecasts are reproducible
+from the stored verified state and candidate.
+
+See [the completion update](PRIORITY_3_4_COMPLETION.md) for current measured results,
+including unsuccessful attempts and the remaining quality limits.

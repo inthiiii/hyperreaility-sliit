@@ -2,7 +2,7 @@
 
 Simulation remains a separate evaluator owned by Zahra. No truth loader is imported.
 """
-from typing import Literal
+from typing import Literal,Annotated
 import time
 from datetime import datetime, timezone
 from pydantic import Field
@@ -11,24 +11,26 @@ from .schemas import Contract,EvidenceFact,ScenarioInput,Plan,Approval,Validatio
 from .state import build_verified_state,digest
 from .planner import plan,greedy_plan
 from .validator import validate
+from .forecast import service_forecast
 from project.agents.extraction import template_facts
 from project.llm.client import RunBudget,BudgetExceeded
 from project.evaluation.extraction import extraction_metrics
-from project.agents.protocol import DecisionRequest, TASKS, PROTOCOL_VERSION, visible_context
+from project.agents.context import observations_view,plan_view,arithmetic_checks
+from project.agents.protocol import DecisionRequest, TASKS, PROTOCOL_VERSION, OUTPUT_LIMITS, visible_context
 
 class FactBatch(Contract):facts:list[EvidenceFact]
 class Finding(Contract):
-    finding:str
-    evidence_ids:list[str]
     clarification_required:bool=False
     requests:list[DecisionRequest]=Field(default_factory=list)
+    evidence_ids:list[str]
+    finding:str=Field(max_length=600)
 class Review(Contract):
     decision:Literal['approve','revise','escalate']
-    findings:list[str]
-    evidence_ids:list[str]
-    revision_request:str=''
     revision_kind:Literal['evidence','schedule']='evidence'
+    revision_request:str=''
     requests:list[DecisionRequest]=Field(default_factory=list)
+    evidence_ids:list[str]
+    findings:list[Annotated[str,Field(max_length=240)]]=Field(max_length=3)
 
 class RunResult(Contract):
     run_id:str
@@ -63,6 +65,8 @@ class Coordinator:
         messages=[];reasons=[];effects=[];raw_extraction=None;deferred=set();context=visible_context(scenario);state=build_verified_state(scenario,[],state_version=state_version)
         candidate=None;validation=None
         reports=[r.model_dump() for r in scenario.reports]
+        recognized=template_facts(scenario)
+        recognized_ids={rid for fact in recognized for rid in fact.evidence_ids}
         def message(sender,recipient,content):
             messages.append({'sender':sender,'recipient':recipient,'incident_id':scenario.scenario_id,
                              'state_version':state_version,'finding':content})
@@ -71,23 +75,28 @@ class Coordinator:
             shared={k:v for k,v in context.items() if k not in ('reports','observations','site_ids')}
             payload={**payload,'reports':reports,'site_ids':context['site_ids'],'stage':stage,'task':TASKS[stage],
                      'shared_context':shared,'context_sha256':digest(context),
-                     'state_version':state_version,'resolved_observations':state.resolved_observations.model_dump(),
+                     'state_version':state_version,'resolved_observations':observations_view(state.resolved_observations),
                      'active_deferred_action_ids':sorted(deferred)}
             # Both modes see the same findings. Distinct role identities are the
             # controlled workflow difference, not a hidden information advantage.
             payload['agent_findings']=[{'sender':m['sender'],'state_version':m['state_version'],'finding':m['finding']} for m in messages
-                                     if m['sender'] not in ('deterministic_scheduler','coordinator') and 'facts' not in m['finding']][-3:]
+                                     if m['sender'] not in ('deterministic_scheduler','coordinator','rejected_agent_output') and 'facts' not in m['finding']][-3:]
             if not self.feedback_enabled:payload['agent_findings']=[]
-            result=self.adapter.complete(role,payload,model,max_output=700 if model is FactBatch else 400)
+            allowed={r.report_id for r in scenario.reports}
+            if model is not FactBatch:allowed.add(scenario.policy.evidence_id)
+            result=self.adapter.complete(role,payload,model,max_output=OUTPUT_LIMITS[stage],evidence_ids=allowed)
+            def reject(reason):
+                message('rejected_agent_output','audit',{'role':role,'stage':stage,
+                        'validation_error':reason,'output':result.model_dump()})
+                raise ValueError(reason)
             evidence=set(result.evidence_ids) if hasattr(result,'evidence_ids') else {rid for f in result.facts for rid in f.evidence_ids}
-            allowed={r.report_id for r in scenario.reports}|{scenario.policy.evidence_id}
-            if not evidence<=allowed:raise ValueError('Agent cited nonexistent evidence')
+            if not evidence<=allowed:reject('Agent cited nonexistent evidence')
             for request in getattr(result,'requests',[]):
-                if not set(request.evidence_ids)<=allowed:raise ValueError('Decision request cited nonexistent evidence')
+                if not set(request.evidence_ids)<=allowed:reject('Decision request cited nonexistent evidence')
                 if not request.reason.strip() or len(set(request.action_ids))!=len(request.action_ids):
-                    raise ValueError('Invalid decision request')
+                    reject('Invalid decision request')
                 if not set(request.action_ids)<={a.action_id for a in scenario.action_options}:
-                    raise ValueError('Decision request references nonexistent action')
+                    reject('Decision request references nonexistent action')
             message(role,'coordinator',result.model_dump())
             return result
         def apply_requests(finding,role):
@@ -123,10 +132,14 @@ class Coordinator:
                 reasons.extend(state.unresolved_facts)
             if mode!='template' and not reasons:assess_specialists()
             if not reasons:
+                review_feedback=None
+                candidate_dirty=True
                 for revision in range(4):
                     self.budget.check_time()
-                    candidate=greedy_plan(state,excluded_action_ids=deferred) if self.planner=='greedy' else plan(state,solver_seconds=min(5,self.budget.remaining_seconds()),excluded_action_ids=deferred)
-                    validation=validate(candidate,state);message('deterministic_scheduler','coordinator',candidate.model_dump())
+                    if candidate_dirty:
+                        candidate=greedy_plan(state,excluded_action_ids=deferred) if self.planner=='greedy' else plan(state,solver_seconds=min(5,self.budget.remaining_seconds()),excluded_action_ids=deferred)
+                        validation=validate(candidate,state);message('deterministic_scheduler','coordinator',candidate.model_dump())
+                        candidate_dirty=False
                     self.budget.check_time()
                     if deferred & {a.action_id for a in candidate.actions}:
                         raise ValueError('Scheduler violated a recorded action deferral')
@@ -134,29 +147,43 @@ class Coordinator:
                         reasons.append('Independent validation failed');break
                     if mode=='template' or not self.reviewer_enabled:break
                     review=invoke('plan_reviewer' if mode=='multi' else 'single_agent',
-                        {'plan':candidate.model_dump(),'validation':validation.model_dump(),'reports':reports},Review,'review')
-                    if review.requests and (review.decision!='revise' or review.revision_kind!='schedule'):
-                        raise ValueError('Reviewer requests require an explicit scheduling revision')
-                    if review.decision=='approve':break
+                        {'plan':plan_view(candidate),'validation':validation.model_dump(),'arithmetic_checks':arithmetic_checks(candidate,scenario),'service_forecast':service_forecast(state,candidate),'review_feedback':review_feedback},Review,'review')
+                    requested={aid for request in review.requests for aid in request.action_ids}
+                    if review.decision=='approve' and requested<=deferred:
+                        if requested:message('coordinator','review_audit',{'acknowledged_existing_holds':sorted(requested)})
+                        break
                     if review.decision=='escalate' or revision==3:
                         reasons.extend(review.findings or ['Review did not approve within revision budget']);break
                     if not self.feedback_enabled:
                         reasons.append('Review requested revision; feedback disabled for ablation');break
-                    if not review.revision_request:
-                        reasons.append('Reviewer requested revision without a concrete request');break
-                    if review.revision_kind=='schedule':
-                        if review.requests:
-                            apply_requests(review,'plan_reviewer' if mode=='multi' else 'single_agent')
-                            if reasons:break
-                            continue
-                        if self.planner=='cp_sat':
-                            reasons.append('Scheduling revision requires an explicit new constraint; operator clarification needed');break
-                        self.planner='cp_sat'
+                    if review.requests and requested-deferred:
+                        if review.decision=='approve':
+                            message('coordinator','review_audit',{'new_holds_require_replanning':sorted(requested-deferred),'original_decision':'approve'})
+                        apply_requests(review,'plan_reviewer' if mode=='multi' else 'single_agent')
+                        if reasons:break
+                        candidate_dirty=True;review_feedback=None
+                        continue
+                    if review.decision=='revise' and review.revision_kind=='schedule' and not review.requests and self.planner=='greedy' and review.revision_request.strip():
+                        self.planner='cp_sat';candidate_dirty=True;review_feedback=None
                         message('coordinator','deterministic_scheduler',{'revision_request':review.revision_request,'planner':'cp_sat'})
+                        continue
+                    exact_source_recheck=(review.revision_kind=='evidence' and set(review.evidence_ids)<=recognized_ids|{scenario.policy.evidence_id})
+                    needs_clarification=(review.decision=='approve' or bool(review.requests) or not review.revision_request.strip()
+                                         or review.revision_kind=='schedule' or (exact_source_recheck and review_feedback is None))
+                    if needs_clarification:
+                        review_feedback={'issue':'Review cannot be applied as returned; candidate remains unapproved.',
+                            'allowed_responses':'Approve only the unchanged valid candidate with existing holds; revise with a concrete evidence correction or NEW typed defer_action; otherwise escalate.',
+                            'active_holds':sorted(deferred),'requested_holds':sorted(requested),
+                            'arithmetic_checks':arithmetic_checks(candidate,scenario),
+                            'exact_report_checks':[{'report_id':f.evidence_ids[0],'target':f.target_id,'attribute':f.attribute,'value':f.value,'status':f.status} for f in recognized],
+                            'resolved_observations':observations_view(state.resolved_observations),
+                            'note':'Repeating an existing hold changes no constraint. Work end is work start plus duration; travel precedes work start. Never require simulator results before human approval.'}
+                        message('coordinator','plan_reviewer' if mode=='multi' else 'single_agent',review_feedback)
                         continue
                     revised=invoke('network_investigator' if mode=='multi' else 'single_agent',{'reports':reports,'revision_request':review.revision_request,
                        'previous_facts':[f.model_dump() for f in state.facts]},FactBatch,'investigate')
                     state_version+=1
+                    candidate_dirty=True;review_feedback=None
                     state=build_verified_state(scenario,revised.facts,state_version=state_version)
                     if mode!='template' and not state.unresolved_facts:assess_specialists()
                     if reasons:break
@@ -170,7 +197,7 @@ class Coordinator:
                          state=state,plan=candidate,validation=validation,messages=messages,
                          model_usage=list(self.budget.records),reasons=reasons,
                          metadata={"started_at_utc":started_at,"duration_seconds":time.monotonic()-self.budget.started,
-                           "raw_extraction_metrics":raw_extraction,"protocol_version":PROTOCOL_VERSION,"context_sha256":digest(context),"decision_effects":effects,
+                           "auxiliary_requests":list(self.budget.auxiliary_records),"raw_extraction_metrics":raw_extraction,"protocol_version":PROTOCOL_VERSION,"context_sha256":digest(context),"decision_effects":effects,
                            "deferred_action_ids":sorted(deferred),"input_hash":digest(scenario),"planner":self.planner,"reviewer_enabled":self.reviewer_enabled,
                            "feedback_enabled":self.feedback_enabled,"simulation_status":"not_integrated",
                            "transport":"none" if self.adapter is None else ("injected_test_client" if self.adapter.injected_client else "hosted"),

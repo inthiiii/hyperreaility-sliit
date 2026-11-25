@@ -1,0 +1,137 @@
+{
+  "scope": "offline planner counterfactual only; no new model calls or physical-effect claim",
+  "runs": [
+    {
+      "run_id": "6dc2026f-9d5a-4d57-bf3b-326c937be4a7",
+      "scenario_id": "DEV-004",
+      "mode": "multi",
+      "status": "awaiting_approval",
+      "requests": [
+        {
+          "sender": "field_resource_planner",
+          "state_version": 2,
+          "request": {
+            "kind": "defer_action",
+            "action_ids": [
+              "BH-L01"
+            ],
+            "evidence_ids": [
+              "REP-001",
+              "REP-003"
+            ],
+            "reason": "S01 has no grid power, and repairing L01 fixes only the link; this repair alone cannot restore S01 service."
+          },
+          "applied_action_ids": [
+            "BH-L01"
+          ],
+          "effect": "excluded_from_candidate_schedule",
+          "operational_fact_verified": false
+        },
+        {
+          "sender": "field_resource_planner",
+          "state_version": 3,
+          "request": {
+            "kind": "defer_action",
+            "action_ids": [
+              "GEN-G1-S01"
+            ],
+            "evidence_ids": [
+              "REP-001",
+              "REP-003"
+            ],
+            "reason": "Generator power would not restore S01 service while upstream link L01 is failed; the single deployment is better preserved for a site where it can contribute to service."
+          },
+          "applied_action_ids": [
+            "GEN-G1-S01"
+          ],
+          "effect": "excluded_from_candidate_schedule",
+          "operational_fact_verified": false
+        }
+      ],
+      "actual_actions": [
+        [
+          "GEN-G1-S02",
+          "C1",
+          25,
+          40
+        ]
+      ],
+      "counterfactual_without_holds": [
+        [
+          "GEN-G1-S02",
+          "C1",
+          25,
+          40
+        ]
+      ],
+      "schedule_changed": false,
+      "both_encoded_valid": true,
+      "variant": "no_reviewer"
+    },
+    {
+      "run_id": "5e7c866a-427f-4713-a3f1-df589e83c953",
+      "scenario_id": "DEV-005",
+      "mode": "multi",
+      "status": "awaiting_approval",
+      "requests": [
+        {
+          "sender": "field_resource_planner",
+          "state_version": 2,
+          "request": {
+            "kind": "defer_action",
+            "action_ids": [
+              "EQ-S01"
+            ],
+            "evidence_ids": [
+              "REP-002"
+            ],
+            "reason": "R01 is reported closed, blocking the listed Depot-to-S01 route; defer S01 equipment repair until access is available."
+          },
+          "applied_action_ids": [
+            "EQ-S01"
+          ],
+          "effect": "excluded_from_candidate_schedule",
+          "operational_fact_verified": false
+        }
+      ],
+      "actual_actions": [],
+      "counterfactual_without_holds": [],
+      "schedule_changed": false,
+      "both_encoded_valid": true,
+      "variant": "multi"
+    },
+    {
+      "run_id": "cba004dd-0456-4942-a183-54541c2a6146",
+      "scenario_id": "DEV-005",
+      "mode": "multi",
+      "status": "awaiting_approval",
+      "requests": [
+        {
+          "sender": "field_resource_planner",
+          "state_version": 2,
+          "request": {
+            "kind": "defer_action",
+            "action_ids": [
+              "EQ-S01"
+            ],
+            "evidence_ids": [
+              "REP-001",
+              "REP-002"
+            ],
+            "reason": "Defer equipment repair: the only supplied road from DEPOT to S01, R01, is reported closed, blocking both crews from reaching the repair location."
+          },
+          "applied_action_ids": [
+            "EQ-S01"
+          ],
+          "effect": "excluded_from_candidate_schedule",
+          "operational_fact_verified": false
+        }
+      ],
+      "actual_actions": [],
+      "counterfactual_without_holds": [],
+      "schedule_changed": false,
+      "both_encoded_valid": true,
+      "variant": "no_reviewer"
+    }
+  ]
+}

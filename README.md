@@ -8,7 +8,7 @@ Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — Univ
 
 [Proposal](docs/Proposal.docx) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Architecture](#proposed-architecture) · [Development setup](#development-setup) · [Evaluation](#evaluation-plan)
 
-> **Status: integrated synthetic recovery MVP.** The dashboard supports evidence inspection, operator clarification, validated planning, recorded approval, independent incident simulation and event-time continuation. Hosted single-/multi-agent workflows now share four decision stages, operational information, tools and budget caps; evidence-linked deferral requests can change the validated schedule. See [hosted protocol and verification](docs/HOSTED_FAIRNESS.md), [operator clarification](docs/OPERATOR_CONFIRMATION.md) and [benchmark scoring](docs/BENCHMARK_SCORING.md). Live provider verification awaits an exact model ID; no hosted performance advantage is claimed.
+> **Status: integrated synthetic recovery MVP.** The dashboard supports evidence inspection, operator clarification, validated planning, recorded approval, independent incident simulation and event-time continuation. Hosted single-/multi-agent workflows now share four decision stages, operational information, tools and budget caps; evidence-linked deferral requests can change the validated schedule. See [hosted protocol and verification](docs/HOSTED_FAIRNESS.md), [operator clarification](docs/OPERATOR_CONFIRMATION.md) and [benchmark scoring](docs/BENCHMARK_SCORING.md). Real OpenAI Luna execution is verified on the demo; development comparisons and their limitations are recorded in [Luna validation](docs/LUNA_LIVE_VALIDATION.md). No hosted performance advantage is claimed.
 
 ## Overview
 
@@ -135,13 +135,13 @@ The repository root corresponds to the `university-project/` root in the competi
 | Path | Purpose | Status |
 | --- | --- | --- |
 | [docs/Proposal.docx](docs/Proposal.docx) | Submitted competition proposal | Uploaded on 20 November 2026 |
-| [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Initial design available |
-| [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Initial version available |
-| [project/main.py](project/main.py) | Required application entry point | Dashboard Pushes 1–5 available; real loader/simulator integration and outcome verification pending |
+| [docs/Workflow.md](docs/Workflow.md) | Process, agent communication and implementation sequence | Current agent workflow, approval and continuation documented |
+| [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, technical design, evaluation and disclosures | Current implementation, models and disclosures documented |
+| [project/main.py](project/main.py) | Required application entry point | Integrated dashboard, live hosted planning, approval and independent incident simulation |
 | [project/requirements.txt](project/requirements.txt) | Tested Python dependencies | Environment dependency versions recorded |
 | `data/scenarios/` | Scenario fixtures and provenance | Placeholder |
-| `tests/` | Verification code and fixtures | Core tests and six visible development fixtures available |
-| `results/` | Benchmark outputs and traces | Placeholder |
+| `tests/` | Verification code and fixtures | 458 automated tests; data, simulation, core, evaluation and UI checks |
+| `results/` | Benchmark outputs and traces | Development aggregate reports published; raw local traces ignored by Git |
 | `project-demo.mp4` | Actual-execution demonstration video | Pending |
 
 ## Development setup
@@ -298,7 +298,31 @@ Single-agent and multi-agent workflows use the same four stages and tools. Origi
 For bounded live verification, select an exact OpenAI model ID and run:
 
 ```sh
-python -m project.evaluation.hosted_check --model YOUR_EXACT_MODEL_ID --env-file .env --output results/local_benchmarks/hosted-check-01 --allow-live
+python -m project.evaluation.hosted_check --model gpt-6-luna --reasoning-effort none --api-mode responses --env-file .env --output results/local_benchmarks/hosted-check-01 --allow-live
 ```
 
-This explicitly authorizes two development attempts (single and multi), each capped at 12 calls, 24,000 input tokens, 4,800 output tokens and 180 seconds. API charges are possible and are not estimated. Use a new output directory for each run. See [the protocol](docs/HOSTED_FAIRNESS.md) for assumptions and exact verification status.
+This explicitly authorizes two development attempts (single and multi), each capped at 12 calls, 24,000 input tokens, 4,800 output tokens and 180 seconds. API charges are possible and are not estimated. Use a new output directory for each run. See [the protocol](docs/HOSTED_FAIRNESS.md) and [live validation](docs/LUNA_LIVE_VALIDATION.md) for assumptions and actual results.
+
+### Selected Luna configuration
+
+Keep the existing API key in `.env` and use these settings:
+
+```dotenv
+LLM_PROVIDER=openai
+LLM_MODEL=gpt-6-luna
+LLM_REASONING_EFFORT=none
+LLM_API=responses
+```
+
+Restart Streamlit after changing settings. Responses input-token counts are checked before generation; count requests are audited separately from the 12 model-generation limit. Their latency counts toward the same run deadline. Chat Completions remains available with `LLM_API=chat_completions`. SOCKS environments additionally need `python -m pip install -r project/requirements-proxy.txt`; direct connections do not require that file.
+
+
+### Priority 3–4 completion update — 25 November
+
+The selected Luna workflow now uses strict structured responses, lossless compact
+operational context, bounded reviewer clarification and visible-state service
+forecasting. New operational holds always require a newly validated candidate and
+fresh review; operator approval remains separate. Full regression: **458 passed**.
+See [the completion update](docs/PRIORITY_3_4_COMPLETION.md) for current live
+results, evidence and limits. Earlier benchmark cohorts retain their original
+protocol labels and must not be pooled. Priority 5–7 remain separate milestones.
