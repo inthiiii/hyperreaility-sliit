@@ -67,7 +67,7 @@ def workflow_status(session, choice):
                 'Wait for backend integration. No measured recovery results are available yet.')
         return WorkflowStatus('approved', 'Ready to simulate',
             'The current plan has matching recorded operator approval.',
-            'Use the approving operator label and click Simulate approved plan on Planning.')
+            'As the Restoration Manager who approved it, open Planning → ④ Simulate and click Simulate approved plan.')
     if decision and decision.approval.decision == 'approve':
         return WorkflowStatus('approval_expired', 'Approval is no longer current',
             'The current plan/state does not match the recorded approval.',

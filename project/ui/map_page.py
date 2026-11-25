@@ -51,16 +51,21 @@ def render_map_page(choice, session):
         trajectory = sim.trajectory if view == 'Simulated restoration' else None
         frame = st.empty()
         if play:
-            # Simple replay: redraw every 30 incident minutes.
-            for step in range(scenario.current_time_min, scenario.horizon_min + 1, 30):
+            # Replay: each frame replaces the previous one in the same placeholder; the last
+            # frame (end of the incident) stays as the final view.
+            steps = list(range(scenario.current_time_min, scenario.horizon_min, 30)) + [scenario.horizon_min]
+            for index, step in enumerate(steps):
                 with frame.container():
                     st.caption(f'Incident minute {step} of {scenario.horizon_min}')
-                    render_map(scenario, observations=observations, trajectory=trajectory, minute=step, plan=plan,
-                               basemap=basemap)
-                time.sleep(0.5)
-        with frame.container():
-            rows = render_map(scenario, observations=observations, trajectory=trajectory,
-                              minute=minute if not play else scenario.horizon_min, plan=plan, basemap=basemap)
+                    rows = render_map(scenario, observations=observations, trajectory=trajectory, minute=step,
+                                      plan=plan, basemap=basemap)
+                if index < len(steps) - 1:
+                    time.sleep(0.5)
+            minute = scenario.horizon_min
+        else:
+            with frame.container():
+                rows = render_map(scenario, observations=observations, trajectory=trajectory, minute=minute,
+                                  plan=plan, basemap=basemap)
     if view == 'Evidence now':
         st.caption('Using the resolved evidence from the current plan.' if result is not None else
                    'Using the initial snapshot. Generate a plan to show what the agents resolved.')
