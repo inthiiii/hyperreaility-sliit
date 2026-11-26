@@ -28,3 +28,8 @@ h2 { font-size: 1.45rem !important; }
   .block-container { padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
   h1 { font-size: 2rem !important; }
 }
+
+.relink-todo{border:1px solid rgba(241,203,120,.45);background:rgba(241,203,120,.08);border-radius:10px;
+  padding:8px 10px;margin-top:6px;font-size:13px;line-height:1.45}
+.relink-todo b{display:block;color:#f1cb78;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.relink-todo span{color:#8796a8}

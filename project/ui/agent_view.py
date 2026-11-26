@@ -109,9 +109,29 @@ def collaboration_counts(result):
             'rejected': sum(r['Kind'] == 'Rejected output' for r in rows)}
 
 
+UNKNOWN_TEXT = {'equipment_ok': 'is the equipment working', 'grid_power_ok': 'is grid power on',
+                'backhaul_ok': 'is the backhaul link working', 'open': 'is the road open'}
+
+
+def unknown_questions(result, asked=()):
+    """Facts the run could not establish, phrased as operator questions (one per fact)."""
+    out = []
+    for item in result.state.unresolved_facts:
+        parts = item.split(':')
+        typ, target = parts[0], parts[1]
+        attribute = parts[2] if len(parts) > 2 else {'link': 'backhaul_ok', 'road': 'open'}.get(typ)
+        if attribute is None or target in asked:
+            continue
+        out.append({'target_id': target, 'question': f'Not established from the reports: {UNKNOWN_TEXT[attribute]} '
+                                                     f'at {target}?', 'source': 'evidence_check',
+                    'evidence_ids': [], 'fact': f'{typ}:{target}:{attribute}'})
+    return out
+
+
 def inbox(result):
     meta = result.metadata or {}
-    return {'questions': list(meta.get('operator_questions', [])),
+    asked = list(meta.get('operator_questions', []))
+    return {'questions': asked + unknown_questions(result, {q.get('target_id') for q in asked}),
             'proposals': list(meta.get('priority_proposals', [])),
             'ignored': list(meta.get('ignored_reports', []))}
 

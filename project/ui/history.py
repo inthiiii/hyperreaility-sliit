@@ -59,6 +59,17 @@ def render_history(root, choice=None):
         with evidence:_evidence(result)
         with activity:_activity(result)
         with details:_details(result, None)
+        if result.plan is not None:
+            from project.auth import can
+            from project.ui.auth_view import current_user
+            from project.ui.plan_export import build_summary, history_parts, pdf_bytes
+            run, decision, simulation = history_parts(entry, catalog)
+            allowed = can(current_user(), 'export_records')
+            st.download_button('Download plan summary (PDF)',
+                               pdf_bytes(build_summary(run, decision, simulation)) if allowed else b'',
+                               file_name=f'relink-plan-{run.state.scenario_id}-{run.plan.plan_id[:8]}.pdf',
+                               mime='application/pdf', key='history_pdf', on_click='ignore', disabled=not allowed)
+            st.caption('One page with jobs, reasons, the recorded approval and the linked measured result, if any.')
     elif entry.kind == 'simulation':
         simulation, issue = linked_simulation(entry, catalog)
         if issue:st.info(issue)

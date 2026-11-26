@@ -18,9 +18,15 @@ from project.ui.workflow import render_workflow
 from project.ui.map_page import render_field_page, render_map_page
 from project.ui.benchmark_page import render_benchmark
 from project.ui.baseline_compare import render_baseline_compare
+from project.ui.plan_export import render_plan_export
+from project.ui.notifications import badge_counts, notifications
+from project.ui.upload_view import render_upload
+from project.ui.whatif import has_truth
+from project.ui.whatif_page import render_whatif
 from project.ui.auth_view import current_user, render_identity, render_login, render_roles_panel
 
-PAGES = ('Overview', 'Incident', 'Map', 'Planning', 'Field work', 'Results', 'Benchmark', 'History', 'Settings')
+PAGES = ('Overview', 'Incident', 'Map', 'Planning', 'Field work', 'Results', 'What-if', 'Benchmark', 'History',
+         'Settings')
 
 
 def _pill(text, amber=False):
@@ -136,12 +142,15 @@ def render_app(root=None):
                 '<div class="relink-muted">Restore connectivity.<br>Coordinate recovery.</div>'
                 '<div class="relink-rule"></div>')
         st.caption('WORKSPACE')
-        page = st.radio('Workspace navigation', PAGES, key='workspace_page', label_visibility='collapsed')
+        nav = st.container()
         st.divider()
         st.caption('ACTIVE SCENARIO')
         if catalog.choices:
             by_key = {item.key: item for item in catalog.choices}
             keys = list(by_key)
+            pending = st.session_state.pop('pending_scenario', None)
+            if pending in by_key:
+                st.session_state['scenario_picker'] = pending
             # A data publication may remove the previously selected development fixture.
             if st.session_state.get('scenario_picker') not in by_key:
                 st.session_state['scenario_picker'] = keys[catalog.default_index]
@@ -158,6 +167,16 @@ def render_app(root=None):
         else:
             session.clear_selection()
             st.warning('No valid visible scenarios found.')
+        render_upload(root, catalog, choice, user)
+        todo = notifications(session, choice, user)
+        counts = badge_counts(todo)
+        with nav:
+            page = st.radio('Workspace navigation', PAGES, key='workspace_page', label_visibility='collapsed',
+                            format_func=lambda p: f'{p}  🔴 {counts[p]}' if counts.get(p) else p)
+            if todo:
+                st.html('<div class="relink-todo"><b>For you now</b>' +
+                        ''.join(f'<div>• {escape(msg)} <span>({escape(where)})</span></div>' for where, msg in todo) +
+                        '</div>')
         render_identity(user)
         st.divider()
         st.html(_pill('Synthetic workspace'))
@@ -191,9 +210,12 @@ def render_app(root=None):
         render_planning(choice, session, root)
     elif page == 'Field work':
         render_field_page(choice, session, root)
+    elif page == 'What-if':
+        render_whatif(choice, session, root)
     else:
         render_results(session, choice)
-        if choice is not None and choice.source != 'development_fixture':
+        if choice is not None and choice.source != 'development_fixture' and has_truth(choice):
             render_baseline_compare(session, choice, root)
+        render_plan_export(session, choice)
     st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
             ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')

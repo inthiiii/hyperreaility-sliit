@@ -16,13 +16,15 @@ PERMISSIONS = {
     'export_records': 'Download recorded runs and decisions',
     'view_settings': 'See model, budget and access settings',
     'manage_users': 'See users and roles',
+    'upload_scenario': 'Add a new incident from a visible-input JSON file',
 }
 
 ROLES = {
     'noc_coordinator': {
         'label': 'NOC Coordinator',
         'summary': 'Prepares plans and answers agent questions. Cannot approve.',
-        'permissions': {'view_incident', 'generate_plan', 'confirm_fact', 'view_history', 'export_records'},
+        'permissions': {'view_incident', 'generate_plan', 'confirm_fact', 'view_history', 'export_records',
+                        'upload_scenario'},
     },
     'restoration_manager': {
         'label': 'Restoration Manager',
@@ -43,7 +45,7 @@ ROLES = {
     'admin': {
         'label': 'Administrator',
         'summary': 'Settings and users. Deliberately has no planning or approval authority.',
-        'permissions': {'view_incident', 'view_history', 'view_settings', 'manage_users'},
+        'permissions': {'view_incident', 'view_history', 'view_settings', 'manage_users', 'upload_scenario'},
     },
 }
 
