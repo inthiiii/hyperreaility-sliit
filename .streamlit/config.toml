@@ -32,6 +32,59 @@ backgroundColor = "#0B111B"
 secondaryBackgroundColor = "#121B28"
 borderColor = "#22303F"
 
+# RE:L!NK is dark-only: if a viewer picks Light (or System) in the app menu, they still get the dark palette.
+[theme.light]
+primaryColor = "#54D6BB"
+backgroundColor = "#070B12"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+linkColor = "#7BE8CF"
+borderColor = "#22303F"
+dataframeBorderColor = "#22303F"
+dataframeHeaderBackgroundColor = "#182334"
+dataframeHeaderTextColor = "#B8C6D6"
+codeBackgroundColor = "#0D141F"
+codeTextColor = "#7BE8CF"
+redColor = "#FF7A85"
+orangeColor = "#FF9F5A"
+yellowColor = "#F4C76B"
+greenColor = "#54D6BB"
+blueColor = "#7DB8F5"
+violetColor = "#B7A5E6"
+chartCategoricalColors = ["#54D6BB", "#F4C76B", "#7DB8F5", "#FF9F5A", "#B7A5E6", "#FF7A85", "#7A8CA3"]
+
+[theme.light.sidebar]
+backgroundColor = "#0B111B"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+borderColor = "#22303F"
+
+[theme.dark]
+primaryColor = "#54D6BB"
+backgroundColor = "#070B12"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+linkColor = "#7BE8CF"
+borderColor = "#22303F"
+dataframeBorderColor = "#22303F"
+dataframeHeaderBackgroundColor = "#182334"
+dataframeHeaderTextColor = "#B8C6D6"
+codeBackgroundColor = "#0D141F"
+codeTextColor = "#7BE8CF"
+redColor = "#FF7A85"
+orangeColor = "#FF9F5A"
+yellowColor = "#F4C76B"
+greenColor = "#54D6BB"
+blueColor = "#7DB8F5"
+violetColor = "#B7A5E6"
+chartCategoricalColors = ["#54D6BB", "#F4C76B", "#7DB8F5", "#FF9F5A", "#B7A5E6", "#FF7A85", "#7A8CA3"]
+
+[theme.dark.sidebar]
+backgroundColor = "#0B111B"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+borderColor = "#22303F"
+
 [browser]
 gatherUsageStats = false
 

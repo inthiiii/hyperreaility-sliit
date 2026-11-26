@@ -2,7 +2,12 @@
    Local system fonts and CSS only; no remote assets or JavaScript. */
 
 /* ------------------------------------------------------------------ canvas */
-html, body, [data-testid="stApp"] { background: var(--rl-bg); }
+/* Dark-only: hold the palette even if a viewer picked a light theme in the app menu. */
+html, body, [data-testid="stApp"], [data-testid="stMain"], [data-testid="stBottom"] > div { background-color: var(--rl-bg) !important; color-scheme: dark; }
+[data-testid="stApp"] { color: var(--rl-text); }
+[data-testid="stMain"] [data-testid="stMarkdownContainer"], [data-testid="stMain"] [data-testid="stText"],
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] { color: var(--rl-text-2); }
+[data-testid="stMain"] h1, [data-testid="stMain"] h2, [data-testid="stMain"] h3, [data-testid="stMain"] h4 { color: var(--rl-text) !important; }
 [data-testid="stAppViewContainer"] {
   background:
     radial-gradient(900px 480px at 100% -8%, rgba(84,214,187,.10), transparent 60%),
