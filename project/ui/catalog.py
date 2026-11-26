@@ -1,6 +1,7 @@
 """Allowlisted, visible scenario catalog for the dashboard foundation.
 
-No arbitrary uploads, evaluation splits, raw inputs or hidden-truth readers.
+No evaluation splits, raw inputs or hidden-truth readers. Uploaded incidents are
+visible-input JSON only, validated on upload and kept locally under .relink/uploads.
 Zahra's eventual loader should replace this boundary without changing the views.
 """
 from dataclasses import dataclass
@@ -25,6 +26,7 @@ LEGACY_ROOTS = (
 )
 APPROVED_ROOTS = CURRENT_ROOTS + LEGACY_ROOTS
 FIXTURE_ROOT = 'tests/core/fixtures'
+UPLOAD_ROOT = '.relink/uploads'
 
 
 @dataclass(frozen=True)
@@ -36,7 +38,8 @@ class ScenarioChoice:
 
     @property
     def label(self):
-        return f'{self.scenario.scenario_id} · {len(self.scenario.sites)} sites'
+        suffix = ' · uploaded' if self.key.startswith(UPLOAD_ROOT + '/') else ''
+        return f'{self.scenario.scenario_id} · {len(self.scenario.sites)} sites{suffix}'
 
 
 @dataclass(frozen=True)
@@ -99,6 +102,8 @@ def load_catalog(root: Path) -> ScenarioCatalog:
 
     choices = scan(APPROVED_ROOTS, 'processed_input')
     using_fixtures = not choices
+    known = {item.scenario.scenario_id for item in choices}
+    uploads = [item for item in scan((UPLOAD_ROOT,), 'uploaded') if item.scenario.scenario_id not in known]
     if using_fixtures:
         choices = scan((FIXTURE_ROOT,), 'development_fixture')
-    return ScenarioCatalog(tuple(choices), tuple(issues), using_fixtures)
+    return ScenarioCatalog(tuple(choices + uploads), tuple(issues), using_fixtures)

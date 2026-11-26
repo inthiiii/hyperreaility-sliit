@@ -145,7 +145,7 @@ def _details(result, attempt):
                'UI attempt metadata is stored separately under ui_attempts/. These local files are excluded from Git.')
 
 
-def _result(result, attempt):
+def _result(result, attempt, choice=None):
     if result.mode == 'template':
         st.caption('OFFLINE TEMPLATE BASELINE · zero hosted inference')
     if result.status == 'awaiting_approval':
@@ -176,7 +176,7 @@ def _result(result, attempt):
     with activity:
         _activity(result)
     with operator:
-        _inbox(result, box)
+        _inbox(result, box, choice)
     with details:
         _details(result, attempt)
 
@@ -189,19 +189,13 @@ def _decide(session, result, index, decision, root):
         st.session_state['priority_feedback'] = f'Not recorded: {error}'
 
 
-def _inbox(result, box):
+def _inbox(result, box, choice=None):
+    from project.ui.inbox_answer import render_questions
     from project.ui.session import get_dashboard_session
     session = get_dashboard_session(st.session_state)
     root = st.session_state.get('relink_root')
     st.subheader('Questions for the operator')
-    if box['questions']:
-        st.dataframe([{'From': q.get('source', '').replace('_', ' '), 'About': q.get('target_id'),
-                       'Question': q.get('question'), 'Evidence': ', '.join(q.get('evidence_ids', []))}
-                      for q in box['questions']], hide_index=True, width='stretch')
-        st.caption('Answer with Record operator clarification below (NOC Coordinator or Field Supervisor). '
-                   'Recording an answer creates new evidence and clears the current plan and approval.')
-    else:
-        st.caption('No open questions. Unknown facts would appear here instead of stopping the run.')
+    render_questions(choice, session, root, box['questions'])
     st.subheader('Priority proposals')
     if not box['proposals']:
         st.caption('No proposals. Agents may only propose priority changes; weights stay as approved.')
@@ -317,6 +311,12 @@ def _generate_step(choice, session, root, user):
                 begin_new_attempt(session)
                 st.session_state['review_note'] = ''
                 st.rerun()
+    if st.session_state.pop('auto_replan', False) and not generate:
+        if blocked or session.busy or attempted or not allowed:
+            st.warning('Your answer was recorded, but a new plan could not start automatically. Use Generate plan.')
+        else:
+            st.info('Replanning with your answer as new evidence…')
+            generate = True
     if generate:
         st.markdown('**Live agent workflow**')
         flow = LiveFlow(st.empty(), mode, len(choice.scenario.reports))
@@ -338,7 +338,10 @@ def _generate_step(choice, session, root, user):
                 st.text(reason)
             with st.expander('Attempt metadata and any recorded model usage'):
                 st.json(redact(attempt))
-    if session.core.current is not None:
+    if session.core.current is not None and session.core.current.status != 'awaiting_approval':
+        st.warning('Planning escalated: some facts could not be established. Answer the open questions in '
+                   '② Inspect plan → Operator inbox; each answer starts a new plan.')
+    elif session.core.current is not None:
         st.success('A plan is ready. Open ② Inspect plan, then ③ Review & approve.')
         if session.core.current.state.source_hash == choice.content_hash:
             st.markdown('**How this plan was made**')
@@ -352,6 +355,6 @@ def _inspect_step(choice, session):
     if result is not None:
         if attempt and attempt['request_key'] != key:
             st.info('Controls differ from the displayed run. Generate a plan to replace it; no new request has been sent.')
-        _result(result, attempt)
+        _result(result, attempt, choice)
     elif not attempt:
         st.info('No plan generated yet. Use ① Generate.')
