@@ -48,7 +48,7 @@ def _schedule(result):
                                                                                 result.state.scenario.horizon_min])),
             x2='End:Q', y=alt.Y('Lane:N', title=None, sort=None),
             color=alt.Color('Stage:N', scale=alt.Scale(domain=['Travel', 'Work', 'Powering site'],
-                                                      range=['#74869d', '#69e3c6', '#f1cb78'])),
+                                                      range=['#8D9EB3', '#54D6BB', '#F4C76B'])),
             tooltip=['Lane:N', 'Action:N', 'Stage:N', 'Start:Q', 'End:Q'],
         ).properties(height=max(140, data['Lane'].nunique() * 56))
         st.altair_chart(chart, width='stretch')

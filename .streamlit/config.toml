@@ -1,10 +1,92 @@
+# Mirrors project/ui/theme.py (RE:L!NK dark palette).
 [theme]
 base = "dark"
 primaryColor = "#54D6BB"
-backgroundColor = "#0B1018"
-secondaryBackgroundColor = "#121B27"
-textColor = "#E8EEF5"
-font = "sans serif"
+backgroundColor = "#070B12"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+linkColor = "#7BE8CF"
+borderColor = "#22303F"
+dataframeBorderColor = "#22303F"
+dataframeHeaderBackgroundColor = "#182334"
+dataframeHeaderTextColor = "#B8C6D6"
+showWidgetBorder = true
+codeBackgroundColor = "#0D141F"
+codeTextColor = "#7BE8CF"
+font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif"
+headingFontWeights = [720, 680, 650, 620, 600, 600]
+baseRadius = "12px"
+buttonRadius = "10px"
+metricValueFontWeight = 700
+redColor = "#FF7A85"
+orangeColor = "#FF9F5A"
+yellowColor = "#F4C76B"
+greenColor = "#54D6BB"
+blueColor = "#7DB8F5"
+violetColor = "#B7A5E6"
+chartCategoricalColors = ["#54D6BB", "#F4C76B", "#7DB8F5", "#FF9F5A", "#B7A5E6", "#FF7A85", "#7A8CA3"]
+chartSequentialColors = ["#0F2A26", "#13403A", "#18564D", "#1D6D61", "#238476", "#2F9C8A", "#41B39F", "#54D6BB", "#7BE8CF", "#B4F4E4"]
+
+[theme.sidebar]
+backgroundColor = "#0B111B"
+secondaryBackgroundColor = "#121B28"
+borderColor = "#22303F"
+
+# RE:L!NK is dark-only: if a viewer picks Light (or System) in the app menu, they still get the dark palette.
+[theme.light]
+primaryColor = "#54D6BB"
+backgroundColor = "#070B12"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+linkColor = "#7BE8CF"
+borderColor = "#22303F"
+dataframeBorderColor = "#22303F"
+dataframeHeaderBackgroundColor = "#182334"
+dataframeHeaderTextColor = "#B8C6D6"
+codeBackgroundColor = "#0D141F"
+codeTextColor = "#7BE8CF"
+redColor = "#FF7A85"
+orangeColor = "#FF9F5A"
+yellowColor = "#F4C76B"
+greenColor = "#54D6BB"
+blueColor = "#7DB8F5"
+violetColor = "#B7A5E6"
+chartCategoricalColors = ["#54D6BB", "#F4C76B", "#7DB8F5", "#FF9F5A", "#B7A5E6", "#FF7A85", "#7A8CA3"]
+
+[theme.light.sidebar]
+backgroundColor = "#0B111B"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+borderColor = "#22303F"
+
+[theme.dark]
+primaryColor = "#54D6BB"
+backgroundColor = "#070B12"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+linkColor = "#7BE8CF"
+borderColor = "#22303F"
+dataframeBorderColor = "#22303F"
+dataframeHeaderBackgroundColor = "#182334"
+dataframeHeaderTextColor = "#B8C6D6"
+codeBackgroundColor = "#0D141F"
+codeTextColor = "#7BE8CF"
+redColor = "#FF7A85"
+orangeColor = "#FF9F5A"
+yellowColor = "#F4C76B"
+greenColor = "#54D6BB"
+blueColor = "#7DB8F5"
+violetColor = "#B7A5E6"
+chartCategoricalColors = ["#54D6BB", "#F4C76B", "#7DB8F5", "#FF9F5A", "#B7A5E6", "#FF7A85", "#7A8CA3"]
+
+[theme.dark.sidebar]
+backgroundColor = "#0B111B"
+secondaryBackgroundColor = "#121B28"
+textColor = "#EAF1F8"
+borderColor = "#22303F"
 
 [browser]
 gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"

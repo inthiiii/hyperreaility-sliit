@@ -45,9 +45,9 @@ LAYOUTS = {
     },
 }
 STYLE = {  # stroke, fill, note colour
-    'idle': ('#2a3647', '#111824', '#6f7f93'), 'working': ('#f1cb78', '#2a2312', '#f1cb78'),
-    'done': ('#69e3c6', '#0f2420', '#9fe9d6'), 'warn': ('#ff9f5a', '#2a1a10', '#ffc08f'),
-    'failed': ('#ff7880', '#2a1215', '#ff9ea4'),
+    'idle': ('#2a3647', '#111824', '#8D9EB3'), 'working': ('#F4C76B', '#2a2312', '#F4C76B'),
+    'done': ('#54D6BB', '#0f2420', '#9fe9d6'), 'warn': ('#ff9f5a', '#2a1a10', '#ffc08f'),
+    'failed': ('#FF7A85', '#2a1215', '#ff9ea4'),
 }
 W, H = 150, 76
 
@@ -187,7 +187,7 @@ class FlowState:
                  SVG_CSS, '<defs>' + ''.join(
                      f'<marker id="ah-{k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" '
                      f'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{c}"/></marker>'
-                     for k, c in (('idle', '#2f3d50'), ('used', '#4f8f82'), ('active', '#69e3c6'), ('back', '#ff9f5a')))
+                     for k, c in (('idle', '#2f3d50'), ('used', '#4f8f82'), ('active', '#54D6BB'), ('back', '#ff9f5a')))
                  + '</defs>']
         for a, b in layout['edges']:
             (x1, y1), (x2, y2) = pos[a], pos[b]
@@ -199,7 +199,7 @@ class FlowState:
             (x1, y1), (x2, y2) = pos[a], pos[b]
             parts.append(self._edge(f'M{x1},{y1 + H / 2} C{x1},322 {x2},322 {x2},{y2 + H / 2 + 2}', (a, b), back=True))
             parts.append(f'<text x="{(x1 + x2) / 2}" y="300" text-anchor="middle" font-size="11" '
-                         f'fill="{"#ffc08f" if self.challenges else "#4a5a6e"}">fact challenges go back'
+                         f'fill="{"#ffc08f" if self.challenges else "#8D9EB3"}">fact challenges go back'
                          f'{f" ({self.challenges})" if self.challenges else ""}</text>')
         for node, title, icon, x, y in layout['nodes']:
             stroke, fill, note_colour = STYLE[self.status[node]]
@@ -208,9 +208,9 @@ class FlowState:
             parts.append(f'<g><rect{cls} x="{x - W / 2}" y="{y - H / 2}" width="{W}" height="{H}" rx="12" '
                          f'fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
                          f'<text x="{x - W / 2 + 12}" y="{y - 4}" font-size="20">{icon}</text>'
-                         f'<text x="{x - W / 2 + 42}" y="{y - 14}" font-size="12.5" font-weight="600" fill="#e6ebf2">'
+                         f'<text x="{x - W / 2 + 42}" y="{y - 14}" font-size="12.5" font-weight="600" fill="#EAF1F8">'
                          f'{html.escape(first)}</text>'
-                         f'<text x="{x - W / 2 + 42}" y="{y + 2}" font-size="12.5" font-weight="600" fill="#e6ebf2">'
+                         f'<text x="{x - W / 2 + 42}" y="{y + 2}" font-size="12.5" font-weight="600" fill="#EAF1F8">'
                          f'{html.escape(second)}</text>'
                          f'<text x="{x}" y="{y + 26}" font-size="10.5" text-anchor="middle" fill="{note_colour}">'
                          f'{html.escape(self.notes[node][:30])}</text></g>')
@@ -219,7 +219,7 @@ class FlowState:
 
     def _edge(self, d, key, back=False):
         if key == self.active:
-            colour, marker, cls = ('#ff9f5a', 'back', ' class="rl-flow"') if back else ('#69e3c6', 'active', ' class="rl-flow"')
+            colour, marker, cls = ('#ff9f5a', 'back', ' class="rl-flow"') if back else ('#54D6BB', 'active', ' class="rl-flow"')
             width = 3
         elif key in self.used:
             colour, marker, cls, width = ('#a8683a', 'back', '', 2) if back else ('#4f8f82', 'used', '', 2)
@@ -231,7 +231,7 @@ class FlowState:
 
     def html(self, log_lines=6):
         elapsed = self.clock() - self.started
-        dot = '#69e3c6' if self.finished else '#f1cb78'
+        dot = '#54D6BB' if self.finished else '#F4C76B'
         header = (f'<div class="rl-flow-head"><span class="rl-dot" style="background:{dot}"></span>'
                   f'<b>{html.escape(self.now)}</b><span class="rl-meta">{self.messages} messages · '
                   f'{self.challenges} challenges · {elapsed:.1f} s</span></div>')
@@ -261,13 +261,13 @@ SVG_CSS = ('<style>.rl-pulse{animation:rlpulse 1.1s ease-in-out infinite}'
            '@keyframes rlpulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.25}}'
            '@keyframes rldash{to{stroke-dashoffset:-15}}</style>')
 FLOW_CSS = """<style>
-.rl-flow{border:1px solid #223042;border-radius:14px;padding:12px 14px;background:#0d141f;margin-bottom:8px}
+.rl-flow{border:1px solid #22303F;border-radius:14px;padding:12px 14px;background:#0D141F;margin-bottom:8px}
 .rl-diagram{width:100%;height:auto;display:block;margin:4px 0}
-.rl-flow-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;margin-bottom:4px;color:#e6ebf2}
+.rl-flow-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;margin-bottom:4px;color:#EAF1F8}
 .rl-dot{width:10px;height:10px;border-radius:50%;display:inline-block;animation:rlblink 1.2s infinite}
-.rl-meta{margin-left:auto;color:#8796a8;font-size:12px}
-.rl-log{border-top:1px solid #1d2938;margin-top:6px;padding-top:6px;font-size:12.5px;color:#b9c4d2;max-height:170px;overflow:auto}
-.rl-log-row{padding:2px 0}.rl-log-row span{color:#6f7f93;display:inline-block;width:52px;font-variant-numeric:tabular-nums}
+.rl-meta{margin-left:auto;color:#8D9EB3;font-size:12px}
+.rl-log{border-top:1px solid #182334;margin-top:6px;padding-top:6px;font-size:12.5px;color:#B8C6D6;max-height:170px;overflow:auto}
+.rl-log-row{padding:2px 0}.rl-log-row span{color:#8D9EB3;display:inline-block;width:52px;font-variant-numeric:tabular-nums}
 @keyframes rlblink{0%,100%{opacity:1}50%{opacity:.35}}
 </style>"""
 

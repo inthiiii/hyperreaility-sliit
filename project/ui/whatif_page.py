@@ -96,7 +96,7 @@ def _render(out, measured):
             y=alt.Y('Option:N', sort=None, title=None),
             color=alt.Color('Option:N', legend=None, scale=alt.Scale(
                 domain=['Current plan · normal conditions', 'Current plan · with the disruption',
-                        'Replanned for the disruption'], range=['#74869d', '#ff9f5a', '#69e3c6']))
+                        'Replanned for the disruption'], range=['#8D9EB3', '#ff9f5a', '#54D6BB']))
         ).properties(height=150), width='stretch')
     elif not measured:
         st.caption('Uploaded incidents have no simulator answer, so only validity and jobs are compared.')

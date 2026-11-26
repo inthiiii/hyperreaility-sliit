@@ -13,8 +13,8 @@ from pathlib import Path
 CORE_POINT = (6.934, 79.843)    # Colombo Fort: fictional core switch location
 DEPOT_POINT = (6.944, 79.879)   # Orugodawatta: fictional regional depot
 LAT_RANGE, LON_RANGE = (6.45, 7.22), (79.84, 80.20)
-COLORS = {'OK': [105, 227, 198], 'Fault': [255, 120, 128], 'Unknown': [241, 203, 120],
-          'Up': [105, 227, 198], 'Down': [255, 120, 128], 'Not served': [150, 160, 175]}
+COLORS = {'OK': [84, 214, 187], 'Fault': [255, 122, 133], 'Unknown': [244, 199, 107],
+          'Up': [84, 214, 187], 'Down': [255, 122, 133], 'Not served': [150, 160, 175]}
 DISTRICTS = Path(__file__).resolve().parents[2] / 'data' / 'processed' / 'context' / 'western_district_context.geojson'
 
 
@@ -202,7 +202,7 @@ def render_map(scenario, *, observations=None, trajectory=None, minute=None, pla
     lons = [s['lon'] for s in rows['sites']] + [CORE_POINT[1]]
     view = pdk.ViewState(latitude=(min(lats) + max(lats)) / 2, longitude=(min(lons) + max(lons)) / 2, zoom=8.6)
     deck = pdk.Deck(layers=layers, initial_view_state=view, tooltip={'text': '{label}'},
-                    map_style='light' if basemap else None, map_provider='carto' if basemap else None)
+                    map_style='dark' if basemap else None, map_provider='carto' if basemap else None)
     st.pydeck_chart(deck, height=height)
     return rows
 

@@ -2,7 +2,7 @@
 from html import escape
 from .incident_data import local_site_status, observed_label
 
-COLORS = {'OK': '#69e3c6', 'Fault': '#ff8c91', 'Unknown': '#f1cb78'}
+COLORS = {'OK': '#54D6BB', 'Fault': '#FF7A85', 'Unknown': '#F4C76B'}
 
 
 def schematic_positions(scenario):
@@ -44,7 +44,7 @@ def render_topology_svg(scenario, selected_site=None, show_roads=False):
         return escape(str(value), quote=True)
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
              'role="img" aria-labelledby="relink-topology-title relink-topology-desc" '
-             'style="width:100%;height:auto;display:block;background:#0e1722;border-radius:12px">',
+             'style="width:100%;height:auto;display:block;background:#0D141F;border-radius:12px">',
              '<title id="relink-topology-title">Synthetic backhaul dependencies and observed asset states</title>',
              '<desc id="relink-topology-desc">Arrows point from upstream parent to downstream site. '
              'Local observations OK does not mean service is restored. Layout is schematic, not geographic.</desc>',
@@ -86,16 +86,16 @@ def render_topology_svg(scenario, selected_site=None, show_roads=False):
         parts.append(f'<circle cx="{x}" cy="{y}" r="30" fill="none" stroke="#d7b66c" stroke-width="1.5" stroke-dasharray="3 4"/>')
         symbol = '!' if status == 'Fault' else '?' if status == 'Unknown' else '✓'
         parts.append(f'<circle cx="{x}" cy="{y}" r="22" fill="#162532" stroke="{COLORS[status]}" stroke-width="3"/>'
-                     f'<text x="{x}" y="{y+5}" text-anchor="middle" fill="#e8eef5" font-size="16" '
+                     f'<text x="{x}" y="{y+5}" text-anchor="middle" fill="#EAF1F8" font-size="16" '
                      f'font-family="system-ui,sans-serif">{text(site.site_id)}</text>'
-                     f'<circle cx="{x+18}" cy="{y-19}" r="9" fill="#0e1722" stroke="{COLORS[status]}"/>'
+                     f'<circle cx="{x+18}" cy="{y-19}" r="9" fill="#0D141F" stroke="{COLORS[status]}"/>'
                      f'<text x="{x+18}" y="{y-15}" text-anchor="middle" fill="{COLORS[status]}" font-size="12" '
                      f'font-family="system-ui,sans-serif">{symbol}</text></g>')
     x, y = positions[scenario.core_id]
     parts.append(f'<g><title>Core reference node; health is not separately observed in this schema</title>'
                  f'<rect x="{x-23}" y="{y-23}" width="46" height="46" rx="10" fill="#172d42" stroke="#8ec3f5" stroke-width="2"/>'
                  f'<text x="{x}" y="{y+5}" text-anchor="middle" fill="#b5dafb" font-size="12" font-family="system-ui,sans-serif">{text(scenario.core_id)}</text>'
-                 f'<text x="{x}" y="{y+46}" text-anchor="middle" fill="#9baec2" font-size="11" font-family="system-ui,sans-serif">Core reference</text></g>')
+                 f'<text x="{x}" y="{y+46}" text-anchor="middle" fill="#8D9EB3" font-size="11" font-family="system-ui,sans-serif">Core reference</text></g>')
     x, y = positions[scenario.depot_id]
     parts.append(f'<g><title>Depot reference; schematic location, not a real coordinate</title>'
                  f'<path d="M {x} {y-21} L {x+24} {y} L {x} {y+21} L {x-24} {y} Z" fill="#252435" stroke="#b7a5e6" stroke-width="2"/>'
