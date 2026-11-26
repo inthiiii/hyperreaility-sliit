@@ -6,6 +6,7 @@ import streamlit as st
 
 from project.auth import PERMISSIONS, ROLES, AuthError, User, UserStore, can, default_store_path
 from project.auth.roles import roles_for
+from project.ui.brand import brand_html
 
 
 def current_user():
@@ -33,56 +34,33 @@ def sign_out():
         st.session_state.pop(key, None)
 
 
-FEATURES = (
-    ('◉', 'Agents that check each other', 'A Field Analyst, Network Checker and Plan Reviewer read the reports and '
-     'challenge unclear facts instead of guessing.'),
-    ('✦', 'Plans a solver proves feasible', 'CP-SAT turns verified facts into crew routes and timings, then an '
-     'independent validator checks every job.'),
-    ('✓', 'People stay in control', 'Nothing moves until a Restoration Manager approves. Every decision is '
-     'recorded with who made it and why.'),
-    ('▤', 'Results you can measure', 'A separate simulator replays the incident and compares the plan with a '
-     'no-AI baseline.'),
-)
-
-
-def render_login(root, brand=''):
+def render_login(root):
     store = UserStore(default_store_path(root))
     st.html('<style>[data-testid="stSidebar"],[data-testid="stSidebarCollapsedControl"],'
-            '[data-testid="stExpandSidebarButton"]{display:none}</style>')
-    left, right = st.columns([1.25, 1], gap='large', vertical_alignment='center')
-    with left:
-        st.html('<div class="relink-hero relink-login-hero">' + brand +
-                '<div class="relink-eyebrow" style="margin-top:1.2rem">Telecom outage recovery</div>'
-                '<h1>Bring the network back <em>faster</em>, together.</h1>'
-                '<p>RE:L!NK turns messy field reports into a checked, approved crew plan, and shows '
-                'how much downtime it saves.</p>'
-                '<div class="relink-features">' +
-                ''.join(f'<div class="relink-feature"><i>{icon}</i><div><b>{escape(title)}</b>'
-                        f'<span>{escape(text)}</span></div></div>' for icon, title, text in FEATURES) +
-                '</div></div>')
-    with right, st.container(border=True):
-        st.html('<div class="relink-eyebrow">Secure workspace</div>')
-        st.subheader('Sign in')
+            '[data-testid="stExpandSidebarButton"]{display:none}</style>'
+            '<div class="relink-login-head">' + brand_html('xl', tagline=True) +
+            '<h1>Bring the network back <em>faster</em>, together.</h1>'
+            '<p>Field reports in, a checked and approved crew plan out, with the downtime it saves measured.</p></div>')
+    _, middle, _ = st.columns([1, 1.15, 1])
+    with middle, st.container(border=True):
+        st.html('<div class="relink-login-title">Sign in to the recovery workspace</div>')
         if not store.exists():
             st.warning('No users are configured on this machine yet.')
             st.write('Create demo users (one per role) from the repository root:')
             st.code('python -m project.auth.manage seed-demo', language='bash')
             st.caption('Set RELINK_DEMO_PASSWORD in .env first, or you will be prompted. Passwords are stored only '
                        'as salted hashes in .relink/users.json, which is git-ignored.')
-            return
-        with st.form('login_form', border=False):
-            st.text_input('Username', key='login_username', autocomplete='username', placeholder='e.g. coordinator')
-            st.text_input('Password', key='login_password', type='password', autocomplete='current-password')
-            st.form_submit_button('Sign in', type='primary', on_click=_sign_in, args=(store,), width='stretch')
-        if st.session_state.get('login_error'):
-            st.error(st.session_state['login_error'])
-        st.html('<div class="relink-rule"></div><div class="relink-eyebrow">Who does what</div><div class="relink-roles">' +
-                ''.join(f'<div class="relink-role"><b>{escape(role["label"])}</b><span>{escape(role["summary"])}</span></div>'
-                        for role in ROLES.values()) + '</div>')
-        st.caption('Demo-grade sign-in for the MVP: local hashed passwords and lockout after 5 failures. '
-                   'Not production identity (no SSO or MFA).')
-    st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
-            ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')
+        else:
+            with st.form('login_form', border=False):
+                st.text_input('Username', key='login_username', autocomplete='username', placeholder='e.g. coordinator')
+                st.text_input('Password', key='login_password', type='password', autocomplete='current-password')
+                st.form_submit_button('Sign in', type='primary', on_click=_sign_in, args=(store,), width='stretch')
+            if st.session_state.get('login_error'):
+                st.error(st.session_state['login_error'])
+            st.caption('Demo-grade sign-in: local hashed passwords, lockout after 5 failures. No SSO or MFA.')
+    st.html('<div class="relink-login-roles"><div class="relink-section">Who does what</div><div class="relink-roles">' +
+            ''.join(f'<div class="relink-role"><b>{escape(role["label"])}</b><span>{escape(role["summary"])}</span></div>'
+                    for role in ROLES.values()) + '</div></div>')
 
 
 def render_identity(user):

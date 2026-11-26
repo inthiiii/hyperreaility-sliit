@@ -26,7 +26,7 @@ from project.ui.whatif_page import render_whatif
 from project.ui.auth_view import current_user, render_identity, render_login, render_roles_panel
 from project.ui.theme import css_vars
 
-BRAND = '<div class="relink-brand"><div class="relink-mark"></div><div>RE:<span>L!NK</span></div></div>'
+from project.ui.brand import brand_html
 
 ICONS = {'Overview': 'space_dashboard', 'Incident': 'crisis_alert', 'Map': 'map', 'Planning': 'hub',
          'Field work': 'engineering', 'Results': 'monitoring', 'What-if': 'alt_route', 'Benchmark': 'speed',
@@ -135,7 +135,7 @@ def render_app(root=None):
     st.html('<style>' + css_vars() + Path(__file__).with_name('styles.css').read_text() + '</style>')
     user = current_user()
     if user is None:
-        render_login(root, BRAND)
+        render_login(root)
         return
     st.session_state['operator_label'] = user.label
     catalog = load_catalog(root)
@@ -144,8 +144,7 @@ def render_app(root=None):
     choice = None
 
     with st.sidebar:
-        st.html(BRAND + '<div class="relink-tagline">Restore connectivity. Coordinate recovery.</div>'
-                '<div class="relink-rule"></div>')
+        st.html(brand_html('md', tagline=True) + '<div class="relink-rule"></div>')
         st.html('<div class="relink-section">Workspace</div>')
         nav = st.container()
         st.divider()
@@ -228,5 +227,3 @@ def render_app(root=None):
         if choice is not None and choice.source != 'development_fixture' and has_truth(choice):
             render_baseline_compare(session, choice, root)
         render_plan_export(session, choice)
-    st.html('<div class="relink-footer">HyperReAIlity · SLIIT &nbsp; / &nbsp; AI Catalyst 2026'
-            ' &nbsp; / &nbsp; Synthetic decision-support workspace</div>')

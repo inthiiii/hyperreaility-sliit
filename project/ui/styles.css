@@ -139,15 +139,16 @@ button:focus-visible, input:focus-visible, [role="tab"]:focus-visible { outline:
 [data-testid="stCode"] pre { border: 1px solid var(--rl-border); border-radius: 12px; }
 
 /* ------------------------------------------------------------------ brand pieces */
-.relink-brand { display: flex; align-items: center; gap: .55rem; font-size: 1.5rem; font-weight: 800; letter-spacing: -.06em; color: var(--rl-text); margin: .1rem 0 .15rem; }
-.relink-brand span { color: var(--rl-mint); }
-.relink-brand .relink-mark {
-  width: 30px; height: 30px; border-radius: 9px; flex: none;
-  background: conic-gradient(from 210deg, var(--rl-mint-deep), var(--rl-mint-bright), var(--rl-mint-deep));
-  box-shadow: 0 0 0 1px rgba(123,232,207,.35), 0 6px 18px -6px rgba(84,214,187,.7);
-  position: relative;
-}
-.relink-brand .relink-mark::after { content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 2.5px solid var(--rl-on-mint); border-right-color: transparent; }
+.relink-lockup { margin: .1rem 0 .2rem; }
+.relink-brand { display: flex; align-items: center; gap: .6rem; white-space: nowrap; }
+.relink-mark { width: 34px; height: 34px; flex: none; object-fit: contain; display: block; }
+.relink-word { font-size: 1.55rem; font-weight: 850; letter-spacing: -.01em; color: #FFFFFF; line-height: 1; white-space: nowrap; }
+.relink-word i { font-style: normal; color: var(--rl-logo-teal); margin: 0 .01em; }
+.relink-lockup-xl { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.relink-lockup-xl .relink-brand { gap: 1rem; }
+.relink-lockup-xl .relink-mark { width: clamp(52px, 4vw + 30px, 76px); height: auto; }
+.relink-lockup-xl .relink-word { font-size: clamp(2.4rem, 1.6rem + 3vw, 3.9rem); letter-spacing: -.005em; }
+.relink-lockup-xl .relink-tagline { font-size: clamp(.9rem, .8rem + .4vw, 1.08rem); color: #D4D4D5; margin-top: .55rem; letter-spacing: .01em; }
 .relink-tagline { color: var(--rl-muted); font-size: .82rem; line-height: 1.5; }
 .relink-eyebrow { display: inline-flex; align-items: center; gap: .45rem; color: var(--rl-mint-bright); text-transform: uppercase; font-size: .7rem; font-weight: 700; letter-spacing: .18em; margin-bottom: .55rem; }
 .relink-eyebrow::before { content: ""; width: 18px; height: 2px; border-radius: 2px; background: var(--rl-mint); }
@@ -156,12 +157,11 @@ button:focus-visible, input:focus-visible, [role="tab"]:focus-visible { outline:
 .relink-pill.amber { background: rgba(244,199,107,.10); color: var(--rl-amber); border-color: rgba(244,199,107,.35); }
 .relink-pill.blue { background: rgba(125,184,245,.10); color: var(--rl-blue); border-color: rgba(125,184,245,.35); }
 .relink-rule { border-top: 1px solid var(--rl-border); margin: 1rem 0; }
-.relink-footer { border-top: 1px solid var(--rl-border); padding-top: 1rem; margin-top: 2.4rem; color: var(--rl-muted); font-size: .75rem; }
 
 /* Workflow steps on Overview. */
 .relink-step { padding: .2rem .1rem .5rem; }
-.relink-step-no { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(84,214,187,.12); border: 1px solid rgba(84,214,187,.35); color: var(--rl-mint-bright); font-size: .8rem; font-weight: 800; }
-.relink-step-title { font-size: 1.02rem; font-weight: 680; margin: .7rem 0 .35rem; color: var(--rl-text); }
+.relink-step-no { display: inline-flex; align-items: center; white-space: nowrap; padding: .28rem .65rem; border-radius: 999px; background: rgba(84,214,187,.12); border: 1px solid rgba(84,214,187,.35); color: var(--rl-mint-bright); font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
+.relink-step-title { font-size: 1.02rem; font-weight: 680; margin: .75rem 0 .35rem; color: var(--rl-text); line-height: 1.3; text-wrap: balance; }
 
 /* Hero banner (Overview and sign-in). */
 .relink-hero {
@@ -187,11 +187,6 @@ button:focus-visible, input:focus-visible, [role="tab"]:focus-visible { outline:
 .relink-hero-stat { background: rgba(7,11,18,.55); border: 1px solid var(--rl-border); border-radius: 14px; padding: .75rem .9rem; backdrop-filter: blur(6px); }
 .relink-hero-stat b { display: block; font-size: 1.45rem; color: var(--rl-text); letter-spacing: -.03em; }
 .relink-hero-stat span { color: var(--rl-muted); font-size: .78rem; }
-.relink-features { display: grid; gap: .75rem; margin-top: 1.2rem; }
-.relink-feature { display: flex; gap: .8rem; align-items: flex-start; }
-.relink-feature i { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-style: normal; background: rgba(84,214,187,.12); border: 1px solid rgba(84,214,187,.3); }
-.relink-feature b { display: block; color: var(--rl-text); font-size: .95rem; }
-.relink-feature span { color: var(--rl-muted); font-size: .85rem; line-height: 1.5; }
 
 /* Page header used on every page. */
 .relink-page-head { margin-bottom: .4rem; }
@@ -209,12 +204,24 @@ button:focus-visible, input:focus-visible, [role="tab"]:focus-visible { outline:
 .relink-todo span { color: var(--rl-muted); }
 @keyframes rl-ping { 0% { box-shadow: 0 0 0 0 rgba(244,199,107,.6); } 70% { box-shadow: 0 0 0 7px rgba(244,199,107,0); } 100% { box-shadow: 0 0 0 0 rgba(244,199,107,0); } }
 
-/* Sign-in page: no sidebar. */
-.relink-login-page [data-testid="stSidebar"], .relink-login-page [data-testid="stSidebarCollapsedControl"] { display: none; }
-.relink-roles { display: grid; gap: .5rem; }
-.relink-role { display: flex; gap: .6rem; align-items: baseline; padding: .5rem .7rem; border-radius: 10px; background: var(--rl-surface); border: 1px solid var(--rl-border); }
-.relink-role b { color: var(--rl-text); font-size: .86rem; white-space: nowrap; }
-.relink-role span { color: var(--rl-muted); font-size: .8rem; line-height: 1.45; }
+/* Sign-in page: centred lockup, card, then roles. */
+.relink-login-head { text-align: center; padding: clamp(1rem, 3vh, 2.6rem) 0 1.4rem; position: relative; }
+.relink-login-head::before {
+  content: ""; position: absolute; left: 50%; top: 0; width: min(760px, 95%); height: 260px; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(19,233,212,.16), transparent); pointer-events: none;
+}
+.relink-login-head > * { position: relative; }
+.relink-login-head h1 { margin: 1.4rem auto .5rem; max-width: 30ch; font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.3rem) !important; font-weight: 760; letter-spacing: -.035em; text-wrap: balance; }
+.relink-login-head h1 em { font-style: normal; color: var(--rl-logo-teal); }
+.relink-login-head p { margin: 0 auto; max-width: 52ch; color: var(--rl-text-2); font-size: 1rem; line-height: 1.55; }
+.relink-login-title { font-size: 1.05rem; font-weight: 700; color: var(--rl-text); margin: .1rem 0 .2rem; text-align: center; }
+.relink-login-roles { max-width: 1100px; margin: 2.2rem auto 0; }
+.relink-login-roles .relink-section { text-align: center; margin-bottom: .8rem; }
+.relink-roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .7rem; }
+.relink-role { display: flex; flex-direction: column; gap: .3rem; padding: .85rem .95rem; border-radius: 14px; background: var(--rl-surface); border: 1px solid var(--rl-border); transition: border-color .2s, transform .2s; }
+.relink-role:hover { border-color: rgba(84,214,187,.45); transform: translateY(-2px); }
+.relink-role b { color: var(--rl-text); font-size: .9rem; }
+.relink-role span { color: var(--rl-muted); font-size: .8rem; line-height: 1.5; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -229,10 +236,8 @@ button:focus-visible, input:focus-visible, [role="tab"]:focus-visible { outline:
   .block-container { padding-top: 3.2rem; padding-left: 1rem; padding-right: 1rem; }
   [data-testid="stHorizontalBlock"] { flex-wrap: wrap; gap: .75rem; }
   [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] { min-width: 100% !important; flex: 1 1 100% !important; }
+  [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:not(:has([data-testid="stElementContainer"])) { display: none; }
   .relink-hero { border-radius: 16px; }
   .relink-hero p { font-size: .95rem; }
   [data-testid="stMetric"] { padding: .8rem .9rem; }
-  .relink-footer { font-size: .7rem; }
-  [data-testid="stHorizontalBlock"]:has(.relink-login-hero) { flex-direction: column-reverse; }
-  .relink-login-hero .relink-features { display: none; }
-}
+  }

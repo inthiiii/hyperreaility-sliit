@@ -63,3 +63,9 @@ def contrast(fg, bg):
 
 def css_vars():
     return ':root{' + ''.join(f'--rl-{k}:{v};' for k, v in TOKENS.items()) + '}'
+
+# Logo colours, sampled from docs/assets/branding/relink-logo.png.
+LOGO_CYAN = '#00C9FE'
+LOGO_MINT = '#1AF4BA'
+LOGO_TEAL = '#13E9D4'  # the ':' and '!' in the wordmark
+TOKENS.update({'logo-cyan': LOGO_CYAN, 'logo-mint': LOGO_MINT, 'logo-teal': LOGO_TEAL})
