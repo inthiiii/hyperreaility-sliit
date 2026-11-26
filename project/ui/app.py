@@ -24,7 +24,13 @@ from project.ui.upload_view import render_upload
 from project.ui.whatif import has_truth
 from project.ui.whatif_page import render_whatif
 from project.ui.auth_view import current_user, render_identity, render_login, render_roles_panel
+from project.ui.theme import css_vars
 
+BRAND = '<div class="relink-brand"><div class="relink-mark"></div><div>RE:<span>L!NK</span></div></div>'
+
+ICONS = {'Overview': 'space_dashboard', 'Incident': 'crisis_alert', 'Map': 'map', 'Planning': 'hub',
+         'Field work': 'engineering', 'Results': 'monitoring', 'What-if': 'alt_route', 'Benchmark': 'speed',
+         'History': 'history', 'Settings': 'settings'}
 PAGES = ('Overview', 'Incident', 'Map', 'Planning', 'Field work', 'Results', 'What-if', 'Benchmark', 'History',
          'Settings')
 
@@ -50,19 +56,19 @@ def _steps(connected=False):
 
 def _overview(choice, session):
     scenario = choice.scenario
-    st.html('<div class="relink-eyebrow">Incident workspace</div>')
-    st.title('Restore with a clearer picture.')
-    st.write('Bring the incident, field resources and recovery decisions into one workspace.')
+    st.html('<div class="relink-hero"><div class="relink-eyebrow">Incident workspace · ' + escape(scenario.scenario_id) + '</div>'
+            '<h1>Restore the network <em>faster</em>, with people in control.</h1>'
+            '<p>AI agents read the field reports, check every fact and build a crew schedule that a solver '
+            'proves feasible. A Restoration Manager approves it before anything moves, and an independent '
+            'simulator measures the result.</p>'
+            + _pill('● Synthetic scenario') + _pill('Human approval required', True) + _pill('Independent measurement')
+            + '<div class="relink-hero-stats">'
+            + ''.join(f'<div class="relink-hero-stat"><b>{v}</b><span>{k}</span></div>' for k, v in (
+                ('Sites affected', len(scenario.sites)), ('Field crews', len(scenario.crews)),
+                ('Field reports', len(scenario.reports)), ('Services at stake', len(scenario.services)),
+                ('Planning horizon', f'{scenario.horizon_min / 60:g} h')))
+            + '</div></div>')
     render_workflow(session, choice)
-    st.html(_pill('Synthetic scenario') + _pill('Dashboard foundation', True))
-    st.write('')
-    for column, (label, value, help_text) in zip(st.columns(4), (
-        ('Sites', len(scenario.sites), 'Fictional sites described by the selected visible input.'),
-        ('Crews', len(scenario.crews), 'Inventory count; availability is checked during planning.'),
-        ('Reports', len(scenario.reports), 'Visible report inventory; inspect extracted/resolved facts on Planning after a run.'),
-        ('Horizon', f'{scenario.horizon_min / 60:g} h', 'Total scenario horizon, not time until a real-world deadline.'),
-    )):
-        column.metric(label, value, help=help_text)
     st.write('')
     left, right = st.columns([1.6, 1])
     with left, st.container(border=True):
@@ -125,11 +131,11 @@ def render_app(root=None):
     root = Path(root) if root is not None else Path(__file__).resolve().parents[2]
     load_dotenv(root / '.env', override=False)
     st.set_page_config(page_title='RE:L!NK · Recovery workspace', page_icon='📡', layout='wide',
-                       initial_sidebar_state='expanded')
-    st.html('<style>' + Path(__file__).with_name('styles.css').read_text() + '</style>')
+                       initial_sidebar_state='auto')
+    st.html('<style>' + css_vars() + Path(__file__).with_name('styles.css').read_text() + '</style>')
     user = current_user()
     if user is None:
-        render_login(root)
+        render_login(root, BRAND)
         return
     st.session_state['operator_label'] = user.label
     catalog = load_catalog(root)
@@ -138,13 +144,12 @@ def render_app(root=None):
     choice = None
 
     with st.sidebar:
-        st.html('<div class="relink-brand">RE:<span>L!NK</span></div>'
-                '<div class="relink-muted">Restore connectivity.<br>Coordinate recovery.</div>'
+        st.html(BRAND + '<div class="relink-tagline">Restore connectivity. Coordinate recovery.</div>'
                 '<div class="relink-rule"></div>')
-        st.caption('WORKSPACE')
+        st.html('<div class="relink-section">Workspace</div>')
         nav = st.container()
         st.divider()
-        st.caption('ACTIVE SCENARIO')
+        st.html('<div class="relink-section">Active Scenario</div>')
         if catalog.choices:
             by_key = {item.key: item for item in catalog.choices}
             keys = list(by_key)
@@ -172,7 +177,13 @@ def render_app(root=None):
         counts = badge_counts(todo)
         with nav:
             page = st.radio('Workspace navigation', PAGES, key='workspace_page', label_visibility='collapsed',
-                            format_func=lambda p: f'{p}  🔴 {counts[p]}' if counts.get(p) else p)
+                            format_func=lambda p: f':material/{ICONS[p]}: {p}')
+            # Badges are drawn with CSS so the option labels (and the radio's identity) never change.
+            if counts:
+                st.html('<style>' + ''.join(
+                    f'[data-testid="stSidebar"] [data-testid="stRadioGroup"] > div:nth-child({PAGES.index(p) + 1}) '
+                    f'[data-testid="stRadioOption"] p::after{{content:"{int(n)}"}}' for p, n in counts.items() if p in PAGES)
+                    + '</style>')
             if todo:
                 st.html('<div class="relink-todo"><b>For you now</b>' +
                         ''.join(f'<div>• {escape(msg)} <span>({escape(where)})</span></div>' for where, msg in todo) +

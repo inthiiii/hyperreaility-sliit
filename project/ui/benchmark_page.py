@@ -112,7 +112,7 @@ def render_benchmark(root):
                                for v in present])
     st.altair_chart(alt.Chart(completion).mark_bar(cornerRadius=3).encode(
         x=alt.X('Completed %:Q', scale=alt.Scale(domain=[0, 100])), y=alt.Y('Variant:N', sort=None, title=None),
-        color=alt.value('#69e3c6'), tooltip=['Variant:N', alt.Tooltip('Completed %:Q', format='.0f')]).properties(height=200),
+        color=alt.value('#54D6BB'), tooltip=['Variant:N', alt.Tooltip('Completed %:Q', format='.0f')]).properties(height=200),
         width='stretch')
 
     with st.expander('All paired comparisons'):
