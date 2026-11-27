@@ -8,9 +8,9 @@
 
 Built by **HyperReAIlity · SLIIT** for the **Innodata AI Catalyst 2026 — University Track** (domain: Telecommunications).
 
-[Proposal](docs/Proposal.docx) · [Project plan](docs/PROJECT_PLAN.md) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Quick start](#quick-start) · [Evaluation](#evaluation)
+[Proposal](docs/Proposal.docx) · [Project plan](docs/PROJECT_PLAN.md) · [Project details](docs/PROJECT_DETAILS.md) · [Workflow](docs/Workflow.md) · [Samples](samples/README.md) · [Demo video](project-demo.mp4) · [Quick start](#quick-start) · [Evaluation](#evaluation)
 
-> **Status (25 Nov 2026):** end-to-end synthetic MVP. Sign-in with roles → four AI specialists read messy incident reports → CP-SAT schedule → independent validation → reviewer challenge loop → hash-bound human approval → independent simulation with mid-incident replanning. A real single-agent baseline and a human-baseline scorer are implemented. The frozen held-out benchmark is complete (results below). The human sessions are pending.
+> **Status (27 Nov 2026, Phase 1 submission):** end-to-end synthetic MVP. Sign-in with roles → four AI specialists read messy incident reports → CP-SAT schedule → independent validation → reviewer challenge loop → hash-bound human approval → independent simulation with mid-incident replanning. A real single-agent baseline is implemented and the frozen held-out benchmark is complete (results below): **30 % less weighted downtime than CP-SAT without AI across 20 held-out incidents, none made worse, about USD 0.04 and 18 s per incident.** The human comparison is not run yet ([disclosure](docs/HUMAN_REVIEW_DISCLOSURE.md)).
 
 ## The problem
 
@@ -85,13 +85,13 @@ python -m pytest -q
 
 ## Roles
 
-| Role | Can |
+| Role (demo username) | Can |
 |---|---|
-| NOC Coordinator | Prepare plans, record clarifications |
-| Restoration Manager | Approve / reject, simulate, continue incidents, decide priority proposals |
-| Field Supervisor | Submit field updates (which expire approval) |
-| Auditor | Read-only |
-| Administrator | Settings and users; no planning or approval |
+| NOC Coordinator (`coordinator`) | Prepare plans, answer agent questions (each answer replans), add incidents from JSON |
+| Restoration Manager (`manager`) | Approve / reject, simulate, continue incidents, decide priority proposals |
+| Field Supervisor (`field`) | See crew jobs; submit field updates (which expire approval) |
+| Auditor (`auditor`) | Read-only history, traces and exports |
+| Administrator (`admin`) | Settings and users, add incidents; no planning or approval |
 
 Permissions are enforced in the service layer. Passwords are stored as salted PBKDF2 hashes in `.relink/` (git-ignored). This is demo-grade sign-in, not production SSO.
 
@@ -121,13 +121,29 @@ python -m project.evaluation.runner \
 
 **Held-out results** ([full report](results/final/evaluation-v3-run1/README.md): 20 frozen EVAL2 cases × 6 variants × 3 repeats = 360 attempts, 0 failures):
 
-- Agents reading the reports reduce weighted downtime against CP-SAT without AI. Multi-agent is better on 13 of 20 cases and never worse (mean −2,378 weighted minutes, 95 % CI −4,044 to −981). The single agent is better on 11 of 19.
+- Agents reading the reports reduce weighted downtime against CP-SAT without AI. Multi-agent is better on 13 of 20 cases and never worse (mean −2,378 weighted minutes, 95 % CI −4,044 to −981; total 156,960 → 109,405 service-minutes, −30.3 %). The single agent is better on 11 of 19.
 - **Multi vs single: no significant difference** (2 better, 15 ties, 2 worse; CI includes zero). The proposal's 10 % target is not met, and no superiority is claimed.
 - Most reliable and cheapest agent configuration: multi-agent **without** the Reviewer, 60/60 completed and about 35 % fewer tokens than full multi. The Reviewer did not improve outcomes on this set.
 - Prompt injection was followed in 0 of 130 runs that contained it.
 - Cost per incident (upper bound, team-supplied prices as of 25 Nov 2026): multi about USD 0.039, single 0.032, multi without Reviewer 0.025.
 
 Development tuning is recorded in [v14-dev-tuning](results/development/v14-dev-tuning-20261125/README.md).
+
+## Input and output samples
+
+[`samples/`](samples/README.md) holds two input incidents and the full outputs for one held-out case planned three ways (CP-SAT alone, single agent, multi-agent): agent message traces, the validated plan, the simulator's measured outcome and the exported one-page plan summary. The case shows the pattern of the benchmark: CP-SAT alone leaves 13,680 weighted service-minutes of downtime; both agent variants cut it to 1,235.
+
+## Submission documents
+
+| Document | Purpose |
+|---|---|
+| [Proposal.docx](docs/Proposal.docx) | Submitted proposal (20 Nov, unchanged) |
+| [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) | Architecture, agent design, evaluation plan, milestones, risks |
+| [Workflow.md](docs/Workflow.md) | Process flow, operator workflow by role, implementation steps |
+| [PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) | Objectives, features, technology, results, AI-tools disclosure |
+| [PROPOSAL_VS_MVP.md](docs/PROPOSAL_VS_MVP.md) | What we added beyond the proposal and what changed |
+| [HUMAN_REVIEW_DISCLOSURE.md](docs/HUMAN_REVIEW_DISCLOSURE.md) | What people reviewed, what AI did, what is not done yet |
+| `project-demo.mp4` | Demonstration video |
 
 ## Repository layout
 
@@ -144,12 +160,14 @@ project/
   simulation/          # independent incident simulator
   ui/                  # dashboard pages and services
 releases/              # frozen datasets (v2, evidence v3)
-results/               # development runs and traces
-docs/                  # proposal, plan, workflow, details, protocols, development log
+results/               # held-out benchmark, development runs and traces
+samples/               # input incidents and example outputs (traces, simulation, plan PDF)
+docs/                  # proposal, plan, workflow, details, disclosures, protocols, development log
 scripts/               # data builders and checks
-tests/                 # 569 pytest tests
+tests/                 # 614 pytest tests
+project-demo.mp4       # demonstration video
 ```
 
 ## Disclosure
 
-AI coding assistants were used: ChatGPT/Codex (OpenAI) and Claude Code (Anthropic, Claude Opus 5.5). The runtime model is OpenAI `gpt-6-luna`. Data is synthetic; town coordinates are public, and district boundaries are from geoBoundaries (ODbL). Full register: [PROJECT_DETAILS.md §9](docs/PROJECT_DETAILS.md#9-ai-tools-services-and-third-party-components-disclosure).
+AI coding assistants were used: ChatGPT/Codex (OpenAI) and Claude Code (Anthropic, Claude Opus 5.5); [CLAUDE.md](CLAUDE.md) is the repository guide for AI assistants. The runtime model is OpenAI `gpt-6-luna`. Data is synthetic; town coordinates are public, and district boundaries are from geoBoundaries (ODbL). Full register: [PROJECT_DETAILS.md §9](docs/PROJECT_DETAILS.md#9-ai-tools-services-and-third-party-components-disclosure).

@@ -1,0 +1,56 @@
+[
+  {
+    "variant": "single",
+    "status": "completed",
+    "model_calls": 2,
+    "input_tokens": 8181,
+    "output_tokens": 531,
+    "duration_seconds": 6.854134000022896,
+    "api_cost": null,
+    "actual_weighted_downtime": 1235,
+    "actual_critical_service_downtime_minutes": 65,
+    "baseline_weighted_downtime": 13680,
+    "run_ids": [
+      "c82d2651-ea0f-4aee-88b7-2812d966d017"
+    ],
+    "episode_artifacts": [
+      "simulations/9b438897-cb50-4709-82a5-5408616e290a-0.json"
+    ]
+  },
+  {
+    "variant": "optimizer",
+    "status": "completed",
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "duration_seconds": 0.0447420830023475,
+    "api_cost": null,
+    "actual_weighted_downtime": 13680,
+    "actual_critical_service_downtime_minutes": 720,
+    "baseline_weighted_downtime": 13680,
+    "run_ids": [
+      "5595c6b0-3a2c-4227-969b-c0101aa38aa3"
+    ],
+    "episode_artifacts": [
+      "simulations/629ae4ea-2df9-4d82-adcc-55b250b25329-0.json"
+    ]
+  },
+  {
+    "variant": "multi",
+    "status": "completed",
+    "model_calls": 6,
+    "input_tokens": 15644,
+    "output_tokens": 1608,
+    "duration_seconds": 22.864436417003162,
+    "api_cost": null,
+    "actual_weighted_downtime": 1235,
+    "actual_critical_service_downtime_minutes": 65,
+    "baseline_weighted_downtime": 13680,
+    "run_ids": [
+      "8aeb9464-a17b-4191-8af5-68216440955e"
+    ],
+    "episode_artifacts": [
+      "simulations/51624dd9-dd38-4839-a760-2c2f9e91c5e3-0.json"
+    ]
+  }
+]
