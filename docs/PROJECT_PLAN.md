@@ -1,6 +1,6 @@
 # RE:L!NK — Complete Project Plan
 
-Innodata AI Catalyst 2026 · University Track · Team HyperReAIlity (SLIIT) · 25 November 2026
+Innodata AI Catalyst 2026 · University Track · Team HyperReAIlity (SLIIT) · updated 27 November 2026
 
 This plan covers the architecture, agent design, benchmarking and evaluation, milestones and risk analysis. Behaviour details are in [Workflow.md](Workflow.md) and technology and disclosures in [PROJECT_DETAILS.md](PROJECT_DETAILS.md).
 
@@ -100,9 +100,12 @@ Unmet targets will be reported as such.
 | 21–24 Nov | Core contracts, CP-SAT, validator, simulator, dashboard, approval, continuation | I, Z, E | Done |
 | 25 Nov | v2 evaluation freeze, QA rehearsal, gap review | I, K | Done |
 | **25 Nov (plan days 1–2)** | Evidence v3, v14 orchestrator, real single agent, sign-in and roles, human scorer; map, agent conversation, crew Gantt, operator inbox, field work; development tuning; EVAL2 configuration freeze | Z, I, E, K | Done |
-| 26–27 Nov | Human sessions; full held-out benchmark (after API quota check); results analysis | K, E, I, Z | Planned |
-| 28 Nov | Results analysis, Benchmark page, cost table, final docs, fresh-clone test; **internal freeze 18:00** | All | Planned |
-| 29 Nov | Demo video, release tag, submission before 23:59 | All | Planned |
+| 25 Nov | Full held-out benchmark (360 attempts, 0 failures), results analysis, cost table, Benchmark page | I, K | Done |
+| 26 Nov | Product features: live agent diagram, map story, inline answers, what-if, incident upload, notifications, plan PDF | I, E, Z | Done |
+| 26–27 Nov | Responsive interface redesign; input/output samples; submission documents | E, I, K | Done |
+| 26–28 Nov | Human comparison sessions | K, E | **Not run yet** ([disclosure](HUMAN_REVIEW_DISCLOSURE.md)) |
+| 28 Nov | Fresh-clone test; **internal freeze 18:00** | All | Planned |
+| 29 Nov | Demo video (recorded), `project-demo.mp4` in the repository root, release tag, submission before 23:59 | All | Video done; upload and tag planned |
 | 30 Nov – 6 Dec | Final-day feature drills, 10 slides, 15-minute demo rehearsal | All | Planned |
 | 7 Dec | Grand finale: build the announced features | All | — |
 
@@ -125,4 +128,4 @@ Unmet targets will be reported as such.
 
 - A new agent is one `AgentSpec` entry.
 - New action kinds touch the scheduler, validator and simulator together (drill planned).
-- Likely requests: multiple generators or refuelling, temporary microwave/drone backhaul, a weather/hazard agent, scenario upload, plan export, multilingual reports.
+- Likely requests: multiple generators or refuelling, temporary microwave/drone backhaul, a weather/hazard agent, multilingual reports. Scenario upload, plan export, what-if replanning and notifications are already built (26 Nov).

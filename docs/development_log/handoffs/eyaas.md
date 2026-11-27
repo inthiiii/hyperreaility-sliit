@@ -4,7 +4,7 @@ Checkpoint: **Push 5**, 24 November 2026. Branch: `feature/dashboard`. Push 5 ba
 
 ## Implemented
 
-Dashboard Pushes 1–5 are ready for independent merge: incident inspection, explicit planning, recorded decisions and simulator boundary, plus read-only run/decision/attempt history, exports and evaluator-output presentation. Real simulator output remains pending; no fake evaluator is installed. See [Push 5 details](../development_log/DASHBOARD_PUSH5.md) and [merge checklist](../development_log/DASHBOARD_MERGE_CHECKLIST.md).
+Dashboard Pushes 1–5 are ready for independent merge: incident inspection, explicit planning, recorded decisions and simulator boundary, plus read-only run/decision/attempt history, exports and evaluator-output presentation. Real simulator output remains pending; no fake evaluator is installed. See [Push 5 details](../DASHBOARD_PUSH5.md) and [merge checklist](../DASHBOARD_MERGE_CHECKLIST.md).
 
 ## Files
 
@@ -35,7 +35,7 @@ The joint core/dashboard integration now records explicit operator fact confirma
 retains original reports and auditable corrections, advances state versions, clears
 stale plans/approval, and requires separate replanning and approval. History exposes
 confirmation records. The independent evaluator preserves its physical truth and
-same-incident continuation metrics. See [operator confirmation](../OPERATOR_CONFIRMATION.md)
+same-incident continuation metrics. See [operator confirmation](../../OPERATOR_CONFIRMATION.md)
 for workflow, regression coverage and remaining identity/verification limits.
 This checkpoint supersedes earlier statements that operator clarification was absent;
 live hosted-model evaluation remains a later priority.
@@ -44,7 +44,7 @@ live hosted-model evaluation remains a later priority.
 ## Priority 6 — application QA checkpoint (25 November)
 
 The browser walkthrough and regression checks are recorded in
-[PRIORITY_6_QA.md](../development_log/PRIORITY_6_QA.md). Static and dynamic recovery, conflict/missing
+[PRIORITY_6_QA.md](../PRIORITY_6_QA.md). Static and dynamic recovery, conflict/missing
 evidence, rejection/retry, clarification, scenario changes and read-only history
 were exercised. Two UI defects were fixed: stale review notes and valid hosted
 metadata being skipped by History. **509 tests passed**. One hosted smoke

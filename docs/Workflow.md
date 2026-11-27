@@ -2,7 +2,7 @@
 
 **Restore connectivity. Coordinate recovery.**
 
-Team HyperReAIlity, SLIIT · Innodata AI Catalyst 2026, University Track · Version 1.0 (agent protocol `relink-agents-v14`) · Updated 25 November 2026
+Team HyperReAIlity, SLIIT · Innodata AI Catalyst 2026, University Track · Version 1.1 (agent protocol `relink-agents-v14`) · Updated 27 November 2026 (submission version)
 
 This file describes the process **as implemented**. Planned items are labelled as planned. The earlier proposal-stage version is archived at [development_log/Workflow_v0.4.md](development_log/Workflow_v0.4.md).
 
@@ -80,15 +80,34 @@ State versions increase on every applied hold, re-extraction, operator clarifica
 
 ## 6. Roles and permissions
 
-| Role | Prepare plan | Clarify facts | Approve / reject | Simulate / continue | History |
-|---|:-:|:-:|:-:|:-:|:-:|
-| NOC Coordinator | ✓ | ✓ | | | ✓ |
-| Restoration Manager | | | ✓ | ✓ | ✓ |
-| Field Supervisor | | ✓ | | | |
-| Auditor | | | | | ✓ |
-| Administrator | | | | | ✓ (+ settings, users) |
+| Role | Prepare plan | Answer questions / field updates | Approve / reject | Simulate / continue | History + exports | Add incident (JSON) | Settings + users |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| NOC Coordinator | ✓ | ✓ (and replan) | | | ✓ | ✓ | |
+| Restoration Manager | | | ✓ (+ priority proposals) | ✓ | ✓ | | |
+| Field Supervisor | | ✓ (field updates) | | | | | |
+| Auditor | | | | | ✓ (read-only) | | |
+| Administrator | | | | | history only | ✓ | ✓ |
 
-Checks run in the service layer. The approver can never be the person who generated the plan, because no role can do both.
+Checks run in the service layer (`project/auth/roles.py`), not only in the interface. The approver can never be the person who generated the plan, because no role can do both. Every decision records the username and role.
+
+## 6a. Operator workflow in the dashboard
+
+How the stages above appear to the people using RE:L!NK. The sidebar shows a red badge and a **For you now** list for whatever the signed-in role should do next.
+
+| Step | Role | Page | What happens | Notification it raises |
+|---|---|---|---|---|
+| 1 | Any | Overview, Incident, Map ① | Inspect the incident: sites, reports with provenance, crews, roads, services; map of reported damage | — |
+| 2 | Coordinator | Planning ① Generate | Choose Offline template (free) or Hosted single / multi-agent; a **live diagram** shows each agent working and every message | — |
+| 3 | Coordinator | Planning ② Inspect plan | Schedule and crew Gantt, evidence, agent conversation with **replay**, **Operator inbox** | "N agent questions to answer" |
+| 4 | Coordinator | Operator inbox | Answer each question (value, source, "I verified"); the answer becomes signed evidence and the plan is **regenerated automatically** | "Plan sent: waiting for a Restoration Manager" |
+| 5 | Manager | Planning ③ Review & approve | Approve or reject the exact plan (hash-bound); decide any priority proposals | "A plan is waiting for your approval" |
+| 6 | Manager | Planning ④ Simulate | Independent simulator executes the approved plan; pauses at incident events | "Approved plan ready to simulate" |
+| 7 | Manager | Results | Measured downtime and services, **compare with the no-AI baseline**, download the **plan summary PDF** | "Incident event: accept the update and replan" (if an event occurs) |
+| 8 | Field Supervisor | Field work | Crew job lists; a **field update** records new evidence, expires approval and sends the plan back to step 2 | "N jobs assigned in the approved plan" |
+| 9 | Manager or Coordinator | Map ②–④ | See what the agents established, crew routes, and a timed **restoration replay** | — |
+| 10 | Manager or Coordinator | What-if | Remove a crew or close a road; check whether the current plan still works; CP-SAT replans in a sandbox (no model calls, real plan untouched) | — |
+| 11 | Coordinator or Admin | Sidebar: Add an incident | Upload a new incident JSON; checked by the same loader and state builder; can be planned and approved, not simulated | — |
+| 12 | Auditor | History, Benchmark | Read-only trail of runs, decisions, simulations and clarifications; exports and plan PDFs; held-out benchmark results | — |
 
 ## 7. Evaluation workflow
 
@@ -108,4 +127,16 @@ Checks run in the service layer. The approver can never be the person who genera
 5. **Human baseline:** [human_baseline/README.md](human_baseline/README.md), 6 cases × up to 4 participants, scored by `project.evaluation.human_trial` with the same validator and simulator.
 6. **Report** paired case medians, failures and escalations, cost and time. No superiority claim without evidence.
 
-Status on 25 November 2026: steps 1–3 are implemented. Development tuning is recorded in [v14-dev-tuning](../results/development/v14-dev-tuning-20261125/README.md) and the EVAL2 configuration is frozen. The EVAL2 run and the human sessions are pending.
+Status on 27 November 2026: steps 1–4 and 6 are complete. Development tuning is recorded in [v14-dev-tuning](../results/development/v14-dev-tuning-20261125/README.md); the EVAL2 configuration was frozen and the held-out run finished on 25 November ([report](../results/final/evaluation-v3-run1/README.md): 20 cases × 6 variants × 3 repeats = 360 attempts, 0 failures). Step 5 (human sessions) is **not run yet**; see [HUMAN_REVIEW_DISCLOSURE.md](HUMAN_REVIEW_DISCLOSURE.md). Worked input and output examples are in [samples/](../samples/README.md).
+
+## 8. Implementation steps (how the system was built)
+
+| Phase | Dates (2026) | Steps |
+|---|---|---|
+| Proposal | 16–20 Nov | Problem research, agent design, benchmark plan; proposal submitted 20 Nov |
+| Core | 22–23 Nov | Development environment and entry point; Pydantic contracts, evidence resolver, CP-SAT scheduler, independent validator, greedy fallback, approval records, hosted-model adapter with budgets |
+| Data, simulator and dashboard | 24 Nov | Geographic context, synthetic incidents, allowlisted loaders, independent simulator with power/backhaul/generator semantics, incident continuation; dashboard (Incident, Planning, Results, History) with approval-gated simulation; operator clarification |
+| Agents v14 and evidence v3 | 25 Nov | Four specialist agents with scoped contexts, real single-agent baseline, realistic reports with distractors, sign-in and roles, map, Gantt, inbox, field work, tuning on development cases, configuration freeze |
+| Held-out benchmark | 25 Nov | 360 attempts on frozen EVAL2 cases; report, cost table, Benchmark page and no-AI comparison |
+| Product features | 26 Nov | Live agent-workflow diagram, map story, inline answers with replanning, what-if sandbox, incident upload, notifications, plan summary PDF |
+| Interface and submission | 26–27 Nov | Responsive dark interface, input/output samples, submission documents, demo video |

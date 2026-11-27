@@ -14,12 +14,12 @@ and release) remain separate.
 
 ## Current findings
 
-The [review packet](evaluation/priority5-20261125/packet.json) audits all twenty
+The [review packet](../evaluation/priority5-20261125/packet.json) audits all twenty
 candidates, with two cases in each of the ten intended categories. It retains
 input/raw/truth file hashes, declared report labels, evidence sources, resources,
 future-event details for evaluators, and expected conservative fixture behavior.
-The [case cards](evaluation/priority5-20261125/cards.md) provide a review checklist
-for every case; [reviews.csv](evaluation/priority5-20261125/reviews.csv) is the
+The [case cards](../evaluation/priority5-20261125/cards.md) provide a review checklist
+for every case; [reviews.csv](../evaluation/priority5-20261125/reviews.csv) is the
 editable human worksheet. All twenty decisions remain **PENDING**, with reviewer
 names and timestamps blank. The original HUMAN_REVIEW.csv and frozen dataset
 remain unchanged historical records.
@@ -161,9 +161,9 @@ No completed review release is published by this update.
 Full regression: **492 passed in 50.20 seconds**. The actual check CLI exits 2
 while review is pending, and a direct candidate-run attempt stops before creating
 results or accessing a provider. All 201 frozen dataset file hashes still match.
-See [checks.json](evaluation/priority5-20261125/checks.json) for the recorded checks.
+See [checks.json](../evaluation/priority5-20261125/checks.json) for the recorded checks.
 
-See [readiness.json](evaluation/priority5-20261125/readiness.json) for the actual
+See [readiness.json](../evaluation/priority5-20261125/readiness.json) for the actual
 blocked state and per-case outstanding checks. Tests cover missing/duplicate
 reviews, author/tuner/contamination declarations, timestamps, data/packet drift,
 release immutability, forged bindings, non-template wording, invalid gold targets,

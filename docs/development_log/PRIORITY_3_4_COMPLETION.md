@@ -65,8 +65,8 @@ audited. No fallback model or raised incident cap was used.
 
 ## Current live development comparison
 
-The [v13 repeated-run report](../results/development/luna-v13-development-20261125/report.md)
-and [all machine-readable outcomes](../results/development/luna-v13-development-20261125/report.json)
+The [v13 repeated-run report](../../results/development/luna-v13-development-20261125/report.md)
+and [all machine-readable outcomes](../../results/development/luna-v13-development-20261125/report.json)
 cover **10 development cases × 3 repetitions × 4 variants = 120 attempts**.
 Ten disjoint case batches ran concurrently, interleaving variants within each
 batch. Latency includes contention; this is not an isolated speed benchmark.
@@ -95,10 +95,10 @@ labelled-development target only; no real-world accuracy or held-out claim follo
 No participant study was used.
 
 Before this repeated comparison, a separate
-[40-attempt current-source verification pass](../results/development/luna-v13-verification-20261125/report.md)
+[40-attempt current-source verification pass](../../results/development/luna-v13-verification-20261125/report.md)
 produced 19 scores/21 escalations, with four comparable single/multi pairs all tied.
 It is retained separately rather than pooled as extra independent scenarios.
-[Selected examples from that pass](../results/development/luna-v13-examples-20261125/summary.json)
+[Selected examples from that pass](../../results/development/luna-v13-examples-20261125/summary.json)
 include scored single/multi incidents with independent simulator artifacts,
 no-report evidence escalations and unsuccessful dynamic continuation traces.
 Both v13 reports' source fingerprints match the current runtime source. Actual
@@ -106,7 +106,7 @@ API charges were not measured; available usage/failure information is retained.
 
 ## Diagnostics and remaining limitations
 
-The separate [v12 diagnostic cohort](../results/development/luna-v12-diagnostic-20261125/report.md)
+The separate [v12 diagnostic cohort](../../results/development/luna-v12-diagnostic-20261125/report.md)
 has 120 attempts (ten cases × three repetitions × four variants): 53 full-horizon
 scores and 67 escalations. Its nine comparable single/multi pairs all tied.
 It exposed the empty-evidence schema error, fixed before the v13 pass. It uses a
@@ -114,17 +114,17 @@ different source/protocol and must not be pooled with v13 or older v4 results.
 The repeated v13 comparison fulfills the three-run development check, not the
 later independent held-out evaluation. Cross-cohort count changes do not prove improvement.
 
-The [diagnostic record](../results/development/luna-review-diagnostics-20261125/report.json)
+The [diagnostic record](../../results/development/luna-review-diagnostics-20261125/report.json)
 retains eight focused protocol rounds, three permit trials, the no-report fix
 confirmation and an initial unattached batch that made zero generations because
 its token-count requests encountered connection errors. The latter is excluded
 from the actual model comparison, not silently deleted.
 
-A [v5 permit trial](../results/development/luna-review-diagnostics-20261125/permit-1/summary.json)
+A [v5 permit trial](../../results/development/luna-review-diagnostics-20261125/permit-1/summary.json)
 produced a typed hold, changed the independently validated schedule and passed the
 approval gate for an explicitly automated test operator. It was not physically
-simulated. Both [v12 repeat 1](../results/development/luna-review-diagnostics-20261125/permit-2/summary.json)
-and [repeat 2](../results/development/luna-review-diagnostics-20261125/permit-3/summary.json)
+simulated. Both [v12 repeat 1](../../results/development/luna-review-diagnostics-20261125/permit-2/summary.json)
+and [repeat 2](../../results/development/luna-review-diagnostics-20261125/permit-3/summary.json)
 stopped for specialist clarification before a candidate was emitted. That earlier
 success is not evidence of reliable current-protocol performance.
 

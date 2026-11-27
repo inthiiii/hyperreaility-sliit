@@ -12,11 +12,11 @@ gate remains available and unchanged in meaning.
 
 | Deliverable | Location | Actual status |
 |---|---|---|
-| New versioned dataset | [evaluation v2](../releases/evaluation-v2-20261125/README.md) | 20 new EVAL2 case IDs, two per category |
-| Filled reviews.csv | [AI review worksheet](../releases/evaluation-v2-20261125/review/reviews.csv) | 20/20 AI_REVIEWED; reviewer_kind AI; independence NO |
-| All case checks and numerical reference evidence | [validation.json](../releases/evaluation-v2-20261125/review/validation.json) | 20/20 PASS; 35 declared claims checked |
-| Frozen dataset/review manifest | [AI_RELEASE.json](../releases/evaluation-v2-20261125/AI_RELEASE.json) | AI_REVIEWED_FROZEN, 203 file bindings |
-| Blank optional human review packet | [human worksheet](../releases/evaluation-v2-20261125/review/human/reviews.csv) | 0/20 human approvals; archival and unchanged |
+| New versioned dataset | [evaluation v2](../../releases/evaluation-v2-20261125/README.md) | 20 new EVAL2 case IDs, two per category |
+| Filled reviews.csv | [AI review worksheet](../../releases/evaluation-v2-20261125/review/reviews.csv) | 20/20 AI_REVIEWED; reviewer_kind AI; independence NO |
+| All case checks and numerical reference evidence | [validation.json](../../releases/evaluation-v2-20261125/review/validation.json) | 20/20 PASS; 35 declared claims checked |
+| Frozen dataset/review manifest | [AI_RELEASE.json](../../releases/evaluation-v2-20261125/AI_RELEASE.json) | AI_REVIEWED_FROZEN, 203 file bindings |
+| Blank optional human review packet | [human worksheet](../../releases/evaluation-v2-20261125/review/human/reviews.csv) | 0/20 human approvals; archival and unchanged |
 
 The original root data, frozen 201-file snapshot and older PENDING worksheets are
 preserved. Their pending rows do not describe the completed **AI** review of the

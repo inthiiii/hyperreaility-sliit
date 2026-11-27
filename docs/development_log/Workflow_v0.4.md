@@ -7,7 +7,7 @@
 **Version:** 0.4 — matched hosted workflow, clarification and simulation
 **Last updated:** 24 November 2026
 
-This file describes the proposed process from the submitted [Proposal.docx](Proposal.docx). The planned agent design remains subject to hosted evaluation. Independent static/event simulation and the approval-gated continuation path are implemented; see handoffs/zahra.md for verified semantics and limits. See [PROJECT_DETAILS.md](PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
+This file describes the proposed process from the submitted [Proposal.docx](../Proposal.docx). The planned agent design remains subject to hosted evaluation. Independent static/event simulation and the approval-gated continuation path are implemented; see handoffs/zahra.md (in this folder) for verified semantics and limits. See [PROJECT_DETAILS.md](../PROJECT_DETAILS.md) for scope, technology choices, evaluation and disclosures.
 
 ## 1. Inputs and outputs
 
@@ -131,7 +131,7 @@ Keep API keys backend-only. Commit only synthetic/redacted samples and authorize
 6. Score with the same independent checker and simulator. Record valid plans, correct escalations, invalid outputs, timeouts and unmet services; failed/invalid plans receive no additional restoration credit.
 7. Use scenario medians across repeats, paired differences and exploratory scenario-level bootstrap intervals. Separate automated planning, human approval and simulated restoration time. Publish failures and negative results.
 
-The proposed success targets and full metric definitions are in [PROJECT_DETAILS.md](PROJECT_DETAILS.md). No execution or benchmark result is asserted by this workflow.
+The proposed success targets and full metric definitions are in [PROJECT_DETAILS.md](../PROJECT_DETAILS.md). No execution or benchmark result is asserted by this workflow.
 
 ## 9. Implementation and documentation milestones
 
@@ -165,8 +165,8 @@ session state; history is read-only and cannot restore authorization.
 
 ## Implemented clarification checkpoint
 
-Planning now provides an explicit operator confirmation form. Recording evidence preserves the source reports, versions the state, clears prior plan/approval and requires a separately reviewed replacement plan. Corrections and confirmation history are auditable. See [OPERATOR_CONFIRMATION.md](OPERATOR_CONFIRMATION.md) for supported facts, continuation semantics and verification limits.
+Planning now provides an explicit operator confirmation form. Recording evidence preserves the source reports, versions the state, clears prior plan/approval and requires a separately reviewed replacement plan. Corrections and confirmation history are auditable. See [OPERATOR_CONFIRMATION.md](../OPERATOR_CONFIRMATION.md) for supported facts, continuation semantics and verification limits.
 
 ## Matched hosted workflow checkpoint
 
-Both hosted modes now traverse investigation, resource assessment, priority assessment and review. Single mode retains one agent identity; multi mode uses four role contexts. Operational context, deterministic tools and whole-incident caps match. Evidence-linked deferral requests change the next validated candidate, retain unmet needs and appear before human approval. Benchmark configuration and usage are recorded, and paired summaries report exclusions/failures alongside measured downtime. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md). The selected Luna model and real hosted observations are recorded in [LUNA_LIVE_VALIDATION.md](LUNA_LIVE_VALIDATION.md).
+Both hosted modes now traverse investigation, resource assessment, priority assessment and review. Single mode retains one agent identity; multi mode uses four role contexts. Operational context, deterministic tools and whole-incident caps match. Evidence-linked deferral requests change the next validated candidate, retain unmet needs and appear before human approval. Benchmark configuration and usage are recorded, and paired summaries report exclusions/failures alongside measured downtime. See [HOSTED_FAIRNESS.md](../HOSTED_FAIRNESS.md). The selected Luna model and real hosted observations are recorded in [LUNA_LIVE_VALIDATION.md](LUNA_LIVE_VALIDATION.md).
