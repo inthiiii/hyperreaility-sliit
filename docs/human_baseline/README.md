@@ -2,15 +2,16 @@
 
 Exploratory comparison required by competition rule 04. It is small, so its results are indicative only.
 
-Printable guide for facilitators and participants, with answer sheets: [RELINK_Human_Comparison_Guide.pdf](RELINK_Human_Comparison_Guide.pdf).
+- Printable guide for facilitators and participants, with answer sheets: [RELINK_Human_Comparison_Guide.pdf](RELINK_Human_Comparison_Guide.pdf).
+- Step-by-step sheet for each member (who facilitates whom, case order, before / during / after): [RELINK_Human_Comparison_Member_Steps.pdf](RELINK_Human_Comparison_Member_Steps.pdf).
 
 ## Setup
 
-- **Participants:** up to 4 consenting people who did not build the scheduler or agents. Record expertise honestly; no names are needed in the repository (use P1–P4).
+- **Participants:** the four team members, recorded as P1–P4 in submission files. Each member facilitates one other member's session. Record each participant's background honestly in `expertise`.
 - **Cases:** DEMO-005, DEV-001, DEV-002, DEV-003, DEV-004 and DEV-005 from `releases/evidence-v3-20261126` (no mid-incident events). Participants are told these are development cases.
 - **Order:** counterbalanced. P1 uses the list order, P2 reverses it, P3 starts at the 3rd case, P4 starts at the 5th case and wraps.
 - **Time limit:** 10 minutes per case, timed by the facilitator.
-- **Tools:** the RE:L!NK dashboard signed in as **Auditor** (Incident page only: map/schematic, reports, crews, roads, actions). No AI, no optimiser, no Planning page.
+- **Tools:** the RE:L!NK dashboard signed in as **Auditor** (Incident page and Map chapter 1 only: network schematic, reports, crews, roads, actions, site map). No AI, no optimiser, no Planning, Results, What-if or History pages.
 - **Same information as the AI:** the same reports, site directory, crews, roads, generator and action catalogue.
 
 ## Task given to the participant
@@ -36,3 +37,4 @@ python -m project.evaluation.human_trial --submissions docs/human_baseline/submi
 - Do not show participants the AI's plans or the hidden labels.
 - Record every attempt, including incomplete ones, and report the sample size and limits with the results.
 - No submissions are committed until real sessions take place; the template is not a result.
+- Participants are the team members who built parts of the system, so they may know the domain and the case format better than a typical operator; report this with the results.

@@ -18,8 +18,8 @@ The competition asks for a **documented human comparison or assessment** and for
 
 ## 2. Human comparison: how to complete it
 
-1. Recruit up to 4 consenting people who did not build the scheduler or agents. Record expertise only (P1–P4), no names.
-2. Follow [human_baseline/README.md](human_baseline/README.md): 6 cases, 10 minutes each, counterbalanced order, Incident page only (signed in as `auditor`).
+1. The four team members take part as P1–P4, each facilitated by another member ([member steps](human_baseline/RELINK_Human_Comparison_Member_Steps.pdf)).
+2. Follow [human_baseline/README.md](human_baseline/README.md) and the [guide](human_baseline/RELINK_Human_Comparison_Guide.pdf): 6 cases, 10 minutes each, counterbalanced order, Incident page and Map chapter 1 only (signed in as `auditor`).
 3. Save one file per participant in `docs/human_baseline/submissions/` from `submission_template.json`.
 4. Score with the same validator and simulator as the AI:
 
@@ -45,4 +45,5 @@ The competition asks for a **documented human comparison or assessment** and for
 
 - The held-out cases may share patterns with the generator that also produced the development cases; results are evidence under these synthetic assumptions, not field validation.
 - Without the human study, we cannot yet say how RE:L!NK compares with a human planner on time or quality.
+- The human participants are the team members who built parts of the system, which may favour the human side; this is reported with the results.
 - Benchmark approvals are automated, so the benchmark measures planning quality, not approval behaviour.

@@ -134,7 +134,7 @@ Dependencies are pinned in `project/requirements.txt`.
 
 | Member | Area |
 |---|---|
-| Ihthisham Irshad (lead) | Architecture, agents, integration |
+| Ihthisham Irshad | Architecture, agents, integration |
 | Zahra Hassan | Data, loader, simulator, metrics |
 | Eyaas Ajmal | Interface, workflow, approval, access control |
 | Kiruthika Vijayakumar | QA, evaluation protocol, documentation |

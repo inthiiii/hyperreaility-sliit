@@ -118,7 +118,7 @@ The coordinator will retain at most three revision rounds and one schema-repair 
 
 | Member | Proposed work allocation |
 | --- | --- |
-| Ihthisham Irshad — Team Leader | Architecture, scheduling, agent coordination and integration |
+| Ihthisham Irshad | Architecture, scheduling, agent coordination and integration |
 | Zahra Hassan | Data preprocessing, loader, independent simulator and metrics |
 | Eyaas Ajmal | Interface, workflow and approval |
 | Kiruthika Vijayakumar | Manual QA, defect reports and documentation support |
