@@ -54,7 +54,7 @@ The joint core/dashboard integration now records explicit operator fact confirma
 retains original reports and auditable corrections, advances state versions, clears
 stale plans/approval, and requires separate replanning and approval. History exposes
 confirmation records. The independent evaluator preserves its physical truth and
-same-incident continuation metrics. See [operator confirmation](../OPERATOR_CONFIRMATION.md)
+same-incident continuation metrics. See [operator confirmation](../../OPERATOR_CONFIRMATION.md)
 for workflow, regression coverage and remaining identity/verification limits.
 This checkpoint supersedes earlier statements that operator clarification was absent;
 live hosted-model evaluation remains a later priority.
@@ -70,7 +70,7 @@ workstream; no new teammate co-author is attached.
 Offline CLI: four baseline attempts (DEMO-005 and DEV-010, heuristic/optimizer),
 all scored by the independent evaluator. DEV-010 retains its two-approval
 continuation semantics. No live provider request was made: an exact OpenAI
-model ID is still required. See [HOSTED_FAIRNESS.md](../HOSTED_FAIRNESS.md).
+model ID is still required. See [HOSTED_FAIRNESS.md](../../HOSTED_FAIRNESS.md).
 
 Full regression at this checkpoint: **411 passed in 42.65 seconds**.
 
@@ -88,7 +88,7 @@ Eleven comparable single/multi pairs all tied; no restoration superiority claim.
 A separate real permit challenge changed the validated candidate through a typed
 resource hold, but its reviewer escalated, so it was not approved/simulated.
 
-Earlier rounds and failures are retained. See [Luna validation](../development_log/LUNA_LIVE_VALIDATION.md)
+Earlier rounds and failures are retained. See [Luna validation](../LUNA_LIVE_VALIDATION.md)
 for current results, traces, limitations and reproduction. Joint co-author credit
 is requested for all four team members. Independent case review and final
 release/participant evidence remain later priorities.
@@ -101,7 +101,7 @@ context compaction, bounded review clarification, fresh review after every new
 hold, retained rejected-output audit, and visible-state arithmetic/service
 forecast tools. Regression: **458 passed in 43.87 seconds**. Both workflow modes
 retain equal context/tools and unchanged aggregate incident caps. See
-[the completion update](../development_log/PRIORITY_3_4_COMPLETION.md) for live outcomes and all
+[the completion update](../PRIORITY_3_4_COMPLETION.md) for live outcomes and all
 remaining quality limits. Follow-up credit includes Ihthisham, Zahra, Eyaas and
 Kiruthika; work was prepared with ChatGPT/Codex in Ihthisham's session.
 

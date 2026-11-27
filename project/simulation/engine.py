@@ -5,7 +5,7 @@ separately supplied evaluator truth object. The simulator never reads the
 planner's predicted restoration figures and never calls a model, network or
 real equipment interface; it only evolves an in-memory copy of the world.
 
-Time model (see docs/handoffs/zahra.md):
+Time model (see docs/development_log/handoffs/zahra.md):
 * all times are whole incident minutes; availability holds on half-open
   intervals [t0, t1); metrics integrate exactly over [0, horizon);
 * events at the same minute are applied together before availability is

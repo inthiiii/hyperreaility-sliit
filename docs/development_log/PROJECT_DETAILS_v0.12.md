@@ -11,8 +11,8 @@
 | Repository | https://github.com/inthiiii/hyperreaility-sliit |
 | Document version | 0.12 — revised AI-reviewed synthetic evaluation freeze |
 | Last updated | 24 November 2026 |
-| Proposal | [Proposal.docx](Proposal.docx) |
-| Process description | [Workflow.md](Workflow.md) |
+| Proposal | [Proposal.docx](../Proposal.docx) |
+| Process description | [Workflow.md](../Workflow.md) |
 
 ## 1. Current implementation status
 
@@ -66,7 +66,7 @@ Live network control, autonomous crew dispatch, detailed radio propagation, nati
 
 Agents use separate role prompts and contexts. The primary benchmark uses the same hosted model across all roles and the single-agent baseline. Per-role model changes, if explored, will be reported separately.
 
-Typed messages will carry sender, recipient, incident ID, state version, finding, evidence IDs and requested action. Shared state will store observations, verified facts, open conflicts, topology, resources, priorities, schedules, validation and approvals. The detailed sequence is in [Workflow.md](Workflow.md).
+Typed messages will carry sender, recipient, incident ID, state version, finding, evidence IDs and requested action. Shared state will store observations, verified facts, open conflicts, topology, resources, priorities, schedules, validation and approvals. The detailed sequence is in [Workflow.md](../Workflow.md).
 
 ## 5. Planned technologies and dependencies
 
@@ -141,7 +141,7 @@ Every team member must add any other AI model, service, coding assistant, reused
 
 ## 11. References and update checklist
 
-The research context and full bibliography are in [Proposal.docx](Proposal.docx). Technical references:
+The research context and full bibliography are in [Proposal.docx](../Proposal.docx). Technical references:
 
 - [OpenAI API reference](https://developers.openai.com/api/reference/overview)
 - [OpenAI pricing](https://developers.openai.com/api/docs/pricing)
@@ -169,7 +169,7 @@ these coding tools.
 
 The single-agent baseline now traverses the same investigation, resources, priorities and review stages as the four-role workflow. Both receive the same operational context, deterministic tools and whole-incident caps. Agent requests can conservatively defer evidence-linked actions, version the state, and force a new validated schedule; they cannot change approved weights or mutate evaluator truth.
 
-Benchmark manifests freeze the selected provider/model, endpoint fingerprint, supported generation settings, protocol, runtime and source/input hashes. Paired summaries exclude unsuccessful jobs and model-version mismatches from downtime differences while reporting their counts. Raw extraction F1 is computed before deterministic fixture fill-in and reports label coverage. Charges remain unmeasured. Real Luna smoke checks and development comparisons are now recorded separately from injected-client tests in LUNA_LIVE_VALIDATION.md. See [HOSTED_FAIRNESS.md](HOSTED_FAIRNESS.md).
+Benchmark manifests freeze the selected provider/model, endpoint fingerprint, supported generation settings, protocol, runtime and source/input hashes. Paired summaries exclude unsuccessful jobs and model-version mismatches from downtime differences while reporting their counts. Raw extraction F1 is computed before deterministic fixture fill-in and reports label coverage. Charges remain unmeasured. Real Luna smoke checks and development comparisons are now recorded separately from injected-client tests in LUNA_LIVE_VALIDATION.md. See [HOSTED_FAIRNESS.md](../HOSTED_FAIRNESS.md).
 
 
 ## Priority 3–4 completion — 25 November
@@ -246,4 +246,4 @@ identity. Priority 7 remains pending.
 ## Brand asset disclosure — 25 November
 
 The README logo was created using ChatGPT built-in image generation. The asset
-and exact prompt are recorded in [branding](assets/branding/README.md).
+and exact prompt are recorded in [branding](../assets/branding/README.md).

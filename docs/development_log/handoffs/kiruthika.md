@@ -1,8 +1,8 @@
 # Kiruthika — Priority 5 independent review handoff
 
-Read [PRIORITY_5_REVIEW.md](../development_log/PRIORITY_5_REVIEW.md), then the
-[twenty case cards](../evaluation/priority5-20261125/cards.md) and
-[human worksheet](../evaluation/priority5-20261125/reviews.csv).
+Read [PRIORITY_5_REVIEW.md](../PRIORITY_5_REVIEW.md), then the
+[twenty case cards](../../evaluation/priority5-20261125/cards.md) and
+[human worksheet](../../evaluation/priority5-20261125/reviews.csv).
 
 1. Confirm you did not author the case, tune its agent prompts, or use it for tuning.
    Otherwise assign that case to a different independent reviewer.
@@ -26,7 +26,7 @@ Priority 6–7 are not started by this update.
 ## Priority 5 — AI-authored/reviewed v2 completion
 
 The user requested the coding assistant perform the revision and review. See
-[the completion record](../development_log/PRIORITY_5_AI_COMPLETION.md): twenty new cases,
+[the completion record](../PRIORITY_5_AI_COMPLETION.md): twenty new cases,
 twenty completed AI review rows, checked physical/label mechanisms and a frozen
 203-file release. No human signature was entered on your behalf. Independent
 human validation is still unperformed; co-author credit is separate. The original
@@ -37,7 +37,7 @@ zero project inference API calls. Steps 6–7 remain pending.
 ## Priority 6 — application QA checkpoint (25 November)
 
 The browser walkthrough and regression checks are recorded in
-[PRIORITY_6_QA.md](../development_log/PRIORITY_6_QA.md). Static and dynamic recovery, conflict/missing
+[PRIORITY_6_QA.md](../PRIORITY_6_QA.md). Static and dynamic recovery, conflict/missing
 evidence, rejection/retry, clarification, scenario changes and read-only history
 were exercised. Two UI defects were fixed: stale review notes and valid hosted
 metadata being skipped by History. **509 tests passed**. One hosted smoke

@@ -166,7 +166,7 @@ The exact coding-assistant model identifier was not recorded in the repository.
 
 ## Priority 5 — evaluation revision handoff (25 November)
 
-Read [the review instructions](../development_log/PRIORITY_5_REVIEW.md). Prepare a new version of
+Read [the review instructions](../PRIORITY_5_REVIEW.md). Prepare a new version of
 candidate inputs/truth/raw source; preserve the original frozen 201-file release.
 Current candidates have 20/20 development topology-descriptor overlap and 34/34
 report-text overlap. Diversify topology, routes, resources/windows and natural
@@ -184,7 +184,7 @@ filled by this update. Steps 6–7 are pending.
 ## Priority 5 — AI-authored/reviewed v2 completion
 
 The user requested the coding assistant perform the revision and review. See
-[the completion record](../development_log/PRIORITY_5_AI_COMPLETION.md): twenty new cases,
+[the completion record](../PRIORITY_5_AI_COMPLETION.md): twenty new cases,
 twenty completed AI review rows, checked physical/label mechanisms and a frozen
 203-file release. No human signature was entered on your behalf. Independent
 human validation is still unperformed; co-author credit is separate. The original

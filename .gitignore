@@ -28,3 +28,7 @@ results/local_benchmarks/
 
 # Local sign-in store (salted password hashes)
 .relink/
+
+# Local assistant settings and local-only documents
+.claude/
+docs/RELINK_USER_GUIDE.pdf

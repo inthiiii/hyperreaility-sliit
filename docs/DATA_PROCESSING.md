@@ -68,7 +68,7 @@ is frozen by docs/evaluation/FROZEN_DATASET.json; check_data verifies those byte
 as well as the working manifest. Refresh/generation/preparation now refuse to
 modify this frozen release in place. Preserve it when preparing a reviewed new
 release. Freeze protection is reproducibility, not evidence that the candidates
-are independently reviewed or held out. HUMAN_REVIEW.csv remains PENDING.
+are independently reviewed or held out. Human review status: see HUMAN_REVIEW_DISCLOSURE.md.
 
 The older Day 1 scope notes are historical. Independent loader, simulation and
-approval-gated continuation are now implemented; see handoffs/zahra.md.
+approval-gated continuation are now implemented; see development_log/handoffs/zahra.md.
